@@ -1,0 +1,36 @@
+/* body {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+} */
+
+:root {
+  --background-yellow: rgb(240, 231, 132);
+  --lighter-blue: rgb(139, 144, 218);
+  --card-blue: rgb(81, 128, 248);
+  --card-pink: #f8519f;
+  --card-purple: rgb(189, 96, 244);
+  --card-green: rgb(42, 200, 124);
+}
+
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  /* background: rgb(66, 2, 75); */
+  background: var(--background-yellow);
+  scroll-behavior: smooth;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+.link {
+  text-decoration: none !important;
+}
