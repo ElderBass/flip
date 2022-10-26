@@ -1,6 +1,9 @@
+@import url('./index.css');
+
 .mainContainer {
   display: grid;
-  background: #29012e;
+  background: var(--background-yellow);
+  color: var(--card-blue);
   grid-template-columns: 1fr;
   grid-template-rows: 200px auto;
   grid-template-areas: 
@@ -8,4 +11,8 @@
   "page";
   margin: -8px -8px -8px -8px;
   font-family: 'DM Serif Display', serif;
+}
+
+.heading {
+  font-size: 50px;
 }
