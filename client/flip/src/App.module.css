@@ -1,0 +1,11 @@
+.mainContainer {
+  display: grid;
+  background: #29012e;
+  grid-template-columns: 1fr;
+  grid-template-rows: 200px auto;
+  grid-template-areas: 
+  "header"
+  "page";
+  margin: -8px -8px -8px -8px;
+  font-family: 'DM Serif Display', serif;
+}
