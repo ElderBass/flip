@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
-import styles from './LoginForm.module.css';
+import styles from './Signup.module.css';
 
-const LoginForm = () => {
+const SignupForm = ({ flipped }) => {
     const emailRef = useRef(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [formFilledOut, setFormFilledOut] = useState(false);
 
     useEffect(() =>  {
@@ -12,10 +13,10 @@ const LoginForm = () => {
     }, []);
 
     useEffect(() => {
-        if (email.length && password.length) {
+        if (email.length && password.length && confirmPassword.lenght) {
             setFormFilledOut(true);
         }
-    }, [email, password]);
+    }, [email, password, confirmPassword]);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -23,8 +24,8 @@ const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={onSubmit} className={styles.loginForm}>
-            <h1 className={styles.header}>Login</h1>
+        <form onSubmit={onSubmit} className={styles.signupForm}>
+            <h1 className={styles.header}>Sign Up</h1>
             <div className={styles.inputField}>
                 <label className={styles.label} htmlFor='email'>Email:</label>
                 <input
@@ -48,6 +49,17 @@ const LoginForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
+            <div className={styles.inputField}>
+                <label className={styles.label} htmlFor='confirmPassword'>Confirm:</label>
+                <input
+                    className={styles.input}
+                    name='confirmPassword'
+                    type='confirmPassword'
+                    id='confirmPassword'
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+            </div>
             <div className={styles.actions}>
                 {formFilledOut && (
                     <button className={styles.submitBtn} type='submit'>Continue</button>
@@ -57,4 +69,4 @@ const LoginForm = () => {
     )
 };
 
-export default LoginForm;
+export default SignupForm;
