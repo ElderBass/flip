@@ -1,8 +1,8 @@
 @import url('../../../index.css');
 
 .loginForm {
-    height: 60%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     background: var(--background-yellow);
     color: var(--card-blue);
     box-shadow: 2px 2px 4px black;

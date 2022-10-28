@@ -1,0 +1,18 @@
+.signupLoginToggle {
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.signupLoginToggleBtn {
+    outline: none;
+    border: none;
+    font-size: 35px;
+    font-family: var(--text-font);
+    color: white;
+    background: var(--card-blue);
+}
+
+.signupLoginToggleBtn:hover {
+    cursor: pointer;
+    color: var(--background-yellow);
+}
