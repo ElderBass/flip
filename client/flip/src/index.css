@@ -1,29 +1,26 @@
-/* body {
-  box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-} */
-
 :root {
-  --background-yellow: rgb(240, 231, 132);
+  --background-yellow: rgb(246, 238, 146);
   --lighter-blue: rgb(139, 144, 218);
   --card-blue: rgb(81, 128, 248);
   --card-pink: #f8519f;
   --card-purple: rgb(189, 96, 244);
-  --card-green: rgb(42, 200, 124);
+  --card-green: rgb(31, 165, 100);
+  --pencil-gray: #5c6274;
+  --logo-font: 'Reenie Beanie', cursive;
+  --text-font: 'Vidaloka', serif;
 }
 
-html {
-  box-sizing: border-box;
-  overflow-x: hidden;
-  /* background: rgb(66, 2, 75); */
-  background: var(--background-yellow);
-  scroll-behavior: smooth;
-}
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+  background: var(--background-yellow);
+  scroll-behavior: smooth;
+  overflow: auto;
 }
 
 a {

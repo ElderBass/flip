@@ -1,16 +1,17 @@
 @import url('./index.css');
 
 .mainContainer {
+  height: 100%;
   display: grid;
   background: var(--background-yellow);
   color: var(--card-blue);
   grid-template-columns: 1fr;
-  grid-template-rows: 200px auto;
+  grid-template-rows: 160px auto;
   grid-template-areas: 
   "header"
   "page";
   margin: -8px -8px -8px -8px;
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Vidaloka', serif;
 }
 
 .heading {
