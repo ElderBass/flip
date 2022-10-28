@@ -1,0 +1,10 @@
+.logout {
+  /* color: rgb(62, 90, 248); */
+  /* color: #E64398; */
+  color: var(--lighter-blue);
+}
+
+.logout:hover {
+  cursor: pointer;
+  color: var(--logo-blue);
+}
