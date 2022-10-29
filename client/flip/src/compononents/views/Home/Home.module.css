@@ -12,13 +12,37 @@
     background-color: var(--background-yellow);
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
 .logo {
+    flex: 1 0 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 200px;
     font-family: var(--logo-font);
+}
+
+.blurb {
+    flex: 1 0 50%;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    height: 40px;
+    background: var(--card-blue);
+    margin-bottom: 50px;
+}
+
+.errorMsg {
+    color: var(--background-yellow);
+    font-size: 32px;
+    text-align: center;
 }
 
 .loginSignup {
