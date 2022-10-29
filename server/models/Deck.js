@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Card = require('./Card')
 
 const Schema = mongoose.Schema;
 
@@ -9,7 +8,7 @@ const DeckSchema = new Schema({
         required: true,
     },
     cards: {
-        type: [Card],
+        type: Array,
         required: true
     },
     favorites: {

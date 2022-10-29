@@ -20,11 +20,11 @@ const UserSchema = new Schema({
         required: true
     },
     decks: {
-        type: [Deck],
+        type: Array,
         default: []
     },
     favorites: {
-        type: [Deck],
+        type: Array,
         default: []
     },
     followers: {
