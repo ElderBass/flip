@@ -25,16 +25,19 @@ const Home = () => {
                 <div className={styles.logo}>Flip</div>
                 <div className={styles.blurb}>Live. Laugh. Learn.</div>
             </div>
-            <div className={styles.loginSignup}>
-                <div className={styles.error}>
-                    {error && <p className={styles.errorMsg}>{error}</p>}
+            <div className={styles.wrapper}>
+                <div className={styles.loginSignup}>
+                    <div className={styles.error}>
+                        {error && <p className={styles.errorMsg}>{error}</p>}
+                    </div>
+                    <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
+                        <LoginForm setError={setError} />
+                        <SignupForm setError={setError} />
+                    </ReactCardFlip>
+                    <SignupLoginToggle text={toggleText} onClick={onToggleClick} />
                 </div>
-                <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
-                    <LoginForm setError={setError} />
-                    <SignupForm setError={setError} />
-                </ReactCardFlip>
-                <SignupLoginToggle text={toggleText} onClick={onToggleClick} />
             </div>
+
         </div>
     );
 };
