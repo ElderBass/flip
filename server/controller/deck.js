@@ -1,8 +1,8 @@
 //const config = require("../config/dbconfig");
 const db = require("../models");
 
-module.exports = {
-  getAllPosts: function (req, res) {
+const deckController = {
+  getAllDecks: function (req, res) {
     db.Deck.find()
       .sort({ timestamp: -1 })
       .then((dbModel) => {
@@ -10,7 +10,7 @@ module.exports = {
       })
       .catch((err) => res.status(422).json({ isSuccess: false, error: err }));
   },
-  createPost: async function (req, res) {
+  createDeck: async function (req, res) {
     const { body } = req;
     try {
       const result = await db.Deck.create(body);
@@ -22,3 +22,5 @@ module.exports = {
     }
   },
 };
+
+module.exports = deckController;

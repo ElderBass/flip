@@ -1,16 +1,16 @@
 const express = require("express");
 const app = express();
-const deckController = require('../../controller/deck');
+const { getAllDecks, createDeck } = require('../controller/deck');
 
 app.use(function(req, res, next) {
   res.header(
     "Access-Control-Allow-Headers",
-    "x-access-token, Origin, Content-Type, Accept"
+    "Origin, Content-Type, Accept"
   );
   next();
 });
 
-app.route("/all").get(deckController.getAlldeck);
-app.route("/create").post(deckController.createPost);
+app.route('/all').get(getAllDecks);
+app.route('/create').post(createDeck);
 
 module.exports = app;

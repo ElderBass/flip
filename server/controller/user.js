@@ -1,6 +1,6 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-const config = require("../config/db-config");
+const config = require("../dbConfig");
 
 module.exports = {
   addUser: function (req, res) {
