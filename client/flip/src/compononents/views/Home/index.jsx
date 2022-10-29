@@ -7,11 +7,15 @@ import styles from './Home.module.css';
 
 const Home = () => {
     const [flipped, setFlipped] = useState(false);
+    const [error, setError] = useState('');
 
-    const SIGNUP_TEXT = "Haven't Flipped yet? Sign up for free";
-    const LOGIN_TEXT = 'Already Flipped? Login instead';
+    const SIGNUP_TEXT = "Haven't Flipped yet? Sign up free here";
+    const LOGIN_TEXT = 'Already Flipped? Login here instead';
 
-    const onClick = () => setFlipped(!flipped);
+    const onToggleClick = () => {
+        setFlipped(!flipped);
+        setError('');
+    };
 
     const toggleText = flipped ? LOGIN_TEXT : SIGNUP_TEXT;
 
@@ -22,11 +26,14 @@ const Home = () => {
                 <div className={styles.blurb}>Live. Laugh. Learn.</div>
             </div>
             <div className={styles.loginSignup}>
+                <div className={styles.error}>
+                    {error && <p className={styles.errorMsg}>{error}</p>}
+                </div>
                 <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
-                    <LoginForm />
-                    <SignupForm />
+                    <LoginForm setError={setError} />
+                    <SignupForm setError={setError} />
                 </ReactCardFlip>
-                <SignupLoginToggle text={toggleText} onClick={onClick} />
+                <SignupLoginToggle text={toggleText} onClick={onToggleClick} />
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import styles from './Signup.module.css';
+import styles from './SignupForm.module.css';
 
-const SignupForm = ({ flipped }) => {
+const SignupForm = ({ setError }) => {
     const emailRef = useRef(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,14 +13,25 @@ const SignupForm = ({ flipped }) => {
     }, []);
 
     useEffect(() => {
-        if (email.length && password.length && confirmPassword.lenght) {
+        if (email.length && password.length && confirmPassword.length) {
             setFormFilledOut(true);
         }
     }, [email, password, confirmPassword]);
 
-    const onSubmit = (e) => {
+    const isValidEmail = email => {
+        return email.includes('@') || email.substring(email.length - 4) === '.com';
+    }
+
+    const onSubmit = e => {
         e.preventDefault();
         console.log('submit to my will!');
+        if (!isValidEmail(email)) {
+            setError('Oops! That email doesn\'t look right');
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError('Yikes! Your passwords don\'t match!');
+        }
     };
 
     return (
@@ -31,8 +42,6 @@ const SignupForm = ({ flipped }) => {
                 <input
                     className={styles.input}
                     ref={emailRef}
-                    name='email'
-                    type='email'
                     id='email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -42,7 +51,6 @@ const SignupForm = ({ flipped }) => {
                 <label className={styles.label} htmlFor='password'>Password:</label>
                 <input
                     className={styles.input}
-                    name='password'
                     type='password'
                     id='password'
                     value={password}
@@ -53,8 +61,7 @@ const SignupForm = ({ flipped }) => {
                 <label className={styles.label} htmlFor='confirmPassword'>Confirm:</label>
                 <input
                     className={styles.input}
-                    name='confirmPassword'
-                    type='confirmPassword'
+                    type='password'
                     id='confirmPassword'
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
