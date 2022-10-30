@@ -3,14 +3,22 @@ const cors = require("cors");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const app = express();
-const routes = require("./routes");
+const UserRoutes = require("./routes/user");
 
 const PORT = process.env.PORT || 8000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use(routes);
+app.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, Content-Type, Accept"
+  );
+  next();
+});
+
+app.use(UserRoutes);
 
 const MONGO_URI = process.env.MONGODB_URI;
 

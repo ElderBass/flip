@@ -1,11 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { ERROR_MESSAGE } from '../../../utils/constants';
+import { login } from '../../../utils/login';
 import styles from './LoginForm.module.css';
 
-const LoginForm = () => {
+const LoginForm = ({ setError }) => {
     const emailRef = useRef(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [formFilledOut, setFormFilledOut] = useState(false);
+
+    const history = useHistory();
 
     useEffect(() =>  {
         emailRef.current.focus();
@@ -17,9 +22,20 @@ const LoginForm = () => {
         }
     }, [email, password]);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        console.log('submit to my will!');
+        try {
+            await login({ email, password });
+            history.push("/home");
+        } catch (e) {
+            if (e.response && e.response.status === 404){
+                setError(ERROR_MESSAGE.LOGIN[404]);
+            } else if (e.message) {
+                setError(e.message);
+            } else {
+                setError(ERROR_MESSAGE.LOGIN.GENERIC)
+            }
+        }
     };
 
     return (

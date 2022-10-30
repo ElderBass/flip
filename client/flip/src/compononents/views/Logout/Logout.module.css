@@ -1,0 +1,15 @@
+@import '../../../index.css';
+
+.logoutPage {
+    grid-area: page;
+    background: var(--background-yellow);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    border-radius: 10px;
+    border: solid .5px var(--card-pink);
+    box-shadow: -4px 4px 2px black;
+}

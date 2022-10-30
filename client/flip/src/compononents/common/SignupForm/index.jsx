@@ -1,4 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { addUser } from '../../../api';
+import { ERROR_MESSAGE } from '../../../utils/constants';
+import { login } from '../../../utils/login';
 import styles from './SignupForm.module.css';
 
 const SignupForm = ({ setError }) => {
@@ -7,6 +11,8 @@ const SignupForm = ({ setError }) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [formFilledOut, setFormFilledOut] = useState(false);
+
+    const history = useHistory();
 
     useEffect(() =>  {
         emailRef.current.focus();
@@ -22,15 +28,23 @@ const SignupForm = ({ setError }) => {
         return email.includes('@') || email.substring(email.length - 4) === '.com';
     }
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
         console.log('submit to my will!');
         if (!isValidEmail(email)) {
-            setError('Oops! That email doesn\'t look right');
+            setError(ERROR_MESSAGE.SIGNUP.INVALID_EMAIL);
             return;
         }
         if (password !== confirmPassword) {
-            setError('Yikes! Your passwords don\'t match!');
+            setError(ERROR_MESSAGE.SIGNUP.PASSWORD_MISMATCH);
+        }
+        try {
+            const result = await addUser({ email, password });
+            console.log('\n\n result on adding user - ', result, '\n\n');
+            await login({ email, password });
+            history.push('/home');
+        } catch (e) {
+            console.log('\n\n error on adding user - ', e, '\n\n');
         }
     };
 
