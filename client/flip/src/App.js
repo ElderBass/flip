@@ -1,28 +1,32 @@
-import React from 'react';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
-import Header from './compononents/common/Header/Header';
+import React, { useEffect } from 'react';
+import { Route, BrowserRouter as Router, Switch, useHistory } from 'react-router-dom';
+import Logout from './compononents/views/Logout/Logout';
 import styles from './App.module.css';
 import Home from './compononents/views/Home';
+import UserHome from './compononents/views/UserHome';
 
 function App() {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('userLoggedIn') === true) {
+      history.push('/home');
+    }
+  }, []);
+
   return (
-    <BrowserRouter>
+    <Router>
       <div className={styles.mainContainer}>
-        {/* <Header /> */}
-        <Route exact path='/'>
-          <Home />
-        </Route>
-                {/* 
-        <Route exact path='/login'>
-          <Login />
-        </Route>
-        <Route exact path='/logout'>
-          <Logout />
-        </Route>
-        <Route exact path='/signup'>
-          <Signup />
-        </Route>
-        <Route exact path='/posts/create'>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route exact path='/home' component={UserHome} />
+          <Route exact path='/logout' component={Logout} />
+        </Switch>
+
+        {/*
+        <Route exact path='/decks/create'>
           {isLoggedIn ? (
             <CreatePostPage />
           ) : (
@@ -30,7 +34,7 @@ function App() {
           )}
         </Route> */}
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

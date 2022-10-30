@@ -1,0 +1,46 @@
+.logoutHeader {
+  flex: 0 0 70px;
+  text-align: center;
+  font-size: 64px;
+  color: var(--background-purple);
+  font-family: 'Lobster', cursive;
+  text-shadow: 0 0 3px var(--logo-blue), 0 0 3px var(--logo-blue), 0 0 3px var(--logo-blue), 0 0 3px var(--logo-blue);
+}
+
+.actions {
+  /* display: flex;
+  flex-direction: column;
+  justify-content:space-evenly; */
+  align-items: center;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.logoutButton {
+  flex: 1 0 auto;
+  text-align: center;
+  color: var(--electric-pink);
+  font-family: 'Lobster', cursive;
+  text-decoration: none;
+  border: none;
+  font-size: 80px;
+  font-weight: 400;
+}
+
+.logoutButton:hover {
+  cursor: pointer;
+  color: var(--logo-blue);
+}
+
+.cancelButton {
+  flex: 0 0 auto;
+  color: var(--lighter-blue);
+  border: none;
+  background: var(--background-purple);
+  font-size: 20px;
+}
+
+.cancelButton:hover {
+  color: var(--electric-pink);
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@
 
 .header {
     padding: 20px;
+    height: 100px;
     background: var(--background-yellow);
     /* color: rgb(139, 144, 218); */
     display: flex;
@@ -19,7 +20,6 @@
     font-size: 80px;
     color: var(--card-blue);
     font-family: 'Reenie Beanie', cursive;
-    /* text-shadow: 0 0 3px var(--logo-blue), 0 0 3px var(--logo-blue), 0 0 3px var(--logo-blue), 0 0 3px var(--logo-blue); */
 }
 
 .logo:hover {

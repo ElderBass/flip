@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './LogoutLink.module.css'
 
 
-const LogoutLink = (props) => {
+const LogoutLink = () => {
 
   return (
     <li>

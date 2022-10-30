@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/ElderBass/flip#readme",
   "devDependencies": {
-    "bcrypt": "5.1.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "1.20.1",
     "concurrently": "7.5.0",
     "cors": "2.8.5",
