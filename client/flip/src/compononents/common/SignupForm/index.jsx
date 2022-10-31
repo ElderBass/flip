@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addUser } from '../../../api';
 import { ERROR_MESSAGE } from '../../../utils/constants';
+import { isValidEmail } from '../../../utils/helpers/emailHelpers';
 import { login } from '../../../utils/login';
 import styles from './SignupForm.module.css';
 
@@ -24,10 +25,6 @@ const SignupForm = ({ setError }) => {
         }
     }, [email, password, confirmPassword]);
 
-    const isValidEmail = email => {
-        return email.includes('@') || email.substring(email.length - 4) === '.com';
-    }
-
     const onSubmit = async e => {
         e.preventDefault();
         console.log('submit to my will!');
@@ -39,8 +36,7 @@ const SignupForm = ({ setError }) => {
             setError(ERROR_MESSAGE.SIGNUP.PASSWORD_MISMATCH);
         }
         try {
-            const result = await addUser({ email, password });
-            console.log('\n\n result on adding user - ', result, '\n\n');
+            await addUser({ email, password });
             await login({ email, password });
             history.push('/home');
         } catch (e) {

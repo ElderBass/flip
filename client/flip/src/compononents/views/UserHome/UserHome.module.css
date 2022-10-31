@@ -1,11 +1,37 @@
+@import url('../../../index.css');
+
 .userHomePage {
   height: 100%;
   display: grid;
-  background: var(--background-yellow);
   color: var(--card-blue);
+  background: var(--background-yellow);
   grid-template-columns: 1fr;
   grid-template-rows: 100px auto;
   grid-template-areas: 
   "header"
   "content";
+}
+
+.userContent {
+  grid-area: "content";
+  height: 100vh;
+  color: var(--card-blue);
+  background: var(--background-yellow);
+  display: flex;
+}
+
+.userFeed {
+  flex: 1 0 80%;
+  color: var(--card-blue);
+  background: var(--background-yellow);
+  display: flex;
+  flex-direction: column;
+}
+
+.actions {
+  flex: 1 0 20%;
+  background: var(--background-yellow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
