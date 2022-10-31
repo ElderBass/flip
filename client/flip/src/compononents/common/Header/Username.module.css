@@ -4,28 +4,17 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: var(--logo-blue);
 }
 
 .welcome {
-  color: rgb(139, 144, 218);
+  color: var(--card-blue);
   font-size: 24px;
   margin-right: 5px;
 }
 
 .username {
   text-align: left;
-  color: var(--electric-pink);
+  color: var(--card-pink);
   font-weight: 100;
-  font-size: 32px;
-  font-family: 'Lobster', cursive;
-}
-
-.profile {
-  color: var(--logo-blue);
-}
-
-.profile:hover {
-  cursor: pointer;
-  color: var(--lighter-blue);
+  font-size: 28px;
 }

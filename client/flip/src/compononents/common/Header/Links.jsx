@@ -10,7 +10,7 @@ const Links = () => {
 	return (
 		<div className={styles.linksContainer}>
 			<ul className={styles.linksList}>
-				<Username username={user.email} />
+				<Username username={user.username} />
 				<LogoutLink />
 			</ul>
 		</div>

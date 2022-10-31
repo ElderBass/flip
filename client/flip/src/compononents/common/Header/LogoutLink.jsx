@@ -4,7 +4,6 @@ import styles from './LogoutLink.module.css'
 
 
 const LogoutLink = () => {
-
   return (
     <li>
       <Link className={`link ${styles.logout}`} to='/logout'>Logout</Link>

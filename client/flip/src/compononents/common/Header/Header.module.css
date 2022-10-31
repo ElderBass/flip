@@ -3,8 +3,8 @@
 .header {
     padding: 20px;
     height: 100px;
+    color: var(--card-blue);
     background: var(--background-yellow);
-    /* color: rgb(139, 144, 218); */
     display: flex;
     justify-content: flex-start;
     align-items: center;
