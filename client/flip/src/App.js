@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Route, BrowserRouter as Router, Switch, useHistory } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, Redirect, useHistory } from 'react-router-dom';
 import Logout from './compononents/views/Logout/Logout';
 import styles from './App.module.css';
 import Home from './compononents/views/Home';
 import UserHome from './compononents/views/UserHome';
+import CreateDeck from './compononents/views/CreateDeck';
 
 function App() {
   const history = useHistory();
@@ -12,7 +13,7 @@ function App() {
     if (localStorage.getItem('userLoggedIn') === true) {
       history.push('/home');
     }
-  }, []);
+  }, [history]);
 
   return (
     <Router>
@@ -21,18 +22,17 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path='/home' component={UserHome} />
+          {/* <Route exact path='/home'>
+            {isLoggedIn ? (
+              <UserHome />
+            ) : (
+              <Redirect to='/' />
+            )}
+          </Route> */}
+           <Route exact path='/home' component={UserHome} />
+          <Route exact path='/create-deck' component={CreateDeck} />
           <Route exact path='/logout' component={Logout} />
         </Switch>
-
-        {/*
-        <Route exact path='/decks/create'>
-          {isLoggedIn ? (
-            <CreatePostPage />
-          ) : (
-            <Redirect to='/' />
-          )}
-        </Route> */}
       </div>
     </Router>
   );

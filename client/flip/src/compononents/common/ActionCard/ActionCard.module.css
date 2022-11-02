@@ -1,7 +1,7 @@
 @import url('../../../index.css');
 
 .actionCard {
-  width: 90%;
+  width: 80%;
   height: 100px;
   box-shadow: 2px 2px 4px black;
   display: flex;
@@ -12,14 +12,12 @@
   margin: 15px;
   position: relative;
   z-index: 0;
-  /* color: var(--pencil-gray); */
   color: var(--background-yellow);
 }
 
 .actionCard:hover {
   cursor:pointer;
   box-shadow: 2px 2px 4px var(--card-pink);
-  /* color: var(--background-yellow); */
   color: var(--pencil-gray);
 
 }

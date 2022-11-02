@@ -1,5 +1,6 @@
 import React from 'react';
 import store from '../../../store';
+import { useHistory } from 'react-router-dom';
 import UserDecks from '../../common/UserDecks';
 import ActionCard from '../../common/ActionCard';
 import Header from '../../common/Header/Header';
@@ -7,11 +8,19 @@ import styles from './UserHome.module.css';
 
 const ACTIONS = ['Create', 'Stats', 'Browse'];
 
+const ActionRouteMap = {
+  Create: '/create-deck',
+  Stats: '/user-stats',
+  Browse: '/browse'
+};
+
 const UserHome = () => {
+  const history = useHistory();
   const { user } = store.getState();
 
   const onActionClick = action => {
-    console.log('\n on action click ', action, '\n\n');
+      const page = ActionRouteMap[action];
+      history.push(page);
   };
 
   return (
@@ -26,7 +35,7 @@ const UserHome = () => {
             <ActionCard
               key={action}
               title={action}
-              onClick={onActionClick}
+              onClick={() => onActionClick(action)}
             />
           ))}
         </div>

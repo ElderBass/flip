@@ -1,0 +1,71 @@
+.cardSide {
+    height: 400px;
+    width: 100%;
+    min-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    background: var(--create-card-green);
+    box-shadow: 3px 3px 6px  black;
+}
+
+.label {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: var(--pencil-gray);
+}
+
+.line {
+    width: 100%;
+    border: solid .5px var(--card-pink);
+}
+
+.inputField {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 15px;
+}
+
+.input {
+    width: 80%;
+    border: solid 1px var(--card-pink);
+    background-color: rgb(92, 98, 116, .2);
+    font-family: var(--text-font);
+    border-radius: 5px;
+    color: var(--pencil-gray)
+}
+
+.frontInput {
+    height: 60px;
+    font-size: 40px;
+    margin-top: 50px;
+}
+
+.backInput {
+    height: 160px;
+    font-size: 24px;
+    margin-top: 5px;
+}
+
+.flipCardBtn {
+    color: white;
+    background: var(--card-purple);
+    border: none;
+    margin-top: 25px;
+    padding: 10px 30px;
+    font-size: 36px;
+    font-family: var(--text-font);
+    border-radius: 8px;
+    width: 150px;
+}
+
+.flipCardBtn:hover {
+    cursor: pointer;
+    background-color: var(--card-pink);
+}
+

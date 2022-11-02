@@ -6,7 +6,7 @@ const addUser = userData => axios.post('/api/users/signup', userData);
 const loginUser = userData => axios.post('/api/users/login', userData);
 const getOneUser = () => axios.get('/api/users:id');
 const createDeck = deckData => axios.post('/api/decks/create', deckData);
-const getAllDecks = () => axios.get('/api/decks/all');
+const getAllDecks = userId => axios.get('/api/decks/all', userId);
 
 
 export {
