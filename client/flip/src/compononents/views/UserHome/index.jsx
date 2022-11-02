@@ -20,7 +20,6 @@ const UserHome = () => {
 
   const onActionClick = action => {
       const page = ActionRouteMap[action];
-      console.log('\n page = ', page, '\n\n');
       history.push(page);
   };
 
