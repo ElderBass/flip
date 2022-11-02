@@ -27,7 +27,6 @@ const SignupForm = ({ setError }) => {
 
     const onSubmit = async e => {
         e.preventDefault();
-        console.log('submit to my will!');
         if (!isValidEmail(email)) {
             setError(ERROR_MESSAGE.SIGNUP.INVALID_EMAIL);
             return;

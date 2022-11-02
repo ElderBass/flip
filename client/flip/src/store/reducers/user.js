@@ -1,10 +1,11 @@
 import { trimEmail } from '../../utils/helpers/emailHelpers';
+import * as DeckActions from '../actions/decks';
 import * as UserActions from '../actions/user';
 
 const INITIAL_STATE = {
     decks: [],
     email: '',
-    username: '',
+    username: 'zygster11',
     favorites: [],
     following: [],
     password: '',
@@ -29,6 +30,9 @@ function user(state = INITIAL_STATE, { type, payload }) {
         case UserActions.LOG_OUT_USER:
             console.log('is this happening ? log out user reducer');
             return INITIAL_STATE;
+        case DeckActions.ADD_DECK:
+            const decks = [...state.decks, payload];
+            return { ...state, decks };
         default:
             return state;
     }

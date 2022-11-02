@@ -6,5 +6,13 @@ export const ERROR_MESSAGE = {
   SIGNUP: {
     INVALID_EMAIL: 'Oops! That email doesn\'t look right',
     PASSWORD_MISMATCH: 'Yikes! Your passwords don\'t match!'
+  },
+  CREATE_CARD: {
+    INCOMPLETE: 'You haven\'t finished filling out the card!'
   }
+};
+
+export const SIDES = {
+  FRONT: 'Front',
+  BACK: 'Back',
 };

@@ -11,7 +11,7 @@ router.post('/api/users/signup', bodyParser.json(), async (req, res) => {
     res.json({ user, isSuccess: true });
   } catch (e) {
     console.log('\n\n err in signing up user = ', e, '\n\n');
-    res.status(400).json({ isSuccess: false, error: err });
+    res.status(400).json({ isSuccess: false, error: e });
   }
 });
 

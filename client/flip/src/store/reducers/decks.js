@@ -1,18 +1,4 @@
 import * as DeckActions from '../actions/decks';
-// import API from '../../utils/API';
-
-// async function fetchdecks() {
-//   try {
-//     const response = await API.getAlldecks();
-//     console.log('\n \n  response in useEffect get all decks = ', response, '\n \n ')
-//     if (response.statusText === 'OK' && response.data.isSuccess) {
-//       return response.data.decks;
-//     }
-//   } catch (err) {
-//     console.log('\n \n error in retrieving all decks useEffect', err, '\n \n');
-//     throw err;
-//   }
-// }
 
 const INITIAL_STATE = {
   decks: [],
