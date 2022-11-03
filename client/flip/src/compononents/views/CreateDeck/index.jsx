@@ -4,9 +4,10 @@ import store from '../../../store';
 import * as DeckActions from '../../../store/actions/decks';
 import Header from '../../common/Header/Header';
 import { createDeck } from '../../../api';
-import styles from './CreateDeck.module.css';
 import CreateCardForm from '../../common/CreateCardForm';
 import { ERROR_MESSAGE } from '../../../utils/constants';
+import { isDuplicateCard } from '../../../utils/helpers/isDuplicateCard';
+import styles from './CreateDeck.module.css';
 
 const CreateDeck = () => {
     const history = useHistory();
@@ -16,15 +17,11 @@ const CreateDeck = () => {
     const [back, setBack] = useState('');
     const [error, setError] = useState('');
     const [newDeck, setNewDeck] = useState([]);
-    const [flipped, setFlipped] = useState('false')
-
-    const onAddCard = (card) => setNewDeck((prevState) => [...prevState, card]);
+    const [flipped, setFlipped] = useState(false);
 
     const isCardFilledOut = () => front.length && back.length;
 
     const onFinishDeck = async () => {
-        console.log('\n submitting new deck\n');
-
         try {
             const result = await createDeck(newDeck);
             console.log('\n\n result in creating a deck = ', result, '\n\n');
@@ -42,8 +39,13 @@ const CreateDeck = () => {
 
     const onSubmitCard = (e) => {
         e.preventDefault();
+        setError('');
         if (!isCardFilledOut()) {
             setError(ERROR_MESSAGE.CREATE_CARD.INCOMPLETE);
+            return;
+        }
+        if (isDuplicateCard(front, newDeck)) {
+            setError(ERROR_MESSAGE.CREATE_CARD.DUPLICATE);
             return;
         }
         const card = { front, back };
@@ -66,19 +68,19 @@ const CreateDeck = () => {
                         back={back}
                         setFront={setFront}
                         setBack={setBack}
-                        addToDeck={onAddCard}
                         flipped={flipped}
                         setFlipped={setFlipped}
                     />
                     <div className={styles.addCard}>
-                        <button
-                            disabled={!isCardFilledOut()}
-                            className={styles.addCardBtn}
-                            type="button"
-                            onClick={onSubmitCard}
-                        >
-                            Add
-                        </button>
+                        {isCardFilledOut() ? (
+                            <button
+                                className={styles.addCardBtn}
+                                type="button"
+                                onClick={onSubmitCard}
+                            >
+                                Add
+                            </button>
+                        ) : null}
                     </div>
                     <div className={styles.actions}>
                         <button
@@ -97,14 +99,18 @@ const CreateDeck = () => {
                         </button>
                     </div>
                 </div>
-                <div className={styles.addedCards}>
+                <div className={styles.addedCardsContainer}>
                     <h3 className={styles.addedCardsHeader}>Cards in Deck:</h3>
                     <hr className={styles.line} />
-                    {newDeck.length ? newDeck.map((card) => (
-                        <div key={card.front} className={styles.addedCard}>
-                            <p className={styles.addedCardLabel}>{card.front}</p>
-                        </div>
-                    )) : null}
+                    <div className={styles.addedCards}>
+                        {newDeck.length
+                            ? newDeck.map((card) => (
+                                  <div key={card.front} className={styles.addedCard}>
+                                      <p className={styles.addedCardLabel}>{card.front}</p>
+                                  </div>
+                              ))
+                            : null}
+                    </div>
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                     type="button"
                     onClick={onFlip}
                 >
-                    Flip
+                    -Flip-
                 </button>
         </div>
     );

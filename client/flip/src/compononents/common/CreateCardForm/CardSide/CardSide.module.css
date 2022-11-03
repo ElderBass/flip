@@ -53,8 +53,8 @@
 }
 
 .flipCardBtn {
-    color: white;
-    background: var(--card-purple);
+    color: var(--card-pink);
+    background: var(--create-card-green);
     border: none;
     margin-top: 25px;
     padding: 10px 30px;
@@ -66,6 +66,6 @@
 
 .flipCardBtn:hover {
     cursor: pointer;
-    background-color: var(--card-pink);
+    color: var(--card-purple);
 }
 

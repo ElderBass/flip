@@ -8,7 +8,8 @@ export const ERROR_MESSAGE = {
     PASSWORD_MISMATCH: 'Yikes! Your passwords don\'t match!'
   },
   CREATE_CARD: {
-    INCOMPLETE: 'You haven\'t finished filling out the card!'
+    INCOMPLETE: 'You haven\'t finished filling out the card!',
+    DUPLICATE: 'You\'ve already added this card!'
   }
 };
 
