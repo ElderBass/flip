@@ -33,9 +33,10 @@
 }
 
 .error {
-    height: 30px;
-    background: var(--card-blue);
+    height: 50px;
+    text-align: center;
     margin-bottom: 30px;
+    background: var(--card-blue);
 }
 
 .errorMsg {

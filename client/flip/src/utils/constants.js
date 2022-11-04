@@ -10,6 +10,11 @@ export const ERROR_MESSAGE = {
   CREATE_CARD: {
     INCOMPLETE: 'You haven\'t finished filling out the card!',
     DUPLICATE: 'You\'ve already added this card!'
+  },
+  FINISH_CARD: {
+    DOUBLE_CHECK: 'Don\'t forget to double check your cards!',
+    NO_NAME: 'This deck needs a name, bro!',
+    GENERIC: 'Something went wrong when finishing your deck, sorry!',
   }
 };
 

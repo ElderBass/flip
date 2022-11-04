@@ -1,0 +1,104 @@
+@import url('../../../index.css');
+
+.finishDeckContainer {
+    flex: 1 0 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.error {
+    height: 60px;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.finishDeckForm {
+    width: 80%;
+    height: 500px;
+    min-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-blue);
+    padding: 20px 0;
+    box-shadow: 3px 3px 6px  black;
+}
+
+.label {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: var(--background-yellow);
+}
+
+.line {
+    width: 100%;
+    background: var(--card-pink);
+    border: solid 1.5px var(--card-pink);
+}
+
+.inputField {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 15px;
+    padding: 20px 0;
+}
+
+.input {
+    width: 80%;
+    border: solid 2px var(--background-yellow);
+    background-color: rgb(86, 236, 141, .3);
+    font-family: var(--text-font);
+    border-radius: 5px;
+    height: 64px;
+    font-size: 50px;
+    color: var(--pencil-gray);
+    margin-top: 40px;
+}
+
+.actions {
+    width: 70%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cancelBtn {
+    padding: 10px;
+    color: var(--pencil-gray);
+    font-size: 32px;
+    font-family: var(--text-font);
+    background: var(--card-blue);
+    border: none;
+}
+
+.cancelBtn:hover {
+    cursor: pointer;
+    font-size: 36px;
+    color: var(--card-pink);
+}
+
+.submitBtn {
+    height: 91px;
+    padding: 10px;
+    color: var(--background-yellow);
+    font-size: 70px;
+    font-family: var(--logo-font);
+    outline: none;
+    border: none;
+    background: var(--card-blue);
+    font-weight: 400;
+}
+
+.submitBtn:hover {
+    cursor: pointer;
+    font-size: 74px;
+    font-weight: 700;
+}

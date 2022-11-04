@@ -1,18 +1,6 @@
 @import url('../../../index.css');
 
-.createDeckPage {
-    height: 100vh;
-    display: grid;
-    color: var(--card-blue);
-    background: var(--background-yellow);
-    grid-template-columns: 1fr;
-    grid-template-rows: 100px auto;
-    grid-template-areas: 
-    "header"
-    "content";
-}
-
-.createDeckContentWrapper {
+.createDeckContent {
     grid-area: "content";
     display: flex;
     justify-content: center;
@@ -20,7 +8,7 @@
     height: 100%;
 }
 
-.createDeckContent {
+.createDeckForm {
     flex: 1 0 70%;
     color: var(--card-blue);
     background: var(--background-yellow);
