@@ -16,23 +16,28 @@
     padding: 20px;
 }
 
-.card {
+.addCard {
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    height: 100px;
 }
 
-.label {
-    font-size: 30px;
-    margin-bottom: 10px;
+.addCardBtn {
+    height: 90px;
+    font-size: 80px;
+    font-weight: 500;
+    font-family: var(--logo-font);
+    color: var(--dark-green);
+    outline: none;
+    border: none;
+    padding: 0 20px;
+    background: none;
 }
 
-.inputField {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 15px;
+.addCardBtn:hover {
+    cursor: pointer;
+    font-size: 86px;
+    font-weight: 700;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import CreateDeckButton from '../CreateDeckButton';
 import styles from './UserDecks.module.css';
 
 const UserDecks = ({ decks }) => {
