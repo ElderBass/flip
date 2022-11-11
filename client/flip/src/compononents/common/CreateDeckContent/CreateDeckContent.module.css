@@ -1,20 +1,19 @@
 @import url('../../../index.css');
 
 .createDeckContent {
-    grid-area: "content";
+    grid-area: content;
     display: flex;
-    justify-content: center;
     padding-bottom: 30px;
     height: 100%;
 }
 
 .createDeckForm {
     flex: 1 0 70%;
+    max-height: 60%;
     color: var(--card-blue);
     background: var(--background-yellow);
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -52,16 +51,14 @@
 }
 
 .actions {
-    width: 50%;
-    margin-top: 30px;
-    padding: 30px;
+    flex: 1 0 30%;
+    margin-top: -20px;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
 }
 
 .cancelBtn {
-    flex: 1 0 50%;
     padding: 20px;
     color: var(--card-purple);
     font-size: 32px;
@@ -78,7 +75,6 @@
 }
 
 .finishBtn {
-    flex: 1 0 50%;
     padding: 20px;
     color: var(--dark-green);
     font-size: 70px;

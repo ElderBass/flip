@@ -43,24 +43,25 @@ const CreateDeckContent = () => {
                 <FinishDeckForm onCancel={() => setShowFinish(false)} />
             ) : (
                 <div className={styles.createDeckForm}>
-                    <div className={styles.error}>
-                        {error && <p className={styles.errorMsg}>{error}</p>}
-                    </div>
-                    <CreateCardForm currentCard={currentCard} submitCard={onSubmitCard} />
+                    <CreateCardForm
+                        error={error}
+                        currentCard={currentCard}
+                        submitCard={onSubmitCard}
+                    />
                     <div className={styles.actions}>
+                        <button
+                            className={styles.finishBtn}
+                            onClick={() => setShowFinish(true)}
+                            type="button"
+                        >
+                            Finish
+                        </button>
                         <button
                             className={styles.cancelBtn}
                             onClick={() => history.push('/home')}
                             type="button"
                         >
                             Cancel
-                        </button>
-                        <button
-                            className={styles.finishBtn}
-                            disabled={!newDeck.length}
-                            onClick={() => setShowFinish(true)}
-                        >
-                            Finish
                         </button>
                     </div>
                 </div>

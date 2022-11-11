@@ -1,18 +1,20 @@
+import Zena from '../../data/Zena';
 import { trimEmail } from '../../utils/helpers/emailHelpers';
 import * as DeckActions from '../actions/decks';
 import * as UserActions from '../actions/user';
 
-const INITIAL_STATE = {
-    decks: [],
-    email: '',
-    username: 'zygster11',
-    favorites: [],
-    following: [],
-    password: '',
-    _id: '',
-    token: '',
-    isLoggedIn: false,
-};
+// const INITIAL_STATE = {
+//         decks: [],
+//         email: '',
+//         username: 'zygster11',
+//         favorites: [],
+//         following: [],
+//         _id: '',
+//         token: '',
+//     isLoggedIn: false,
+// };
+
+const INITIAL_STATE = Zena;
 
 function user(state = INITIAL_STATE, { type, payload }) {
     switch (type) {

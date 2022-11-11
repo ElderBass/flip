@@ -1,0 +1,23 @@
+@import url('../../../index.css');
+
+.userFeedCarousel {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contentHeader {
+    font-size: 80px;
+    font-family: var(--logo-font);
+    margin: 20px;
+}
+
+.contentContainer {
+    max-width: 1000px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    overflow: hidden;    
+    padding: 20px 0;
+}

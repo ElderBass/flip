@@ -1,44 +1,24 @@
-import React from 'react';
+import React, { useSyncExternalStore } from 'react';
 import store from '../../../store';
-import { useHistory } from 'react-router-dom';
-import UserDecks from '../../common/UserDecks';
-import ActionCard from '../../common/ActionCard';
 import Header from '../../common/Header/Header';
 import styles from './UserHome.module.css';
-
-const ACTIONS = ['Create', 'Stats', 'Browse'];
-
-const ActionRouteMap = {
-  Create: '/create-deck',
-  Stats: '/user-stats',
-  Browse: '/browse'
-};
+import Actions from '../../common/Actions';
+import UserFeedCarousel from '../../common/UserFeedCarousel';
 
 const UserHome = () => {
-  const history = useHistory();
   const { user } = store.getState();
-
-  const onActionClick = action => {
-      const page = ActionRouteMap[action];
-      history.push(page);
-  };
+  const { decks, favorites, following } = user;
 
   return (
     <div className={styles.userHomePage}>
       <Header />
       <div className={styles.userContent}>
         <div className={styles.userFeed}>
-          <UserDecks decks={user.decks} />
+          <UserFeedCarousel type="Decks" content={decks} />
+          <UserFeedCarousel type="Favorites" content={favorites} />
+          <UserFeedCarousel type="Following" content={following} />
         </div>
-        <div className={styles.actions}>
-          {ACTIONS.map(action => (
-            <ActionCard
-              key={action}
-              title={action}
-              onClick={() => onActionClick(action)}
-            />
-          ))}
-        </div>
+        <Actions />
       </div>
     </div>
   );

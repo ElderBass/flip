@@ -1,0 +1,32 @@
+@import url('../../../../index.css');
+
+.deckCarouselItem {
+    height: 150px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    background-color: var(--action-blue);
+    color: var(--background-yellow);
+    box-shadow: 2px 2px 4px black;
+}
+
+.line {
+    width: 100%;
+    margin-top: 20px;
+    background: var(--card-pink);
+    border: solid 1px var(--card-pink);
+}
+
+.name {
+    padding-top: 20px;
+}
+
+.deckCarouselItem:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 4px var(--card-pink);
+    color: var(--pencil-gray);
+
+}
