@@ -17,19 +17,18 @@
 
 .finishDeckForm {
     width: 80%;
-    height: 500px;
+    height: 400px;
     min-width: 700px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background: var(--card-blue);
-    padding: 20px 0;
     box-shadow: 3px 3px 6px  black;
 }
 
 .label {
-    font-size: 40px;
+    font-size: 32px;
     margin-bottom: 10px;
     color: var(--background-yellow);
 }
@@ -46,7 +45,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 15px;
+    margin: 10px;
     padding: 20px 0;
 }
 
@@ -56,15 +55,15 @@
     background-color: rgb(86, 236, 141, .3);
     font-family: var(--text-font);
     border-radius: 5px;
-    height: 64px;
-    font-size: 50px;
+    height: 60px;
+    font-size: 40px;
     color: var(--pencil-gray);
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .actions {
     width: 70%;
-    padding: 30px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,7 +72,7 @@
 .cancelBtn {
     padding: 10px;
     color: var(--pencil-gray);
-    font-size: 32px;
+    font-size: 24px;
     font-family: var(--text-font);
     background: var(--card-blue);
     border: none;
@@ -81,15 +80,15 @@
 
 .cancelBtn:hover {
     cursor: pointer;
-    font-size: 36px;
+    font-size: 26px;
     color: var(--card-pink);
 }
 
 .submitBtn {
-    height: 91px;
+    height: 70px;
     padding: 10px;
     color: var(--background-yellow);
-    font-size: 70px;
+    font-size: 60px;
     font-family: var(--logo-font);
     outline: none;
     border: none;
@@ -99,6 +98,6 @@
 
 .submitBtn:hover {
     cursor: pointer;
-    font-size: 74px;
+    font-size: 64px;
     font-weight: 700;
 }

@@ -16,7 +16,6 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                 <label className={styles.label} htmlFor={id}>
                     {side}
                 </label>
-                <hr className={styles.line} />
                 {side === SIDES.FRONT ? (
                     <input
                         ref={sideRef}

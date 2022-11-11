@@ -15,10 +15,10 @@ const cardStyles = {
 
 const backStyles = {
     ...cardStyles,
-    background: 'rgb(199, 107, 252)',
+    background: 'rgb(246, 238, 146)',
 };
 
-const CreateCardForm = ({ submitCard, currentCard }) => {
+const CreateCardForm = ({ error, submitCard, currentCard }) => {
     const [front, setFront] = useState(currentCard.front || '');
     const [back, setBack] = useState(currentCard.back || '');
     const [flipped, setFlipped] = useState(false);
@@ -34,7 +34,10 @@ const CreateCardForm = ({ submitCard, currentCard }) => {
     };
 
     return (
-        <div className={styles.createCardContainer}>
+        <div className={styles.createCardFormContainer}>
+            <div className={styles.error}>
+                {error && <p className={styles.errorMsg}>{error}</p>}
+            </div>
             <form className={styles.createCardForm}>
                 <ReactCardFlip
                     cardStyles={{ front: cardStyles, back: backStyles }}

@@ -1,7 +1,8 @@
 @import url('../../../index.css');
 
 .userHomePage {
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   display: grid;
   color: var(--card-blue);
   background: var(--background-yellow);
@@ -13,8 +14,8 @@
 }
 
 .userContent {
-  grid-area: "content";
-  height: 100vh;
+  grid-area: content;
+  height: 100%;
   color: var(--card-blue);
   background: var(--background-yellow);
   display: flex;
@@ -22,16 +23,10 @@
 
 .userFeed {
   flex: 1 0 80%;
+  padding: 40px;
   color: var(--card-blue);
   background: var(--background-yellow);
   display: flex;
   flex-direction: column;
-}
-
-.actions {
-  flex: 1 0 20%;
-  background: var(--background-yellow);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-evenly;
 }

@@ -1,0 +1,16 @@
+@import url('../../index.css');
+
+.scrollArrow {
+    background: var(--background-yellow);
+    color: var(--card-pink);
+    width: 60px;
+    margin: 10px;
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+
+.scrollArrow:hover {
+    color: var(--card-blue);
+    cursor: pointer;
+}
