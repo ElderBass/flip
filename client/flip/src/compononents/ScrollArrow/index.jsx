@@ -20,8 +20,6 @@ const ScrollArrow = ({ direction }) => {
         Left: <FontAwesomeIcon icon={faArrowLeft} size="3x" />
     }
 
-    console.log('\n direction ? ', direction, '\n\n');
-    console.log('\n is this map working? ', ArrowMap[direction], '\n\n');
     return (
         <button onClick={onClick} className={styles.scrollArrow} disabled={disabled}>
             {ArrowMap[direction]}

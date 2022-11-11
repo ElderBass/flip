@@ -30,7 +30,6 @@ function user(state = INITIAL_STATE, { type, payload }) {
             const username = trimEmail(user.email);
             return { ...user, username, token, isLoggedIn: true };
         case UserActions.LOG_OUT_USER:
-            console.log('is this happening ? log out user reducer');
             return INITIAL_STATE;
         case DeckActions.ADD_DECK:
             const decks = [...state.decks, payload];
