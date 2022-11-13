@@ -9,7 +9,6 @@ const SelectedDeck = () => {
     const { deckName, cards, timestamp } = selectedDeck;
 
     const dateCreated = new Date(timestamp).toLocaleDateString();
-    console.log('\n\n dateCreated ? ', dateCreated, '\n\n');
 
     return (
         <div className={styles.selectedDeckContainer}>
