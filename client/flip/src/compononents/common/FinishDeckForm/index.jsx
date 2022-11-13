@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import store from '../../../store';
+import { useHistory } from 'react-router-dom';
 import { ERROR_MESSAGE } from '../../../utils/constants';
 import * as DeckActions from '../../../store/actions/decks';
 import { createDeck } from '../../../api';
@@ -9,6 +10,8 @@ const FinishDeckForm = ({ cards, onCancel }) => {
     const { DOUBLE_CHECK, NO_NAME, GENERIC } = ERROR_MESSAGE.FINISH_CARD;
     const [error, setError] = useState(DOUBLE_CHECK);
     const [deckName, setDeckName] = useState('');
+
+    const history = useHistory();
 
     const {
         user: { username, _id },
@@ -27,10 +30,11 @@ const FinishDeckForm = ({ cards, onCancel }) => {
             userId: _id,
             cards,
         };
+
         try {
             const result = await createDeck(deckPayload);
-            console.log('\n\n result in creating a deck = ', result, '\n\n');
-            store.dispatch(DeckActions.addDeck(result));
+            store.dispatch(DeckActions.addDeck(result.data.data));
+            history.push('/home');
         } catch (e) {
             console.log('\n\n error in creating deck = ', e, '\n\n');
             setError(GENERIC);

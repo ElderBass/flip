@@ -1,4 +1,4 @@
-import React, { useSyncExternalStore } from 'react';
+import React from 'react';
 import store from '../../../store';
 import Header from '../../common/Header/Header';
 import styles from './UserHome.module.css';
