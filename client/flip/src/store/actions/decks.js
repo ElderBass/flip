@@ -10,9 +10,17 @@ const setAllDecks = (decks) => ({
     payload: decks
 });
 
+const SET_SELECTED_DECK = 'SET_SELECTED_DECK';
+const setSelectedDeck = (deck) => ({
+  type: SET_SELECTED_DECK,
+  payload: deck
+});
+
 export {
   ADD_DECK,
   addDeck,
   SET_ALL_DECKS,
   setAllDecks,
+  SET_SELECTED_DECK,
+  setSelectedDeck
 };

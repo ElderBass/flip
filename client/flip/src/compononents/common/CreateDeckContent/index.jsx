@@ -40,7 +40,7 @@ const CreateDeckContent = () => {
     return (
         <div className={styles.createDeckContent}>
             {showFinish ? (
-                <FinishDeckForm onCancel={() => setShowFinish(false)} />
+                <FinishDeckForm cards={newDeck} onCancel={() => setShowFinish(false)} />
             ) : (
                 <div className={styles.createDeckForm}>
                     <CreateCardForm
@@ -50,6 +50,7 @@ const CreateDeckContent = () => {
                     />
                     <div className={styles.actions}>
                         <button
+                            disabled={newDeck.length === 0}
                             className={styles.finishBtn}
                             onClick={() => setShowFinish(true)}
                             type="button"

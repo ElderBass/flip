@@ -4,6 +4,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const app = express();
 const UserRoutes = require("./routes/user");
+const DeckRoutes = require("./routes/deck");
 
 const PORT = process.env.PORT || 8000;
 
@@ -19,6 +20,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(UserRoutes);
+app.use(DeckRoutes);
 
 const MONGO_URI = process.env.MONGODB_URI;
 

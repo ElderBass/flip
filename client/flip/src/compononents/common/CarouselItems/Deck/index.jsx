@@ -1,15 +1,25 @@
-import React, { useContext } from 'react';
-import { VisibilityContext } from 'react-horizontal-scrolling-menu';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import store from '../../../../store';
+import * as DeckActions from '../../../../store/actions/decks';
+// import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import styles from './Deck.module.css';
 
 const Deck = ({ item }) => {
-    const visibility = useContext(VisibilityContext);
+    const { deckName } = item;
+    // const visibility = useContext(VisibilityContext);
+    const history = useHistory();
+
+    const onClick = () => {
+        store.dispatch(DeckActions.setSelectedDeck(item));
+        history.push('/deck');
+    };
 
     return (
-        <div className={styles.deckCarouselItem}>
+        <div onClick={onClick} className={styles.deckCarouselItem}>
             <hr className={styles.line} />
             <div className={styles.name}>
-                {item.deckName}
+                {deckName}
             </div>
         </div>
     );

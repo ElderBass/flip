@@ -5,7 +5,7 @@ import Deck from '../CarouselItems/Deck';
 import Following from '../CarouselItems/Following';
 import styles from './UserFeedCarousel.module.css';
 
-const UserContentCarousel = ({ type, content }) => {
+const UserFeedCarousel = ({ type, content }) => {
     const CarouselItemMap = {
         Decks: Deck,
         Favorites: Deck,
@@ -37,4 +37,4 @@ const UserContentCarousel = ({ type, content }) => {
     );
 };
 
-export default UserContentCarousel;
+export default UserFeedCarousel;
