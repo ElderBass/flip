@@ -32,6 +32,7 @@ function App() {
           </Route> */}
                     <Route exact path="/home" component={UserHome} />
                     <Route exact path="/create-deck" component={CreateDeck} />
+                    <Route exact path="/edit-deck" component={CreateDeck} />
                     <Route exact path="/deck" component={Deck} />
                     <Route exact path="/logout" component={Logout} />
                 </Switch>

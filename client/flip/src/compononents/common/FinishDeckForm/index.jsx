@@ -6,10 +6,10 @@ import * as DeckActions from '../../../store/actions/decks';
 import { createDeck } from '../../../api';
 import styles from './FinishDeckForm.module.css';
 
-const FinishDeckForm = ({ cards, onCancel }) => {
+const FinishDeckForm = ({ cards, onCancel, title }) => {
     const { DOUBLE_CHECK, NO_NAME, GENERIC } = ERROR_MESSAGE.FINISH_CARD;
     const [error, setError] = useState(DOUBLE_CHECK);
-    const [deckName, setDeckName] = useState('');
+    const [deckName, setDeckName] = useState(title || '');
 
     const history = useHistory();
 

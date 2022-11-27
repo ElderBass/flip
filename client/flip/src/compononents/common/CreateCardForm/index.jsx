@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
+import { v4 as uuidv4 } from 'uuid';
 import { SIDES } from '../../../utils/constants';
 import CardSide from './CardSide';
 import styles from './CreateCardForm.module.css';
@@ -18,7 +19,7 @@ const backStyles = {
     background: 'rgb(246, 238, 146)',
 };
 
-const CreateCardForm = ({ error, submitCard, currentCard }) => {
+const CreateCardForm = ({ error, submitCard, currentCard, editCard, isEdit }) => {
     const [front, setFront] = useState(currentCard.front || '');
     const [back, setBack] = useState(currentCard.back || '');
     const [flipped, setFlipped] = useState(false);
@@ -27,11 +28,19 @@ const CreateCardForm = ({ error, submitCard, currentCard }) => {
 
     const onSubmitCard = (e) => {
         e.preventDefault();
-        submitCard({ front, back });
+        const id = uuidv4();
+        submitCard({ front, back, id });
         setFront('');
         setBack('');
         setFlipped(false);
     };
+
+    useEffect(() => {
+        if (currentCard.front && currentCard.back) {
+            setFront(currentCard.front);
+            setBack(currentCard.back);
+        }
+    }, [currentCard]);
 
     return (
         <div className={styles.createCardFormContainer}>
@@ -53,11 +62,16 @@ const CreateCardForm = ({ error, submitCard, currentCard }) => {
                 </ReactCardFlip>
             </form>
             <div className={styles.addCard}>
-                {front.length && back.length ? (
+                {!isEdit && front.length && back.length ? (
                     <button className={styles.addCardBtn} type="button" onClick={onSubmitCard}>
                         Add
                     </button>
                 ) : null}
+                {isEdit && (
+                    <button className={styles.addCardBtn} type="button" onClick={() => editCard({ front, back, id: currentCard.id })}>
+                        Update
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -3,11 +3,12 @@ import Header from '../../common/Header/Header';
 import styles from './CreateDeck.module.css';
 import CreateDeckContent from '../../common/CreateDeckContent';
 
-const CreateDeck = () => {
+const CreateDeck = ({ location }) => {
+    const isEdit = location?.state?.isEdit || null;
     return (
         <div className={styles.createDeckPage}>
             <Header />
-            <CreateDeckContent />
+            <CreateDeckContent isEdit={isEdit} />
         </div>
     );
 };
