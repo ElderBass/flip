@@ -48,6 +48,7 @@
     "react-horizontal-scrolling-menu": "3.2.3",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
-    "redux-persist": "6.0.0"
+    "redux-persist": "6.0.0",
+    "uuid": "9.0.0"
   }
 }

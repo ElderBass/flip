@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import store from '../../store';
 import styles from './SelectedDeck.module.css';
 
@@ -32,7 +33,12 @@ const SelectedDeck = () => {
                     </div>
                 </div>
                 <div className={styles.actions}>
-                    <button className={`${styles.button} ${styles.editBtn}`}>Edit</button>
+                    <Link
+                        to={{ pathname: '/edit-deck', state: { isEdit: true } }}
+                        className={`${styles.button} ${styles.editBtn}`}
+                    >
+                        Edit
+                    </Link>
                     <button className={`${styles.button} ${styles.studyBtn}`}>Study</button>
                 </div>
             </div>

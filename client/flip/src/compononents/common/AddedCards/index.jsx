@@ -10,7 +10,7 @@ const AddedCards = ({ cards, onClick }) => {
                 {cards.length
                     ? cards.map((card) => (
                           <div
-                              key={card.front}
+                              key={card.id}
                               className={styles.addedCard}
                               onClick={() => onClick(card)}
                           >
