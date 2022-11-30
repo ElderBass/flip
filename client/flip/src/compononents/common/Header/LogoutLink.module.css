@@ -2,7 +2,7 @@
 
 .logout {
   font-size: 20px;
-  color: var(--card-blue);
+  color: var(--pencil-gray);
 }
 
 .logout:hover {

@@ -21,8 +21,3 @@
     color: var(--card-blue);
     font-family: 'Reenie Beanie', cursive;
 }
-
-.logo:hover {
-    cursor: pointer;
-    /* text-shadow: 0 0 3px var(--electric-pink), 0 0 3px var(--electric-pink), 0 0 3px var(--electric-pink), 0 0 3px var(--electric-pink); */
-}

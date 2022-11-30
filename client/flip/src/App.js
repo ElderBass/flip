@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import store from './store';
-import Logout from './compononents/views/Logout/Logout';
+import Logout from './compononents/views/Logout';
 import styles from './App.module.css';
 import Home from './compononents/views/Home';
 import UserHome from './compononents/views/UserHome';

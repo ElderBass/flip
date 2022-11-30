@@ -8,7 +8,7 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
 
     useEffect(() => {
         sideRef.current && sideRef.current.focus();
-    }, []);
+    }, [side]);
 
     return (
         <div className={styles.cardSide}>

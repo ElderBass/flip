@@ -4,7 +4,7 @@ import store from '../../store';
 import * as UserActions from '../../store/actions/user';
 import styles from './SelectedDeck.module.css';
 import { useEffect } from 'react';
-import { editFavorites } from '../../api';
+import { editDeckFavorites, editUserFavorites } from '../../api';
 
 const FAVORITE_CLASS = 'fas fa-heart fa-2x';
 const REGULAR_CLASS = 'far fa-heart fa-2x';
@@ -14,9 +14,10 @@ const SelectedDeck = () => {
         decks: { selectedDeck },
         user: { favorites, email }
     } = store.getState();
-    const { deckName, cards, timestamp, _id } = selectedDeck;
+    const { deckName, cards, timestamp, _id, favorites: timesFavorited } = selectedDeck;
 
     const [iconClass, setIconClass] = useState(REGULAR_CLASS);
+    const [deckFavorites, setDeckFavorites] = useState(timesFavorited);
 
     useEffect(() => {
         if (favorites.length) {
@@ -32,13 +33,19 @@ const SelectedDeck = () => {
         if (iconClass === FAVORITE_CLASS) {
             store.dispatch(UserActions.removeFavoriteDeck(_id));
             updatedFavorites = favorites.filter((favs) => !favs._id === _id);
+            setDeckFavorites(deckFavorites - 1);
             setIconClass(REGULAR_CLASS);
         } else {
+            console.log('\n when are we inside ELSE BLOCK on fav click? \n\n')
+            console.log('\n\n deck favs before alteration ', deckFavorites, '\n\n');
             store.dispatch(UserActions.addFavoriteDeck(selectedDeck));
             updatedFavorites = [...favorites, selectedDeck];
+            setDeckFavorites(deckFavorites + 1);
             setIconClass(FAVORITE_CLASS);
         }
-        await editFavorites({ favorites: updatedFavorites, email });
+
+        await editUserFavorites({ favorites: updatedFavorites, email });
+        await editDeckFavorites({ favorites: deckFavorites, deckId: _id });
     };
 
     const dateCreated = new Date(timestamp).toLocaleDateString();
@@ -66,6 +73,10 @@ const SelectedDeck = () => {
                     <div className={styles.statWrap}>
                         <p className={styles.statLabel}>Date Created:</p>
                         <p className={styles.stat}>{dateCreated}</p>
+                    </div>
+                    <div className={styles.statWrap}>
+                        <p className={styles.statLabel}>Times Favorited:</p>
+                        <p className={styles.stat}>{deckFavorites}</p>
                     </div>
                 </div>
                 <div className={styles.actions}>
