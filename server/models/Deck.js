@@ -13,6 +13,7 @@ const DeckSchema = new Schema({
     },
     favorites: {
         type: Number,
+        default: 0
     },
     userId: {
         type: String,

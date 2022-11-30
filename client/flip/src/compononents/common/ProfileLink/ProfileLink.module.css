@@ -1,0 +1,10 @@
+@import url('../../../index.css');
+
+.profileLink {
+    font-size: 28px;
+    color: var(--dark-green);
+}
+
+.profileLink:hover {
+    color: var(--card-blue);
+}

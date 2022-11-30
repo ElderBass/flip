@@ -5,13 +5,13 @@ import * as DeckActions from '../actions/decks';
 import * as UserActions from '../actions/user';
 
 const INITIAL_STATE = {
-        decks: [],
-        email: '',
-        username: '',
-        favorites: [],
-        following: [],
-        _id: '',
-        token: '',
+    decks: [],
+    email: '',
+    username: '',
+    favorites: [],
+    following: [],
+    _id: '',
+    token: '',
     isLoggedIn: false,
 };
 

@@ -26,4 +26,16 @@ router.get('/api/decks/all', async (req, res) => {
   }
 });
 
+router.put('/api/decks/edit-favorites', async (req, res) => {
+  const { favorites, deckId } = req.body;
+  console.log('\n favors in edit-favs ? ', favorites, '\n\n');
+  try {
+    const response = await Deck.findOneAndUpdate({ _id: deckId }, { favorites });
+    console.log("\n \n response from editing favs for a deck ", response, "\n");
+  } catch (e) {
+    console.log('\n error in editing number of favs for a deck = ', e, '\n\n');
+    res.status(400).send({ isSuccess: false, error: e });
+  }
+});
+
 module.exports = router;

@@ -8,10 +8,11 @@ import LogoutForm from './LogoutForm';
 const Logout = () => {
     const history = useHistory();
 
-    const onSubmit = () => {
-      store.dispatch(UserActions.logoutUser());
-      localStorage.setItem('userLoggedIn', false);
-      history.push('/');
+    const onSubmit = (e) => {
+        e.preventDefault();
+        store.dispatch(UserActions.logoutUser());
+        localStorage.setItem('userLoggedIn', false);
+        history.push('/');
     };
 
     return (
@@ -19,7 +20,6 @@ const Logout = () => {
             <LogoutForm onSubmit={onSubmit} />
         </div>
     );
-}
-
+};
 
 export default Logout;
