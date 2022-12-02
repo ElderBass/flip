@@ -12,7 +12,7 @@ const REGULAR_CLASS = 'far fa-heart fa-2x';
 const SelectedDeck = () => {
     const {
         decks: { selectedDeck },
-        user: { favorites, email }
+        user: { favorites, email },
     } = store.getState();
     const { deckName, cards, timestamp, _id, favorites: timesFavorited } = selectedDeck;
 
@@ -31,14 +31,10 @@ const SelectedDeck = () => {
     const onFavoriteClick = async () => {
         let updatedFavorites = [];
         if (iconClass === FAVORITE_CLASS) {
-            store.dispatch(UserActions.removeFavoriteDeck(_id));
             updatedFavorites = favorites.filter((favs) => !favs._id === _id);
             setDeckFavorites(deckFavorites - 1);
             setIconClass(REGULAR_CLASS);
         } else {
-            console.log('\n when are we inside ELSE BLOCK on fav click? \n\n')
-            console.log('\n\n deck favs before alteration ', deckFavorites, '\n\n');
-            store.dispatch(UserActions.addFavoriteDeck(selectedDeck));
             updatedFavorites = [...favorites, selectedDeck];
             setDeckFavorites(deckFavorites + 1);
             setIconClass(FAVORITE_CLASS);
@@ -46,6 +42,8 @@ const SelectedDeck = () => {
 
         await editUserFavorites({ favorites: updatedFavorites, email });
         await editDeckFavorites({ favorites: deckFavorites, deckId: _id });
+        store.dispatch(UserActions.removeFavoriteDeck(_id));
+        store.dispatch(UserActions.addFavoriteDeck(selectedDeck));
     };
 
     const dateCreated = new Date(timestamp).toLocaleDateString();
@@ -86,7 +84,9 @@ const SelectedDeck = () => {
                     >
                         Edit
                     </Link>
-                    <button className={`${styles.button} ${styles.studyBtn}`}>Study</button>
+                    <Link to="/study" className={`${styles.button} ${styles.studyBtn}`}>
+                        Study
+                    </Link>
                 </div>
             </div>
         </div>
