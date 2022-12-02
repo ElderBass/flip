@@ -34,13 +34,9 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                     />
                 )}
             </div>
-            <button
-                    className={styles.flipCardBtn}
-                    type="button"
-                    onClick={onFlip}
-                >
-                    -Flip-
-                </button>
+            <button className={styles.flipCardBtn} type="button" onClick={onFlip}>
+                -Flip-
+            </button>
         </div>
     );
 };
