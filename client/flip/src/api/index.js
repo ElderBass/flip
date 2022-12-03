@@ -9,7 +9,9 @@ const editUserFavorites = favorites => axios.put('/api/users/edit-favorites', fa
 
 const createDeck = deckData => axios.post('/api/decks/create', deckData);
 const editUserDecks = decks => axios.put('/api/users/edit-decks', decks);
-const getAllDecks = userId => axios.get('/api/decks/all', userId);
+const getAllDecks = () => axios.get('/api/decks/all');
+const getOneDeck = deckId => axios.get(`/api/decks/${deckId}`);
+const getAllUserDecks = userId => axios.get(`/api/decks/user/${userId}`);
 const editDeckFavorites = favs => axios.put('/api/decks/edit-favorites', favs);
 
 export {
@@ -19,6 +21,8 @@ export {
 	createDeck,
 	editUserDecks,
 	getAllDecks,
+	getOneDeck,
+	getAllUserDecks,
 	editUserFavorites,
 	editDeckFavorites
 };

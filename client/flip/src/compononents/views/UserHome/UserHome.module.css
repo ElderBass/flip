@@ -23,7 +23,7 @@
 
 .userFeed {
   flex: 1 0 80%;
-  padding: 40px;
+  padding: 0 40px;
   color: var(--card-blue);
   background: var(--background-yellow);
   display: flex;

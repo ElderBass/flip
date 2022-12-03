@@ -10,9 +10,10 @@ import styles from './CreateDeckContent.module.css';
 
 const CreateDeckContent = ({ isEdit }) => {
     const {
-        decks: { selectedDeck },
+        decks: { selectedDeck = {} },
     } = store.getState();
-    const { cards, deckName } = selectedDeck;
+    const cards = selectedDeck?.cards;
+    const deckName = selectedDeck?.deckName;
 
     const currentCardState = isEdit ? cards[0] : {};
     const initialCards = isEdit ? cards : [];

@@ -1,18 +1,22 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { getOneDeck } from '../../../../api';
 import store from '../../../../store';
-import * as DeckActions from '../../../../store/actions/decks';
-// import { VisibilityContext } from 'react-horizontal-scrolling-menu';
+import { setSelectedDeck } from '../../../../store/actions/decks';
 import styles from './Deck.module.css';
 
-const Deck = ({ item }) => {
+const Deck = ({ item, itemId }) => {
     const { deckName } = item;
-    // const visibility = useContext(VisibilityContext);
     const history = useHistory();
 
-    const onClick = () => {
-        store.dispatch(DeckActions.setSelectedDeck(item));
-        history.push('/deck');
+    const onClick = async () => {
+        try {
+            const response = await getOneDeck(itemId);
+            store.dispatch(setSelectedDeck(response.data.deck));
+            history.push('/deck');
+        } catch (e) {
+            console.log('\n error in getting single deck to set as selected deck: ', '\n\n');
+        }
     };
 
     return (

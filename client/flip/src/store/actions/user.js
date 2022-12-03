@@ -15,16 +15,22 @@ const logoutUser = () => ({
     type: LOG_OUT_USER,
 });
 
-const ADD_FAVORITE_DECK = 'ADD_FAVORITE_DECK';
-const addFavoriteDeck = (deck) => ({
-    type: ADD_FAVORITE_DECK,
-    payload: deck
+const SET_FAVORITES = 'SET_FAVORITES';
+const setFavorites = (favs) => ({
+        type: SET_FAVORITES,
+        payload: favs
 });
 
-const REMOVE_FAVORITE_DECK = 'REMOVE_FAVORITE_DECK';
-const removeFavoriteDeck = (deckId) => ({
-    type: REMOVE_FAVORITE_DECK,
-    payload: deckId
+const ADD_FAVORITE = 'ADD_FAVORITE';
+const addFavorite = (fav) => ({
+    type: ADD_FAVORITE,
+    payload: fav
+});
+
+const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+const removeFavorite = (fav) => ({
+    type: REMOVE_FAVORITE,
+    payload: fav
 });
 
 export {
@@ -34,8 +40,10 @@ export {
     loginUser,
     LOG_OUT_USER,
     logoutUser,
-    ADD_FAVORITE_DECK,
-    addFavoriteDeck,
-    REMOVE_FAVORITE_DECK,
-    removeFavoriteDeck
+    SET_FAVORITES,
+    setFavorites,
+    ADD_FAVORITE,
+    addFavorite,
+    removeFavorite,
+    REMOVE_FAVORITE
 };

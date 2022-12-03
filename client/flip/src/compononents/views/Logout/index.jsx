@@ -8,10 +8,9 @@ import LogoutForm from './LogoutForm';
 const Logout = () => {
     const history = useHistory();
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        store.dispatch(UserActions.logoutUser());
-        localStorage.setItem('userLoggedIn', false);
+        await store.dispatch(UserActions.logoutUser());
         history.push('/');
     };
 

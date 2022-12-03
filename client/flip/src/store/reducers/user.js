@@ -1,7 +1,5 @@
-import { faV } from '@fortawesome/free-solid-svg-icons';
 // import Zena from '../../data/Zena';
 import { trimEmail } from '../../utils/helpers/emailHelpers';
-import * as DeckActions from '../actions/decks';
 import * as UserActions from '../actions/user';
 
 const INITIAL_STATE = {
@@ -16,8 +14,6 @@ const INITIAL_STATE = {
 };
 
 // const INITIAL_STATE = Zena;
-let favorites;
-let decks;
 
 function user(state = INITIAL_STATE, { type, payload }) {
     switch (type) {
@@ -34,18 +30,15 @@ function user(state = INITIAL_STATE, { type, payload }) {
             return { ...user, username, token, isLoggedIn: true };
         case UserActions.LOG_OUT_USER:
             return INITIAL_STATE;
-        case DeckActions.ADD_DECK:
-            decks = [...state.decks, payload];
-            return { ...state, decks };
-        case UserActions.ADD_FAVORITE_DECK:
-            favorites = [...state.favorites, payload];
-            return { ...state, favorites };
-        case UserActions.REMOVE_FAVORITE_DECK:
-            favorites = state.favorites.filter((favs) => !faV._id === payload);
-            return { ...state, favorites };
+        case UserActions.SET_FAVORITES:
+            return { ...state, favorites: payload };
+        case UserActions.ADD_FAVORITE:
+            const alreadyFavorited = state.favorites.filter(fav => fav._id === payload._id).length > 0;
+            return alreadyFavorited ? state : { ...state, favorites: [...state.favorites, payload] };
+        case UserActions.REMOVE_FAVORITE:
+            const updatedFavs = state.favorites.filter(fav => fav._id === payload._id);
+            return { ...state, favorites: updatedFavs };
         default:
-            decks = [];
-            favorites = [];
             return state;
     }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import store from '../../store';
 import * as UserActions from '../../store/actions/user';
+import * as DeckActions from '../../store/actions/decks';
 import styles from './SelectedDeck.module.css';
 import { useEffect } from 'react';
 import { editDeckFavorites, editUserFavorites } from '../../api';
@@ -14,6 +15,7 @@ const SelectedDeck = () => {
         decks: { selectedDeck },
         user: { favorites, email },
     } = store.getState();
+
     const { deckName, cards, timestamp, _id, favorites: timesFavorited } = selectedDeck;
 
     const [iconClass, setIconClass] = useState(REGULAR_CLASS);
@@ -32,18 +34,21 @@ const SelectedDeck = () => {
         let updatedFavorites = [];
         if (iconClass === FAVORITE_CLASS) {
             updatedFavorites = favorites.filter((favs) => !favs._id === _id);
+            store.dispatch(UserActions.removeFavorite(selectedDeck));
             setDeckFavorites(deckFavorites - 1);
             setIconClass(REGULAR_CLASS);
         } else {
             updatedFavorites = [...favorites, selectedDeck];
+            store.dispatch(UserActions.addFavorite(selectedDeck));
             setDeckFavorites(deckFavorites + 1);
             setIconClass(FAVORITE_CLASS);
         }
 
         await editUserFavorites({ favorites: updatedFavorites, email });
-        await editDeckFavorites({ favorites: deckFavorites, deckId: _id });
-        store.dispatch(UserActions.removeFavoriteDeck(_id));
-        store.dispatch(UserActions.addFavoriteDeck(selectedDeck));
+        await editDeckFavorites({ favorites: timesFavorited + 1, deckId: _id });
+        store.dispatch(
+            DeckActions.setSelectedDeck({ ...selectedDeck, favorites: timesFavorited + 1 })
+        );
     };
 
     const dateCreated = new Date(timestamp).toLocaleDateString();
@@ -88,6 +93,11 @@ const SelectedDeck = () => {
                         Study
                     </Link>
                 </div>
+                <div className={`${styles.returnHome} ${styles.button}`}>
+                <Link className={`${styles.returnHomeLink} ${styles.button}`} to="/home">
+                    Back to Home
+                </Link>
+            </div>
             </div>
         </div>
     );

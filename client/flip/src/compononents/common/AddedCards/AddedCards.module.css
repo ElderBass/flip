@@ -23,8 +23,7 @@
 }
 
 .addedCard {
-    width: 80%;
-    max-width: 200px;
+    width: 120px;
     display: block;
     color: var(--background-yellow);
     background: var(--action-blue);
@@ -49,7 +48,7 @@
 .addedCardLabel {
     text-align: center;
     color: var(--background-yellow);
-    font-size: 30px;
+    font-size: 18px;
     display: block;
     overflow: hidden;
     white-space: nowrap;

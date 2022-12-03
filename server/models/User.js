@@ -14,10 +14,6 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  decks: {
-    type: Array,
-    default: []
-  },
   favorites: {
     type: Array,
     default: []

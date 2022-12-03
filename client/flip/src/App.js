@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
-import store from './store';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Logout from './compononents/views/Logout';
 import styles from './App.module.css';
 import Home from './compononents/views/Home';
@@ -10,18 +9,11 @@ import Deck from './compononents/views/Deck';
 import Study from './compononents/views/Study';
 
 function App() {
-    const { user } = store.getState();
-
     return (
         <Router>
             <div className={styles.mainContainer}>
                 <Switch>
-                    <Route exact path="/">
-                        {user && user.isLoggedIn ? <Redirect to="/home" /> : <Home />}
-                    </Route>
-                    <Route exact path="/home">
-                        <UserHome />
-                    </Route>
+                    <Route exact path="/" component={Home} />
                     <Route exact path="/home" component={UserHome} />
                     <Route exact path="/create-deck" component={CreateDeck} />
                     <Route exact path="/edit-deck" component={CreateDeck} />

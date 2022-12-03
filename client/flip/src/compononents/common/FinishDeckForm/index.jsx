@@ -3,7 +3,7 @@ import store from '../../../store';
 import { useHistory } from 'react-router-dom';
 import { ERROR_MESSAGE } from '../../../utils/constants';
 import * as DeckActions from '../../../store/actions/decks';
-import { createDeck, editUserDecks } from '../../../api';
+import { createDeck } from '../../../api';
 import styles from './FinishDeckForm.module.css';
 
 const FinishDeckForm = ({ cards, onCancel, title }) => {
@@ -14,7 +14,7 @@ const FinishDeckForm = ({ cards, onCancel, title }) => {
     const history = useHistory();
 
     const {
-        user: { username, _id, decks, email },
+        user: { username, _id },
     } = store.getState();
 
     const onFinishDeck = async (e) => {
@@ -33,8 +33,6 @@ const FinishDeckForm = ({ cards, onCancel, title }) => {
 
         try {
             const result = await createDeck(deckPayload);
-            const updatedDecks = [...decks, deckPayload];
-            await editUserDecks({ email, decks: updatedDecks });
             store.dispatch(DeckActions.addDeck(result.data.data));
             history.push('/home');
         } catch (e) {
