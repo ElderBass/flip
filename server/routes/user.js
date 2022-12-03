@@ -85,16 +85,4 @@ router.put('/api/users/edit-favorites', async (req, res) => {
   }
 });
 
-router.put('/api/users/edit-decks', async (req, res) => {
-  const { decks, email } = req.body;
-  try {
-    const result = await db.User.findOneAndUpdate({ email }, { decks });
-    console.log("\n \n result inside edit decks ", result, "\n \n ");
-    res.status(200).json(result);
-  } catch (e) {
-    console.log("\n\n err inside edit decks", e, "\n \n");
-    res.status(400).json({ isSuccess: false, error: e});
-  }
-});
-
 module.exports = router;

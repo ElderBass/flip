@@ -18,6 +18,7 @@ const Actions = () => {
         const page = ActionRouteMap[action];
         history.push(page);
     };
+
     return (
         <div className={styles.actions}>
             {ACTIONS.map((action) => (

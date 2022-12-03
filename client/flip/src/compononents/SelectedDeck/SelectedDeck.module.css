@@ -60,7 +60,6 @@
 .greyLines {
     position: absolute;
     top: 131px;
-    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -139,4 +138,23 @@
     font-weight: 600;
     font-size: 54;
     color: var(--create-card-green);
+}
+
+.returnHome {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.returnHomeLink {
+    font-family: var(--text-font);
+    font-size: 30px;
+    opacity: .7;
+    background-color: var(--background-yellow);
+    color: var(--card-purple);
+}
+
+.returnHomeLink:hover {
+    opacity: 1;
+    font-weight: 600;
 }

@@ -4,10 +4,21 @@ import styles from './CardSide.module.css';
 
 const CardSide = ({ value, onChange, onFlip, side }) => {
     const id = side.toLowerCase();
-    const sideRef = useRef(null);
+    const frontRef = useRef();
+    const backRef = useRef();
 
     useEffect(() => {
-        sideRef.current && sideRef.current.focus();
+        // TODO: Figure out why this isn't focusing
+        if (side === SIDES.FRONT) {
+            setTimeout(() => {
+                frontRef.current.focus();
+            }, 5);
+        } else {
+            setTimeout(() => {
+                backRef.current.focus();
+            }, 5);
+        }
+
     }, [side]);
 
     return (
@@ -18,7 +29,7 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                 </label>
                 {side === SIDES.FRONT ? (
                     <input
-                        ref={sideRef}
+                        ref={frontRef}
                         id={id}
                         className={`${styles.input} ${styles.frontInput}`}
                         value={value}
@@ -26,7 +37,7 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                     />
                 ) : (
                     <textarea
-                        ref={sideRef}
+                        ref={backRef}
                         id={id}
                         className={`${styles.input} ${styles.backInput}`}
                         value={value}
