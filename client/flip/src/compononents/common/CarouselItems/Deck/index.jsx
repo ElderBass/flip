@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom';
 import { getOneDeck } from '../../../../api';
 import store from '../../../../store';
 import { setSelectedDeck } from '../../../../store/actions/decks';
-import styles from './Deck.module.css';
 
-const Deck = ({ item, itemId }) => {
+const Deck = ({ item, itemId, classes }) => {
     const { deckName } = item;
+    const { container, line, name } = classes;
     const history = useHistory();
 
     const onClick = async () => {
@@ -20,9 +20,9 @@ const Deck = ({ item, itemId }) => {
     };
 
     return (
-        <div onClick={onClick} className={styles.deckCarouselItem}>
-            <hr className={styles.line} />
-            <div className={styles.name}>
+        <div onClick={onClick} className={container}>
+            <hr className={line} />
+            <div className={name}>
                 {deckName}
             </div>
         </div>
