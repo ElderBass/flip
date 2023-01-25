@@ -1,0 +1,57 @@
+@import url('../../../index.css');
+
+.userResultContainer {
+    height: 300px;
+    width: 500px;
+    background-color: var(--background-yellow);
+    box-shadow: 2px 2px 4px black;
+}
+
+.username {
+    border-bottom: solid 2px var(--card-pink);
+    color: var(--card-blue);
+    width: 100%;
+    padding-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.contentContainer {
+    width: 90%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    overflow: hidden;    
+    padding: 10px 0;
+}
+
+.deckCarouselItem {
+    height: 80px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+    background-color: var(--action-blue);
+    color: var(--background-yellow);
+    box-shadow: 2px 2px 4px black;
+}
+
+.line {
+    width: 100%;
+    margin-top: 10px;
+    background: var(--card-pink);
+    border: solid 1px var(--card-pink);
+}
+
+.name {
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.deckCarouselItem:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 4px var(--card-pink);
+    color: var(--pencil-gray);
+}
