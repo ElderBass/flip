@@ -1,4 +1,4 @@
-@import url('../../index.css');
+@import url('../../../index.css');
 
 .scrollArrow {
     background: var(--background-yellow);

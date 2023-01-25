@@ -7,6 +7,7 @@ import UserHome from './compononents/views/UserHome';
 import CreateDeck from './compononents/views/CreateDeck';
 import Deck from './compononents/views/Deck';
 import Study from './compononents/views/Study';
+import Browse from './compononents/views/Browse';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route exact path="/edit-deck" component={CreateDeck} />
                     <Route exact path="/study" component={Study} />
                     <Route exact path="/deck" component={Deck} />
+                    <Route exact path="/browse" component={Browse} />
                     <Route exact path="/logout" component={Logout} />
                 </Switch>
             </div>

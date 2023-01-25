@@ -73,6 +73,17 @@ router.get('/api/users:id', async (req, res) => {
   }
 });
 
+router.get('/api/users/all', async (req, res) => {
+  try {
+    const users = await db.User.find().sort({ email: 1 });
+    console.log('\n result in retrieving all users = ', users, '\n\n');
+    res.status(200).json({ users });
+  } catch (e) {
+    console.log('\n error in retrieving all users = ', e, '\n\n');
+    res.status(400).json({ error: e });
+  }
+});
+
 router.put('/api/users/edit-favorites', async (req, res) => {
   const { favorites, email } = req.body;
   try {
