@@ -1,21 +1,22 @@
 const router = require("express").Router();
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-const config = require("../dbConfig"); const bodyParser = require("body-parser");
+const config = require("../dbConfig");
+const bodyParser = require("body-parser");
 
-router.post('/api/users/signup', bodyParser.json(), async (req, res) => {
+router.post("/api/users/signup", bodyParser.json(), async (req, res) => {
   const { body } = req;
-  console.log("\n \n req body inside add user ", body, "\n \n");
+
   try {
     const user = await db.User.create(body);
     res.json({ user, isSuccess: true });
   } catch (e) {
-    console.log('\n\n err in signing up user = ', e, '\n\n');
+    console.log("\n\n err in signing up user = ", e, "\n\n");
     res.status(400).json({ isSuccess: false, error: e });
   }
 });
 
-router.post('/api/users/login', bodyParser.json(), async (req, res) => {
+router.post("/api/users/login", bodyParser.json(), async (req, res) => {
   const { email, password } = req.body;
   db.User.findOne({
     email,
@@ -32,7 +33,10 @@ router.post('/api/users/login', bodyParser.json(), async (req, res) => {
           .json({ error: "User Not found.", isSuccess: false });
       }
 
-      let passwordIsValid = await user.validatePassword(password, user.password);
+      let passwordIsValid = await user.validatePassword(
+        password,
+        user.password
+      );
 
       if (!passwordIsValid) {
         return res.status(401).json({
@@ -61,38 +65,49 @@ router.post('/api/users/login', bodyParser.json(), async (req, res) => {
   });
 });
 
-router.get('/api/users:id', async (req, res) => {
-  const { id } = req.query;
+router.get("/api/users/:userId", async (req, res) => {
+  const { userId } = req.params;
+
   try {
-    const user = await db.User.findOne({ _id: id });
-    console.log("\n \n result inside get one user", user, "\n \n ");
+    const user = await db.User.findOne({ _id: userId });
     res.status(200).json({ user });
   } catch (err) {
     console.log("\n\n err inside get one user controller", err, "\n \n");
-    res.status(400).json({ isSuccess: false, error: err});
+    res.status(400).json({ isSuccess: false, error: err });
   }
 });
 
-router.get('/api/users/all', async (req, res) => {
+router.get("/api/users/all", async (req, res) => {
   try {
     const users = await db.User.find().sort({ email: 1 });
-    console.log('\n result in retrieving all users = ', users, '\n\n');
     res.status(200).json({ users });
   } catch (e) {
-    console.log('\n error in retrieving all users = ', e, '\n\n');
+    console.log("\n error in retrieving all users = ", e, "\n\n");
     res.status(400).json({ error: e });
   }
 });
 
-router.put('/api/users/edit-favorites', async (req, res) => {
+router.put("/api/users/edit-favorites", async (req, res) => {
   const { favorites, email } = req.body;
   try {
     const result = await db.User.findOneAndUpdate({ email }, { favorites });
-    console.log("\n \n result inside edit favorites one ", result, "\n \n ");
     res.status(200).json(result);
   } catch (e) {
-    console.log("\n\n err inside edit favoirtes", e, "\n \n");
-    res.status(400).json({ isSuccess: false, error: e});
+    console.log("\n\n err inside edit favorites", e, "\n \n");
+    res.status(400).json({ error: e });
+  }
+});
+
+router.put("/api/users/update-user", bodyParser.json(), async (req, res) => {
+  const { user } = req.body;
+  const { _id } = user;
+
+  try {
+    const result = await db.User.findByIdAndUpdate(_id, user, { new: true });
+    res.status(200).json({ user: result });
+  } catch (e) {
+    console.log("\n error in updating user = ", e, "\n\n");
+    res.status(400).json({ error: e });
   }
 });
 

@@ -1,0 +1,26 @@
+@import url('../../../index.css');
+
+.followUserButton {
+  width: 100%;
+  max-width: 250px;
+  height: 120px;
+  box-shadow: 2px 2px 4px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 20px;
+  margin: 15px;
+  background-color: var(--card-green);
+  color: white;
+  outline: none;
+  border: none;
+  font-size: 40px;
+  font-family: var(--text-font);
+}
+
+.followUserButton:hover {
+  cursor:pointer;
+  box-shadow: 2px 2px 4px var(--card-pink);
+  color: var(--pencil-gray);
+}

@@ -30,6 +30,8 @@ function user(state = INITIAL_STATE, { type, payload }) {
             return { ...user, username, token, isLoggedIn: true };
         case UserActions.LOG_OUT_USER:
             return INITIAL_STATE;
+        case UserActions.UPDATE_USER:
+            return payload;
         case UserActions.SET_FAVORITES:
             return { ...state, favorites: payload };
         case UserActions.ADD_FAVORITE:

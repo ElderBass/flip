@@ -1,13 +1,13 @@
 @import url('../../../../index.css');
 
-.deckCarouselItem {
-    height: 150px;
-    min-width: 280px;
+.carouselItem {
+    height: 120px;
+    min-width: 210px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    font-size: 30px;
+    font-size: 24px;
     background-color: var(--action-blue);
     color: var(--background-yellow);
     box-shadow: 2px 2px 4px black;
@@ -20,13 +20,12 @@
     border: solid 1px var(--card-pink);
 }
 
-.name {
+.label {
     padding-top: 20px;
 }
 
-.deckCarouselItem:hover {
+.carouselItem:hover {
     cursor: pointer;
     box-shadow: 2px 2px 4px var(--card-pink);
     color: var(--pencil-gray);
-
 }
