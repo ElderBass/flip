@@ -1,7 +1,6 @@
 @import url('../../../index.css');
 
 .userFeedCarousel {
-    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
 }
@@ -15,7 +14,7 @@
 .contentContainer {
     max-width: 1000px;
     display: flex;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
     overflow: hidden;    
     padding: 20px 0;

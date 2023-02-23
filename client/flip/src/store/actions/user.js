@@ -15,6 +15,12 @@ const logoutUser = () => ({
     type: LOG_OUT_USER,
 });
 
+const UPDATE_USER = 'UPDATE_USER';
+const updateUser = (user) => ({
+    type: UPDATE_USER,
+    payload: user
+});
+
 const SET_FAVORITES = 'SET_FAVORITES';
 const setFavorites = (favs) => ({
         type: SET_FAVORITES,
@@ -40,6 +46,8 @@ export {
     loginUser,
     LOG_OUT_USER,
     logoutUser,
+    UPDATE_USER,
+    updateUser,
     SET_FAVORITES,
     setFavorites,
     ADD_FAVORITE,

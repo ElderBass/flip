@@ -5,6 +5,7 @@ import Deck from '../CarouselItems/Deck';
 import Following from '../CarouselItems/Following';
 import styles from './UserFeedCarousel.module.css';
 
+// TODO: refactor to have all fetching occur here, with 'loading' prop passed in
 const UserFeedCarousel = ({ type, content }) => {
     const CarouselItemMap = {
         Decks: Deck,
@@ -17,12 +18,6 @@ const UserFeedCarousel = ({ type, content }) => {
     const RightArrow = <ScrollArrow direction="Right" />;
     const LeftArrow = <ScrollArrow direction="Left" />;
 
-    const classes = {
-        container: styles.deckCarouselItem,
-        line: styles.line,
-        name: styles.name
-    };
-
     return (
         <div className={styles.userFeedCarousel}>
             <h2 className={styles.contentHeader}>{type}</h2>
@@ -33,7 +28,7 @@ const UserFeedCarousel = ({ type, content }) => {
                     scrollContainerClassName={styles.contentContainer}
                 >
                     {content.map((item, i) => (
-                        <CarouselItem key={i} item={item} itemId={item._id} classes={classes} />
+                        <CarouselItem key={i} item={item} itemId={item._id} />
                     ))}
                 </ScrollMenu>
             ) : (

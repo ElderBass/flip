@@ -7,6 +7,10 @@
     box-shadow: 2px 2px 4px black;
 }
 
+.userResultContainer:hover {
+    box-shadow: 2px 2px 4px var(--card-pink);
+}
+
 .username {
     border-bottom: solid 2px var(--card-pink);
     color: var(--card-blue);

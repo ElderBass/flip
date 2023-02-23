@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
+import store from '../../../store';
 import { getAllUserDecks } from '../../../api';
 import { trimEmail } from '../../../utils/helpers/emailHelpers';
 import Deck from '../CarouselItems/Deck';
 import styles from './UserResult.module.css';
 import ScrollCaret from '../ScrollCaret';
+import { setSelectedDeck } from '../../../store/actions/decks';
 
 const UserResult = ({ user }) => {
     const { email, _id } = user;
     const [username, setUsername] = useState('');
     const [decks, setDecks] = useState([]);
+
+    const history = useHistory();
 
     useEffect(() => {
         const getUserDecks = async () => {
@@ -33,8 +38,13 @@ const UserResult = ({ user }) => {
         name: styles.name,
     };
 
+    const onSelectDeck = async (deck) => {
+        await store.dispatch(setSelectedDeck(deck));
+        history.push('/deck');
+    };
+
     return (
-        <div className={styles.userResultContainer}>
+        <Link to={`/user/${_id}`} className={styles.userResultContainer}>
             <h4 className={styles.username}>{username}</h4>
             {decks.length > 0 ? (
                 <ScrollMenu
@@ -43,13 +53,19 @@ const UserResult = ({ user }) => {
                     scrollContainerClassName={styles.contentContainer}
                 >
                     {decks.map((item, i) => (
-                        <Deck key={i} item={item} itemId={item._id} classes={deckClasses} />
+                        <Deck
+                            key={i}
+                            onClick={() => onSelectDeck(item)}
+                            item={item}
+                            itemId={item._id}
+                            classes={deckClasses}
+                        />
                     ))}
                 </ScrollMenu>
             ) : (
                 'This user has no decks'
             )}
-        </div>
+        </Link>
     );
 };
 
