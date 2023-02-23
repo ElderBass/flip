@@ -4,13 +4,9 @@ import { trimEmail } from '../../../../utils/helpers/emailHelpers';
 import CarouselItem from '../CarouselItem';
 
 const Following = ({ item }) => {
-    const onClick = () => {
-        console.log('suhdude');
-    };
-
     return (
         <Link className='link' to={`/user/${item._id}`}>
-            <CarouselItem onClick={onClick} label={trimEmail(item.email)} />
+            <CarouselItem onClick={() => {}} label={trimEmail(item.email)} />
         </Link>
     );
 };

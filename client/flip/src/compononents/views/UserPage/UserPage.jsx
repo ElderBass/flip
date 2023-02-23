@@ -64,7 +64,6 @@ const UserPage = () => {
             }
 
             const response = await updateUser(newUser);
-            console.log('\n response from updating user = ', response, '\n');
             store.dispatch(UserActions.updateUser(response.data.user));
             setIsFollowing(!isFollowing);
         } catch (e) {
