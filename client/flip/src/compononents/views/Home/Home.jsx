@@ -4,31 +4,24 @@ import Header from '../../common/Header/Header';
 import styles from './Home.module.css';
 import Actions from '../../common/Actions';
 import UserFeedCarousel from '../../common/UserFeedCarousel';
-import { getAllUserDecks, getOneUser } from '../../../api';
+import { getAllUserDecks } from '../../../api';
+import { getFollowedUsers } from '../../../utils/helpers/getFollowedUsers';
 
-const Home = ({ location }) => {
+const Home = () => {
     const { user } = store.getState();
     const { favorites, following, _id } = user;
-    const usersId = location?.state?.usersId || null;
 
-    const userId = usersId || _id;
     const [loading, setLoading] = useState(true);
     const [userDecks, setUserDecks] = useState([]);
     const [followedUsers, setFollowedUsers] = useState([]);
-    const alreadyFollowing = usersId && user.following.includes(usersId);
 
     useEffect(() => {
         const getUserData = async () => {
             try {
                 if (following.length) {
-                    const users = [];
-                    await following.forEach(async (id) => {
-                        const response = await getOneUser(id);
-                        users.push(response.data.user);
-                    });
-                    setFollowedUsers(users);
+                    getFollowedUsers(following).then((users) => setFollowedUsers(users))
                 }
-                const deckResponse = await getAllUserDecks(userId);
+                const deckResponse = await getAllUserDecks(_id);
                 setUserDecks(deckResponse.data.decks);
             } catch (e) {
                 console.log('\n error in getting user decks/favorites on UserHome: ', e, '\n\n');
@@ -36,7 +29,7 @@ const Home = ({ location }) => {
             setLoading(false);
         };
         getUserData();
-    }, [userId, following]);
+    }, [_id, following]);
 
     return (
         <div className={styles.homePage}>
@@ -51,7 +44,7 @@ const Home = ({ location }) => {
                         <UserFeedCarousel type="Following" content={followedUsers} />
                     </div>
                 )}
-                <Actions otherUser={{ id: usersId, alreadyFollowing }} />
+                <Actions />
             </div>
         </div>
     );

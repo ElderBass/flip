@@ -5,6 +5,7 @@ import Deck from '../CarouselItems/Deck';
 import Following from '../CarouselItems/Following';
 import styles from './UserFeedCarousel.module.css';
 
+// TODO: refactor to have all fetching occur here, with 'loading' prop passed in
 const UserFeedCarousel = ({ type, content }) => {
     const CarouselItemMap = {
         Decks: Deck,

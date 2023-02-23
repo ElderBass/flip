@@ -65,8 +65,9 @@ router.post("/api/users/login", bodyParser.json(), async (req, res) => {
   });
 });
 
-router.get("/api/users/:userId", async (req, res) => {
+router.get("/api/users/get-one/:userId", async (req, res) => {
   const { userId } = req.params;
+  console.log('\n\nuserid? ', userId, '\n\n')
 
   try {
     const user = await db.User.findOne({ _id: userId });
@@ -77,7 +78,7 @@ router.get("/api/users/:userId", async (req, res) => {
   }
 });
 
-router.get("/api/users/all", async (req, res) => {
+router.get("/api/users/get-all", async (req, res) => {
   try {
     const users = await db.User.find().sort({ email: 1 });
     res.status(200).json({ users });

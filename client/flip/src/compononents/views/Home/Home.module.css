@@ -29,5 +29,4 @@
   background: var(--background-yellow);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }

@@ -11,7 +11,7 @@
   grid-template-areas: 
   "header"
   "content";
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .content {
@@ -31,22 +31,47 @@
   flex-direction: column;
 }
 
+.headerContent {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 30px 20px;
+    width: 80%;
+}
+
+.headerBtn {
+    background-color: var(--background-yellow);
+    outline: none;
+    border: none;
+    font-size: 24px;
+    padding: 0;
+    font-family: var(--text-font);
+}
+
+.backBtn {
+    color: var(--pencil-gray);
+}
+
+.backBtn:hover {
+    color: var(--card-pink);
+    cursor: pointer;
+}
+
 .usernameHeader {
     font-size: 36px;
     text-align: center;
-    margin: 30px 0 0 0;
+    margin: 0 20px;
 }
 
 .username {
     color: var(--card-pink);
 }
 
-.followUser {
-    flex: 1 0 25%;
-    padding-top: 40px;
-    background: var(--background-yellow);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.toggleFollow {
+    color: var(--card-pink);
+}
+
+.toggleFollow:hover {
+    color: var(--dark-green);
+    cursor: pointer;
 }
