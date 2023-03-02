@@ -4,7 +4,7 @@ import store from '../../store';
 import * as UserActions from '../../store/actions/user';
 import * as DeckActions from '../../store/actions/decks';
 import { useEffect } from 'react';
-import { deleteDeck, editDeckFavorites, editUserFavorites, updateUser } from '../../api';
+import { deleteDeck, editDeckFavorites, updateUser } from '../../api';
 import { trimEmail } from '../../utils/helpers/emailHelpers';
 import DeleteDeckModal from '../DeleteDeckModal';
 import styles from './SelectedDeck.module.css';
@@ -46,20 +46,25 @@ const SelectedDeck = () => {
 
     const onFavoriteClick = async () => {
         let updatedFavorites = [];
+
         if (iconClass === FAVORITE_CLASS) {
             updatedFavorites = favorites.filter((favs) => !favs._id === _id);
-            store.dispatch(UserActions.removeFavorite(selectedDeck));
             setDeckFavorites(deckFavorites - 1);
             setIconClass(REGULAR_CLASS);
         } else {
             updatedFavorites = [...favorites, selectedDeck];
-            store.dispatch(UserActions.addFavorite(selectedDeck));
             setDeckFavorites(deckFavorites + 1);
             setIconClass(FAVORITE_CLASS);
         }
-        // TODO: Refactor this to just use updateUser
-        await editUserFavorites({ favorites: updatedFavorites, email });
+        const newUser = {
+            ...user,
+            favorites: updatedFavorites
+        };
+
+        await updateUser(newUser);
         await editDeckFavorites({ favorites: timesFavorited + 1, deckId: _id });
+
+        store.dispatch(UserActions.updateUser(newUser));
         store.dispatch(
             DeckActions.setSelectedDeck({ ...selectedDeck, favorites: timesFavorited + 1 })
         );
@@ -77,8 +82,8 @@ const SelectedDeck = () => {
                 favorites: updatedFavorites,
             };
 
-            const response = await updateUser(newUser);
-            await store.dispatch(UserActions.updateUser(response.data.user));
+            await updateUser(newUser);
+            await store.dispatch(UserActions.updateUser(newUser));
 
             await deleteDeck(_id);
             await store.dispatch(DeckActions.setSelectedDeck(null));
