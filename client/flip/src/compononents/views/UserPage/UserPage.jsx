@@ -49,22 +49,20 @@ const UserPage = () => {
 
     const onFollowToggle = async () => {
         try {
-            let newUser;
+            let updatedFollowing;
             if (isFollowing) {
-                const updatedFollowing = user.following.filter((id) => id !== userId);
-                newUser = {
-                    ...user,
-                    following: updatedFollowing,
-                };
-            } else {
-                newUser = {
-                    ...user,
-                    following: [...user.following, userId],
-                };
-            }
+                updatedFollowing = user.following.filter((id) => id !== userId);
 
-            const response = await updateUser(newUser);
-            store.dispatch(UserActions.updateUser(response.data.user));
+            } else {
+                updatedFollowing = [...user.following, userId];
+            }
+            const newUser = {
+                ...user,
+                following: updatedFollowing
+            };
+
+            await updateUser(newUser);
+            store.dispatch(UserActions.updateUser(newUser));
             setIsFollowing(!isFollowing);
         } catch (e) {
             console.log('\n error in trying to follow user = ', e, '\n\n');

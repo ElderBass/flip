@@ -85,7 +85,7 @@ const CreateDeckContent = ({ isEdit }) => {
                         </button>
                         <button
                             className={styles.cancelBtn}
-                            onClick={() => history.push('/user-home')}
+                            onClick={() => history.push('/home')}
                             type="button"
                         >
                             Cancel

@@ -88,17 +88,6 @@ router.get("/api/users/get-all", async (req, res) => {
   }
 });
 
-router.put("/api/users/edit-favorites", async (req, res) => {
-  const { favorites, email } = req.body;
-  try {
-    const result = await db.User.findOneAndUpdate({ email }, { favorites });
-    res.status(200).json(result);
-  } catch (e) {
-    console.log("\n\n err inside edit favorites", e, "\n \n");
-    res.status(400).json({ error: e });
-  }
-});
-
 router.put("/api/users/update-user", bodyParser.json(), async (req, res) => {
   const { user } = req.body;
   const { _id } = user;
