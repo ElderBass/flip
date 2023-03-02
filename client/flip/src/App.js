@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Logout from './compononents/views/Logout';
-import styles from './App.module.css';
 import Landing from './compononents/views/Landing';
 import Home from './compononents/views/Home';
 import CreateDeck from './compononents/views/CreateDeck';
@@ -9,6 +8,7 @@ import Deck from './compononents/views/Deck';
 import Study from './compononents/views/Study';
 import Browse from './compononents/views/Browse';
 import UserPage from './compononents/views/UserPage';
+import styles from './App.module.css';
 
 function App() {
     return (
