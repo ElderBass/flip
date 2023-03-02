@@ -17,6 +17,7 @@ const getAllDecks = () => axios.get('/api/decks/all');
 const getOneDeck = deckId => axios.get(`/api/decks/${deckId}`);
 const getAllUserDecks = userId => axios.get(`/api/decks/user/${userId}`);
 const editDeckFavorites = favs => axios.put('/api/decks/edit-favorites', favs);
+const deleteDeck = deckId => axios.delete(`/api/decks/delete/${deckId}`);
 
 export {
 	addUser,
@@ -31,5 +32,6 @@ export {
 	getOneDeck,
 	getAllUserDecks,
 	editUserFavorites,
-	editDeckFavorites
+	editDeckFavorites,
+	deleteDeck
 };
