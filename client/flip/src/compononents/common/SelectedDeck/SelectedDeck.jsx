@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import store from '../../store';
-import * as UserActions from '../../store/actions/user';
-import * as DeckActions from '../../store/actions/decks';
+import store from '../../../store';
+import * as UserActions from '../../../store/actions/user';
+import * as DeckActions from '../../../store/actions/decks';
 import { useEffect } from 'react';
-import { deleteDeck, editDeckFavorites, updateUser } from '../../api';
-import { trimEmail } from '../../utils/helpers/emailHelpers';
+import { deleteDeck, editDeckFavorites, updateUser } from '../../../api';
+import { trimEmail } from '../../../utils/helpers/emailHelpers';
 import DeleteDeckModal from '../DeleteDeckModal';
 import styles from './SelectedDeck.module.css';
 
