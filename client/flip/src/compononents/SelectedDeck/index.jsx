@@ -14,6 +14,8 @@ const REGULAR_CLASS = 'far fa-heart fa-2x';
 const DELETE_CLASS = 'fas fa-trash fa-2x';
 
 const SelectedDeck = () => {
+    const history = useHistory();
+
     const {
         decks: { selectedDeck },
         user,
@@ -21,8 +23,6 @@ const SelectedDeck = () => {
 
     const { deckName, cards, timestamp, _id, favorites: timesFavorited, author } = selectedDeck;
     const { favorites, email } = user;
-
-    const history = useHistory();
 
     const [iconClass, setIconClass] = useState(REGULAR_CLASS);
     const [deckFavorites, setDeckFavorites] = useState(timesFavorited);

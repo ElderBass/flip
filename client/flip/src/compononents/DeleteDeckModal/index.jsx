@@ -1,3 +1,3 @@
-import DeleteDeckModal from "./DeleteDeckModal";
+import DeleteDeckModal from './DeleteDeckModal';
 
 export default DeleteDeckModal;
