@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import store from '../../../store';
 import styles from './AddedCards.module.css';
 
-const AddedCards = ({ cards, onClick, isStudy }) => {
+const AddedCards = ({ onClick, isStudy }) => {
+    const { decks: { addedCards } } = store.getState();
+
+    const [cards, setCards] = useState(addedCards);
+
+    useEffect(() => {
+        setCards(addedCards);
+    }, [addedCards]);
+
     const header = isStudy ? 'Cards to Study:' : 'Cards in Deck:';
 
     return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import store from '../../../store';
+import * as DeckActions from '../../../store/actions/decks';
 import { ERROR_MESSAGE } from '../../../utils/constants';
 import { isDuplicateCard } from '../../../utils/helpers/isDuplicateCard';
 import AddedCards from '../AddedCards';
@@ -10,13 +11,13 @@ import styles from './CreateDeckContent.module.css';
 
 const CreateDeckContent = ({ isEdit }) => {
     const {
-        decks: { selectedDeck = {} },
+        decks: { selectedDeck = {}, addedCards },
     } = store.getState();
     const cards = selectedDeck?.cards;
     const deckName = selectedDeck?.deckName;
 
     const currentCardState = isEdit ? cards[0] : {};
-    const initialCards = isEdit ? cards : [];
+    const initialCards = isEdit ? cards : addedCards;
 
     const history = useHistory();
 
@@ -46,7 +47,9 @@ const CreateDeckContent = ({ isEdit }) => {
             return;
         } else {
             const card = { id, front, back };
-            setNewDeck((prevState) => [...prevState, card]);
+            const updatedDeck = [...newDeck, card];
+            setNewDeck(updatedDeck);
+            store.dispatch(DeckActions.setAddedCards(updatedDeck));
         }
     };
 
@@ -70,6 +73,7 @@ const CreateDeckContent = ({ isEdit }) => {
             return card;
         });
         setNewDeck(updatedDeck);
+        store.dispatch(DeckActions.setAddedCards(updatedDeck));
         setEditingAddedCard(false);
         setError('Card successfully updated');
         resetError();
@@ -95,7 +99,7 @@ const CreateDeckContent = ({ isEdit }) => {
                     />
                     <div className={styles.actions}>
                         <button
-                            disabled={newDeck.length === 0}
+                            disabled={addedCards.length === 0}
                             className={styles.finishBtn}
                             onClick={() => setShowFinish(true)}
                             type="button"
