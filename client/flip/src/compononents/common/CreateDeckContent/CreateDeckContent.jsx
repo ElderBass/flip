@@ -28,23 +28,22 @@ const CreateDeckContent = ({ isEdit }) => {
 
     const isCardFilledOut = (front, back) => front.length && back.length;
 
+    const resetError = () => {
+        setTimeout(() => {
+            setError('');
+        }, 2000);
+    };
+
     const onSubmitCard = ({ id, front, back }) => {
         setError('');
         if (!isCardFilledOut(front, back)) {
             setError(ERROR_MESSAGE.CREATE_CARD.INCOMPLETE);
+            resetError();
             return;
         } else if (!isEdit && isDuplicateCard(front, newDeck) && !editingAddedCard) {
             setError(ERROR_MESSAGE.CREATE_CARD.DUPLICATE);
+            resetError();
             return;
-        } else if (editingAddedCard) {
-            const updatedDeck = newDeck.map((item) => {
-                if (item.id === currentCard.id) {
-                    return currentCard;
-                } else {
-                    return item;
-                }
-            });
-            setNewDeck(updatedDeck);
         } else {
             const card = { id, front, back };
             setNewDeck((prevState) => [...prevState, card]);
@@ -59,13 +58,21 @@ const CreateDeckContent = ({ isEdit }) => {
     };
 
     const onEditCard = (updatedCard) => {
+        if (!updatedCard.front || !updatedCard.back || !updatedCard.id) {
+            setError("You can't edit an empty card!");
+            resetError();
+            return;
+        }
         const updatedDeck = newDeck.map((card) => {
             if (card.id === updatedCard.id) {
                 return updatedCard;
             }
             return card;
         });
-        setNewDeck(updatedDeck)
+        setNewDeck(updatedDeck);
+        setEditingAddedCard(false);
+        setError('Card successfully updated');
+        resetError();
     };
 
     return (
@@ -84,6 +91,7 @@ const CreateDeckContent = ({ isEdit }) => {
                         submitCard={onSubmitCard}
                         editCard={onEditCard}
                         isEdit={isEdit || editingAddedCard}
+                        editingAddedCard={editingAddedCard}
                     />
                     <div className={styles.actions}>
                         <button

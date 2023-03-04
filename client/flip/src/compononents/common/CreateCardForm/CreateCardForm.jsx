@@ -19,20 +19,31 @@ const backStyles = {
     background: 'rgb(246, 238, 146)',
 };
 
-const CreateCardForm = ({ error, submitCard, currentCard, editCard, isEdit }) => {
+const CreateCardForm = ({ error, submitCard, currentCard, editCard, isEdit, editingAddedCard }) => {
     const [front, setFront] = useState(currentCard.front || '');
     const [back, setBack] = useState(currentCard.back || '');
     const [flipped, setFlipped] = useState(false);
 
     const onFlip = () => setFlipped(!flipped);
 
+    const resetCard = () => {
+        setFront('');
+        setBack('');
+        setFlipped(false);
+    };
+
     const onSubmitCard = (e) => {
         e.preventDefault();
         const id = uuidv4();
         submitCard({ front, back, id });
-        setFront('');
-        setBack('');
-        setFlipped(false);
+        resetCard();
+    };
+    
+    const onEditCard = () => {
+        editCard({ front, back, id: currentCard.id });
+        if (editingAddedCard) {
+            resetCard();
+        }
     };
 
     useEffect(() => {
@@ -68,7 +79,7 @@ const CreateCardForm = ({ error, submitCard, currentCard, editCard, isEdit }) =>
                     </button>
                 ) : null}
                 {isEdit && (
-                    <button className={styles.addCardBtn} type="button" onClick={() => editCard({ front, back, id: currentCard.id })}>
+                    <button className={styles.addCardBtn} type="button" onClick={onEditCard}>
                         Update
                     </button>
                 )}
