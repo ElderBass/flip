@@ -3,7 +3,7 @@ import styles from './CarouselItem.module.css';
 
 const CarouselItem = ({ onClick, label }) => {
     return (
-        <div onClick={onClick} className={styles.carouselItem}>
+        <div title={label} onClick={onClick} className={styles.carouselItem}>
             <hr className={styles.line} />
             <div className={styles.label}>
                 {label}
