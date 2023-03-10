@@ -22,3 +22,7 @@ export const SIDES = {
   FRONT: 'Front',
   BACK: 'Back',
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  LOGGED_IN: 'userLoggedIn',
+};
