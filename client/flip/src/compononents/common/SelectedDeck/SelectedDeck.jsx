@@ -28,6 +28,7 @@ const SelectedDeck = () => {
     const [deckFavorites, setDeckFavorites] = useState(timesFavorited);
     const [showDeleteIcon, setShowDeleteIcon] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    // const [nameFontSize, setNameFontSize] = useState('10px');
 
     useEffect(() => {
         if (favorites.length) {
@@ -43,6 +44,25 @@ const SelectedDeck = () => {
             setShowDeleteIcon(true);
         }
     }, [author, email]);
+
+    // useEffect(() => {
+    //       if (deckNameRef && deckNameRef.current) {
+    //         const isOverflown = () => deckNameRef.current.scrollHeight > 91;
+
+    //         let size = 10;
+    //         let overflow = false;
+    //         const maxSize = 41;
+
+    //         while (!overflow && size < maxSize) {
+    //             console.log('\n ayyyy ', deckNameRef.current.scrollHeight, '\n\n');
+    //             setNameFontSize(`${size}px`);
+    //             overflow = isOverflown();
+    //             if (!overflow) size++;
+    //         }
+
+    //         setNameFontSize(`${size - 1}px`);
+    //       }
+    // }, []);
 
     const onFavoriteClick = async () => {
         let updatedFavorites = [];
@@ -103,7 +123,7 @@ const SelectedDeck = () => {
                     cancel={() => setShowDeleteModal(false)}
                 />
             ) : (
-                <div className={styles.selectedDeck}>
+                <div title={deckName} className={styles.selectedDeck}>
                     <div className={styles.greyLines}>
                         <hr className={styles.greyLine} />
                         <hr className={styles.greyLine} />
@@ -120,7 +140,7 @@ const SelectedDeck = () => {
                         ) : (
                             <div className={styles.spacer} />
                         )}
-                        <p className={styles.header}>{deckName}</p>
+                        <p className={styles.header} >{deckName}</p>
                         <i onClick={onFavoriteClick} className={`${iconClass} ${styles.icon}`}></i>
                     </div>
                     <div className={styles.deckStats}>

@@ -45,6 +45,9 @@
     font-size: 40px;
     color: var(--background-yellow);
     z-index: 2;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .icon {
