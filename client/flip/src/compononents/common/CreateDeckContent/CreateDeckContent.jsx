@@ -13,17 +13,16 @@ const CreateDeckContent = ({ isEdit }) => {
     const {
         decks: { selectedDeck = {}, addedCards },
     } = store.getState();
-    const cards = selectedDeck?.cards;
     const deckName = selectedDeck?.deckName;
 
-    const currentCardState = isEdit ? cards[0] : {};
-    const initialCards = isEdit ? cards : addedCards;
+    const currentCardState = isEdit ? selectedDeck?.cards[0] : {};
+    const initialCards = isEdit ? selectedDeck?.cards : addedCards;
 
     const history = useHistory();
 
     const [error, setError] = useState('');
     const [currentCard, setCurrentCard] = useState(currentCardState);
-    const [newDeck, setNewDeck] = useState(initialCards);
+    const [cards, setCards] = useState(initialCards);
     const [showFinish, setShowFinish] = useState(false);
     const [editingAddedCard, setEditingAddedCard] = useState(false);
 
@@ -41,14 +40,14 @@ const CreateDeckContent = ({ isEdit }) => {
             setError(ERROR_MESSAGE.CREATE_CARD.INCOMPLETE);
             resetError();
             return;
-        } else if (!isEdit && isDuplicateCard(front, newDeck) && !editingAddedCard) {
+        } else if (!isEdit && isDuplicateCard(front, cards) && !editingAddedCard) {
             setError(ERROR_MESSAGE.CREATE_CARD.DUPLICATE);
             resetError();
             return;
         } else {
             const card = { id, front, back };
-            const updatedDeck = [...newDeck, card];
-            setNewDeck(updatedDeck);
+            const updatedDeck = [...cards, card];
+            setCards(updatedDeck);
             store.dispatch(DeckActions.setAddedCards(updatedDeck));
         }
     };
@@ -66,13 +65,13 @@ const CreateDeckContent = ({ isEdit }) => {
             resetError();
             return;
         }
-        const updatedDeck = newDeck.map((card) => {
+        const updatedDeck = cards.map((card) => {
             if (card.id === updatedCard.id) {
                 return updatedCard;
             }
             return card;
         });
-        setNewDeck(updatedDeck);
+        setCards(updatedDeck);
         store.dispatch(DeckActions.setAddedCards(updatedDeck));
         setEditingAddedCard(false);
         setError('Card successfully updated');
@@ -84,7 +83,7 @@ const CreateDeckContent = ({ isEdit }) => {
             {showFinish ? (
                 <FinishDeckForm
                     title={deckName}
-                    cards={newDeck}
+                    cards={cards}
                     onCancel={() => setShowFinish(false)}
                 />
             ) : (
@@ -116,7 +115,7 @@ const CreateDeckContent = ({ isEdit }) => {
                     </div>
                 </div>
             )}
-            <AddedCards onClick={onAddedCardClick} cards={newDeck} />
+            <AddedCards onClick={onAddedCardClick} cards={cards} />
         </div>
     );
 };
