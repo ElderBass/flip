@@ -9,6 +9,7 @@
     font-size: 60px;
     font-family: var(--logo-font);
     margin: 20px;
+    text-align: center;
 }
 
 .contentContainer {

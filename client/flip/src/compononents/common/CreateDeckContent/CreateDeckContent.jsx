@@ -6,6 +6,7 @@ import { ERROR_MESSAGE } from '../../../utils/constants';
 import { isDuplicateCard } from '../../../utils/helpers/isDuplicateCard';
 import AddedCards from '../AddedCards';
 import CreateCardForm from '../CreateCardForm';
+import EditDeckActionCard from '../EditDeckActionCard/EditDeckActionCard';
 import FinishDeckForm from '../FinishDeckForm';
 import styles from './CreateDeckContent.module.css';
 
@@ -15,13 +16,12 @@ const CreateDeckContent = ({ isEdit }) => {
     } = store.getState();
     const deckName = selectedDeck?.deckName;
 
-    const currentCardState = isEdit ? selectedDeck?.cards[0] : {};
     const initialCards = isEdit ? selectedDeck?.cards : addedCards;
 
     const history = useHistory();
 
     const [error, setError] = useState('');
-    const [currentCard, setCurrentCard] = useState(currentCardState);
+    const [currentCard, setCurrentCard] = useState(null);
     const [cards, setCards] = useState(initialCards);
     const [showFinish, setShowFinish] = useState(false);
     const [editingAddedCard, setEditingAddedCard] = useState(false);
@@ -49,6 +49,7 @@ const CreateDeckContent = ({ isEdit }) => {
             const updatedDeck = [...cards, card];
             setCards(updatedDeck);
             store.dispatch(DeckActions.setAddedCards(updatedDeck));
+            setCurrentCard(null);
         }
     };
 
@@ -57,6 +58,10 @@ const CreateDeckContent = ({ isEdit }) => {
         setShowFinish(false);
         setCurrentCard(card);
         setEditingAddedCard(true);
+    };
+
+    const onAddCardClick = () => {
+        setCurrentCard({ front: '', back: '' });
     };
 
     const onEditCard = (updatedCard) => {
@@ -74,6 +79,7 @@ const CreateDeckContent = ({ isEdit }) => {
         setCards(updatedDeck);
         store.dispatch(DeckActions.setAddedCards(updatedDeck));
         setEditingAddedCard(false);
+        setCurrentCard(null);
         setError('Card successfully updated');
         resetError();
     };
@@ -88,17 +94,20 @@ const CreateDeckContent = ({ isEdit }) => {
                 />
             ) : (
                 <div className={styles.createDeckForm}>
-                    <CreateCardForm
-                        error={error}
-                        currentCard={currentCard}
-                        submitCard={onSubmitCard}
-                        editCard={onEditCard}
-                        isEdit={isEdit || editingAddedCard}
-                        editingAddedCard={editingAddedCard}
-                    />
+                    {isEdit && !currentCard ? (
+                        <EditDeckActionCard deckName={deckName} onAddCard={onAddCardClick} />
+                    ) : (
+                        <CreateCardForm
+                            error={error}
+                            currentCard={currentCard}
+                            submitCard={onSubmitCard}
+                            editCard={onEditCard}
+                            isEdit={editingAddedCard}
+                        />
+                    )}
                     <div className={styles.actions}>
                         <button
-                            disabled={addedCards.length === 0}
+                            disabled={initialCards.length === 0}
                             className={styles.finishBtn}
                             onClick={() => setShowFinish(true)}
                             type="button"
@@ -107,7 +116,7 @@ const CreateDeckContent = ({ isEdit }) => {
                         </button>
                         <button
                             className={styles.cancelBtn}
-                            onClick={() => history.push('/home')}
+                            onClick={() => history.push('/deck')}
                             type="button"
                         >
                             Cancel
