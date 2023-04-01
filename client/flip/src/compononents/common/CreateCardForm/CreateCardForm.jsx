@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { v4 as uuidv4 } from 'uuid';
 import { SIDES } from '../../../utils/constants';
+import DeleteModal from '../DeleteModal';
 import CardSide from './CardSide';
 import styles from './CreateCardForm.module.css';
 
@@ -19,12 +20,21 @@ const backStyles = {
     background: 'rgb(246, 238, 146)',
 };
 
-const CreateCardForm = ({ error, submitCard, currentCard, editCard, isEdit }) => {
+const CreateCardForm = (props) => {
+    const { error, submitCard, currentCard, editCard, deleteCard, cancelDeleteCard, isEdit } = props;
     const [front, setFront] = useState(currentCard.front || '');
     const [back, setBack] = useState(currentCard.back || '');
     const [flipped, setFlipped] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const onFlip = () => setFlipped(!flipped);
+
+    useEffect(() => {
+        if (currentCard.front && currentCard.back) {
+            setFront(currentCard.front);
+            setBack(currentCard.back);
+        }
+    }, [currentCard]);
 
     const resetCard = () => {
         setFront('');
@@ -44,44 +54,69 @@ const CreateCardForm = ({ error, submitCard, currentCard, editCard, isEdit }) =>
         resetCard();
     };
 
-    useEffect(() => {
-        if (currentCard.front && currentCard.back) {
-            setFront(currentCard.front);
-            setBack(currentCard.back);
-        }
-    }, [currentCard]);
+    const onDeleteCard = () => {
+        setShowDeleteModal(true);
+    };
 
     return (
         <div className={styles.createCardFormContainer}>
-            <div className={styles.error}>
-                {error && <p className={styles.errorMsg}>{error}</p>}
-            </div>
-            <form className={styles.createCardForm}>
-                <ReactCardFlip
-                    cardStyles={{ front: cardStyles, back: backStyles }}
-                    isFlipped={flipped}
-                >
-                    <CardSide
-                        value={front}
-                        onChange={setFront}
-                        onFlip={onFlip}
-                        side={SIDES.FRONT}
-                    />
-                    <CardSide value={back} onChange={setBack} onFlip={onFlip} side={SIDES.BACK} />
-                </ReactCardFlip>
-            </form>
-            <div className={styles.addCard}>
-                {!isEdit && front.length && back.length ? (
-                    <button className={styles.addCardBtn} type="button" onClick={onSubmitCard}>
-                        Add
-                    </button>
-                ) : null}
-                {isEdit && (
-                    <button className={styles.addCardBtn} type="button" onClick={onEditCard}>
-                        Update
-                    </button>
-                )}
-            </div>
+            {showDeleteModal ? (
+                <DeleteModal type="card" deleteFunc={() => deleteCard(currentCard.id)} cancelFunc={cancelDeleteCard} />
+            ) : (
+                <>
+                    <div className={styles.error}>
+                        {error && <p className={styles.errorMsg}>{error}</p>}
+                    </div>
+                    <form className={styles.createCardForm}>
+                        <ReactCardFlip
+                            cardStyles={{ front: cardStyles, back: backStyles }}
+                            isFlipped={flipped}
+                        >
+                            <CardSide
+                                value={front}
+                                onChange={setFront}
+                                onFlip={onFlip}
+                                side={SIDES.FRONT}
+                            />
+                            <CardSide
+                                value={back}
+                                onChange={setBack}
+                                onFlip={onFlip}
+                                side={SIDES.BACK}
+                            />
+                        </ReactCardFlip>
+                    </form>
+                    <div className={styles.addCard}>
+                        {!isEdit && front.length && back.length ? (
+                            <button
+                                className={styles.addCardBtn}
+                                type="button"
+                                onClick={onSubmitCard}
+                            >
+                                Add
+                            </button>
+                        ) : null}
+                        {isEdit && (
+                            <div className={styles.actions}>
+                                <button
+                                    className={styles.addCardBtn}
+                                    type="button"
+                                    onClick={onEditCard}
+                                >
+                                    Update
+                                </button>
+                                <button
+                                    className={styles.deleteCardBtn}
+                                    type="buttoon"
+                                    onClick={onDeleteCard}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </>
+            )}
         </div>
     );
 };

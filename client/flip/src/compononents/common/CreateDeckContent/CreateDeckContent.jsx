@@ -84,6 +84,19 @@ const CreateDeckContent = ({ isEdit }) => {
         resetError();
     };
 
+    const onDeleteCard = (cardId) => {
+        console.log('\nwe are doing this right', cardId, '\n\n');
+        const updatedCards = cards.filter((card) => card.id !== cardId);
+        console.log('\n updatedCards ?? ', updatedCards, '\n\n');
+        setCards(updatedCards);
+        store.dispatch(DeckActions.setAddedCards(updatedCards));
+        setCurrentCard(null);
+    };
+
+    const onCancelDeleteCard = () => {
+        setCurrentCard(null);
+    };
+
     return (
         <div className={styles.createDeckContent}>
             {showFinish ? (
@@ -102,6 +115,8 @@ const CreateDeckContent = ({ isEdit }) => {
                             currentCard={currentCard}
                             submitCard={onSubmitCard}
                             editCard={onEditCard}
+                            deleteCard={onDeleteCard}
+                            cancelDeleteCard={onCancelDeleteCard}
                             isEdit={editingAddedCard}
                         />
                     )}
