@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import store from '../../../store';
 import { getAllUserDecks } from '../../../api';
@@ -44,8 +44,8 @@ const UserResult = ({ user }) => {
     };
 
     return (
-        <Link to={`/user/${_id}`} className={styles.userResultContainer}>
-            <h4 className={styles.username}>{username}</h4>
+        <div to={`/user/${_id}`} className={styles.userResultContainer}>
+            <h4 onClick={() => history.push(`/user/${_id}`)} className={styles.username}>{username}</h4>
             {decks.length > 0 ? (
                 <ScrollMenu
                     RightArrow={RightArrow}
@@ -65,7 +65,7 @@ const UserResult = ({ user }) => {
             ) : (
                 'This user has no decks'
             )}
-        </Link>
+        </div>
     );
 };
 
