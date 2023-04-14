@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { getAllUsers } from '../../../api';
 import UserResult from '../UserResult';
+import UsersSearchBar from '../UsersSearchBar/UsersSearchBar';
 import styles from './BrowsePageContent.module.css';
 
 const BrowsePageContent = () => {
+    const searchRef = useRef(null);
     const [allUsers, setAllUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+
+    const users = filteredUsers.length ? filteredUsers : allUsers;
 
     useEffect(() => {
         const getUsers = async () => {
@@ -21,8 +26,9 @@ const BrowsePageContent = () => {
     return (
         <div className={styles.browsePageContent}>
             <h2 className={styles.header}>Browse Users</h2>
+            <UsersSearchBar innerRef={searchRef} allUsers={allUsers} setUsers={setFilteredUsers} />
             <div className={styles.contentContainer}>
-                {allUsers.map((user) => (
+                {users.map((user) => (
                     <UserResult user={user} key={user.email} />
                 ))}
             </div>
