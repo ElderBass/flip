@@ -43,7 +43,7 @@ router.get("/api/decks/:id", async (req, res) => {
 router.get("/api/decks/user/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const response = await Deck.find({ id }).sort({ timestamp: -1 });
+    const response = await Deck.find({ userId: id }).sort({ timestamp: -1 });
     console.log("\n \n response from getting all user decks ", response, "\n");
     res.json({ decks: response, isSuccess: true });
   } catch (e) {

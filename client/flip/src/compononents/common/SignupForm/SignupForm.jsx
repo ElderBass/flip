@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { addUser } from '../../../api';
 import { ERROR_MESSAGE } from '../../../utils/constants';
 import { isValidEmail } from '../../../utils/helpers/emailHelpers';
+import { validatePassword } from '../../../utils/helpers/validatePassword';
 import { login } from '../../../utils/login';
 import styles from './SignupForm.module.css';
 
@@ -31,8 +32,15 @@ const SignupForm = ({ setError }) => {
             setError(ERROR_MESSAGE.SIGNUP.INVALID_EMAIL);
             return;
         }
+        const passwordResult = validatePassword(password);
+
+        if (!passwordResult.isValid) {
+            setError(passwordResult.msg);
+            return;
+        }
         if (password !== confirmPassword) {
             setError(ERROR_MESSAGE.SIGNUP.PASSWORD_MISMATCH);
+            return;
         }
         try {
             await addUser({ email, password });

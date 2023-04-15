@@ -67,7 +67,6 @@ router.post("/api/users/login", bodyParser.json(), async (req, res) => {
 
 router.get("/api/users/get-one/:userId", async (req, res) => {
   const { userId } = req.params;
-  console.log('\n\nuserid? ', userId, '\n\n')
 
   try {
     const user = await db.User.findOne({ _id: userId });

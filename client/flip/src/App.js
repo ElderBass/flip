@@ -31,6 +31,7 @@ function App() {
                     <Route exact path="/">
                         {routeToHome ? <Home /> : <Landing />}
                     </Route>
+                    <Route exact path="/landing" component={Landing} />
                     <Route exact path="/home" component={Home} />
                     <Route path="/user/:userId" component={UserPage} />
                     <Route exact path="/create-deck" component={CreateDeck} />
