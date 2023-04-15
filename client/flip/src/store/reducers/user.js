@@ -27,7 +27,7 @@ function user(state = INITIAL_STATE, { type, payload }) {
         case UserActions.LOG_IN_USER:
             const { user, token } = payload;
             const username = trimEmail(user.email);
-            return { ...user, username, token, isLoggedIn: true };
+            return { ...user, username, token, isLoggedIn: true  };
         case UserActions.LOG_OUT_USER:
             return INITIAL_STATE;
         case UserActions.UPDATE_USER:

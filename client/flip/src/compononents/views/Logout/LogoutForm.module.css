@@ -8,6 +8,7 @@
   align-items: center;
   text-align: center;
   width: 100%;
+  height: 4000px;
 }
 
 .logoutHeader {
@@ -23,7 +24,7 @@
 
 .logoutButton {
   text-align: center;
-  color: var(--card-blue);
+  color: var(--background-yellow);
   font-family: var(--logo-font);
   font-size: 80px;
   font-weight: 500;
@@ -32,18 +33,17 @@
 
 .logoutButton:hover {
   cursor: pointer;
-  color: var(--card-purple);
+  color: var(--card-green);
 }
 
 .cancelButton {
   margin: 30px 0;
-  color: var(--card-purple);
-  opacity: .8;
+  color: var(--pencil-gray);
   border: none;
   font-size: 30px;
 }
 
 .cancelButton:hover {
   cursor: pointer;
-  opacity: 1;
+  color: black;
 }
