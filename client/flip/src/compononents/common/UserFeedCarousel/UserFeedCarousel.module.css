@@ -13,7 +13,7 @@
 }
 
 .contentContainer {
-    max-width: 1000px;
+    width: 60vw;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -50,4 +50,11 @@
     box-shadow: 2px 2px 4px var(--card-pink);
     color: var(--pencil-gray);
 
+}
+
+.noContent {
+    font-size: 28px;
+    text-align: center;
+    color: var(--card-pink);
+    margin: 15px 0;
 }

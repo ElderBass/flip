@@ -149,7 +149,7 @@
     justify-content: center;
 }
 
-.returnHomeLink {
+.backBtn {
     font-family: var(--text-font);
     font-size: 30px;
     opacity: .7;
@@ -157,7 +157,8 @@
     color: var(--card-purple);
 }
 
-.returnHomeLink:hover {
+.backBtn:hover {
     opacity: 1;
     font-weight: 600;
+    cursor: pointer;
 }

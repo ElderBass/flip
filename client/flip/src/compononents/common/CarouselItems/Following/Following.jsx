@@ -5,8 +5,12 @@ import CarouselItem from '../CarouselItem';
 
 const Following = ({ item }) => {
     return (
-        <Link className='link' to={`/user/${item._id}`}>
-            <CarouselItem onClick={() => {}} label={trimEmail(item.email)} />
+        <Link className="link" to={`/user/${item._id}`}>
+            <CarouselItem
+                onClick={() => {}}
+                label={trimEmail(item.email)}
+                customClass="following"
+            />
         </Link>
     );
 };

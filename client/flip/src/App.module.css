@@ -2,6 +2,7 @@
 
 .mainContainer {
   height: 100%;
+  width: 100%;
   display: grid;
   background: var(--background-yellow);
   color: var(--card-blue);
