@@ -20,7 +20,6 @@ function App() {
     useEffect(() => {
         const userLoggedIn = localStorage.getItem(LOCAL_STORAGE_KEYS.LOGGED_IN);
         if (isLoggedIn && userLoggedIn === 'true') {
-            console.log('\n are we doing this?', isLoggedIn, userLoggedIn, '\n\n');
             setRouteToHome(true);
         }
     }, [isLoggedIn]);
