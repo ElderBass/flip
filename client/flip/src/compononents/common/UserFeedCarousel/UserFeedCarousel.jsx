@@ -32,7 +32,7 @@ const UserFeedCarousel = ({ type, content }) => {
                     ))}
                 </ScrollMenu>
             ) : (
-                'There is no content here'
+                <div className={styles.noContent}>There is no content here</div>
             )}
         </div>
     );

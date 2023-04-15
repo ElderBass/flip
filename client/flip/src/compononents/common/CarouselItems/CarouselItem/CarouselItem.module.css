@@ -33,3 +33,7 @@
     box-shadow: 2px 2px 4px var(--card-pink);
     color: var(--pencil-gray);
 }
+
+.following {
+    background-color: var(--card-purple);
+}

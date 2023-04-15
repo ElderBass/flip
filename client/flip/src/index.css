@@ -23,7 +23,9 @@ body {
   box-sizing: border-box;
   background: var(--background-yellow);
   scroll-behavior: smooth;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100vw;
 }
 
 a {

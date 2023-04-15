@@ -113,6 +113,10 @@ const SelectedDeck = () => {
         }
     };
 
+    const goBack = () => {
+        history.goBack();
+    };
+
     const dateCreated = new Date(timestamp).toLocaleDateString();
 
     return (
@@ -169,9 +173,9 @@ const SelectedDeck = () => {
                         </Link>
                     </div>
                     <div className={`${styles.returnHome} ${styles.button}`}>
-                        <Link className={`${styles.returnHomeLink} ${styles.button}`} to="/home">
-                            Back to Home
-                        </Link>
+                        <button className={`${styles.backBtn} ${styles.button}`} onClick={goBack}>
+                            Back
+                        </button>
                     </div>
                 </div>
             )}
