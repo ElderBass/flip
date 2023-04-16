@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-const config = require("../dbConfig");
+const config = require("../config/dbConfig");
 const bodyParser = require("body-parser");
 
 router.post("/api/users/signup", bodyParser.json(), async (req, res) => {
