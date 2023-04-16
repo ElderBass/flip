@@ -63,7 +63,7 @@ const UserResult = ({ user }) => {
                     ))}
                 </ScrollMenu>
             ) : (
-                'This user has no decks'
+                <div className={styles.noDecks}>This user has no decks</div>
             )}
         </div>
     );
