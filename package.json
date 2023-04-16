@@ -23,20 +23,21 @@
   },
   "homepage": "https://github.com/ElderBass/flip#readme",
   "devDependencies": {
-    "bcrypt": "^5.0.1",
-    "body-parser": "1.20.1",
     "bson": "5.2.0",
     "concurrently": "7.5.0",
-    "cors": "2.8.5",
-    "dotenv": "16.0.3",
-    "mongoose": "6.7.0",
-    "morgan": "1.10.0",
-    "nodemon": "2.0.20",
-    "uuid": "9.0.0"
+    "nodemon": "2.0.20"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "1.20.1",
+    "cors": "2.8.5",
+    "dotenv": "16.0.3",
     "express": "4.18.2",
-    "jsonwebtoken": "8.5.1"
+    "if-env": "1.0.4",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "6.7.0",
+    "morgan": "1.10.0",
+    "uuid": "9.0.0"
   },
   "engines": {
     "node": ">=16.13.1"
