@@ -60,3 +60,10 @@
     box-shadow: 2px 2px 4px var(--card-pink);
     color: var(--pencil-gray);
 }
+
+.noDecks {
+    color: var(--card-pink);
+    font-size: 24px;
+    text-align: center;
+    align-self: center;
+}

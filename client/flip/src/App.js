@@ -11,6 +11,7 @@ import Browse from './compononents/views/Browse';
 import UserPage from './compononents/views/UserPage';
 import styles from './App.module.css';
 import { LOCAL_STORAGE_KEYS } from './utils/constants';
+import Stats from './compononents/views/Stats';
 
 function App() {
     const { user: { isLoggedIn } } = store.getState();
@@ -38,6 +39,7 @@ function App() {
                     <Route exact path="/edit-deck" component={CreateDeck} />
                     <Route exact path="/study" component={Study} />
                     <Route exact path="/deck" component={Deck} />
+                    <Route exact path="/stats" component={Stats} />
                     <Route exact path="/browse" component={Browse} />
                     <Route exact path="/logout" component={Logout} />
                 </Switch>
