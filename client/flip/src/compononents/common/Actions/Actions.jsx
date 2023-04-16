@@ -7,7 +7,7 @@ const ACTIONS = ['Create', 'Stats', 'Browse'];
 
 const ActionRouteMap = {
     Create: '/create-deck',
-    Stats: '/user-stats',
+    Stats: '/stats',
     Browse: '/browse',
 };
 
