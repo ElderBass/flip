@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const mongoose = require("mongoose");
+const path = require("path");
 const app = express();
 const UserRoutes = require("./routes/user");
 const DeckRoutes = require("./routes/deck");
