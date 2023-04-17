@@ -26,6 +26,7 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   width: 100vw;
+  margin-right: -5px;
 }
 
 a {
