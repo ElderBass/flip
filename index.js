@@ -26,6 +26,8 @@ if (process.env.NODE_ENV === "production") {
 app.use(UserRoutes);
 app.use(DeckRoutes);
 
+app.get('/*', (req, res) => res.send('./client/build/index.html'));
+
 const MONGO_URI = process.env.MONGODB_URI;
 
 mongoose
