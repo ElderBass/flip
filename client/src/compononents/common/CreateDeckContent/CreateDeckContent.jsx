@@ -85,9 +85,7 @@ const CreateDeckContent = ({ isEdit }) => {
     };
 
     const onDeleteCard = (cardId) => {
-        console.log('\nwe are doing this right', cardId, '\n\n');
         const updatedCards = cards.filter((card) => card.id !== cardId);
-        console.log('\n updatedCards ?? ', updatedCards, '\n\n');
         setCards(updatedCards);
         store.dispatch(DeckActions.setAddedCards(updatedCards));
         setCurrentCard(null);
@@ -112,7 +110,7 @@ const CreateDeckContent = ({ isEdit }) => {
                     ) : (
                         <CreateCardForm
                             error={error}
-                            currentCard={currentCard}
+                            currentCard={currentCard || {}}
                             submitCard={onSubmitCard}
                             editCard={onEditCard}
                             deleteCard={onDeleteCard}
