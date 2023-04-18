@@ -31,6 +31,8 @@ const LoginForm = ({ setError }) => {
         } catch (e) {
             if (e.response && e.response.status === 404) {
                 setError(ERROR_MESSAGE.LOGIN[404]);
+            } else if (e.response && e.response.status === 401) {
+                setError(ERROR_MESSAGE.LOGIN.WRONG_PASSWORD);
             } else if (e.message) {
                 setError(e.message);
             } else {
