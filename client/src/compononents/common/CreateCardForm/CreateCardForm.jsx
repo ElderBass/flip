@@ -83,6 +83,7 @@ const CreateCardForm = (props) => {
                                 onChange={setBack}
                                 onFlip={onFlip}
                                 side={SIDES.BACK}
+                                onSubmit={onSubmitCard}
                             />
                         </ReactCardFlip>
                     </form>

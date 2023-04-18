@@ -95,6 +95,13 @@ const CreateDeckContent = ({ isEdit }) => {
         setCurrentCard(null);
     };
 
+    const onCancelCreateDeck = () => {
+        store.dispatch(DeckActions.setAddedCards([]));
+        setCurrentCard(null);
+        setCards([]);
+        history.goBack();
+    };
+
     return (
         <div className={styles.createDeckContent}>
             {showFinish ? (
@@ -129,7 +136,7 @@ const CreateDeckContent = ({ isEdit }) => {
                         </button>
                         <button
                             className={styles.cancelBtn}
-                            onClick={() => history.goBack()}
+                            onClick={onCancelCreateDeck}
                             type="button"
                         >
                             Cancel

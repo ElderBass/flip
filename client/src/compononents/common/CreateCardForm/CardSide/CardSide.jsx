@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { SIDES } from '../../../../utils/constants';
 import styles from './CardSide.module.css';
 
-const CardSide = ({ value, onChange, onFlip, side }) => {
+const CardSide = ({ value, onChange, onFlip, side, onSubmit }) => {
     const id = side.toLowerCase();
     const frontRef = useRef();
     const backRef = useRef();
@@ -18,8 +18,18 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                 backRef.current.focus();
             }, 5);
         }
-
     }, [side]);
+
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (side === SIDES.FRONT) {
+                onFlip();
+            } else if (side === SIDES.BACK) {
+                onSubmit(e);
+            }
+        }
+    }
 
     return (
         <div className={styles.cardSide}>
@@ -34,6 +44,7 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                         className={`${styles.input} ${styles.frontInput}`}
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
+                        onKeyDown={onKeyDown}
                     />
                 ) : (
                     <textarea
@@ -42,6 +53,7 @@ const CardSide = ({ value, onChange, onFlip, side }) => {
                         className={`${styles.input} ${styles.backInput}`}
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
+                        onKeyDown={onKeyDown}
                     />
                 )}
             </div>
