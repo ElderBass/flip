@@ -16,8 +16,6 @@ const DELETE_CLASS = 'fas fa-trash fa-2x';
 const SelectedDeck = () => {
     const history = useHistory();
 
-    console.log('\n history location = ', history.location, '\n\n');
-
     const {
         decks: { selectedDeck },
         user,
