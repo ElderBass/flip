@@ -7,7 +7,6 @@ const loginUser = userData => axios.post('/api/users/login', userData);
 const getOneUser = userId => axios.get(`/api/users/get-one/${userId}`);
 const getAllUsers = () => axios.get('/api/users/get-all');
 const updateUser = user => axios.put('/api/users/update-user', { user });
-// TODO: Why do I even need these two route? Should just need the updateUser route
 const followUser = userId => axios.post(`/api/users/follow/${userId}`);
 
 const createDeck = deckData => axios.post('/api/decks/create', deckData);
