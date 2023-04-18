@@ -21,7 +21,15 @@ const SelectedDeck = () => {
         user,
     } = store.getState();
 
-    const { deckName, cards, timestamp, _id, favorites: timesFavorited, author } = selectedDeck;
+    const {
+        deckName,
+        cards,
+        timestamp,
+        _id: deckId,
+        userId,
+        favorites: timesFavorited,
+        author,
+    } = selectedDeck;
     const { favorites, email } = user;
 
     const [iconClass, setIconClass] = useState(REGULAR_CLASS);
@@ -32,12 +40,12 @@ const SelectedDeck = () => {
 
     useEffect(() => {
         if (favorites.length) {
-            const isFavorited = favorites.filter((deck) => deck._id === _id).length > 0;
+            const isFavorited = favorites.filter((deck) => deck._id === deckId).length > 0;
             if (isFavorited) {
                 setIconClass(FAVORITE_CLASS);
             }
         }
-    }, [favorites, _id]);
+    }, [favorites, deckId]);
 
     useEffect(() => {
         if (author === trimEmail(email)) {
@@ -68,7 +76,7 @@ const SelectedDeck = () => {
         let updatedFavorites = [];
 
         if (iconClass === FAVORITE_CLASS) {
-            updatedFavorites = favorites.filter((favs) => !favs._id === _id);
+            updatedFavorites = favorites.filter((favs) => !favs._id === deckId);
             setDeckFavorites(deckFavorites - 1);
             setIconClass(REGULAR_CLASS);
         } else {
@@ -78,11 +86,11 @@ const SelectedDeck = () => {
         }
         const newUser = {
             ...user,
-            favorites: updatedFavorites
+            favorites: updatedFavorites,
         };
 
         await updateUser(newUser);
-        await editDeckFavorites({ favorites: timesFavorited + 1, deckId: _id });
+        await editDeckFavorites({ favorites: timesFavorited + 1, deckId });
 
         store.dispatch(UserActions.updateUser(newUser));
         store.dispatch(
@@ -96,7 +104,7 @@ const SelectedDeck = () => {
 
     const onDeleteDeck = async () => {
         try {
-            const updatedFavorites = favorites.filter((fav) => fav._id !== _id);
+            const updatedFavorites = favorites.filter((fav) => fav._id !== deckId);
             const newUser = {
                 ...user,
                 favorites: updatedFavorites,
@@ -105,7 +113,7 @@ const SelectedDeck = () => {
             await updateUser(newUser);
             await store.dispatch(UserActions.updateUser(newUser));
 
-            await deleteDeck(_id);
+            await deleteDeck(deckId);
             await store.dispatch(DeckActions.setSelectedDeck(null));
             history.push('/home');
         } catch (e) {
@@ -144,7 +152,7 @@ const SelectedDeck = () => {
                         ) : (
                             <div className={styles.spacer} />
                         )}
-                        <p className={styles.header} >{deckName}</p>
+                        <p className={styles.header}>{deckName}</p>
                         <i onClick={onFavoriteClick} className={`${iconClass} ${styles.icon}`}></i>
                     </div>
                     <div className={styles.deckStats}>
@@ -162,12 +170,14 @@ const SelectedDeck = () => {
                         </div>
                     </div>
                     <div className={styles.actions}>
-                        <Link
-                            to={{ pathname: '/edit-deck', state: { isEdit: true } }}
-                            className={`${styles.button} ${styles.editBtn}`}
-                        >
-                            Edit
-                        </Link>
+                        {user._id === userId && (
+                            <Link
+                                to={{ pathname: '/edit-deck', state: { isEdit: true } }}
+                                className={`${styles.button} ${styles.editBtn}`}
+                            >
+                                Edit
+                            </Link>
+                        )}
                         <Link to="/study" className={`${styles.button} ${styles.studyBtn}`}>
                             Study
                         </Link>
