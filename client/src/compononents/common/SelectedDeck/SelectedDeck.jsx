@@ -135,59 +135,64 @@ const SelectedDeck = () => {
                     cancel={() => setShowDeleteModal(false)}
                 />
             ) : (
-                <div title={deckName} className={styles.selectedDeck}>
-                    <div className={styles.greyLines}>
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                    </div>
-                    <div className={styles.selectedDeckHeader}>
-                        {showDeleteIcon ? (
+                <>
+                    <div title={deckName} className={styles.selectedDeck}>
+                        <div className={styles.greyLines}>
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
+                        </div>
+                        <div className={styles.selectedDeckHeader}>
+                            {showDeleteIcon ? (
+                                <i
+                                    onClick={onDeleteClick}
+                                    className={`${DELETE_CLASS} ${styles.icon}`}
+                                />
+                            ) : (
+                                <div className={styles.spacer} />
+                            )}
+                            <p className={styles.header}>{deckName}</p>
                             <i
-                                onClick={onDeleteClick}
-                                className={`${DELETE_CLASS} ${styles.icon}`}
-                            />
-                        ) : (
-                            <div className={styles.spacer} />
-                        )}
-                        <p className={styles.header}>{deckName}</p>
-                        <i onClick={onFavoriteClick} className={`${iconClass} ${styles.icon}`}></i>
-                    </div>
-                    <div className={styles.deckStats}>
-                        <div className={styles.statWrap}>
-                            <p className={styles.statLabel}>Number of Cards:</p>
-                            <p className={styles.stat}>{cards.length}</p>
+                                onClick={onFavoriteClick}
+                                className={`${iconClass} ${styles.icon}`}
+                            ></i>
                         </div>
-                        <div className={styles.statWrap}>
-                            <p className={styles.statLabel}>Date Created:</p>
-                            <p className={styles.stat}>{dateCreated}</p>
+                        <div className={styles.deckStats}>
+                            <div className={styles.statWrap}>
+                                <p className={styles.statLabel}>Number of Cards:</p>
+                                <p className={styles.stat}>{cards.length}</p>
+                            </div>
+                            <div className={styles.statWrap}>
+                                <p className={styles.statLabel}>Date Created:</p>
+                                <p className={styles.stat}>{dateCreated}</p>
+                            </div>
+                            <div className={styles.statWrap}>
+                                <p className={styles.statLabel}>Times Favorited:</p>
+                                <p className={styles.stat}>{deckFavorites}</p>
+                            </div>
                         </div>
-                        <div className={styles.statWrap}>
-                            <p className={styles.statLabel}>Times Favorited:</p>
-                            <p className={styles.stat}>{deckFavorites}</p>
-                        </div>
-                    </div>
-                    <div className={styles.actions}>
-                        {user._id === userId && (
-                            <Link
-                                to={{ pathname: '/edit-deck', state: { isEdit: true } }}
-                                className={`${styles.button} ${styles.editBtn}`}
-                            >
-                                Edit
+                        <div className={styles.actions}>
+                            {user._id === userId && (
+                                <Link
+                                    to={{ pathname: '/edit-deck', state: { isEdit: true } }}
+                                    className={`${styles.button} ${styles.editBtn}`}
+                                >
+                                    Edit
+                                </Link>
+                            )}
+                            <Link to="/study" className={`${styles.button} ${styles.studyBtn}`}>
+                                Study
                             </Link>
-                        )}
-                        <Link to="/study" className={`${styles.button} ${styles.studyBtn}`}>
-                            Study
-                        </Link>
+                        </div>
                     </div>
                     <div className={`${styles.returnHome} ${styles.button}`}>
                         <button className={`${styles.backBtn} ${styles.button}`} onClick={goBack}>
                             Back
                         </button>
                     </div>
-                </div>
+                </>
             )}
         </div>
     );
