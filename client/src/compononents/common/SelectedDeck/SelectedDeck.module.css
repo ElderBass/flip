@@ -115,7 +115,6 @@
     outline: none;
     border: none;
     flex: 1 0 50%;
-    /* padding: 20px; */
     font-size: 60px;
     background: transparent;
     font-family: var(--logo-font);
