@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
 import store from '../../../store';
 import { SIDES } from '../../../utils/constants';
@@ -8,9 +9,11 @@ import StudyCardSide from '../StudyCardSide';
 import styles from './StudyDeck.module.css';
 
 const StudyDeck = () => {
+    const history = useHistory();
+
     const {
         decks: {
-            selectedDeck: { cards },
+            selectedDeck: { cards, deckName },
         },
     } = store.getState();
 
@@ -52,6 +55,17 @@ const StudyDeck = () => {
     return (
         <div className={styles.studyDeckContent}>
             <div className={styles.studyDeckContainer}>
+                <div className={styles.studyDeckHeader}>
+                    <h3>
+                        Studying{' '}
+                        <span className={styles.deckName}>
+                            <i>{deckName}</i>
+                        </span>
+                    </h3>
+                    <button className={styles.cancelStudyBtn} onClick={() => history.goBack()}>
+                        Cancel
+                    </button>
+                </div>
                 {endOfDeck ? (
                     <EndOfDeck onStudyAgain={onStudyAgain} />
                 ) : (
