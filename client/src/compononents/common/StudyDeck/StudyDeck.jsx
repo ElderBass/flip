@@ -56,15 +56,13 @@ const StudyDeck = () => {
         <div className={styles.studyDeckContent}>
             <div className={styles.studyDeckContainer}>
                 <div className={styles.studyDeckHeader}>
+                    <div className={styles.spacer} />
                     <h3>
                         Studying{' '}
                         <span className={styles.deckName}>
                             <i>{deckName}</i>
                         </span>
                     </h3>
-                    <button className={styles.cancelStudyBtn} onClick={() => history.goBack()}>
-                        Cancel
-                    </button>
                 </div>
                 {endOfDeck ? (
                     <EndOfDeck onStudyAgain={onStudyAgain} />
@@ -90,6 +88,9 @@ const StudyDeck = () => {
                             onClick={() => onActionClick(false)}
                         >
                             Study Again
+                        </button>
+                        <button className={styles.cancelStudyBtn} onClick={() => history.goBack()}>
+                            Cancel
                         </button>
                         <button
                             className={styles.nailedIt}
