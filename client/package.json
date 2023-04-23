@@ -16,6 +16,7 @@
     "react-card-flip": "1.1.6",
     "react-dom": "^17.0.1",
     "react-horizontal-scrolling-menu": "3.2.3",
+    "react-loader-spinner": "5.3.4",
     "react-redux": "8.0.4",
     "react-router-dom": "^5.2.1",
     "react-scripts": "5.0.1",
