@@ -6,6 +6,7 @@ import Actions from '../../common/Actions';
 import UserFeedCarousel from '../../common/UserFeedCarousel';
 import { getAllUserDecks } from '../../../api';
 import { getFollowedUsers } from '../../../utils/helpers/getFollowedUsers';
+import LoadingScreen from '../../LoadingScreen';
 
 const Home = () => {
     const { user } = store.getState();
@@ -28,7 +29,10 @@ const Home = () => {
             }
             setLoading(false);
         };
-        getUserData();
+        setTimeout(() => {
+            getUserData();
+            setLoading(false);
+        }, 250);
     }, [_id, following]);
 
     return (
@@ -36,7 +40,7 @@ const Home = () => {
             <Header />
             <div className={styles.content}>
                 {loading ? (
-                    <p>Hol up bro</p>
+                    <LoadingScreen />
                 ) : (
                     <div className={styles.feed}>
                         <UserFeedCarousel type="Decks" content={userDecks} />
