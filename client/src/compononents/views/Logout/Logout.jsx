@@ -13,7 +13,7 @@ const Logout = () => {
         e.preventDefault();
         localStorage.setItem(LOCAL_STORAGE_KEYS.LOGGED_IN, false);
         await store.dispatch(UserActions.logoutUser());
-        history.push('/landing');
+        history.push('/');
     };
 
     return (
