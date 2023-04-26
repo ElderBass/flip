@@ -15,11 +15,18 @@
     font-size: 50px;
 }
 
+.withUnknownButton {
+    justify-content: space-between;
+}
+
+.withoutUnknownButton {
+    justify-content: center;
+}
+
 .studyActions {
     width: 70%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .actionButton {
