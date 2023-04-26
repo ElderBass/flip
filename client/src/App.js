@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import AuthRoute from './compononents/common/AuthRoute';
+import HomeRoute from './compononents/common/HomeRoute';
 import Logout from './compononents/views/Logout';
 import Home from './compononents/views/Home';
 import CreateDeck from './compononents/views/CreateDeck';
@@ -10,7 +11,6 @@ import Browse from './compononents/views/Browse';
 import UserPage from './compononents/views/UserPage';
 import styles from './App.module.css';
 import Stats from './compononents/views/Stats';
-import HomeRoute from './compononents/common/HomeRoute/HomeRoute';
 
 function App() {
     return (
