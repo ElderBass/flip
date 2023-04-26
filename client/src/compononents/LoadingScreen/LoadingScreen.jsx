@@ -1,16 +1,15 @@
 import React from 'react';
-import { Audio } from 'react-loader-spinner';
+import { FallingLines } from 'react-loader-spinner';
 import styles from './LoadingScreen.module.css';
 
 const LoadingScreen = () => {
     return (
         <div className={styles.loadingScreen}>
-            <Audio
-                width="300"
-                height="300"
-                color="rgb(81, 128, 248)"
-                radius="20"
-            />
+            <div className={styles.loadingWrapper}>
+                <FallingLines width="200" visible={true} color="rgb(81, 128, 248)" />
+                <FallingLines width="200" visible={true} color="rgb(81, 128, 248)" />
+                <FallingLines width="200" visible={true} color="rgb(81, 128, 248)" />
+            </div>
         </div>
     );
 };

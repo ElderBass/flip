@@ -72,7 +72,6 @@ const UserPage = () => {
         }
     };
 
-    // TODO: Pass loading into all the carousels and have a shimmer until content loads?
     return (
         <div className={styles.userPage}>
             <Header />
