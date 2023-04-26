@@ -65,7 +65,10 @@ const StudyDeck = () => {
                     </h3>
                 </div>
                 {endOfDeck ? (
-                    <EndOfDeck onStudyAgain={onStudyAgain} />
+                    <EndOfDeck
+                        onStudyAgain={onStudyAgain}
+                        renderUnknownButton={cardsToStudy.length > 0}
+                    />
                 ) : (
                     <ReactCardFlip isFlipped={flipped}>
                         <StudyCardSide
