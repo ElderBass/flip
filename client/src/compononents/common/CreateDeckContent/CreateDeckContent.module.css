@@ -7,6 +7,15 @@
     height: 100%;
 }
 
+.cancelEditDeck {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+    align-items: center;
+}
+
 .createDeckForm {
     flex: 1 0 70%;
     max-height: 70%;
