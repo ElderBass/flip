@@ -1,10 +1,7 @@
 .loadingScreen {
     flex: 1 0 75%;
+    height: 50%;
     display: flex;
     justify-content: center;
-}
-
-.loadingWrapper {
-    display: flex;
-    flex-direction: column;
+    align-items: center;
 }
