@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import store from '../../../store';
 import * as DeckActions from '../../../store/actions/decks';
-import { ERROR_MESSAGE } from '../../../utils/constants';
-import { isDuplicateCard } from '../../../utils/helpers/isDuplicateCard';
+import {ERROR_MESSAGE} from '../../../utils/constants';
+import {isDuplicateCard} from '../../../utils/helpers/isDuplicateCard';
 import AddedCards from '../AddedCards';
 import CreateCardForm from '../CreateCardForm';
 import EditDeckActionCard from '../EditDeckActionCard/EditDeckActionCard';
 import FinishDeckForm from '../FinishDeckForm';
 import styles from './CreateDeckContent.module.css';
+import AbortActionConfirmationModal from "../AbortActionConfirmationModal";
 
-const CreateDeckContent = ({ isEdit }) => {
+const CreateDeckContent = ({isEdit}) => {
     const {
-        decks: { selectedDeck = {}, addedCards },
+        decks: {selectedDeck = {}, addedCards},
     } = store.getState();
     const deckName = selectedDeck?.deckName;
 
@@ -25,6 +26,7 @@ const CreateDeckContent = ({ isEdit }) => {
     const [cards, setCards] = useState(initialCards);
     const [showFinish, setShowFinish] = useState(false);
     const [editingAddedCard, setEditingAddedCard] = useState(false);
+    const [showCancelConfirmModal, setShowCancelConfirmModal] = useState(false);
 
     const isCardFilledOut = (front, back) => front.length && back.length;
 
@@ -34,7 +36,7 @@ const CreateDeckContent = ({ isEdit }) => {
         }, 2000);
     };
 
-    const onSubmitCard = ({ id, front, back }) => {
+    const onSubmitCard = ({id, front, back}) => {
         setError('');
         if (!isCardFilledOut(front, back)) {
             setError(ERROR_MESSAGE.CREATE_CARD.INCOMPLETE);
@@ -45,7 +47,7 @@ const CreateDeckContent = ({ isEdit }) => {
             resetError();
             return;
         } else {
-            const card = { id, front, back };
+            const card = {id, front, back};
             const updatedDeck = [...cards, card];
             setCards(updatedDeck);
             store.dispatch(DeckActions.setAddedCards(updatedDeck));
@@ -61,7 +63,7 @@ const CreateDeckContent = ({ isEdit }) => {
     };
 
     const onAddCardClick = () => {
-        setCurrentCard({ front: '', back: '' });
+        setCurrentCard({front: '', back: ''});
     };
 
     const onEditCard = (updatedCard) => {
@@ -96,6 +98,10 @@ const CreateDeckContent = ({ isEdit }) => {
     };
 
     const onCancelCreateDeck = () => {
+        setShowCancelConfirmModal(true)
+    };
+
+    const onCancelConfirmation = () => {
         store.dispatch(DeckActions.setAddedCards([]));
         setCurrentCard(null);
         setCards([]);
@@ -105,46 +111,58 @@ const CreateDeckContent = ({ isEdit }) => {
     return (
         <div className={styles.createDeckContent}>
             {showFinish ? (
-                <FinishDeckForm
-                    title={deckName}
-                    cards={cards}
-                    onCancel={() => setShowFinish(false)}
-                />
-            ) : (
-                <div className={styles.createDeckForm}>
-                    {isEdit && !currentCard ? (
-                        <EditDeckActionCard deckName={deckName} onAddCard={onAddCardClick} />
-                    ) : (
-                        <CreateCardForm
-                            error={error}
-                            currentCard={currentCard || {}}
-                            submitCard={onSubmitCard}
-                            editCard={onEditCard}
-                            deleteCard={onDeleteCard}
-                            cancelDeleteCard={onCancelDeleteCard}
-                            isEdit={editingAddedCard}
-                        />
-                    )}
-                    <div className={styles.actions}>
-                        <button
-                            disabled={initialCards.length === 0}
-                            className={styles.finishBtn}
-                            onClick={() => setShowFinish(true)}
-                            type="button"
-                        >
-                            Finish
-                        </button>
-                        <button
-                            className={styles.cancelBtn}
-                            onClick={onCancelCreateDeck}
-                            type="button"
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            )}
-            <AddedCards onClick={onAddedCardClick} cards={cards} />
+                    <FinishDeckForm
+                        title={deckName}
+                        cards={cards}
+                        onCancel={() => setShowFinish(false)}
+                    />
+                ) :
+                (showCancelConfirmModal ?
+                        <div className={styles.cancelEditDeck}>
+                            <AbortActionConfirmationModal
+                                message="You really wanna cancel? All of your progress will be lost."
+                                deleteFunc={onCancelConfirmation}
+                                cancelFunc={() => {
+                                    setShowCancelConfirmModal(false)
+                                }}
+                                btnWording="Abandon Deck"
+                            />
+                        </div>
+                        :
+                        <div className={styles.createDeckForm}>
+                            {isEdit && !currentCard ? (
+                                <EditDeckActionCard deckName={deckName} onAddCard={onAddCardClick}/>
+                            ) : (
+                                <CreateCardForm
+                                    error={error}
+                                    currentCard={currentCard || {}}
+                                    submitCard={onSubmitCard}
+                                    editCard={onEditCard}
+                                    deleteCard={onDeleteCard}
+                                    cancelDeleteCard={onCancelDeleteCard}
+                                    isEdit={editingAddedCard}
+                                />
+                            )}
+                            <div className={styles.actions}>
+                                <button
+                                    disabled={cards.length === 0}
+                                    className={styles.finishBtn}
+                                    onClick={() => setShowFinish(true)}
+                                    type="button"
+                                >
+                                    Finish
+                                </button>
+                                <button
+                                    className={styles.cancelBtn}
+                                    onClick={onCancelCreateDeck}
+                                    type="button"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                )}
+            <AddedCards onClick={onAddedCardClick} cards={cards}/>
         </div>
     );
 };
