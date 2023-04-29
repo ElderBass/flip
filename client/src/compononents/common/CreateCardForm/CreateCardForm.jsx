@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { v4 as uuidv4 } from 'uuid';
 import { SIDES } from '../../../utils/constants';
-import DeleteModal from '../DeleteModal';
 import CardSide from './CardSide';
 import styles from './CreateCardForm.module.css';
+import AbortActionConfirmationModal from "../AbortActionConfirmationModal";
 
 const cardStyles = {
     display: 'flex',
@@ -61,7 +61,11 @@ const CreateCardForm = (props) => {
     return (
         <div className={styles.createCardFormContainer}>
             {showDeleteModal ? (
-                <DeleteModal type="card" deleteFunc={() => deleteCard(currentCard.id)} cancelFunc={cancelDeleteCard} />
+                <AbortActionConfirmationModal
+                    message="You really wanna delete this card?"
+                    deleteFunc={() => deleteCard(currentCard.id)}
+                    cancelFunc={cancelDeleteCard}
+                />
             ) : (
                 <>
                     <div className={styles.error}>

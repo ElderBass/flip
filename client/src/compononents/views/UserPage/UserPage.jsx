@@ -9,6 +9,7 @@ import Header from '../../common/Header/Header';
 import UserFeedCarousel from '../../common/UserFeedCarousel';
 import Actions from '../../common/Actions';
 import styles from './UserPage.module.css';
+import LoadingScreen from '../../LoadingScreen';
 
 const UserPage = () => {
     const { user } = store.getState();
@@ -43,8 +44,10 @@ const UserPage = () => {
                 console.log('\n error in getting user decks/favorites on UserHome: ', e, '\n\n');
             }
         };
-        getUserData();
-        setLoading(false);
+        setTimeout(() => {
+            getUserData();
+            setLoading(false);
+        }, 250);
     }, [userId, following]);
 
     const onFollowToggle = async () => {
@@ -69,13 +72,12 @@ const UserPage = () => {
         }
     };
 
-    // TODO: Pass loading into all the carousels and have a shimmer until content loads?
     return (
         <div className={styles.userPage}>
             <Header />
             <div className={styles.content}>
                 {loading ? (
-                    <p>Hol up bro</p>
+                    <LoadingScreen />
                 ) : (
                     <div className={styles.feed}>
                         <div className={styles.headerContent}>

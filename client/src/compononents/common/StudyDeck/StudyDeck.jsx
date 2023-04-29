@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
 import store from '../../../store';
 import { SIDES } from '../../../utils/constants';
@@ -8,9 +9,11 @@ import StudyCardSide from '../StudyCardSide';
 import styles from './StudyDeck.module.css';
 
 const StudyDeck = () => {
+    const history = useHistory();
+
     const {
         decks: {
-            selectedDeck: { cards },
+            selectedDeck: { cards, deckName },
         },
     } = store.getState();
 
@@ -52,8 +55,20 @@ const StudyDeck = () => {
     return (
         <div className={styles.studyDeckContent}>
             <div className={styles.studyDeckContainer}>
+                <div className={styles.studyDeckHeader}>
+                    <div className={styles.spacer} />
+                    <h3>
+                        Studying{' '}
+                        <span className={styles.deckName}>
+                            <i>{deckName}</i>
+                        </span>
+                    </h3>
+                </div>
                 {endOfDeck ? (
-                    <EndOfDeck onStudyAgain={onStudyAgain} />
+                    <EndOfDeck
+                        onStudyAgain={onStudyAgain}
+                        renderUnknownButton={cardsToStudy.length > 0}
+                    />
                 ) : (
                     <ReactCardFlip isFlipped={flipped}>
                         <StudyCardSide
@@ -76,6 +91,9 @@ const StudyDeck = () => {
                             onClick={() => onActionClick(false)}
                         >
                             Study Again
+                        </button>
+                        <button className={styles.cancelStudyBtn} onClick={() => history.goBack()}>
+                            Cancel
                         </button>
                         <button
                             className={styles.nailedIt}

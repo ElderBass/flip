@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
 import store from '../../../store';
 import * as UserActions from '../../../store/actions/user';
 import * as DeckActions from '../../../store/actions/decks';
-import { useEffect } from 'react';
-import { deleteDeck, editDeckFavorites, updateUser } from '../../../api';
-import { trimEmail } from '../../../utils/helpers/emailHelpers';
-import DeleteDeckModal from '../DeleteDeckModal';
+import {useEffect} from 'react';
+import {deleteDeck, editDeckFavorites, updateUser} from '../../../api';
+import {trimEmail} from '../../../utils/helpers/emailHelpers';
 import styles from './SelectedDeck.module.css';
+import AbortActionConfirmationModal from "../AbortActionConfirmationModal";
 
 const FAVORITE_CLASS = 'fas fa-heart fa-2x';
 const REGULAR_CLASS = 'far fa-heart fa-2x';
@@ -17,7 +17,7 @@ const SelectedDeck = () => {
     const history = useHistory();
 
     const {
-        decks: { selectedDeck },
+        decks: {selectedDeck},
         user,
     } = store.getState();
 
@@ -30,7 +30,7 @@ const SelectedDeck = () => {
         favorites: timesFavorited,
         author,
     } = selectedDeck;
-    const { favorites, email } = user;
+    const {favorites, email} = user;
 
     const [iconClass, setIconClass] = useState(REGULAR_CLASS);
     const [deckFavorites, setDeckFavorites] = useState(timesFavorited);
@@ -90,11 +90,11 @@ const SelectedDeck = () => {
         };
 
         await updateUser(newUser);
-        await editDeckFavorites({ favorites: timesFavorited + 1, deckId });
+        await editDeckFavorites({favorites: timesFavorited + 1, deckId});
 
         store.dispatch(UserActions.updateUser(newUser));
         store.dispatch(
-            DeckActions.setSelectedDeck({ ...selectedDeck, favorites: timesFavorited + 1 })
+            DeckActions.setSelectedDeck({...selectedDeck, favorites: timesFavorited + 1})
         );
     };
 
@@ -130,64 +130,72 @@ const SelectedDeck = () => {
     return (
         <div className={styles.selectedDeckContainer}>
             {showDeleteModal ? (
-                <DeleteDeckModal
-                    confirmDelete={onDeleteDeck}
-                    cancel={() => setShowDeleteModal(false)}
+                <AbortActionConfirmationModal
+                    message="You really wanna delete this deck?"
+                    deleteFunc={onDeleteDeck}
+                    cancelFunc={() => setShowDeleteModal(false)}
                 />
             ) : (
-                <div title={deckName} className={styles.selectedDeck}>
-                    <div className={styles.greyLines}>
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                        <hr className={styles.greyLine} />
-                    </div>
-                    <div className={styles.selectedDeckHeader}>
-                        {showDeleteIcon ? (
+                <>
+                    <div title={deckName} className={styles.selectedDeck}>
+                        <div className={styles.greyLines}>
+                            <hr className={styles.greyLine}/>
+                            <hr className={styles.greyLine}/>
+                            <hr className={styles.greyLine}/>
+                            <hr className={styles.greyLine}/>
+                            <hr className={styles.greyLine}/>
+                        </div>
+                        <div className={styles.selectedDeckHeader}>
+                            {showDeleteIcon ? (
+                                <i
+                                    onClick={onDeleteClick}
+                                    className={`${DELETE_CLASS} ${styles.icon}`}
+                                />
+                            ) : (
+                                <div className={styles.spacer}/>
+                            )}
+                            <p className={styles.header}>{deckName}</p>
                             <i
-                                onClick={onDeleteClick}
-                                className={`${DELETE_CLASS} ${styles.icon}`}
-                            />
-                        ) : (
-                            <div className={styles.spacer} />
-                        )}
-                        <p className={styles.header}>{deckName}</p>
-                        <i onClick={onFavoriteClick} className={`${iconClass} ${styles.icon}`}></i>
-                    </div>
-                    <div className={styles.deckStats}>
-                        <div className={styles.statWrap}>
-                            <p className={styles.statLabel}>Number of Cards:</p>
-                            <p className={styles.stat}>{cards.length}</p>
+                                onClick={onFavoriteClick}
+                                className={`${iconClass} ${styles.icon}`}
+                            ></i>
                         </div>
-                        <div className={styles.statWrap}>
-                            <p className={styles.statLabel}>Date Created:</p>
-                            <p className={styles.stat}>{dateCreated}</p>
+                        <div className={styles.deckStats}>
+                            <div className={styles.statWrap}>
+                                <p className={styles.statLabel}>Number of Cards:</p>
+                                <p className={styles.stat}>{cards.length}</p>
+                            </div>
+                            <div className={styles.statWrap}>
+                                <p className={styles.statLabel}>Date Created:</p>
+                                <p className={styles.stat}>{dateCreated}</p>
+                            </div>
+                            <div className={styles.statWrap}>
+                                <p className={styles.statLabel}>Times Favorited:</p>
+                                <p className={styles.stat}>{deckFavorites}</p>
+                            </div>
                         </div>
-                        <div className={styles.statWrap}>
-                            <p className={styles.statLabel}>Times Favorited:</p>
-                            <p className={styles.stat}>{deckFavorites}</p>
+                        <div className={styles.actions}>
+                            {user._id === userId && (
+                                <Link
+                                    to={{pathname: '/edit-deck', state: {isEdit: true}}}
+                                    className={`${styles.button} ${styles.editBtn}`}
+                                >
+                                    Edit
+                                </Link>
+                            )}
+                            {cards.length > 0 &&
+                                <Link to="/study" className={`${styles.button} ${styles.studyBtn}`}>
+                                    Study
+                                </Link>
+                            }
                         </div>
-                    </div>
-                    <div className={styles.actions}>
-                        {user._id === userId && (
-                            <Link
-                                to={{ pathname: '/edit-deck', state: { isEdit: true } }}
-                                className={`${styles.button} ${styles.editBtn}`}
-                            >
-                                Edit
-                            </Link>
-                        )}
-                        <Link to="/study" className={`${styles.button} ${styles.studyBtn}`}>
-                            Study
-                        </Link>
                     </div>
                     <div className={`${styles.returnHome} ${styles.button}`}>
                         <button className={`${styles.backBtn} ${styles.button}`} onClick={goBack}>
                             Back
                         </button>
                     </div>
-                </div>
+                </>
             )}
         </div>
     );
