@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import store from '../../../store';
+import * as DeckActions from '../../../store/actions/decks';
 import ActionCard from '../ActionCard';
 import styles from './Actions.module.css';
 
@@ -16,6 +18,10 @@ const Actions = () => {
 
     const onActionClick = (action) => {
         const page = ActionRouteMap[action];
+        if (action === 'Create') {
+            store.dispatch(DeckActions.setSelectedDeck({}));
+            store.dispatch(DeckActions.setAddedCards([]));
+        }
         history.push(page);
     };
 

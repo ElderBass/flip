@@ -10,23 +10,33 @@ import EditDeckActionCard from '../EditDeckActionCard/EditDeckActionCard';
 import FinishDeckForm from '../FinishDeckForm';
 import styles from './CreateDeckContent.module.css';
 import AbortActionConfirmationModal from '../AbortActionConfirmationModal';
+import NameDeckForm from '../NameDeckForm/NameDeckForm';
+import { createDeck } from '../../../api';
+
+const PHASES = {
+    NAME: 'name',
+    FINISH: 'finish',
+    CANCEL_CONFIRM: 'cancelConfirm',
+    CREATE: 'create',
+};
 
 const CreateDeckContent = ({ isEdit }) => {
     const {
         decks: { selectedDeck = {}, addedCards },
+        user: { username, _id },
     } = store.getState();
-    const deckName = selectedDeck?.deckName;
+    const selectedDeckName = selectedDeck?.deckName;
 
     const initialCards = isEdit ? selectedDeck?.cards : addedCards;
 
     const history = useHistory();
 
+    const [phase, setPhase] = useState(isEdit ? PHASES.CREATE : PHASES.NAME);
     const [error, setError] = useState('');
+    const [deckName, setDeckName] = useState(selectedDeckName || '');
     const [currentCard, setCurrentCard] = useState(null);
     const [cards, setCards] = useState(initialCards);
-    const [showFinish, setShowFinish] = useState(false);
     const [editingAddedCard, setEditingAddedCard] = useState(false);
-    const [showCancelConfirmModal, setShowCancelConfirmModal] = useState(false);
 
     const isCardFilledOut = (front, back) => front.length && back.length;
 
@@ -57,9 +67,10 @@ const CreateDeckContent = ({ isEdit }) => {
 
     const onAddedCardClick = (card) => {
         setError('');
-        setShowFinish(false);
+        setPhase(PHASES.NAME);
         setCurrentCard(card);
         setEditingAddedCard(true);
+        setPhase(PHASES.CREATE);
     };
 
     const onAddCardClick = () => {
@@ -97,10 +108,6 @@ const CreateDeckContent = ({ isEdit }) => {
         setCurrentCard(null);
     };
 
-    const onCancelCreateDeck = () => {
-        setShowCancelConfirmModal(true);
-    };
-
     const onCancelConfirmation = () => {
         store.dispatch(DeckActions.setAddedCards([]));
         setCurrentCard(null);
@@ -108,27 +115,67 @@ const CreateDeckContent = ({ isEdit }) => {
         history.goBack();
     };
 
+    const onSubmitDeckName = () => {
+        store.dispatch(
+            DeckActions.setSelectedDeck({
+                ...selectedDeck,
+                deckName,
+            })
+        );
+        setPhase(PHASES.CREATE);
+    };
+
+    const onFinishDeck = async (e) => {
+        e.preventDefault();
+
+        const deckPayload = {
+            deckName,
+            timestamp: Date.now(),
+            author: username,
+            userId: _id,
+            cards,
+        };
+
+        try {
+            const result = await createDeck(deckPayload);
+            store.dispatch(DeckActions.addDeck(result.data.data));
+            history.push('/home');
+        } catch (e) {
+            console.log('\n\n error in creating deck = ', e, '\n\n');
+            setError(ERROR_MESSAGE.FINISH_CARD.GENERIC);
+        }
+    };
+
     return (
         <div className={styles.createDeckContent}>
-            {showFinish ? (
+            {phase === PHASES.NAME && (
+                <NameDeckForm
+                    deckName={deckName}
+                    setDeckName={setDeckName}
+                    submitName={onSubmitDeckName}
+                />
+            )}
+            {phase === PHASES.FINISH && (
                 <FinishDeckForm
                     title={deckName}
-                    isEdit={isEdit}
                     cards={cards}
-                    onCancel={() => setShowFinish(false)}
+                    onCancel={() => setPhase(PHASES.CREATE)}
+                    onSubmitDeck={onFinishDeck}
                 />
-            ) : showCancelConfirmModal ? (
+            )}
+            {phase === PHASES.CANCEL_CONFIRM && (
                 <div className={styles.cancelEditDeck}>
                     <AbortActionConfirmationModal
                         message="You really wanna cancel? All of your progress will be lost."
                         deleteFunc={onCancelConfirmation}
                         cancelFunc={() => {
-                            setShowCancelConfirmModal(false);
+                            setPhase(PHASES.CREATE);
                         }}
                         btnWording="Abandon Deck"
                     />
                 </div>
-            ) : (
+            )}
+            {phase === PHASES.CREATE && (
                 <div className={styles.createDeckForm}>
                     {isEdit && !currentCard ? (
                         <EditDeckActionCard deckName={deckName} onAddCard={onAddCardClick} />
@@ -147,14 +194,14 @@ const CreateDeckContent = ({ isEdit }) => {
                         <button
                             disabled={cards.length === 0}
                             className={styles.finishBtn}
-                            onClick={() => setShowFinish(true)}
+                            onClick={() => setPhase(PHASES.FINISH)}
                             type="button"
                         >
                             Finish
                         </button>
                         <button
                             className={styles.cancelBtn}
-                            onClick={onCancelCreateDeck}
+                            onClick={() => setPhase(PHASES.CANCEL_CONFIRM)}
                             type="button"
                         >
                             Cancel
