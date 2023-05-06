@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './FinishDeckForm.module.css';
 
-const FinishDeckForm = ({ onCancel, onFinishDeck }) => {
+const FinishDeckForm = ({ onCancel, onSubmitDeck }) => {
     return (
         <div className={styles.finishDeckContainer}>
-            <form onSubmit={onFinishDeck} className={styles.finishDeckForm}>
+            <form onSubmit={(e) => onSubmitDeck(e)} className={styles.finishDeckForm}>
                 <div className={styles.header}>Canonize Deck</div>
                 <h2 className={styles.modalHeading}>
                     <p>All done? Be sure to double-check your cards!</p>
