@@ -1,18 +1,44 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import AuthRoute from './compononents/common/AuthRoute';
-import HomeRoute from './compononents/common/HomeRoute';
-import Logout from './compononents/views/Logout';
-import Home from './compononents/views/Home';
-import CreateDeck from './compononents/views/CreateDeck';
-import Deck from './compononents/views/Deck';
-import Study from './compononents/views/Study';
-import Browse from './compononents/views/Browse';
-import UserPage from './compononents/views/UserPage';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import store from './store';
+import AuthRoute from './components/common/AuthRoute';
+import Logout from './components/views/Logout';
+import Home from './components/views/Home';
+import CreateDeck from './components/views/CreateDeck';
+import Deck from './components/views/Deck';
+import Study from './components/views/Study';
+import Browse from './components/views/Browse';
+import Landing from './components/views/Landing';
+import UserPage from './components/views/UserPage';
+import FourOhFourPage from './components/views/FourOhFourPage';
+import Stats from './components/views/Stats';
 import styles from './App.module.css';
-import Stats from './compononents/views/Stats';
 
 function App() {
+    const ComponentMap = {
+        Home,
+        Landing,
+        FourOhFourPage
+    };
+
+    const { user: { isLoggedIn } } = store.getState();
+
+    const [CatchAllPage, setCatchAllPage] = useState(null);
+
+    // TODO: Is this the best way to do this? Can't I just take a pure Route approach?
+    useEffect(() => {
+        const path = window.location.pathname;
+        if (path === '/') {
+            if (isLoggedIn) {
+                setCatchAllPage('Home');
+            } else {
+                setCatchAllPage('Landing');
+            }
+        } else {
+            setCatchAllPage('FourOhFourPage');
+        }
+    }, [isLoggedIn]);
+
     return (
         <Router>
             <div className={styles.mainContainer}>
@@ -26,7 +52,7 @@ function App() {
                     <AuthRoute exact path="/stats" component={Stats} />
                     <AuthRoute exact path="/browse" component={Browse} />
                     <AuthRoute exact path="/logout" component={Logout} />
-                    <HomeRoute />
+                    <Route component={ComponentMap[CatchAllPage]} />
                 </Switch>
             </div>
         </Router>
