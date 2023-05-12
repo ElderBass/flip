@@ -11,7 +11,6 @@ const ActionRouteMap = {
     Create: '/create-deck',
     Stats: '/stats',
     Browse: '/browse',
-    Nunya: '/nunya'
 };
 
 const Actions = () => {
