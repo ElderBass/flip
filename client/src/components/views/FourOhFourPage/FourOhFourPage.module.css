@@ -1,0 +1,67 @@
+@import url('../../../index.css');
+
+.fourOhFourPage {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  color: var(--card-blue);
+  background: var(--background-yellow);
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px auto;
+  grid-template-areas: 
+  "header"
+  "content";
+}
+
+.fourOhFourContent {
+    grid-area: content;
+    display: flex;
+    padding-bottom: 30px;
+    height: 100%;
+    color: var(--card-blue);
+    font-family: var(--text-font);
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h4 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 24px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.button {
+    border: none;
+    outline: none;
+    background-color: var(--background-yellow);
+}
+
+.goBack {
+    color: var(--pencil-gray);
+    opacity: .7;
+}
+
+.goBack:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.home {
+    color: var(--card-pink);
+}
+
+.home {
+    cursor: pointer;
+    color: var(--card-blue);
+}

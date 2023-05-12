@@ -5,12 +5,13 @@ import * as DeckActions from '../../../store/actions/decks';
 import ActionCard from '../ActionCard';
 import styles from './Actions.module.css';
 
-const ACTIONS = ['Create', 'Stats', 'Browse'];
+const ACTIONS = ['Create', 'Stats', 'Browse', 'Nunya'];
 
 const ActionRouteMap = {
     Create: '/create-deck',
     Stats: '/stats',
     Browse: '/browse',
+    Nunya: '/nunya'
 };
 
 const Actions = () => {

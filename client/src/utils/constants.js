@@ -27,3 +27,15 @@ export const SIDES = {
 export const LOCAL_STORAGE_KEYS = {
     LOGGED_IN: 'userLoggedIn',
 };
+
+export const PAGES = {
+    ROOT: '/',
+    HOME: '/home',
+    BROWSE: '/browse',
+    DECK: '/deck',
+    CREATE_DECK: '/create-deck',
+    EDIT_DECK: '/edit-deck',
+    LOGOUT: '/logout',
+    STATS: '/stats',
+    STUDY: '/study',
+}
