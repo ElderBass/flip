@@ -5,7 +5,7 @@ import * as DeckActions from '../../../store/actions/decks';
 import ActionCard from '../ActionCard';
 import styles from './Actions.module.css';
 
-const ACTIONS = ['Create', 'Stats', 'Browse', 'Nunya'];
+const ACTIONS = ['Create', 'Stats', 'Browse'];
 
 const ActionRouteMap = {
     Create: '/create-deck',
