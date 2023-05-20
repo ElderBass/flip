@@ -79,4 +79,16 @@ router.delete("/api/decks/delete/:id", async (req, res) => {
   }
 });
 
+router.put("/api/decks/edit-deck", async (req, res) => {
+  const { deck } = req.body;
+  const { _id } = deck;
+  try {
+    const result = await Deck.findByIdAndUpdate(_id, deck, { new: true });
+    res.status(200).json({ deck: result });
+  } catch (e) {
+    console.log("\n error in trying to EDIT a deck = ", e, "\n\n");
+    res.status(400).send({ error: e });
+  }
+});
+
 module.exports = router;
