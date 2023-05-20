@@ -4,7 +4,6 @@
     background: var(--background-yellow);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -13,7 +12,6 @@
     width: 700px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background: var(--card-purple);
     color: var(--background-yellow);
@@ -22,4 +20,54 @@
     position: relative;
     z-index: 0;
     text-align: center;
+}
+
+.header {
+    width: 100%;
+    border-bottom: solid 2px var(--card-pink);
+    font-size: 40px;
+}
+
+h2 {
+    margin: 25px;
+}
+
+h4 {
+    margin: 15px 0;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.actions {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.button {
+    background: var(--card-purple);
+    border: none;
+    outline: none;
+    font-size: 30px;
+    font-family: var(--text-font);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.goBack {
+    color: var(--pencil-gray);
+}
+
+.home {
+    color: var(--card-green);
 }

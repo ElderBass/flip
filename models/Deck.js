@@ -26,6 +26,9 @@ const DeckSchema = new Schema({
     timestamp: {
         type: Date,
         required: true
+    },
+    isPrivate: {
+        type: Boolean
     }
 });
 
