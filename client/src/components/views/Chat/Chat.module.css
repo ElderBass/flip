@@ -1,0 +1,36 @@
+@import url('../../../index.css');
+
+.chatPage {
+    height: 100vh;
+    display: grid;
+    color: var(--card-blue);
+    background: var(--background-yellow);
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px auto;
+    grid-template-areas: 
+    "header"
+    "content";
+}
+
+.chatPageContent {
+    grid-area: content;
+    display: flex;
+    padding-bottom: 30px;
+    height: 100%;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chatBtn {
+    outline: none;
+    border: var(--card-pink);
+    height: 100px;
+    width: 200px;
+    padding: 20px;
+    background-color: var(--card-pink);
+    color: white;
+}

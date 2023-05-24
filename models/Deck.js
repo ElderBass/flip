@@ -9,11 +9,11 @@ const DeckSchema = new Schema({
     },
     cards: {
         type: Array,
-        required: true
+        required: true,
     },
     favorites: {
         type: Number,
-        default: 0
+        default: 0,
     },
     userId: {
         type: String,
@@ -25,11 +25,11 @@ const DeckSchema = new Schema({
     },
     timestamp: {
         type: Date,
-        required: true
+        required: true,
     },
     isPrivate: {
-        type: Boolean
-    }
+        type: Boolean,
+    },
 });
 
 const Deck = mongoose.model('Deck', DeckSchema);
