@@ -6,7 +6,6 @@ let socket = null;
 export const initSocket = () => {
     const options = {
         autoConnect: false,
-        path: PATH,
         reconnectionAttempts: 30,
         rememberUpgrade: true,
         multiplex: false,
@@ -14,12 +13,17 @@ export const initSocket = () => {
         transports: ['polling'],
     };
     return new Promise((resolve) => {
-        socket = io(PATH, options);
-        socket.once('connect', resolve);
-        console.log('\n CONNECTING TO SOCKET ?? \n\n');
+        socket = io(`http://localhost:8000${PATH}`, options);
+        const onConnect = () => {
+            console.log('\n are we actually calling this ? \n\n');
+            console.log('\n CONNECTING TO SOCKET ??', socket, '\n\n');
+            resolve();
+        };
+        socket.once('connect', onConnect);
 
         socket.open();
     });
+
 };
 
 export const sendMessage = () => {

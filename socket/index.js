@@ -1,4 +1,4 @@
-const io = require('socket.io');
+const { Server } = require('socket.io');
 
 const PATH = '/socket/connect';
 let ioServer = null;
@@ -10,6 +10,9 @@ const init = (server) => {
         pingInterval: 25000,
         upgradeTimeout: 20000,
         transports: ['polling'],
+        cors: {
+            origin: 'http://localhost:3000',
+        },
         handlePreflightRequest(req, res) {
             res.writeHead(200, {
                 'Access-Control-Allow-Origin': true,
@@ -20,9 +23,9 @@ const init = (server) => {
         },
     };
     
-    ioServer = io(server, options);
+    ioServer = new Server(server, options);
 
-    ioServer.on('connection', (socket) => {
+    ioServer.of(PATH).on('connection', (socket) => {
         console.log('\n POP, LOCK, AND SOCKET \n\n');
         
         socket.on('send_message', (msg) => {

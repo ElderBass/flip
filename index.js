@@ -37,11 +37,11 @@ mongoose
     .then(() => console.log('DB Connected'))
     .catch((err) => console.log('\n error connecting to MongoDB = ', err, '\n'));
 
-const server = http.createServer(app);
+const server = http.createServer(app).listen(PORT);
+init(server);
 
-app.listen(PORT, function () {
-    init(server);
-    console.log(
-        `🌎  ==> API Server now listening on PORT http://localhost:${PORT} !`
-    );
-});
+// server.listen(PORT, function () {
+//     console.log(
+//         `🌎  ==> API Server now listening on PORT http://localhost:${PORT} !`
+//     );
+// });

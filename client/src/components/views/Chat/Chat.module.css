@@ -20,17 +20,27 @@
 }
 
 .chat {
+    flex: 1 0 70%;
+    max-height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .chatBtn {
     outline: none;
     border: var(--card-pink);
-    height: 100px;
-    width: 200px;
+    border-radius: 5px;
+    height: 150px;
+    width: 300px;
     padding: 20px;
     background-color: var(--card-pink);
     color: white;
+    font-size: 40px;
+    font-family: var(--text-font);
+}
+.chatBtn:hover {
+    cursor: pointer;
+    background-color: var(--card-purple);
 }
