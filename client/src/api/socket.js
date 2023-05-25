@@ -6,6 +6,7 @@ let socket = null;
 export const initSocket = () => {
     const options = {
         autoConnect: false,
+        path: PATH,
         reconnectionAttempts: 30,
         rememberUpgrade: true,
         multiplex: false,
@@ -15,8 +16,7 @@ export const initSocket = () => {
     return new Promise((resolve) => {
         socket = io(`http://localhost:8000${PATH}`, options);
         const onConnect = () => {
-            console.log('\n are we actually calling this ? \n\n');
-            console.log('\n CONNECTING TO SOCKET ??', socket, '\n\n');
+            console.log('\n connected to socket', socket, '\n\n');
             resolve();
         };
         socket.once('connect', onConnect);
@@ -26,10 +26,24 @@ export const initSocket = () => {
 
 };
 
-export const sendMessage = () => {
-    socket.emit('send_message', 'WE OUTTA HERE, BABY');
+export const sendMessage = (msg) => {
+    socket.emit('send_message', msg);
 };
 
+export const createRoom = async (roomId) => {
+    if (!socket) {
+        await initSocket();
+    }
+    socket.emit('create_room', roomId);
+};
+
+export const joinRoom = (roomId) => {
+    socket.emit('join_room', roomId);
+};
+
+export const resetServer = () => {
+    socket.emit('reset');
+};
 
 // function registerEventHandlers() {
 //     const handlers = { ...switchboardEventHandlers, ...socketIoEventHandlers };

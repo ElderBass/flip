@@ -22,19 +22,41 @@ const init = (server) => {
             res.end();
         },
     };
-    
+
     ioServer = new Server(server, options);
 
     ioServer.of(PATH).on('connection', (socket) => {
-        console.log('\n POP, LOCK, AND SOCKET \n\n');
-        
+        console.log('\n we in here ', socket.id, '\n');
+
         socket.on('send_message', (msg) => {
-            console.log('\n socket sending message: ', message, '\n\n');
+            console.log('\n socket sending message: ', msg, '\n');
             ioServer.emit('send_message', msg);
+        });
+
+        socket.on('create_room', (roomId) => {
+           console.log('\n new room created: ', roomId, '\n');
+           console.log('\n current rooms: ', socket.rooms, '\n');
+           ioServer.emit('show_rooms', socket.rooms);
+        });
+
+        socket.on('join_room', (roomId) => {
+            console.log('\n emitting socket event: join_room', roomId, '\n');
+            console.log('\n current rooms: ', socket.rooms, '\n');
+            socket.join(roomId);
+        });
+
+        socket.on('get_rooms', () => {
+            const rooms = socket?.rooms || {};
+            return rooms;
+        });
+
+        socket.on('reset', () => {
+            ioServer.disconnectSockets();
+            ioServer.close();
         });
     });
 };
 
 module.exports = {
-    init
+    init,
 };
