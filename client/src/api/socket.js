@@ -1,9 +1,13 @@
 import { io } from 'socket.io-client';
+import store from '../store';
+import * as ChatActions from '../store/actions/chat';
 
 const PATH = '/socket/connect';
 let socket = null;
 
 export const initSocket = () => {
+    if (socket) return;
+
     const options = {
         autoConnect: false,
         path: PATH,
@@ -15,33 +19,48 @@ export const initSocket = () => {
     };
     return new Promise((resolve) => {
         socket = io(`http://localhost:8000${PATH}`, options);
-        const onConnect = () => {
-            console.log('\n connected to socket', socket, '\n\n');
-            resolve();
-        };
-        socket.once('connect', onConnect);
+
+        socket.once('connect', resolve);
+
+        socket.on('returning_rooms', (rooms) => {
+            store.dispatch(ChatActions.setRooms(rooms));
+        });
+        socket.on('receive_message', (message) => {
+            store.dispatch(ChatActions.addMessage(message));
+        });
 
         socket.open();
     });
-
 };
 
-export const sendMessage = (msg) => {
-    socket.emit('send_message', msg);
+export const sendMessage = (message) => {
+    socket.emit('send_message', message);
 };
 
-export const createRoom = async (roomId) => {
+export const createRoom = async (room) => {
     if (!socket) {
         await initSocket();
     }
-    socket.emit('create_room', roomId);
+    socket.emit('create_room', room);
+    store.dispatch(ChatActions.setOpenRoom(room));
 };
 
-export const joinRoom = (roomId) => {
-    socket.emit('join_room', roomId);
+export const joinRoom = (room) => {
+    socket.emit('join_room', room.id);
+    store.dispatch(ChatActions.setOpenRoom(room));
 };
+
+export const getRooms = async () => {
+    if (!socket) {
+        await initSocket();
+    }
+    socket.emit('get_rooms');
+}
 
 export const resetServer = () => {
+    store.dispatch(ChatActions.setMessages([]));
+    store.dispatch(ChatActions.setOpenRoom({}));
+    store.dispatch(ChatActions.setRooms([]));
     socket.emit('reset');
 };
 
