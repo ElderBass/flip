@@ -1,0 +1,14 @@
+.roomListItem {
+    color: var(--background-yellow);
+    background: var(--card-purple);
+    font-size: 20px;
+    font-family: var(--text-font);
+    border: solid 2px var(--card-purple);
+    padding: 15px 20px;
+    box-shadow: 2px 2px 4px var(--pencil-gray);
+}
+
+.roomListItem:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 4px var(--card-green);
+}

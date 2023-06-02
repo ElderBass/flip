@@ -13,6 +13,7 @@ import UserPage from './components/views/UserPage';
 import FourOhFourPage from './components/views/FourOhFourPage';
 import Stats from './components/views/Stats';
 import styles from './App.module.css';
+import Chat from './components/views/Chat';
 
 function App() {
     const ComponentMap = {
@@ -51,6 +52,7 @@ function App() {
                     <AuthRoute exact path="/deck" component={Deck} />
                     <AuthRoute exact path="/stats" component={Stats} />
                     <AuthRoute exact path="/browse" component={Browse} />
+                    <AuthRoute exact path="/chat" component={Chat} />
                     <AuthRoute exact path="/logout" component={Logout} />
                     <Route component={ComponentMap[CatchAllPage]} />
                 </Switch>

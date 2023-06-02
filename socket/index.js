@@ -1,0 +1,71 @@
+const { Server } = require('socket.io');
+
+const PATH = '/socket/connect';
+let ioServer = null;
+
+let rooms = [];
+
+const init = (server) => {
+    const options = {
+        path: PATH,
+        pingTimeout: 20000,
+        pingInterval: 25000,
+        upgradeTimeout: 20000,
+        transports: ['polling'],
+        cors: {
+            origin: 'http://localhost:3000',
+        },
+        handlePreflightRequest(req, res) {
+            res.writeHead(200, {
+                'Access-Control-Allow-Origin': true,
+                'Access-Control-Allow-Methods': 'POST, GET',
+                'Access-Control-Allow-Credentials': true,
+            });
+            res.end();
+        },
+    };
+
+    ioServer = new Server(server, options);
+
+    ioServer.of(PATH).on('connection', (socket) => {
+        console.log('\n we in here ', socket.id, '\n');
+
+        socket.on('send_message', (msg) => {
+            console.log('\n socket sending message: ', msg, '\n');
+            ioServer.of(PATH).emit('receive_message', msg);
+        });
+
+        socket.on('create_room', (room) => {
+            const { id } = room;
+            console.log('\n new room created: ', id, '\n');
+            rooms.push(room);
+            console.log('\n current rooms: ', rooms, '\n');
+            socket.join(id);
+            ioServer.of(PATH).emit('returning_rooms', rooms);
+        });
+
+        socket.on('destroy_room', (roomId) => {
+            console.log('\n destroying room: ', id, '\n');
+            rooms = rooms.filter(room => room.id !== roomId);
+        });
+
+        socket.on('join_room', (roomId) => {
+            console.log('\n emitting socket event: join_room', roomId, '\n');
+            console.log('\n current rooms: ', rooms, '\n');
+            socket.join(roomId);
+        });
+
+        socket.on('get_rooms', () => {
+            console.log('\n emitting socket event "get_rooms"', rooms, '\n');
+            ioServer.of(PATH).emit('returning_rooms', rooms);
+        });
+
+        socket.on('reset', () => {
+            rooms = [];
+        });
+    });
+};
+
+module.exports = {
+    init,
+};

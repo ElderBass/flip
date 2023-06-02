@@ -5,30 +5,28 @@ import * as DeckActions from '../../../store/actions/decks';
 import ActionCard from '../ActionCard';
 import styles from './Actions.module.css';
 
-const ACTIONS = ['Create', 'Stats', 'Browse'];
-
 const ActionRouteMap = {
     Create: '/create-deck',
     Stats: '/stats',
     Browse: '/browse',
+    Chat: '/chat',
 };
 
 const Actions = () => {
     const history = useHistory();
 
-    const onActionClick = (action) => {
-        const page = ActionRouteMap[action];
-        if (action === 'Create') {
+    const onActionClick = (route) => {
+        if (route === ActionRouteMap.Create) {
             store.dispatch(DeckActions.setSelectedDeck({}));
             store.dispatch(DeckActions.setAddedCards([]));
         }
-        history.push(page);
+        history.push(route);
     };
 
     return (
         <div className={styles.actions}>
-            {ACTIONS.map((action) => (
-                <ActionCard key={action} title={action} onClick={() => onActionClick(action)} />
+            {Object.entries(ActionRouteMap).map(([key, value]) => (
+                <ActionCard key={key} title={key} onClick={() => onActionClick(value)} />
             ))}
         </div>
     );
