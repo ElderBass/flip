@@ -39,9 +39,3 @@ mongoose
 
 const server = http.createServer(app).listen(PORT);
 init(server);
-
-// server.listen(PORT, function () {
-//     console.log(
-//         `🌎  ==> API Server now listening on PORT http://localhost:${PORT} !`
-//     );
-// });

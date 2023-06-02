@@ -51,7 +51,7 @@ const init = (server) => {
 
         socket.on('join_room', (roomId) => {
             console.log('\n emitting socket event: join_room', roomId, '\n');
-            console.log('\n current rooms: ', socket.rooms, '\n');
+            console.log('\n current rooms: ', rooms, '\n');
             socket.join(roomId);
         });
 

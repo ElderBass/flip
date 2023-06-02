@@ -32,7 +32,7 @@ const Chat = () => {
     }, []);
 
     useEffect(() => {
-        setCurrentMessages(messages);
+        setCurrentMessages((prevState) => [...prevState, ...messages]);
     }, [messages]);
 
     const onCreateRoomClick = async () => {

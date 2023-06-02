@@ -49,7 +49,7 @@ export const joinRoom = (room) => {
     socket.emit('join_room', room.id);
     store.dispatch(ChatActions.setOpenRoom(room));
 };
-
+// TODO: Should not need - have BE socket emit all rooms once user connects to it
 export const getRooms = async () => {
     if (!socket) {
         await initSocket();
