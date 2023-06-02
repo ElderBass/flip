@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './ChatContainer.module.css';
 
-const ChatContainer = ({ messages, room }) => {
+const ChatContainer = ({ messages, room, submitMessage }) => {
     const { id, host } = room;
 
     const [conversation, setConversation] = useState([]);
+    const [message, setMessage] = useState('');
+
+    const onChange = (e) => setMessage(e.target.value);
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (!message) return;
+        submitMessage(message);
+        setMessage('');
+    };
 
     useEffect(() => {
         const roomMessages = messages.filter((msg) => msg.roomId === id);
@@ -28,6 +40,21 @@ const ChatContainer = ({ messages, room }) => {
                         );
                     })}
             </ul>
+            <form className={styles.messageForm} onSubmit={(e) => onSubmit(e)}>
+                <div className={styles.actions}>
+                    <input
+                        className={styles.messageInput}
+                        onChange={onChange}
+                        id="message"
+                        value={message}
+                        placeholder="Type message here"
+                        disabled={!room.id}
+                    />
+                    <button disabled={!room.id} className={styles.sendMsgBtn} type="submit">
+                        <FontAwesomeIcon icon={faPaperPlane} size="2x" />
+                    </button>
+                </div>
+            </form>
         </div>
     );
 };

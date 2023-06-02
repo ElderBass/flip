@@ -6,8 +6,8 @@ import {
     sendMessage,
     createRoom,
     resetServer,
-    getRooms,
     joinRoom,
+    disconnectSocket,
 } from '../../../api/socket';
 import Header from '../../common/Header/Header';
 import ChatContainer from '../../common/ChatContainer';
@@ -20,20 +20,30 @@ const Chat = () => {
         chat: { rooms, messages, openRoom = {} },
     } = store.getState();
 
-    const [message, setMessage] = useState('');
     const [currentRoom, setCurrentRoom] = useState(openRoom);
-    const [currentMessages, setCurrentMessages] = useState(messages);
+    const [allRooms, setAllRooms] = useState([]);
+    const [currentMessages, setCurrentMessages] = useState([]);
 
     useEffect(() => {
-        const getAvailableRooms = async () => {
-            await getRooms();
+        const connectToSocket = async () => {
+            await initSocket();
         };
-        getAvailableRooms();
+        connectToSocket();
+
+        return () => disconnectSocket();
     }, []);
 
     useEffect(() => {
         setCurrentMessages((prevState) => [...prevState, ...messages]);
+
+        return () => setCurrentMessages([]);
     }, [messages]);
+
+    useEffect(() => {
+        setAllRooms((prevState) => [...prevState, ...rooms]);
+
+        return () => setAllRooms([]);
+    }, [rooms]);
 
     const onCreateRoomClick = async () => {
         await initSocket();
@@ -42,12 +52,14 @@ const Chat = () => {
         const newRoom = {
             id: roomId,
             host: username,
+            members: [],
         };
         await createRoom(newRoom);
         setCurrentRoom(newRoom);
+        setAllRooms((prevState) => [...prevState, newRoom]);
     };
 
-    const onSendMessage = () => {
+    const onSendMessage = (message) => {
         const messageObject = {
             text: message,
             id: `message-${uuidv4()}`,
@@ -59,9 +71,12 @@ const Chat = () => {
     };
 
     const onRoomItemClick = (room) => {
+        room.members.push(username);
         joinRoom(room);
         setCurrentRoom(room);
     };
+
+    const disableRoomClick = !!(currentRoom.host === username || currentRoom?.members?.includes(username));
 
     return (
         <div className={styles.chatPage}>
@@ -72,23 +87,15 @@ const Chat = () => {
                         Create Chat Room
                     </button>
                     <div className={styles.rooms}>
-                        <input
-                            onChange={(e) => setMessage(e.target.value)}
-                            id="message"
-                            value={message}
-                            placeholder="Type message here"
-                        />
-                        <button className={styles.chatBtn} type="button" onClick={onSendMessage}>
-                            Send Message
-                        </button>
                         <h2>Rooms:</h2>
                         <ul className={styles.roomsList}>
-                            {rooms.length ? (
-                                rooms.map((room) => (
+                            {allRooms.length ? (
+                                allRooms.map((room) => (
                                     <RoomListItem
                                         key={room.id}
                                         room={room}
                                         onClick={onRoomItemClick}
+                                        disabled={disableRoomClick}
                                     />
                                 ))
                             ) : (
@@ -104,12 +111,13 @@ const Chat = () => {
                         >
                             Reset
                         </button>
-                        <button type="button" className={styles.chatBtn} onClick={() => getRooms()}>
-                            Get Rooms
-                        </button>
                     </div>
                 </div>
-                <ChatContainer messages={currentMessages} room={currentRoom} />
+                <ChatContainer
+                    messages={currentMessages}
+                    room={currentRoom}
+                    submitMessage={onSendMessage}
+                />
             </div>
         </div>
     );

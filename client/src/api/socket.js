@@ -23,6 +23,7 @@ export const initSocket = () => {
         socket.once('connect', resolve);
 
         socket.on('returning_rooms', (rooms) => {
+            console.log('\n are we returning rooms? ', rooms, '\n\n');
             store.dispatch(ChatActions.setRooms(rooms));
         });
         socket.on('receive_message', (message) => {
@@ -46,16 +47,11 @@ export const createRoom = async (room) => {
 };
 
 export const joinRoom = (room) => {
-    socket.emit('join_room', room.id);
+    socket.emit('join_room', { roomId: room, socketId: socket.id });
     store.dispatch(ChatActions.setOpenRoom(room));
 };
-// TODO: Should not need - have BE socket emit all rooms once user connects to it
-export const getRooms = async () => {
-    if (!socket) {
-        await initSocket();
-    }
-    socket.emit('get_rooms');
-}
+
+export const disconnectSocket = () => socket.disconnect();
 
 export const resetServer = () => {
     store.dispatch(ChatActions.setMessages([]));
