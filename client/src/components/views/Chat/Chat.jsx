@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import store from '../../../store';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import {
     initSocket,
     sendMessage,
     createRoom,
     resetServer,
-    getRooms,
     joinRoom,
+    disconnectSocket,
 } from '../../../api/socket';
 import Header from '../../common/Header/Header';
 import ChatContainer from '../../common/ChatContainer';
@@ -15,25 +15,21 @@ import styles from './Chat.module.css';
 import RoomListItem from '../../common/RoomListItem/RoomListItem';
 
 const Chat = () => {
-    const {
-        user: { username },
-        chat: { rooms, messages, openRoom = {} },
-    } = store.getState();
-
-    const [message, setMessage] = useState('');
-    const [currentRoom, setCurrentRoom] = useState(openRoom);
-    const [currentMessages, setCurrentMessages] = useState(messages);
+    const { username, rooms, messages, openRoom } = useSelector(({ user, chat }) => ({
+        username: user.username,
+        rooms: chat.rooms,
+        messages: chat.messages,
+        openRoom: chat.openRoom,
+    }));
 
     useEffect(() => {
-        const getAvailableRooms = async () => {
-            await getRooms();
+        const connectToSocket = async () => {
+            await initSocket();
         };
-        getAvailableRooms();
-    }, []);
+        connectToSocket();
 
-    useEffect(() => {
-        setCurrentMessages((prevState) => [...prevState, ...messages]);
-    }, [messages]);
+        return () => disconnectSocket();
+    }, []);
 
     const onCreateRoomClick = async () => {
         await initSocket();
@@ -42,26 +38,32 @@ const Chat = () => {
         const newRoom = {
             id: roomId,
             host: username,
+            members: [],
         };
         await createRoom(newRoom);
-        setCurrentRoom(newRoom);
     };
 
-    const onSendMessage = () => {
+    const onSendMessage = (message) => {
         const messageObject = {
             text: message,
             id: `message-${uuidv4()}`,
-            roomId: currentRoom.id,
+            roomId: openRoom.id,
             sender: username,
         };
         sendMessage(messageObject);
-        setCurrentMessages((prevState) => [...prevState, messageObject]);
     };
 
     const onRoomItemClick = (room) => {
-        joinRoom(room);
-        setCurrentRoom(room);
+        const updatedRoom = {
+            ...room,
+            members: [...room.members, username],
+        };
+        joinRoom(updatedRoom);
     };
+
+    const disableRoomClick = !!(
+        openRoom.host === username || openRoom?.members?.includes(username)
+    );
 
     return (
         <div className={styles.chatPage}>
@@ -72,15 +74,6 @@ const Chat = () => {
                         Create Chat Room
                     </button>
                     <div className={styles.rooms}>
-                        <input
-                            onChange={(e) => setMessage(e.target.value)}
-                            id="message"
-                            value={message}
-                            placeholder="Type message here"
-                        />
-                        <button className={styles.chatBtn} type="button" onClick={onSendMessage}>
-                            Send Message
-                        </button>
                         <h2>Rooms:</h2>
                         <ul className={styles.roomsList}>
                             {rooms.length ? (
@@ -89,6 +82,7 @@ const Chat = () => {
                                         key={room.id}
                                         room={room}
                                         onClick={onRoomItemClick}
+                                        disabled={disableRoomClick}
                                     />
                                 ))
                             ) : (
@@ -104,12 +98,13 @@ const Chat = () => {
                         >
                             Reset
                         </button>
-                        <button type="button" className={styles.chatBtn} onClick={() => getRooms()}>
-                            Get Rooms
-                        </button>
                     </div>
                 </div>
-                <ChatContainer messages={currentMessages} room={currentRoom} />
+                <ChatContainer
+                    messages={messages}
+                    room={openRoom}
+                    submitMessage={onSendMessage}
+                />
             </div>
         </div>
     );

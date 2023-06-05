@@ -28,11 +28,11 @@ const init = (server) => {
     ioServer = new Server(server, options);
 
     ioServer.of(PATH).on('connection', (socket) => {
-        console.log('\n we in here ', socket.id, '\n');
+        ioServer.of(PATH).emit('returning_rooms', rooms);
 
         socket.on('send_message', (msg) => {
-            console.log('\n socket sending message: ', msg, '\n');
-            ioServer.of(PATH).emit('receive_message', msg);
+            console.log('\n emitting socket event send_message: ', msg, '\n');
+            ioServer.of(PATH).to(msg.roomId).emit('receive_message', msg);
         });
 
         socket.on('create_room', (room) => {
@@ -46,21 +46,17 @@ const init = (server) => {
 
         socket.on('destroy_room', (roomId) => {
             console.log('\n destroying room: ', id, '\n');
-            rooms = rooms.filter(room => room.id !== roomId);
+            rooms = rooms.filter((room) => room.id !== roomId);
         });
 
-        socket.on('join_room', (roomId) => {
+        socket.on('join_room', ({ roomId }) => {
             console.log('\n emitting socket event: join_room', roomId, '\n');
             console.log('\n current rooms: ', rooms, '\n');
             socket.join(roomId);
         });
 
-        socket.on('get_rooms', () => {
-            console.log('\n emitting socket event "get_rooms"', rooms, '\n');
-            ioServer.of(PATH).emit('returning_rooms', rooms);
-        });
-
         socket.on('reset', () => {
+            console.log('\n resetting rooms \n');
             rooms = [];
         });
     });

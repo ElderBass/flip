@@ -21,6 +21,8 @@ const chat = (state = INITIAL_STATE, { type, payload }) => {
             return { ...state, messages: payload };
         case ChatActions.ADD_MESSAGE:
             return { ...state, messages: [...state.messages, payload] };
+        case ChatActions.RESET:
+            return INITIAL_STATE;
         default:
             return state;
     }

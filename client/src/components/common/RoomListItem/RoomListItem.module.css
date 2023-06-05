@@ -12,3 +12,8 @@
     cursor: pointer;
     box-shadow: 2px 2px 4px var(--card-green);
 }
+
+.roomListItem:disabled {
+    cursor: default;
+    box-shadow: 2px 2px 4px var(--pencil-gray);
+}

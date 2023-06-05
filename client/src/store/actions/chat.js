@@ -35,6 +35,9 @@ const addMessage = (message) => ({
 });
 
 const RESET = 'RESET';
+const reset = () => ({
+    type: RESET
+});
 
 export {
     SET_ROOMS,
@@ -50,4 +53,5 @@ export {
     ADD_MESSAGE,
     addMessage,
     RESET,
+    reset
 };
