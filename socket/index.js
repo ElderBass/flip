@@ -55,6 +55,11 @@ const init = (server) => {
             socket.join(roomId);
         });
 
+        socket.on('reconnect', (roomId) => {
+            console.log('\n emitting socket event: reconnect', roomId, '\n');
+            socket.join(roomId);
+        });
+
         socket.on('reset', () => {
             console.log('\n resetting rooms \n');
             rooms = [];
