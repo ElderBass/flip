@@ -7,7 +7,7 @@ import {
     createRoom,
     resetServer,
     joinRoom,
-    disconnectSocket,
+    reconnect,
 } from '../../../api/socket';
 import Header from '../../common/Header/Header';
 import ChatContainer from '../../common/ChatContainer';
@@ -24,23 +24,24 @@ const Chat = () => {
 
     useEffect(() => {
         const connectToSocket = async () => {
-            await initSocket();
+            if (openRoom && openRoom.id) {
+                await reconnect(openRoom.id);
+            } else {
+                await initSocket();
+            }
         };
         connectToSocket();
-
-        return () => disconnectSocket();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onCreateRoomClick = async () => {
-        await initSocket();
-
+    const onCreateRoomClick = () => {
         const roomId = uuidv4();
         const newRoom = {
             id: roomId,
             host: username,
             members: [],
         };
-        await createRoom(newRoom);
+        createRoom(newRoom);
     };
 
     const onSendMessage = (message) => {
@@ -100,11 +101,7 @@ const Chat = () => {
                         </button>
                     </div>
                 </div>
-                <ChatContainer
-                    messages={messages}
-                    room={openRoom}
-                    submitMessage={onSendMessage}
-                />
+                <ChatContainer messages={messages} room={openRoom} submitMessage={onSendMessage} />
             </div>
         </div>
     );

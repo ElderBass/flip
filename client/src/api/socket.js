@@ -59,6 +59,11 @@ export const resetServer = () => {
     socket.emit('reset');
 };
 
+export const reconnect = async (roomId) => {
+    await initSocket();
+    socket.emit('reconnect', roomId);
+};
+
 // function registerEventHandlers() {
 //     const handlers = { ...switchboardEventHandlers, ...socketIoEventHandlers };
 //     for (const [event, handler] of Object.entries(handlers)) {
