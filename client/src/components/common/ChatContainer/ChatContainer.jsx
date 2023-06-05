@@ -18,6 +18,13 @@ const ChatContainer = ({ messages, room, submitMessage }) => {
         setMessage('');
     };
 
+    const onKeyDown = (e) => {
+        const isEnterKey = e.code === 'Enter' || e.keyCode === 13;
+        if (isEnterKey && e.shiftKey === false) {
+            onSubmit(e);
+        }
+    };
+
     useEffect(() => {
         const roomMessages = messages.filter((msg) => msg.roomId === id);
         setConversation(roomMessages);
@@ -40,7 +47,7 @@ const ChatContainer = ({ messages, room, submitMessage }) => {
                         );
                     })}
             </ul>
-            <form className={styles.messageForm} onSubmit={(e) => onSubmit(e)}>
+            <form className={styles.messageForm} onSubmit={onSubmit}>
                 <div className={styles.actions}>
                     <input
                         className={styles.messageInput}
@@ -49,6 +56,7 @@ const ChatContainer = ({ messages, room, submitMessage }) => {
                         value={message}
                         placeholder="Type message here"
                         disabled={!room.id}
+                        onKeyDown={onKeyDown}
                     />
                     <button disabled={!room.id} className={styles.sendMsgBtn} type="submit">
                         <FontAwesomeIcon icon={faPaperPlane} size="2x" />
