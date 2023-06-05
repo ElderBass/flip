@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import store from '../../../store';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import {
     initSocket,
@@ -15,14 +15,12 @@ import styles from './Chat.module.css';
 import RoomListItem from '../../common/RoomListItem/RoomListItem';
 
 const Chat = () => {
-    const {
-        user: { username },
-        chat: { rooms, messages, openRoom = {} },
-    } = store.getState();
-
-    const [currentRoom, setCurrentRoom] = useState(openRoom);
-    const [allRooms, setAllRooms] = useState([]);
-    const [currentMessages, setCurrentMessages] = useState([]);
+    const { username, rooms, messages, openRoom } = useSelector(({ user, chat }) => ({
+        username: user.username,
+        rooms: chat.rooms,
+        messages: chat.messages,
+        openRoom: chat.openRoom,
+    }));
 
     useEffect(() => {
         const connectToSocket = async () => {
@@ -32,18 +30,6 @@ const Chat = () => {
 
         return () => disconnectSocket();
     }, []);
-
-    useEffect(() => {
-        setCurrentMessages((prevState) => [...prevState, ...messages]);
-
-        return () => setCurrentMessages([]);
-    }, [messages]);
-
-    useEffect(() => {
-        setAllRooms((prevState) => [...prevState, ...rooms]);
-
-        return () => setAllRooms([]);
-    }, [rooms]);
 
     const onCreateRoomClick = async () => {
         await initSocket();
@@ -55,28 +41,29 @@ const Chat = () => {
             members: [],
         };
         await createRoom(newRoom);
-        setCurrentRoom(newRoom);
-        setAllRooms((prevState) => [...prevState, newRoom]);
     };
 
     const onSendMessage = (message) => {
         const messageObject = {
             text: message,
             id: `message-${uuidv4()}`,
-            roomId: currentRoom.id,
+            roomId: openRoom.id,
             sender: username,
         };
         sendMessage(messageObject);
-        setCurrentMessages((prevState) => [...prevState, messageObject]);
     };
 
     const onRoomItemClick = (room) => {
-        room.members.push(username);
-        joinRoom(room);
-        setCurrentRoom(room);
+        const updatedRoom = {
+            ...room,
+            members: [...room.members, username],
+        };
+        joinRoom(updatedRoom);
     };
 
-    const disableRoomClick = !!(currentRoom.host === username || currentRoom?.members?.includes(username));
+    const disableRoomClick = !!(
+        openRoom.host === username || openRoom?.members?.includes(username)
+    );
 
     return (
         <div className={styles.chatPage}>
@@ -89,8 +76,8 @@ const Chat = () => {
                     <div className={styles.rooms}>
                         <h2>Rooms:</h2>
                         <ul className={styles.roomsList}>
-                            {allRooms.length ? (
-                                allRooms.map((room) => (
+                            {rooms.length ? (
+                                rooms.map((room) => (
                                     <RoomListItem
                                         key={room.id}
                                         room={room}
@@ -114,8 +101,8 @@ const Chat = () => {
                     </div>
                 </div>
                 <ChatContainer
-                    messages={currentMessages}
-                    room={currentRoom}
+                    messages={messages}
+                    room={openRoom}
                     submitMessage={onSendMessage}
                 />
             </div>

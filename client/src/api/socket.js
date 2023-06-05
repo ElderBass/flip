@@ -23,7 +23,6 @@ export const initSocket = () => {
         socket.once('connect', resolve);
 
         socket.on('returning_rooms', (rooms) => {
-            console.log('\n are we returning rooms? ', rooms, '\n\n');
             store.dispatch(ChatActions.setRooms(rooms));
         });
         socket.on('receive_message', (message) => {
@@ -42,13 +41,13 @@ export const createRoom = async (room) => {
     if (!socket) {
         await initSocket();
     }
-    socket.emit('create_room', room);
     store.dispatch(ChatActions.setOpenRoom(room));
+    socket.emit('create_room', room);
 };
 
 export const joinRoom = (room) => {
-    socket.emit('join_room', { roomId: room, socketId: socket.id });
     store.dispatch(ChatActions.setOpenRoom(room));
+    socket.emit('join_room', { roomId: room.id, socketId: socket.id });
 };
 
 export const disconnectSocket = () => socket.disconnect();

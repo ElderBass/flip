@@ -15,7 +15,7 @@ const RoomListItem = ({ room, onClick, disabled }) => {
                 type="button"
                 disabled={disabled}
             >
-                {displayText}
+                {disabled ? defaultText : displayText}
             </button>
         </li>
     );
