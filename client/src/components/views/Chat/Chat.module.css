@@ -15,7 +15,6 @@
 .chatPageContent {
     grid-area: content;
     display: flex;
-    padding-bottom: 30px;
     height: 100%;
 }
 

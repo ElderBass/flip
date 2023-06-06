@@ -1,8 +1,8 @@
 @import url('./index.css');
 
 .mainContainer {
-  height: 100%;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   display: grid;
   background: var(--background-yellow);
   color: var(--card-blue);
