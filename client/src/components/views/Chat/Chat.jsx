@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 import {
     initSocket,
-    sendMessage,
     createRoom,
     resetServer,
     joinRoom,
@@ -34,34 +32,6 @@ const Chat = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const onCreateRoomClick = () => {
-        const roomId = uuidv4();
-        const newRoom = {
-            id: roomId,
-            host: username,
-            members: [],
-        };
-        createRoom(newRoom);
-    };
-
-    const onSendMessage = (message) => {
-        const messageObject = {
-            text: message,
-            id: `message-${uuidv4()}`,
-            roomId: openRoom.id,
-            sender: username,
-        };
-        sendMessage(messageObject);
-    };
-
-    const onRoomItemClick = (room) => {
-        const updatedRoom = {
-            ...room,
-            members: [...room.members, username],
-        };
-        joinRoom(updatedRoom);
-    };
-
     const disableRoomClick = !!(
         openRoom.host === username || openRoom?.members?.includes(username)
     );
@@ -71,7 +41,7 @@ const Chat = () => {
             <Header />
             <div className={styles.chatPageContent}>
                 <div className={styles.chat}>
-                    <button type="button" className={styles.chatBtn} onClick={onCreateRoomClick}>
+                    <button type="button" className={styles.chatBtn} onClick={createRoom}>
                         Create Chat Room
                     </button>
                     <div className={styles.rooms}>
@@ -82,7 +52,7 @@ const Chat = () => {
                                     <RoomListItem
                                         key={room.id}
                                         room={room}
-                                        onClick={onRoomItemClick}
+                                        onClick={() => joinRoom(room)}
                                         disabled={disableRoomClick}
                                     />
                                 ))
@@ -101,7 +71,7 @@ const Chat = () => {
                         </button>
                     </div>
                 </div>
-                <ChatContainer messages={messages} room={openRoom} submitMessage={onSendMessage} />
+                <ChatContainer messages={messages} room={openRoom} />
             </div>
         </div>
     );
