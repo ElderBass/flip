@@ -79,6 +79,11 @@ export const joinRoom = (room) => {
     socket.emit('join_room', { roomId: room.id, socketId: socket.id });
 };
 
+export const reconnect = async (roomId) => {
+    await initSocket();
+    socket.emit('reconnect', roomId);
+};
+
 export const disconnectSocket = () => socket.disconnect();
 
 export const resetServer = () => {
@@ -87,15 +92,3 @@ export const resetServer = () => {
     store.dispatch(ChatActions.setRooms([]));
     socket.emit('reset');
 };
-
-export const reconnect = async (roomId) => {
-    await initSocket();
-    socket.emit('reconnect', roomId);
-};
-
-// function registerEventHandlers() {
-//     const handlers = { ...switchboardEventHandlers, ...socketIoEventHandlers };
-//     for (const [event, handler] of Object.entries(handlers)) {
-//         socket.on(event, eventHandlerMiddleware(handler));
-//     }
-// }

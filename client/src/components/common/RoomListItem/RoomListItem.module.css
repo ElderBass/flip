@@ -1,19 +1,26 @@
 .roomListItem {
-    color: var(--background-yellow);
-    background: var(--card-purple);
-    font-size: 20px;
+    max-height: 28px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--card-purple);
+    background: var(--background-yellow);
+    font-size: 16px;
     font-family: var(--text-font);
-    border: solid 2px var(--card-purple);
-    padding: 15px 20px;
-    box-shadow: 2px 2px 4px var(--pencil-gray);
+    border: none;
+    outline: none;
+    border-bottom: solid 2px var(--card-purple);
+    padding: 16px 12px;;
 }
 
 .roomListItem:hover {
     cursor: pointer;
-    box-shadow: 2px 2px 4px var(--card-green);
+   background-color: var(--create-card-green);
 }
 
 .roomListItem:disabled {
     cursor: default;
-    box-shadow: 2px 2px 4px var(--pencil-gray);
+    color: var(--background-yellow);
+    background-color: rgba(92, 98, 116, .4);
 }

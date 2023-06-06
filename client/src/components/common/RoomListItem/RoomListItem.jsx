@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import store from '../../../store';
+import { hasJoinedRoom } from '../../../utils/helpers/hasJoinedRoom';
 import styles from './RoomListItem.module.css';
 
-const RoomListItem = ({ room, onClick, disabled }) => {
-    const defaultText = `Host: ${room.host}`;
-    const [displayText, setDisplayText] = useState(defaultText);
+const RoomListItem = ({ room, onClick }) => {
+    const {
+        user: { username },
+    } = store.getState();
+    const userHasJoinedRoom = hasJoinedRoom(room, username);
+
+    const hostText = `Host: ${room.host}`;
+    const joinText = userHasJoinedRoom ? 'Joined' : 'Click to Join';
 
     return (
-        <li>
-            <button
-                onMouseEnter={() => setDisplayText('Click to Join')}
-                onMouseLeave={() => setDisplayText(defaultText)}
-                onClick={() => onClick(room)}
-                className={styles.roomListItem}
-                type="button"
-                disabled={disabled}
-            >
-                {disabled ? defaultText : displayText}
-            </button>
-        </li>
+        <button
+            onClick={() => onClick(room)}
+            className={styles.roomListItem}
+            type="button"
+            disabled={userHasJoinedRoom}
+        >
+            <p>{hostText}</p>
+            <p>{joinText}</p>
+        </button>
     );
 };
 

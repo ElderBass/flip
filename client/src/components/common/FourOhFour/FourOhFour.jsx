@@ -12,11 +12,11 @@ const FourOhFour = () => {
         <div className={styles.fourOhFourContainer}>
             <div className={styles.fourOhFourStuff}>
                 <div className={styles.header}>
-                    <h2>What the Flip?!</h2>
+                    <h2 className={styles.headerText}>What the Flip?!</h2>
                 </div>
                 <div className={styles.content}>
-                    <h4>Looks like you stumbled into no man's land. Sorry about that!</h4>
-                    <p>Click to go home or go back to the previous page:</p>
+                    <h4 className={styles.heading}>Looks like you stumbled into no man's land. Sorry about that!</h4>
+                    <p className={styles.body}>Click to go home or go back to the previous page:</p>
                     <div className={styles.actions}>
                         <button className={`${styles.button} ${styles.goBack}`} onClick={goBack}>
                             Go Back
