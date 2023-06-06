@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './ChatContainer.module.css';
+import { sendMessage } from '../../../api/socket';
 
-const ChatContainer = ({ messages, room, submitMessage }) => {
+const ChatContainer = ({ messages, room }) => {
     const { id, host } = room;
 
     const [conversation, setConversation] = useState([]);
@@ -14,7 +15,7 @@ const ChatContainer = ({ messages, room, submitMessage }) => {
     const onSubmit = (e) => {
         e.preventDefault();
         if (!message) return;
-        submitMessage(message);
+        sendMessage(message);
         setMessage('');
     };
 

@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import { v4 as uuidv4 } from 'uuid';
 import store from '../store';
 import * as ChatActions from '../store/actions/chat';
 
@@ -34,20 +35,53 @@ export const initSocket = () => {
 };
 
 export const sendMessage = (message) => {
-    socket.emit('send_message', message);
+    const {
+        user: { username },
+        chat: { openRoom },
+    } = store.getState();
+
+    const messageObject = {
+        text: message,
+        id: `message-${uuidv4()}`,
+        roomId: openRoom.id,
+        sender: username,
+    };
+    socket.emit('send_message', messageObject);
 };
 
-export const createRoom = async (room) => {
+export const createRoom = async () => {
     if (!socket) {
         await initSocket();
     }
-    store.dispatch(ChatActions.setOpenRoom(room));
-    socket.emit('create_room', room);
+    const {
+        user: { username },
+    } = store.getState();
+
+    const newRoom = {
+        id: `room-${uuidv4()}`,
+        host: username,
+        members: [],
+    };
+    store.dispatch(ChatActions.setOpenRoom(newRoom));
+    socket.emit('create_room', newRoom);
 };
 
 export const joinRoom = (room) => {
-    store.dispatch(ChatActions.setOpenRoom(room));
+    const {
+        user: { username },
+    } = store.getState();
+
+    const updatedRoom = {
+        ...room,
+        members: [...room.members, username],
+    };
+    store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     socket.emit('join_room', { roomId: room.id, socketId: socket.id });
+};
+
+export const reconnect = async (roomId) => {
+    await initSocket();
+    socket.emit('reconnect', roomId);
 };
 
 export const disconnectSocket = () => socket.disconnect();
@@ -58,15 +92,3 @@ export const resetServer = () => {
     store.dispatch(ChatActions.setRooms([]));
     socket.emit('reset');
 };
-
-export const reconnect = async (roomId) => {
-    await initSocket();
-    socket.emit('reconnect', roomId);
-};
-
-// function registerEventHandlers() {
-//     const handlers = { ...switchboardEventHandlers, ...socketIoEventHandlers };
-//     for (const [event, handler] of Object.entries(handlers)) {
-//         socket.on(event, eventHandlerMiddleware(handler));
-//     }
-// }

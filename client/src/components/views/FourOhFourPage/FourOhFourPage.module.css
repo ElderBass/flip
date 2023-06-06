@@ -22,18 +22,6 @@
     font-family: var(--text-font);
 }
 
-h2 {
-    font-size: 40px;
-}
-
-h4 {
-    font-size: 30px;
-}
-
-p {
-    font-size: 24px;
-}
-
 .actions {
     display: flex;
     align-items: center;

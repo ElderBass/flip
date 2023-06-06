@@ -28,12 +28,17 @@
     font-size: 40px;
 }
 
-h2 {
+.headerText {
     margin: 25px;
 }
 
-h4 {
+.heading {
     margin: 15px 0;
+    font-size: 30px;
+}
+
+.body {
+    font-size: 24px;
 }
 
 .content {
