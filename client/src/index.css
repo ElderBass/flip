@@ -24,10 +24,6 @@ body {
   box-sizing: border-box;
   background: var(--background-yellow);
   scroll-behavior: smooth;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100vw;
-  margin-right: -5px;
 }
 
 a {

@@ -10,7 +10,7 @@
     font-family: var(--text-font);
     border: none;
     outline: none;
-    border-bottom: solid 2px var(--card-purple);
+    border-bottom: solid 2px var(--pencil-gray);
     padding: 16px 12px;;
 }
 
