@@ -53,7 +53,6 @@ export const sendMessage = (message) => {
 };
 
 export const createRoom = async () => {
-    console.log('\n are we creating a room ? \n');
     if (!socket) {
         await initSocket();
     }
