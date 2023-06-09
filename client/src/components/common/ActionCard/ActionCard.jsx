@@ -3,8 +3,8 @@ import styles from './ActionCard.module.css';
 
 const backgroundsMap = {
     create: 'green',
-    stats: 'blue',
     browse: 'purple',
+    chat: 'blue',
 };
 
 const ActionCard = ({ title, onClick }) => {

@@ -7,7 +7,6 @@ import styles from './Actions.module.css';
 
 const ActionRouteMap = {
     Create: '/create-deck',
-    Stats: '/stats',
     Browse: '/browse',
     Chat: '/chat',
 };

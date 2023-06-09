@@ -1,0 +1,13 @@
+.header {
+    background-color: var(--card-pink);
+    padding: 16px;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+
+.chatRoomHeader {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}

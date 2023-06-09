@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { initSocket, createRoom, resetServer, reconnect } from '../../../api/socket';
+import { initSocket, reconnect } from '../../../api/socket';
 import Header from '../../common/Header/Header';
 import RoomList from '../../common/RoomList';
 import ChatContainer from '../../common/ChatContainer';
 import styles from './Chat.module.css';
 import { hasJoinedRoom } from '../../../utils/helpers/hasJoinedRoom';
+import ChatRoomActionButton from '../../common/ChatRoomActionButton';
 
 const Chat = () => {
     const { username, rooms, messages, openRoom } = useSelector(({ user, chat }) => ({
@@ -14,6 +15,8 @@ const Chat = () => {
         messages: chat.messages,
         openRoom: chat.openRoom,
     }));
+
+    const [actionButtonType, setActionButtonType] = useState('create');
 
     useEffect(() => {
         const connectToSocket = async () => {
@@ -27,33 +30,22 @@ const Chat = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const userHasJoinedRoom = hasJoinedRoom(rooms, username);
+    useEffect(() => {
+        const actionType = hasJoinedRoom(rooms, username) ? 'reset' : 'create';
+        setActionButtonType(actionType);
 
-    const ActionButton = () => {
-        if (userHasJoinedRoom) {
-            return (
-                <button type="button" className={styles.chatBtn} onClick={resetServer}>
-                    Reset
-                </button>
-            );
-        } else {
-            return (
-                <button type="button" className={styles.chatBtn} onClick={createRoom}>
-                    Create Chat Room
-                </button>
-            );
-        }
-    };
+    }, [rooms, username]);
+
 
     return (
         <div className={styles.chatPage}>
             <Header />
             <div className={styles.chatPageContent}>
                 <div className={styles.chat}>
-                    <RoomList rooms={rooms} />
+                    <RoomList rooms={rooms} username={username} />
                     <div className={styles.spacer} />
                     <div className={styles.moreActions}>
-                        <ActionButton />
+                        <ChatRoomActionButton type={actionButtonType} />
                     </div>
                 </div>
                 <ChatContainer messages={messages} room={openRoom} />

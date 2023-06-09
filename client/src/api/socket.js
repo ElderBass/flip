@@ -24,6 +24,9 @@ export const initSocket = () => {
         socket.once('connect', resolve);
 
         socket.on('returning_rooms', (rooms) => {
+            if (rooms.length === 0) {
+                store.dispatch(ChatActions.setOpenRoom({}));
+            }
             store.dispatch(ChatActions.setRooms(rooms));
         });
         socket.on('receive_message', (message) => {
@@ -50,6 +53,7 @@ export const sendMessage = (message) => {
 };
 
 export const createRoom = async () => {
+    console.log('\n are we creating a room ? \n');
     if (!socket) {
         await initSocket();
     }
