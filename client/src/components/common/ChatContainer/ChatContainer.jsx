@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './ChatContainer.module.css';
 import { sendMessage } from '../../../api/socket';
 import ChatHeader from '../ChatHeader';
+import ChatMessage from '../ChatMessage';
 
-const ChatContainer = ({ messages, room }) => {
-    const { id, host } = room;
+const ChatContainer = ({ messages, room, username }) => {
+    const { id } = room;
 
     const [conversation, setConversation] = useState([]);
     const [message, setMessage] = useState('');
@@ -37,17 +38,9 @@ const ChatContainer = ({ messages, room }) => {
             <ChatHeader roomId={id} />
             <ul className={styles.conversation}>
                 {conversation.length > 0 &&
-                    conversation.map((msg) => {
-                        const msgClass = msg.sender === host ? styles.hostMsg : styles.userMsg;
-                        const className = `${styles.msg} ${msgClass}`;
-
-                        return (
-                            <li className={className} key={msg.id}>
-                                <p className={styles.sender}>{msg.sender}:</p>
-                                <p className={styles.msgText}>{msg.text}</p>
-                            </li>
-                        );
-                    })}
+                    conversation.map((msg) => (
+                        <ChatMessage isUserMessage={msg.sender === username} message={msg} />
+                    ))}
             </ul>
             <form className={styles.messageForm} onSubmit={onSubmit}>
                 <div className={styles.actions}>
