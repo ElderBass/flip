@@ -33,9 +33,7 @@ const Chat = () => {
     useEffect(() => {
         const actionType = hasJoinedRoom(rooms, username) ? 'reset' : 'create';
         setActionButtonType(actionType);
-
     }, [rooms, username]);
-
 
     return (
         <div className={styles.chatPage}>
@@ -48,7 +46,7 @@ const Chat = () => {
                         <ChatRoomActionButton type={actionButtonType} />
                     </div>
                 </div>
-                <ChatContainer messages={messages} room={openRoom} />
+                <ChatContainer messages={messages} room={openRoom} username={username} />
             </div>
         </div>
     );
