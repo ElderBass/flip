@@ -26,21 +26,6 @@
     padding-top: 24px;
 }
 
-.chatBtn {
-    outline: none;
-    border: var(--card-pink);
-    border-radius: 5px;
-    padding: 20px;
-    background-color: var(--card-pink);
-    font-size: 24px;
-    color: white;
-    font-family: var(--text-font);
-}
-.chatBtn:hover {
-    cursor: pointer;
-    background-color: var(--card-purple);
-}
-
 .spacer {
     height: 24px;
 }

@@ -1,12 +1,8 @@
 import React from 'react';
-import store from '../../../store';
 import { hasJoinedRoom } from '../../../utils/helpers/hasJoinedRoom';
 import styles from './RoomListItem.module.css';
 
-const RoomListItem = ({ room, onClick }) => {
-    const {
-        user: { username },
-    } = store.getState();
+const RoomListItem = ({ room, username, onClick }) => {
     const userHasJoinedRoom = hasJoinedRoom(room, username);
 
     const hostText = `Host: ${room.host}`;

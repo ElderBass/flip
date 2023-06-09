@@ -3,7 +3,7 @@ import { joinRoom } from '../../../api/socket';
 import RoomListItem from '../RoomListItem/RoomListItem';
 import styles from './RoomList.module.css';
 
-const RoomList = ({ rooms }) => {
+const RoomList = ({ rooms, username }) => {
     return (
         <div className={styles.roomListContainer}>
             <div className={styles.header}>
@@ -16,6 +16,7 @@ const RoomList = ({ rooms }) => {
                             key={room.id}
                             room={room}
                             onClick={joinRoom}
+                            username={username}
                         />
                     ))
                 ) : (

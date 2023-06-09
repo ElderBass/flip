@@ -3,6 +3,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './ChatContainer.module.css';
 import { sendMessage } from '../../../api/socket';
+import ChatHeader from '../ChatHeader';
 
 const ChatContainer = ({ messages, room }) => {
     const { id, host } = room;
@@ -33,7 +34,7 @@ const ChatContainer = ({ messages, room }) => {
 
     return (
         <div className={styles.chatContainer}>
-            <div className={styles.header}>Chat Room: {id}</div>
+            <ChatHeader roomId={id} />
             <ul className={styles.conversation}>
                 {conversation.length > 0 &&
                     conversation.map((msg) => {

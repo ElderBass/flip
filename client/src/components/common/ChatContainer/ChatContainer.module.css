@@ -1,7 +1,6 @@
 .chatContainer {
     flex: 1 0 25%;
     height: 100%;
-    padding-top: 40px;
     background: var(--background-yellow);
     display: flex;
     flex-direction: column;
@@ -55,7 +54,7 @@
 
 .actions {
   position: relative;
-  border: solid 2px var(--card-blue);
+  border: solid 2px var(--card-pink);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -67,7 +66,7 @@
   background-color: var(--background-yellow);
   border: none;
   height: 52px;
-  color: var(--pencile-gray);
+  color: var(--pencil-gray);
   font-family: var(--text-font);
   font-size: 20px;
   padding-left: 4px;
@@ -75,6 +74,7 @@
 
 .messageInput::placeholder {
   font-size: 20px;
+  opacity: .6;
 }
 
 .messageInput:disabled {
@@ -88,8 +88,8 @@
   background-color: var(--background-yellow);
   outline: none;
   border: none;
-  transform: rotate(45deg);
-  color: var(--card-blue);
+  transform: rotate(10deg);
+  color: var(--card-pink);
 }
 
 .sendMsgBtn:hover {
