@@ -52,7 +52,7 @@ const Chat = () => {
                         <RoomList rooms={rooms} username={username} />
                         <div className={styles.spacer} />
                         <div className={styles.moreActions}>
-                            <ChatRoomActionButton type={actionButtonType} roomId={openRoom.id} />
+                            <ChatRoomActionButton type={actionButtonType} room={openRoom} />
                         </div>
                     </div>
                 )}

@@ -4,8 +4,8 @@ import * as ChatActions from '../../../store/actions/chat';
 import { resetServer } from '../../../api/socket';
 import styles from './ChatRoomActionButton.module.css';
 
-const ChatRoomActionButton = ({ type }) => {
-    const onActionClick = (type) => store.dispatch(ChatActions.setModal({ type }));
+const ChatRoomActionButton = ({ type, room }) => {
+    const onActionClick = (type) => store.dispatch(ChatActions.setModal({ type, room }));
 
     const Reset = () => {
         return (
