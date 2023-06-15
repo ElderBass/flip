@@ -28,6 +28,8 @@ const ChatContainer = ({ messages, room, username }) => {
         }
     };
 
+    // TODO: When I move rooms to the DB, will make messages as part of room
+    // thus won't need this hack to filter out room-specific messages
     useEffect(() => {
         const roomMessages = messages.filter((msg) => msg.roomId === id);
         setConversation(roomMessages);

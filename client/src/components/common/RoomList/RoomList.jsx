@@ -1,5 +1,4 @@
 import React from 'react';
-import { joinRoom } from '../../../api/socket';
 import RoomListItem from '../RoomListItem/RoomListItem';
 import styles from './RoomList.module.css';
 
@@ -15,7 +14,6 @@ const RoomList = ({ rooms, username }) => {
                         <RoomListItem
                             key={room.id}
                             room={room}
-                            onClick={joinRoom}
                             username={username}
                         />
                     ))
