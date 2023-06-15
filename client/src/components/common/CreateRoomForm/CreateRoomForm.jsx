@@ -9,14 +9,15 @@ const CreateRoomForm = () => {
 
     const onChange = (e) => setName(e.target.value);
 
+    const resetModal = () => {
+        setName('');
+        store.dispatch(ChatActions.setModal(null));
+    };
+
     const onSubmitRoom = (e) => {
         e.preventDefault();
         createRoom(name);
-    };
-
-    const onCancelClick = () => {
-        setName('');
-        store.dispatch(ChatActions.setModal(null));
+        resetModal();
     };
 
     return (
@@ -35,7 +36,7 @@ const CreateRoomForm = () => {
                 />
             </div>
             <div className={styles.actions}>
-                <button className={styles.cancel} type="button" onClick={onCancelClick}>
+                <button className={styles.cancel} type="button" onClick={resetModal}>
                     Cancel
                 </button>
                 <button disabled={!name.length} className={styles.confirm} type="submit">

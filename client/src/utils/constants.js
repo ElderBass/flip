@@ -1,3 +1,4 @@
+import ChatJoinLeaveModal from '../components/common/ChatJoinLeaveModal';
 import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
 
 export const ERROR_MESSAGE = {
@@ -44,4 +45,6 @@ export const PAGES = {
 
 export const ChatModalMap = {
     Create: CreateRoomForm,
+    Join: ChatJoinLeaveModal,
+    Leave: ChatJoinLeaveModal,
 };
