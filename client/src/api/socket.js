@@ -91,7 +91,6 @@ export const leaveRoom = (room) => {
     } = store.getState();
 
     const newMembers = members.filter((user) => user !== username);
-    console.log('\n new members? ', newMembers, '\n\n');
     const updatedRoom = { ...room, members: newMembers };
     store.dispatch(ChatActions.updateRoom(updatedRoom));
     socket.emit('leave_room', id);
