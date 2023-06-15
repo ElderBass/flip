@@ -1,11 +1,11 @@
 import React from 'react';
-import { hasJoinedRoom } from '../../../utils/helpers/hasJoinedRoom';
+import { hasJoinedRoom } from '../../../utils/chatRoomUtils';
 import styles from './RoomListItem.module.css';
 
 const RoomListItem = ({ room, username, onClick }) => {
     const userHasJoinedRoom = hasJoinedRoom(room, username);
 
-    const hostText = `Host: ${room.host}`;
+    const nameText = `Room: ${room.name}`;
     const joinText = userHasJoinedRoom ? 'Joined' : 'Click to Join';
 
     return (
@@ -15,7 +15,7 @@ const RoomListItem = ({ room, username, onClick }) => {
             type="button"
             disabled={userHasJoinedRoom}
         >
-            <p>{hostText}</p>
+            <p>{nameText}</p>
             <p>{joinText}</p>
         </button>
     );

@@ -1,3 +1,5 @@
+import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
+
 export const ERROR_MESSAGE = {
     LOGIN: {
         404: "Huh, couldn't find any user with that email",
@@ -38,4 +40,8 @@ export const PAGES = {
     LOGOUT: '/logout',
     STATS: '/stats',
     STUDY: '/study',
-}
+};
+
+export const ChatModalMap = {
+    Create: CreateRoomForm,
+};

@@ -7,7 +7,7 @@ import ChatHeader from '../ChatHeader';
 import ChatMessage from '../ChatMessage';
 
 const ChatContainer = ({ messages, room, username }) => {
-    const { id } = room;
+    const { id, name } = room;
 
     const [conversation, setConversation] = useState([]);
     const [message, setMessage] = useState('');
@@ -35,7 +35,7 @@ const ChatContainer = ({ messages, room, username }) => {
 
     return (
         <div className={styles.chatContainer}>
-            <ChatHeader roomId={id} />
+            <ChatHeader roomName={name} />
             <ul className={styles.conversation}>
                 {conversation.length > 0 &&
                     conversation.map((msg) => (

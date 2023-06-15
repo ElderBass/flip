@@ -49,6 +49,11 @@ const init = (server) => {
             rooms = rooms.filter((room) => room.id !== roomId);
         });
 
+        socket.on('leave_room', (roomId) => {
+            console.log('\n emitting socket event: leave_room', roomId, '\n');
+            socket.leave(roomId);
+        });
+
         socket.on('join_room', ({ roomId }) => {
             console.log('\n emitting socket event: join_room', roomId, '\n');
             console.log('\n current rooms: ', rooms, '\n');

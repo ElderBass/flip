@@ -52,7 +52,7 @@ export const sendMessage = (message) => {
     socket.emit('send_message', messageObject);
 };
 
-export const createRoom = async () => {
+export const createRoom = async (roomName) => {
     if (!socket) {
         await initSocket();
     }
@@ -62,8 +62,8 @@ export const createRoom = async () => {
 
     const newRoom = {
         id: `room-${uuidv4()}`,
-        host: username,
-        members: [],
+        members: [username],
+        name: roomName,
     };
     store.dispatch(ChatActions.setOpenRoom(newRoom));
     socket.emit('create_room', newRoom);
@@ -80,6 +80,21 @@ export const joinRoom = (room) => {
     };
     store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     socket.emit('join_room', { roomId: room.id, socketId: socket.id });
+};
+
+export const leaveRoom = (room) => {
+    const { id, members } = room;
+    store.dispatch(ChatActions.setOpenRoom({}));
+    store.dispatch(ChatActions.setMessages([]));
+    const {
+        user: { username },
+    } = store.getState();
+
+    const newMembers = members.filter((user) => user !== username);
+    console.log('\n new members? ', newMembers, '\n\n');
+    const updatedRoom = { ...room, members: newMembers };
+    store.dispatch(ChatActions.updateRoom(updatedRoom));
+    socket.emit('leave_room', id);
 };
 
 export const reconnect = async (roomId) => {
