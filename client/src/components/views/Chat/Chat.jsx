@@ -5,15 +5,17 @@ import Header from '../../common/Header/Header';
 import RoomList from '../../common/RoomList';
 import ChatContainer from '../../common/ChatContainer';
 import styles from './Chat.module.css';
-import { hasJoinedRoom } from '../../../utils/helpers/hasJoinedRoom';
+import { hasJoinedRoom } from '../../../utils/chatRoomUtils';
 import ChatRoomActionButton from '../../common/ChatRoomActionButton';
+import { ChatModalMap } from '../../../utils/constants';
 
 const Chat = () => {
-    const { username, rooms, messages, openRoom } = useSelector(({ user, chat }) => ({
+    const { username, rooms, messages, openRoom, actionModal } = useSelector(({ user, chat }) => ({
         username: user.username,
         rooms: chat.rooms,
         messages: chat.messages,
         openRoom: chat.openRoom,
+        actionModal: chat.actionModal,
     }));
 
     const [actionButtonType, setActionButtonType] = useState('create');
@@ -35,17 +37,26 @@ const Chat = () => {
         setActionButtonType(actionType);
     }, [rooms, username]);
 
+    const ModalForm = actionModal?.type ? ChatModalMap[actionModal.type] : null;
+
     return (
         <div className={styles.chatPage}>
             <Header />
             <div className={styles.chatPageContent}>
-                <div className={styles.chat}>
-                    <RoomList rooms={rooms} username={username} />
-                    <div className={styles.spacer} />
-                    <div className={styles.moreActions}>
-                        <ChatRoomActionButton type={actionButtonType} />
+                {actionModal && actionModal.type ? (
+                    <div className={styles.chat}>
+                        <ModalForm />
                     </div>
-                </div>
+                ) : (
+                    <div className={styles.chat}>
+                        <RoomList rooms={rooms} username={username} />
+                        <div className={styles.spacer} />
+                        <div className={styles.moreActions}>
+                            <ChatRoomActionButton type={actionButtonType} roomId={openRoom.id} />
+                        </div>
+                    </div>
+                )}
+
                 <ChatContainer messages={messages} room={openRoom} username={username} />
             </div>
         </div>

@@ -10,6 +10,12 @@ const addRoom = (room) => ({
     payload: room,
 });
 
+const UPDATE_ROOM = 'UPDATE_ROOM';
+const updateRoom = (room) => ({
+    type: UPDATE_ROOM,
+    payload: room,
+});
+
 const REMOVE_ROOM = 'REMOVE_ROOM';
 const removeRoom = (roomId) => ({
     type: REMOVE_ROOM,
@@ -36,7 +42,13 @@ const addMessage = (message) => ({
 
 const RESET = 'RESET';
 const reset = () => ({
-    type: RESET
+    type: RESET,
+});
+
+const SET_MODAL = 'SET_MODAL';
+const setModal = (payload) => ({
+    type: SET_MODAL,
+    payload,
 });
 
 export {
@@ -44,6 +56,8 @@ export {
     setRooms,
     ADD_ROOM,
     addRoom,
+    UPDATE_ROOM,
+    updateRoom,
     REMOVE_ROOM,
     removeRoom,
     SET_OPEN_ROOM,
@@ -52,6 +66,8 @@ export {
     setMessages,
     ADD_MESSAGE,
     addMessage,
+    SET_MODAL,
+    setModal,
     RESET,
-    reset
+    reset,
 };
