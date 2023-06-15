@@ -45,14 +45,14 @@ const Chat = () => {
             <div className={styles.chatPageContent}>
                 {actionModal && actionModal.type ? (
                     <div className={styles.chat}>
-                        <ModalComponent type={actionModal.type} room={openRoom} />
+                        <ModalComponent type={actionModal.type} room={actionModal.room} />
                     </div>
                 ) : (
                     <div className={styles.chat}>
                         <RoomList rooms={rooms} username={username} />
                         <div className={styles.spacer} />
                         <div className={styles.moreActions}>
-                            <ChatRoomActionButton type={actionButtonType} roomId={openRoom.id} />
+                            <ChatRoomActionButton type={actionButtonType} room={openRoom} />
                         </div>
                     </div>
                 )}
