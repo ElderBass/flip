@@ -1,35 +1,34 @@
 import React from 'react';
 import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
-import { leaveRoom, resetServer } from '../../../api/socket';
+import { resetServer } from '../../../api/socket';
 import styles from './ChatRoomActionButton.module.css';
 
-const ChatRoomActionButton = ({ type, roomId }) => {
+const ChatRoomActionButton = ({ type }) => {
+    const onActionClick = (type) => store.dispatch(ChatActions.setModal({ type }));
+
     const Reset = () => {
-        if (process.env.NODE_ENV === 'development') {
-            return (
+        return (
+            <>
+                {process.env.NODE_ENV === 'development' && (
+                    <button
+                        type="button"
+                        className={`${styles.btn} ${styles.reset}`}
+                        onClick={resetServer}
+                    >
+                        Reset
+                    </button>
+                )}
                 <button
                     type="button"
                     className={`${styles.btn} ${styles.reset}`}
-                    onClick={resetServer}
-                >
-                    Reset
-                </button>
-            );
-        } else {
-            return (
-                <button
-                    type="button"
-                    className={`${styles.btn} ${styles.reset}`}
-                    onClick={() => leaveRoom(roomId)}
+                    onClick={() => onActionClick('Leave')}
                 >
                     Leave Room
                 </button>
-            );
-        }
+            </>
+        );
     };
-
-    const onActionClick = (type) => store.dispatch(ChatActions.setModal({ type }));
 
     const Create = () => (
         <button

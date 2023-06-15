@@ -37,7 +37,7 @@ const Chat = () => {
         setActionButtonType(actionType);
     }, [rooms, username]);
 
-    const ModalForm = actionModal?.type ? ChatModalMap[actionModal.type] : null;
+    const ModalComponent = actionModal?.type ? ChatModalMap[actionModal.type] : null;
 
     return (
         <div className={styles.chatPage}>
@@ -45,7 +45,7 @@ const Chat = () => {
             <div className={styles.chatPageContent}>
                 {actionModal && actionModal.type ? (
                     <div className={styles.chat}>
-                        <ModalForm />
+                        <ModalComponent type={actionModal.type} room={openRoom} />
                     </div>
                 ) : (
                     <div className={styles.chat}>
@@ -56,7 +56,6 @@ const Chat = () => {
                         </div>
                     </div>
                 )}
-
                 <ChatContainer messages={messages} room={openRoom} username={username} />
             </div>
         </div>

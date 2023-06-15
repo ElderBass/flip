@@ -45,8 +45,9 @@ const init = (server) => {
         });
 
         socket.on('destroy_room', (roomId) => {
-            console.log('\n destroying room: ', id, '\n');
+            console.log('\n destroying room: ', roomId, '\n');
             rooms = rooms.filter((room) => room.id !== roomId);
+            ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
         socket.on('leave_room', (roomId) => {

@@ -79,6 +79,7 @@ export const joinRoom = (room) => {
         members: [...room.members, username],
     };
     store.dispatch(ChatActions.setOpenRoom(updatedRoom));
+    store.dispatch(ChatActions.setModal(null));
     socket.emit('join_room', { roomId: room.id, socketId: socket.id });
 };
 
@@ -86,11 +87,17 @@ export const leaveRoom = (room) => {
     const { id, members } = room;
     store.dispatch(ChatActions.setOpenRoom({}));
     store.dispatch(ChatActions.setMessages([]));
+    store.dispatch(ChatActions.setModal(null));
     const {
         user: { username },
     } = store.getState();
 
     const newMembers = members.filter((user) => user !== username);
+
+    if (!newMembers.length) {
+        socket.emit('destroy_room', id);
+        return;
+    }
     const updatedRoom = { ...room, members: newMembers };
     store.dispatch(ChatActions.updateRoom(updatedRoom));
     socket.emit('leave_room', id);

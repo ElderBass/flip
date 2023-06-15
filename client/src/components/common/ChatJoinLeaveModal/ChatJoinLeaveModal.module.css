@@ -1,0 +1,84 @@
+.roomActionModal {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-areas:
+    "header"
+    "heading"
+    "actions";
+    background-color: var(--create-card-green);
+    box-shadow: 3px 3px 6px black;
+}
+
+.header {
+    grid-area: header;
+    width: 100%;
+    padding: 16px;
+    font-size: 30px;
+    border-bottom: solid 2px var(--card-pink);
+    color: var(--pencil-gray);
+    text-align: center;
+    align-self: center;
+}
+
+.heading {
+    grid-area: heading;
+    width: 80%;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainText {
+    font-size: 30px;
+    margin-bottom: 16px;
+    color: var(--card-pink);
+}
+
+.subText {
+    color: var(--card-pink);
+    font-size: 24px;
+}
+
+.actions {
+    grid-area: actions;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;    
+}
+
+.cancel {
+    font-family: var(--logo-font);
+    color: var(--pencil-gray);
+    font-size: 42px;
+    border: none;
+    outline: none;
+    background-color: var(--create-card-green);
+    opacity: .8;
+}
+
+.cancel:hover {
+    cursor: pointer;
+    font-weight: 600;
+    opacity: 1;
+}
+
+.confirm {
+    font-family: var(--text-font);
+    border: none;
+    background-color: var(--card-pink);
+    color: white;
+    padding: 12px;
+    font-size: 30px;
+    border-radius: 8px;
+}
+
+.confirm:hover {
+    cursor: pointer;
+    background-color: var(--card-purple);
+}
