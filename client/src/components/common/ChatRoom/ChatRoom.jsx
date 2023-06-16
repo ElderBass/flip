@@ -6,7 +6,9 @@ const ChatRoom = ({ room }) => {
     const membersString = members.join(', ');
     return (
         <div className={styles.chatRoom}>
-            <div className={styles.header}>Now Viewing Room: {name}</div>
+            <div className={styles.header}>
+                Now Viewing Room: <span className={styles.roomName}>{name}</span>
+            </div>
             <div className={styles.roomDeets}>
                 <p className={styles.currentMembers}>Current Members:</p>
                 <p>{membersString}</p>

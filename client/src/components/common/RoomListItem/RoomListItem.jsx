@@ -22,6 +22,7 @@ const RoomListItem = ({ room, username }) => {
             disabled={userHasJoinedRoom}
         >
             <p>{nameText}</p>
+            <p>Joined: {room.members.length}</p>
             <p>{joinText}</p>
         </button>
     );
