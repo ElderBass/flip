@@ -24,9 +24,19 @@ export const initSocket = () => {
         socket.once('connect', resolve);
 
         socket.on('returning_rooms', (rooms) => {
+            const {
+                user: { username },
+            } = store.getState();
             if (rooms.length === 0) {
                 store.dispatch(ChatActions.setOpenRoom({}));
             }
+
+            rooms.forEach(room => {
+                if (room.members && room.members.includes(username)) {
+                    store.dispatch(ChatActions.setOpenRoom(room));
+                }
+            })
+            console.log('\n rooms coming from returning rooms? ', rooms, '\n\n');
             store.dispatch(ChatActions.setRooms(rooms));
         });
         socket.on('receive_message', (message) => {
@@ -80,7 +90,7 @@ export const joinRoom = (room) => {
     };
     store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     store.dispatch(ChatActions.setModal(null));
-    socket.emit('join_room', { roomId: room.id, socketId: socket.id });
+    socket.emit('join_room', { roomId: room.id, username });
 };
 
 export const leaveRoom = (room) => {
@@ -100,7 +110,7 @@ export const leaveRoom = (room) => {
     }
     const updatedRoom = { ...room, members: newMembers };
     store.dispatch(ChatActions.updateRoom(updatedRoom));
-    socket.emit('leave_room', id);
+    socket.emit('leave_room', { roomId: id, username });
 };
 
 export const reconnect = async (roomId) => {

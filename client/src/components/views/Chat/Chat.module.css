@@ -25,14 +25,3 @@
     align-items: center;
     padding-top: 24px;
 }
-
-.spacer {
-    height: 24px;
-}
-
-.moreActions {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 50%;
-}

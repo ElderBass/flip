@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomListItem from '../RoomListItem/RoomListItem';
+import RoomListItem from '../RoomListItem';
 import styles from './RoomList.module.css';
 
 const RoomList = ({ rooms, username }) => {
