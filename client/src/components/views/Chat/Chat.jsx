@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { initSocket, reconnect } from '../../../api/socket';
 import Header from '../../common/Header/Header';
-import RoomList from '../../common/RoomList';
 import ChatContainer from '../../common/ChatContainer';
 import styles from './Chat.module.css';
-import { hasJoinedRoom } from '../../../utils/chatRoomUtils';
-import ChatRoomActionButton from '../../common/ChatRoomActionButton';
 import { ChatModalMap } from '../../../utils/constants';
+import ChatRoomContainer from '../../common/ChatRoomContainer';
 
 const Chat = () => {
     const { username, rooms, messages, openRoom, actionModal } = useSelector(({ user, chat }) => ({
@@ -17,8 +15,6 @@ const Chat = () => {
         openRoom: chat.openRoom,
         actionModal: chat.actionModal,
     }));
-
-    const [actionButtonType, setActionButtonType] = useState('create');
 
     useEffect(() => {
         const connectToSocket = async () => {
@@ -32,30 +28,20 @@ const Chat = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
-        const actionType = hasJoinedRoom(rooms, username) ? 'reset' : 'create';
-        setActionButtonType(actionType);
-    }, [rooms, username]);
-
     const ModalComponent = actionModal?.type ? ChatModalMap[actionModal.type] : null;
 
     return (
         <div className={styles.chatPage}>
             <Header />
             <div className={styles.chatPageContent}>
-                {actionModal && actionModal.type ? (
-                    <div className={styles.chat}>
+                <div className={styles.chat}>
+                    {actionModal && actionModal.type ? (
                         <ModalComponent type={actionModal.type} room={actionModal.room} />
-                    </div>
-                ) : (
-                    <div className={styles.chat}>
-                        <RoomList rooms={rooms} username={username} />
-                        <div className={styles.spacer} />
-                        <div className={styles.moreActions}>
-                            <ChatRoomActionButton type={actionButtonType} room={openRoom} />
-                        </div>
-                    </div>
-                )}
+                    ) : (
+                        <ChatRoomContainer rooms={rooms} openRoom={openRoom} username={username} />
+                    )}
+                </div>
+
                 <ChatContainer messages={messages} room={openRoom} username={username} />
             </div>
         </div>

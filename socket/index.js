@@ -50,15 +50,37 @@ const init = (server) => {
             ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
-        socket.on('leave_room', (roomId) => {
+        socket.on('leave_room', ({ roomId, username }) => {
             console.log('\n emitting socket event: leave_room', roomId, '\n');
+            const targetRoom = rooms.filter(room => room.id === roomId)[0];
+            const { members } = targetRoom;
+            const updatedMembers = members.filter((member) => member !== username);
+            targetRoom.members = updatedMembers;
+            rooms = rooms.map(room => {
+                if (room.id === roomId) {
+                    return targetRoom;
+                }
+                return room;
+            });
             socket.leave(roomId);
+            ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
-        socket.on('join_room', ({ roomId }) => {
+        socket.on('join_room', ({ roomId, username }) => {
             console.log('\n emitting socket event: join_room', roomId, '\n');
             console.log('\n current rooms: ', rooms, '\n');
+            const targetRoom = rooms.filter(room => room.id === roomId)[0];
+            const { members } = targetRoom;
+            const updatedMembers = [...members, username];
+            targetRoom.members = updatedMembers;
+            rooms = rooms.map(room => {
+                if (room.id === roomId) {
+                    return targetRoom;
+                }
+                return room;
+            });
             socket.join(roomId);
+            ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
         socket.on('reconnect', (roomId) => {
