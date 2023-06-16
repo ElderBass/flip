@@ -36,7 +36,6 @@ export const initSocket = () => {
                     store.dispatch(ChatActions.setOpenRoom(room));
                 }
             })
-            console.log('\n rooms coming from returning rooms? ', rooms, '\n\n');
             store.dispatch(ChatActions.setRooms(rooms));
         });
         socket.on('receive_message', (message) => {

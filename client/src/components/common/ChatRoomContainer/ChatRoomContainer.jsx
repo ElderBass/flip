@@ -9,8 +9,6 @@ const ChatRoomContainer = ({ rooms, openRoom, username }) => {
     const [userInRoom, setUserInRoom] = useState(false);
 
     useEffect(() => {
-        console.log('\n rooms ? ', rooms, '\n\n');
-        console.log('\n username ? ', username, '\n\n');
         setUserInRoom(hasJoinedRoom(rooms, username));
     }, [rooms, username]);
 
