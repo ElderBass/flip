@@ -5,8 +5,9 @@ import styles from './ChatContainer.module.css';
 import { sendMessage } from '../../../api/socket';
 import ChatHeader from '../ChatHeader';
 import ChatMessage from '../ChatMessage';
+import { trimEmail } from '../../../utils/helpers/emailHelpers';
 
-const ChatContainer = ({ messages, room, username }) => {
+const ChatContainer = ({ messages, room, email }) => {
     const { id, name } = room;
 
     const [conversation, setConversation] = useState([]);
@@ -41,7 +42,10 @@ const ChatContainer = ({ messages, room, username }) => {
             <ul className={styles.conversation}>
                 {conversation.length > 0 &&
                     conversation.map((msg) => (
-                        <ChatMessage isUserMessage={msg.sender === username} message={msg} />
+                        <ChatMessage
+                            isUserMessage={msg.sender === trimEmail(email)}
+                            message={msg}
+                        />
                     ))}
             </ul>
             <form className={styles.messageForm} onSubmit={onSubmit}>

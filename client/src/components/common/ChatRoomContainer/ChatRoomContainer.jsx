@@ -5,20 +5,16 @@ import ChatRoomActionButton from '../ChatRoomActionButton';
 import RoomList from '../RoomList';
 import styles from './ChatRoomContainer.module.css';
 
-const ChatRoomContainer = ({ rooms, openRoom, username }) => {
+const ChatRoomContainer = ({ rooms, openRoom, email }) => {
     const [userInRoom, setUserInRoom] = useState(false);
 
     useEffect(() => {
-        setUserInRoom(hasJoinedRoom(rooms, username));
-    }, [rooms, username]);
+        setUserInRoom(hasJoinedRoom(rooms, email));
+    }, [rooms, email]);
 
     return (
         <>
-            {userInRoom ? (
-                <ChatRoom room={openRoom} />
-            ) : (
-                <RoomList rooms={rooms} username={username} />
-            )}
+            {userInRoom ? <ChatRoom room={openRoom} /> : <RoomList rooms={rooms} email={email} />}
             <div className={styles.spacer} />
             <div className={styles.moreActions}>
                 <ChatRoomActionButton type={userInRoom ? 'reset' : 'create'} room={openRoom} />

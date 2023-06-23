@@ -8,8 +8,8 @@ import { ChatModalMap } from '../../../utils/constants';
 import ChatRoomContainer from '../../common/ChatRoomContainer';
 
 const Chat = () => {
-    const { username, rooms, messages, openRoom, actionModal } = useSelector(({ user, chat }) => ({
-        username: user.username,
+    const { email, rooms, messages, openRoom, actionModal } = useSelector(({ user, chat }) => ({
+        email: user.email,
         rooms: chat.rooms,
         messages: chat.messages,
         openRoom: chat.openRoom,
@@ -38,11 +38,11 @@ const Chat = () => {
                     {actionModal && actionModal.type ? (
                         <ModalComponent type={actionModal.type} room={actionModal.room} />
                     ) : (
-                        <ChatRoomContainer rooms={rooms} openRoom={openRoom} username={username} />
+                        <ChatRoomContainer rooms={rooms} openRoom={openRoom} email={email} />
                     )}
                 </div>
 
-                <ChatContainer messages={messages} room={openRoom} username={username} />
+                <ChatContainer messages={messages} room={openRoom} email={email} />
             </div>
         </div>
     );

@@ -1,10 +1,14 @@
-export const hasJoinedRoom = (roomItem, username) => {
+export const hasJoinedRoom = (roomItem, email) => {
     if (Array.isArray(roomItem)) {
-        return (
-            roomItem.filter((room) => room?.members?.includes(username))
-                .length > 0
-        );
+        let hasJoined = false;
+        roomItem.forEach((room) => {
+            if (room?.members?.filter((member) => member.email === email).length > 0) {
+                hasJoined = true;
+                return;
+            }
+        });
+        return hasJoined;
     } else if (typeof roomItem === 'object') {
-        return roomItem?.members?.includes(username);
+        return roomItem?.members?.filter((member) => member.email === email).length > 0;
     }
 };

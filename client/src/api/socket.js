@@ -25,17 +25,20 @@ export const initSocket = () => {
 
         socket.on('returning_rooms', (rooms) => {
             const {
-                user: { username },
+                user: { email },
             } = store.getState();
             if (rooms.length === 0) {
                 store.dispatch(ChatActions.setOpenRoom({}));
             }
 
-            rooms.forEach(room => {
-                if (room.members && room.members.includes(username)) {
+            rooms.forEach((room) => {
+                if (
+                    room.members &&
+                    room.members.filter((member) => member.email === email).length > 0
+                ) {
                     store.dispatch(ChatActions.setOpenRoom(room));
                 }
-            })
+            });
             store.dispatch(ChatActions.setRooms(rooms));
         });
         socket.on('receive_message', (message) => {
@@ -66,12 +69,14 @@ export const createRoom = async (roomName) => {
         await initSocket();
     }
     const {
-        user: { username },
+        user: { email, _id },
     } = store.getState();
+
+    const initialMember = { email, _id };
 
     const newRoom = {
         id: `room-${uuidv4()}`,
-        members: [username],
+        members: [initialMember],
         name: roomName,
     };
     store.dispatch(ChatActions.setOpenRoom(newRoom));
@@ -80,16 +85,18 @@ export const createRoom = async (roomName) => {
 
 export const joinRoom = (room) => {
     const {
-        user: { username },
+        user: { email, _id },
     } = store.getState();
+
+    const newMember = { email, _id };
 
     const updatedRoom = {
         ...room,
-        members: [...room.members, username],
+        members: [...room.members, newMember],
     };
     store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     store.dispatch(ChatActions.setModal(null));
-    socket.emit('join_room', { roomId: room.id, username });
+    socket.emit('join_room', { roomId: room.id, user: newMember });
 };
 
 export const leaveRoom = (room) => {
@@ -98,10 +105,10 @@ export const leaveRoom = (room) => {
     store.dispatch(ChatActions.setMessages([]));
     store.dispatch(ChatActions.setModal(null));
     const {
-        user: { username },
+        user: { email },
     } = store.getState();
 
-    const newMembers = members.filter((user) => user !== username);
+    const newMembers = members.filter((user) => user.email !== email);
 
     if (!newMembers.length) {
         socket.emit('destroy_room', id);
@@ -109,7 +116,7 @@ export const leaveRoom = (room) => {
     }
     const updatedRoom = { ...room, members: newMembers };
     store.dispatch(ChatActions.updateRoom(updatedRoom));
-    socket.emit('leave_room', { roomId: id, username });
+    socket.emit('leave_room', { roomId: id, email });
 };
 
 export const reconnect = async (roomId) => {
