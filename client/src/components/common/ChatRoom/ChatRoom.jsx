@@ -18,7 +18,7 @@ const ChatRoom = ({ room }) => {
             </div>
             <div className={styles.roomDeets}>
                 <p className={styles.currentMembers}>Current Members:</p>
-                <p>{membersString}</p>
+                <p className={styles.memberString}>{membersString}</p>
             </div>
             <div className={styles.users}>
                 {members.length > 0 &&

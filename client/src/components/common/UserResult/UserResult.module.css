@@ -50,7 +50,7 @@
     border: solid 1px var(--card-pink);
 }
 
-.name {
+.label {
     padding-top: 10px;
     font-size: 20px;
 }

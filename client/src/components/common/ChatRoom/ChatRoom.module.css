@@ -5,8 +5,8 @@
     flex-direction: column;
     text-align: center;
     font-family: var(--text-font);
-    margin: 15px;
-    background-color: var(--background-yellow);
+    margin: 16px;
+    background-color: var(--card-blue);
     box-shadow: 2px 2px 4px var(--pencil-gray);
 }
 
@@ -27,11 +27,18 @@
 }
 
 .roomDeets {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 16px;
+    padding: 16px 0;
+    border-bottom: solid 2px var(--pencil-gray);
 }
 
 .currentMembers {
     color: var(--pencil-gray);
+    padding: 0 16px;
+}
+
+.memberString {
+    padding: 0 16px;
 }

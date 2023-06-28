@@ -29,7 +29,7 @@ const UserResult = ({ user, onUserClick, onDeckClick, styles }) => {
     const deckClasses = {
         container: styles.deckCarouselItem,
         line: styles.line,
-        name: styles.name,
+        label: styles.label,
     };
 
     return (
@@ -42,7 +42,6 @@ const UserResult = ({ user, onUserClick, onDeckClick, styles }) => {
                     RightArrow={RightArrow}
                     LeftArrow={LeftArrow}
                     scrollContainerClassName={styles.contentContainer}
-                    Header={null}
                 >
                     {decks.map((item, i) => (
                         <Deck
