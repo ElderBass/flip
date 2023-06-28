@@ -11,7 +11,7 @@
     padding: 20px 0;
     background: var(--card-blue);
     color: var(--background-yellow);
-    box-shadow: 3px 3px 6px  black;
+    box-shadow: 3px 3px 6px var(--dark-gray); 
 }
 
 .headerSpace {

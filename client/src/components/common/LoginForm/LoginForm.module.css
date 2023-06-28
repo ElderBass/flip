@@ -5,7 +5,7 @@
     width: 100%;
     background: var(--background-yellow);
     color: var(--card-blue);
-    box-shadow: 3px 3px 6px black;
+    box-shadow: 3px 3px 6px var(--dark-gray);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

@@ -1,12 +1,12 @@
 .chatRoom {
     min-height: 500px;
-    width: 90%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     text-align: center;
     font-family: var(--text-font);
     margin: 16px;
-    background-color: var(--card-blue);
+    background-color: var(--action-blue);
     box-shadow: 2px 2px 4px var(--pencil-gray);
 }
 
@@ -17,13 +17,19 @@
     font-size: 28px;
     height: 64px;
     width: 100%;
-    color: var(--pencil-gray);
+    color: var(--dark-gray);
     border-bottom: solid 2px var(--card-pink);
 }
 
 .roomName {
-    color: var(--card-blue);
+    color: var(--background-yellow);
     margin-left: 16px;
+}
+
+.heading {
+    padding: 16px 0;
+    font-size: 24px;
+    color: var(--background-yellow);
 }
 
 .roomDeets {
@@ -35,10 +41,17 @@
 }
 
 .currentMembers {
-    color: var(--pencil-gray);
+    color: var(--dark-gray);
     padding: 0 16px;
 }
 
 .memberString {
     padding: 0 16px;
+    color: var(--background-yellow);
+}
+
+.users {
+    padding: 16px;
+    display: flex;
+    gap: 16px;
 }

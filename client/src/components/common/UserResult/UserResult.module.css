@@ -4,7 +4,7 @@
     height: 300px;
     width: 500px;
     background-color: var(--background-yellow);
-    box-shadow: 2px 2px 4px black;
+    box-shadow: 2px 2px 4px var(--dark-gray);
 }
 
 .userResultContainer:hover {
@@ -40,7 +40,7 @@
     font-size: 30px;
     background-color: var(--action-blue);
     color: var(--background-yellow);
-    box-shadow: 2px 2px 4px black;
+    box-shadow: 2px 2px 4px var(--dark-gray);
 }
 
 .line {

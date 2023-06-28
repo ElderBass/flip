@@ -44,5 +44,5 @@
 
 .cancelButton:hover {
   cursor: pointer;
-  color: black;
+  color: var(--dark-gray);
 }

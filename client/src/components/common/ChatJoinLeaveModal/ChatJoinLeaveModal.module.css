@@ -8,7 +8,7 @@
     "heading"
     "actions";
     background-color: var(--create-card-green);
-    box-shadow: 3px 3px 6px black;
+    box-shadow: 3px 3px 6px var(--dark-gray);
 }
 
 .header {

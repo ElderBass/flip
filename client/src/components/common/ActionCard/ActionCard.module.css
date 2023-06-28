@@ -4,7 +4,7 @@
   width: 80%;
   max-width: 220px;
   height: 100px;
-  box-shadow: 2px 2px 4px black;
+  box-shadow: 2px 2px 4px var(--dark-gray);
   display: flex;
   align-items: center;
   justify-content: center;
