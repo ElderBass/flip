@@ -5,7 +5,7 @@ import store from '../../../../store';
 import { setSelectedDeck } from '../../../../store/actions/decks';
 import CarouselItem from '../CarouselItem';
 
-const Deck = ({ item, itemId }) => {
+const Deck = ({ item, itemId, classes }) => {
     const { deckName } = item;
     const history = useHistory();
 
@@ -20,7 +20,7 @@ const Deck = ({ item, itemId }) => {
     };
 
     return (
-        <CarouselItem onClick={onClick} label={deckName} />
+        <CarouselItem onClick={onClick} label={deckName} classes={classes} />
     );
 };
 

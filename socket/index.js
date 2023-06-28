@@ -50,13 +50,15 @@ const init = (server) => {
             ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
-        socket.on('leave_room', ({ roomId, username }) => {
+        socket.on('leave_room', ({ roomId, email }) => {
             console.log('\n emitting socket event: leave_room', roomId, '\n');
-            const targetRoom = rooms.filter(room => room.id === roomId)[0];
+            const targetRoom = rooms.filter((room) => room.id === roomId)[0];
             const { members } = targetRoom;
-            const updatedMembers = members.filter((member) => member !== username);
+            const updatedMembers = members.filter(
+                (member) => member.email !== email
+            );
             targetRoom.members = updatedMembers;
-            rooms = rooms.map(room => {
+            rooms = rooms.map((room) => {
                 if (room.id === roomId) {
                     return targetRoom;
                 }
@@ -66,14 +68,14 @@ const init = (server) => {
             ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
-        socket.on('join_room', ({ roomId, username }) => {
+        socket.on('join_room', ({ roomId, user }) => {
             console.log('\n emitting socket event: join_room', roomId, '\n');
             console.log('\n current rooms: ', rooms, '\n');
-            const targetRoom = rooms.filter(room => room.id === roomId)[0];
+            const targetRoom = rooms.filter((room) => room.id === roomId)[0];
             const { members } = targetRoom;
-            const updatedMembers = [...members, username];
+            const updatedMembers = [...members, user];
             targetRoom.members = updatedMembers;
-            rooms = rooms.map(room => {
+            rooms = rooms.map((room) => {
                 if (room.id === roomId) {
                     return targetRoom;
                 }

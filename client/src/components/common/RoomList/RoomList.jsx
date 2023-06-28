@@ -2,7 +2,7 @@ import React from 'react';
 import RoomListItem from '../RoomListItem';
 import styles from './RoomList.module.css';
 
-const RoomList = ({ rooms, username }) => {
+const RoomList = ({ rooms, email }) => {
     return (
         <div className={styles.roomListContainer}>
             <div className={styles.header}>
@@ -14,7 +14,7 @@ const RoomList = ({ rooms, username }) => {
                         <RoomListItem
                             key={room.id}
                             room={room}
-                            username={username}
+                            email={email}
                         />
                     ))
                 ) : (

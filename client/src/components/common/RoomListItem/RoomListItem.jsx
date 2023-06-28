@@ -4,8 +4,8 @@ import * as ChatActions from '../../../store/actions/chat';
 import { hasJoinedRoom } from '../../../utils/chatRoomUtils';
 import styles from './RoomListItem.module.css';
 
-const RoomListItem = ({ room, username }) => {
-    const userHasJoinedRoom = hasJoinedRoom(room, username);
+const RoomListItem = ({ room, email }) => {
+    const userHasJoinedRoom = hasJoinedRoom(room, email);
 
     const onClick = () => {
         store.dispatch(ChatActions.setModal({ type: 'Join', room }));

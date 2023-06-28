@@ -4,7 +4,7 @@
     height: 300px;
     width: 500px;
     background-color: var(--background-yellow);
-    box-shadow: 2px 2px 4px var(--dark-gray);
+    box-shadow: 2px 2px 4px var(--dark-gray); 
 }
 
 .userResultContainer:hover {
@@ -50,7 +50,7 @@
     border: solid 1px var(--card-pink);
 }
 
-.label {
+.name {
     padding-top: 10px;
     font-size: 20px;
 }

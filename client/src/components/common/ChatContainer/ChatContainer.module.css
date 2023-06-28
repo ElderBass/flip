@@ -34,7 +34,7 @@
 .msgText {
     font-size: 18px !important;
     margin: 0 !important;
-    color: black;
+    color: var(--dark-gray);
 }
 
 .hostMsg {
