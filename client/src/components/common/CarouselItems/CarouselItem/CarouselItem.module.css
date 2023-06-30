@@ -13,12 +13,12 @@
 .line {
     width: 100%;
     height: 20px;
-    background: var(--card-pink);
-    border-bottom: solid 1px var(--card-pink);
+    border-bottom: solid 2px var(--card-pink);
 }
 
 .label {
-    padding-top: 10px;
+    text-align: center;
+    padding: 12px 8px;
     width: 93%;
     display: block;
     overflow: hidden;
