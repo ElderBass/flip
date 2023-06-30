@@ -32,6 +32,8 @@ const UserResult = ({ user, onUserClick, onDeckClick, styles }) => {
         label: styles.label,
     };
 
+    console.log('\n deckClasses ? ', deckClasses, '\n\n');
+
     return (
         <div className={styles.userResultContainer}>
             <h4 onClick={() => onUserClick(_id)} className={styles.username}>
