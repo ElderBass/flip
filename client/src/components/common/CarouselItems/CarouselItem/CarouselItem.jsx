@@ -6,7 +6,7 @@ const CarouselItem = ({ onClick, label, classes = null }) => {
 
     return (
         <div title={label} onClick={onClick} className={classesObject.container}>
-            <hr className={classesObject.line} />
+            <div className={classesObject.line} />
             <div className={classesObject.label}>{label}</div>
         </div>
     );
