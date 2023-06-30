@@ -30,10 +30,7 @@
 .deckCarouselItem {
     height: 64px;
     width: 84px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    display: block;
     font-size: 16px;
     background-color: var(--action-blue);
     color: var(--background-yellow);
@@ -42,13 +39,18 @@
 
 .line {
     width: 100%;
-    margin-top: 8px;
-    background: var(--card-pink);
-    border: solid 1px var(--card-pink);
+    height: 8px;
+    background-color: var(--action-blue);
+    border-bottom: solid 1px var(--card-pink);
 }
 
-.name {
+.label {
     font-size: 16px;
+    text-align: center;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .deckCarouselItem:hover {
