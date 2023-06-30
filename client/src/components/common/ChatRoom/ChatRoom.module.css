@@ -53,5 +53,6 @@
 .users {
     padding: 16px;
     display: flex;
-    gap: 16px;
+    justify-content: center;
+    gap: 8px;
 }
