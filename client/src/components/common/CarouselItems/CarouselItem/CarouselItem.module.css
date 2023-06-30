@@ -3,10 +3,7 @@
 .container {
     height: 120px;
     width: 210px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    display: block;
     font-size: 24px;
     background-color: var(--action-blue);
     color: var(--background-yellow);
@@ -15,14 +12,15 @@
 
 .line {
     width: 100%;
-    margin-top: 20px;
+    height: 20px;
     background: var(--card-pink);
-    border: solid 1px var(--card-pink);
+    border-bottom: solid 1px var(--card-pink);
 }
 
 .label {
     padding-top: 10px;
     width: 93%;
+    display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
