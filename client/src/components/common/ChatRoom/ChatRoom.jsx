@@ -1,32 +1,30 @@
-import React from 'react';
-import UserResult from '../UserResult';
-import userResultStyles from '../UserResult/ChatResult.module.css';
+import React, { useEffect, useState } from 'react';
+import store from '../../../store';
+import * as ChatActions from '../../../store/actions/chat';
+import ChatRoomSelectDeck from '../ChatRoomSelectDeck';
+import ChatRoomStudyDeck from '../ChatRoomStudyDeck';
 import styles from './ChatRoom.module.css';
 
 const ChatRoom = ({ room }) => {
-    const { name, members = [] } = room;
+    const [showStudyRoom, setShowStudyRoom] = useState(false);
 
-    const onDeckClick = () => {};
+    useEffect(() => {
+        if (room.activeDeck) {
+            setShowStudyRoom(true);
+        }
+    }, [room]);
+
+    const onSelectDeck = (deck) => {
+        store.dispatch(ChatActions.setModal({ type: 'Study', deck }));
+    };
 
     return (
         <div className={styles.chatRoom}>
-            <div className={styles.header}>
-                Now Viewing Room: <span className={styles.roomName}>{name}</span>
-            </div>
-            <div className={styles.heading}>
-                <p style={{ margin: '8px' }}>Choose a Deck to Study</p>
-            </div>
-            <div className={styles.users}>
-                {members.length > 0 &&
-                    members.map((member) => (
-                        <UserResult
-                            key={member._id}
-                            user={member}
-                            onDeckClick={onDeckClick}
-                            styles={userResultStyles}
-                        />
-                    ))}
-            </div>
+            {showStudyRoom ? (
+                <ChatRoomStudyDeck />
+            ): (
+                <ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
+            )}
         </div>
     );
 };

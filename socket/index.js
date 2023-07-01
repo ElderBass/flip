@@ -85,6 +85,12 @@ const init = (server) => {
             ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
+        socket.on('study_deck', (room) => {
+            console.log('\n emitting socket event: study_deck', room, '\n');
+            const { id, activeDeck } = room;
+            ioServer.of(PATH).to(id).emit('studying_deck', activeDeck);
+        });
+
         socket.on('reconnect', (roomId) => {
             console.log('\n emitting socket event: reconnect', roomId, '\n');
             socket.join(roomId);

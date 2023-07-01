@@ -1,7 +1,13 @@
-.chatRoom {
-    width: 100%;
+.chatRoomSelectDeck {
+    min-height: 500px;
+    width: 80%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: var(--text-font);
+    margin: 16px;
+    background-color: var(--action-blue);
+    box-shadow: 2px 2px 4px var(--pencil-gray);
 }
 
 .header {

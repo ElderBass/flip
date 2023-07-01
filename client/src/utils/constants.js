@@ -1,3 +1,4 @@
+import ChatConfirmDeckModal from '../components/common/ChatConfirmDeckModal';
 import ChatJoinLeaveModal from '../components/common/ChatJoinLeaveModal';
 import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
 
@@ -47,4 +48,5 @@ export const ChatModalMap = {
     Create: CreateRoomForm,
     Join: ChatJoinLeaveModal,
     Leave: ChatJoinLeaveModal,
+    Study: ChatConfirmDeckModal,
 };

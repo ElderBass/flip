@@ -41,8 +41,20 @@ export const initSocket = () => {
             });
             store.dispatch(ChatActions.setRooms(rooms));
         });
+
         socket.on('receive_message', (message) => {
             store.dispatch(ChatActions.addMessage(message));
+        });
+
+        socket.on('studying_deck', (deck) => {
+            const {
+                chat: { openRoom },
+            } = store.getState();
+            const updatedRoom = {
+                ...openRoom,
+                activeDeck: deck
+            };
+            store.dispatch(ChatActions.setOpenRoom(updatedRoom));
         });
 
         socket.open();
@@ -117,6 +129,20 @@ export const leaveRoom = (room) => {
     const updatedRoom = { ...room, members: newMembers };
     store.dispatch(ChatActions.updateRoom(updatedRoom));
     socket.emit('leave_room', { roomId: id, email });
+};
+
+export const studyDeck = () => {
+    const {
+        decks: { selectedDeck },
+        chat: { openRoom },
+    } = store.getState();
+    const updatedRoom = {
+        ...openRoom,
+        activeDeck: selectedDeck,
+    };
+    store.dispatch(ChatActions.setOpenRoom(updatedRoom));
+    store.dispatch(ChatActions.setModal(null));
+    socket.emit('study_deck', updatedRoom);
 };
 
 export const reconnect = async (roomId) => {
