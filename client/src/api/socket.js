@@ -2,6 +2,7 @@ import { io } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 import store from '../store';
 import * as ChatActions from '../store/actions/chat';
+import * as DeckActions from '../store/actions/decks';
 
 const PATH = '/socket/connect';
 let socket = null;
@@ -50,11 +51,15 @@ export const initSocket = () => {
             const {
                 chat: { openRoom },
             } = store.getState();
-            const updatedRoom = {
-                ...openRoom,
-                activeDeck: deck
-            };
-            store.dispatch(ChatActions.setOpenRoom(updatedRoom));
+
+            if (!openRoom.activeDeck) {
+                const updatedRoom = {
+                    ...openRoom,
+                    activeDeck: deck,
+                };
+                console.log('\n are we about to update the room with the active deck??', updatedRoom, '\n\n');
+                store.dispatch(ChatActions.updateRoom(updatedRoom));
+            }
         });
 
         socket.open();
@@ -84,12 +89,13 @@ export const createRoom = async (roomName) => {
         user: { email, _id },
     } = store.getState();
 
-    const initialMember = { email, _id };
+    const host = { email, _id };
 
     const newRoom = {
         id: `room-${uuidv4()}`,
-        members: [initialMember],
+        members: [host],
         name: roomName,
+        host,
     };
     store.dispatch(ChatActions.setOpenRoom(newRoom));
     socket.emit('create_room', newRoom);
@@ -111,6 +117,7 @@ export const joinRoom = (room) => {
     socket.emit('join_room', { roomId: room.id, user: newMember });
 };
 
+// TODO: Refactor to choose a new host when the host leaves
 export const leaveRoom = (room) => {
     const { id, members } = room;
     store.dispatch(ChatActions.setOpenRoom({}));
@@ -153,8 +160,7 @@ export const reconnect = async (roomId) => {
 export const disconnectSocket = () => socket.disconnect();
 
 export const resetServer = () => {
-    store.dispatch(ChatActions.setMessages([]));
-    store.dispatch(ChatActions.setOpenRoom({}));
-    store.dispatch(ChatActions.setRooms([]));
+    store.dispatch(ChatActions.reset());
+    store.dispatch(DeckActions.setSelectedDeck(null));
     socket.emit('reset');
 };

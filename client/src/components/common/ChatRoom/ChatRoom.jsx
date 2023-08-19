@@ -3,6 +3,7 @@ import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
 import ChatRoomSelectDeck from '../ChatRoomSelectDeck';
 import ChatRoomStudyDeck from '../ChatRoomStudyDeck';
+import { shuffleArray } from '../../../utils/helpers/shuffleArray';
 import styles from './ChatRoom.module.css';
 
 const ChatRoom = ({ room }) => {
@@ -11,6 +12,8 @@ const ChatRoom = ({ room }) => {
     useEffect(() => {
         if (room.activeDeck) {
             setShowStudyRoom(true);
+        } else {
+            setShowStudyRoom(false);
         }
     }, [room]);
 
@@ -21,8 +24,11 @@ const ChatRoom = ({ room }) => {
     return (
         <div className={styles.chatRoom}>
             {showStudyRoom ? (
-                <ChatRoomStudyDeck />
-            ): (
+                <ChatRoomStudyDeck
+                    cards={shuffleArray(room.activeDeck?.cards) || []}
+                    deckName={room.activeDeck?.deckName}
+                />
+            ) : (
                 <ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
             )}
         </div>
