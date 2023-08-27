@@ -12,7 +12,7 @@ const ChatConfirmDeckModal = ({ deck }) => {
     };
 
     return (
-        <div className={styles.chatConfirmDeckModal}>
+        <div className={styles.modal}>
             <div className={styles.header}>Start Flippin'</div>
             <div className={styles.heading}>
                 <p className={styles.mainText}>

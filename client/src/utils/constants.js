@@ -1,6 +1,7 @@
 import ChatConfirmDeckModal from '../components/common/ChatConfirmDeckModal';
 import ChatJoinLeaveModal from '../components/common/ChatJoinLeaveModal';
 import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
+import ResetChatModal from '../components/common/ResetChatModal';
 
 export const ERROR_MESSAGE = {
     LOGIN: {
@@ -49,4 +50,5 @@ export const ChatModalMap = {
     Join: ChatJoinLeaveModal,
     Leave: ChatJoinLeaveModal,
     Study: ChatConfirmDeckModal,
+    Reset: ResetChatModal,
 };

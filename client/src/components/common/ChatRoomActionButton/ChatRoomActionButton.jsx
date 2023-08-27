@@ -1,11 +1,13 @@
 import React from 'react';
 import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
-import { resetServer } from '../../../api/socket';
 import styles from './ChatRoomActionButton.module.css';
 
 const ChatRoomActionButton = ({ type, room }) => {
-    const onActionClick = (type) => store.dispatch(ChatActions.setModal({ type, room }));
+    const onActionClick = (type) => {
+        console.log('\n ARE WE FUCKING DOING THIS \n\n');
+        store.dispatch(ChatActions.setModal({ type, room }));
+    };
 
     const Reset = () => {
         return (
@@ -14,7 +16,7 @@ const ChatRoomActionButton = ({ type, room }) => {
                     <button
                         type="button"
                         className={`${styles.btn} ${styles.reset}`}
-                        onClick={resetServer}
+                        onClick={() => onActionClick('Reset')}
                     >
                         Reset
                     </button>

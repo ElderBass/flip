@@ -91,6 +91,11 @@ const init = (server) => {
             ioServer.of(PATH).to(id).emit('studying_deck', activeDeck);
         });
 
+        socket.on('increment_study_deck', ({ roomId, deckIndex }) => {
+            console.log('\n emitting socket event: increment_study_deck ([roomId]:', roomId, ' )\n');
+            ioServer.of(PATH).to(roomId).emit('incrementing_study_deck', deckIndex);
+        })
+
         socket.on('reconnect', (roomId) => {
             console.log('\n emitting socket event: reconnect', roomId, '\n');
             socket.join(roomId);
@@ -99,6 +104,7 @@ const init = (server) => {
         socket.on('reset', () => {
             console.log('\n resetting rooms \n');
             rooms = [];
+            ioServer.of(PATH).emit('reset_complete');
         });
     });
 };

@@ -40,15 +40,21 @@ const addMessage = (message) => ({
     payload: message,
 });
 
-const RESET = 'RESET';
-const reset = () => ({
-    type: RESET,
-});
+const SET_STUDY_DECK_INDEX = 'SET_STUDY_DECK_INDEX';
+const setStudyDeckIndex = (index) => ({
+    type: SET_STUDY_DECK_INDEX,
+    payload: index
+})
 
 const SET_MODAL = 'SET_MODAL';
 const setModal = (payload) => ({
     type: SET_MODAL,
     payload,
+});
+
+const RESET = 'RESET';
+const reset = () => ({
+    type: RESET,
 });
 
 export {
@@ -68,6 +74,8 @@ export {
     addMessage,
     SET_MODAL,
     setModal,
+    SET_STUDY_DECK_INDEX,
+    setStudyDeckIndex,
     RESET,
     reset,
 };

@@ -1,0 +1,12 @@
+.resetChatModal {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-areas:
+    "header"
+    "heading"
+    "actions";
+    background-color: var(--create-card-green);
+    box-shadow: 3px 3px 6px var(--dark-gray);
+}

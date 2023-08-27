@@ -3,10 +3,13 @@ import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
 import ChatRoomSelectDeck from '../ChatRoomSelectDeck';
 import ChatRoomStudyDeck from '../ChatRoomStudyDeck';
-import { shuffleArray } from '../../../utils/helpers/shuffleArray';
 import styles from './ChatRoom.module.css';
 
 const ChatRoom = ({ room }) => {
+    const {
+        user: { email },
+    } = store.getState();
+
     const [showStudyRoom, setShowStudyRoom] = useState(false);
 
     useEffect(() => {
@@ -21,13 +24,12 @@ const ChatRoom = ({ room }) => {
         store.dispatch(ChatActions.setModal({ type: 'Study', deck }));
     };
 
+    const userIsHost = room && room.host && email === room.host.email;
+
     return (
         <div className={styles.chatRoom}>
             {showStudyRoom ? (
-                <ChatRoomStudyDeck
-                    cards={shuffleArray(room.activeDeck?.cards) || []}
-                    deckName={room.activeDeck?.deckName}
-                />
+                <ChatRoomStudyDeck deck={room.activeDeck} userIsHost={userIsHost} />
             ) : (
                 <ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
             )}

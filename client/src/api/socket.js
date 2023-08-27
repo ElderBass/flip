@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import store from '../store';
 import * as ChatActions from '../store/actions/chat';
 import * as DeckActions from '../store/actions/decks';
+import { shuffleArray } from '../utils/helpers/shuffleArray';
 
 const PATH = '/socket/connect';
 let socket = null;
@@ -57,9 +58,24 @@ export const initSocket = () => {
                     ...openRoom,
                     activeDeck: deck,
                 };
-                console.log('\n are we about to update the room with the active deck??', updatedRoom, '\n\n');
-                store.dispatch(ChatActions.updateRoom(updatedRoom));
+                store.dispatch(ChatActions.setOpenRoom(updatedRoom));
             }
+        });
+
+        socket.on('incrementing_study_deck', (deckIndex) => {
+            console.log('\n incrementing_study_deck SOCKET deck index =', deckIndex, '\n\n');
+            const {
+                chat: { openRoom },
+            } = store.getState();
+            console.log('\n openRoom - ', openRoom, '\n\n');
+            if (deckIndex !== openRoom.activeDeck.index) {
+                console.log('\n are we about to update study deck index ???? \n\n');
+                store.dispatch(ChatActions.setStudyDeckIndex(deckIndex));
+            }
+        });
+
+        socket.on('reset_complete', () => {
+            store.dispatch(ChatActions.reset());
         });
 
         socket.open();
@@ -143,13 +159,26 @@ export const studyDeck = () => {
         decks: { selectedDeck },
         chat: { openRoom },
     } = store.getState();
+
+    store.dispatch(DeckActions.setSelectedDeck(null));
+
+    // SOME FUCKING HOW this is causing a state invariant error
+    const shuffledCards = shuffleArray(selectedDeck.cards);
+
     const updatedRoom = {
         ...openRoom,
-        activeDeck: selectedDeck,
+        activeDeck: {
+            ...selectedDeck,
+            cards: shuffledCards,
+        },
     };
     store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     store.dispatch(ChatActions.setModal(null));
     socket.emit('study_deck', updatedRoom);
+};
+
+export const incrementStudyDeck = (roomId, index) => {
+    socket.emit('increment_study_deck', { roomId, deckIndex: index });
 };
 
 export const reconnect = async (roomId) => {
@@ -160,7 +189,5 @@ export const reconnect = async (roomId) => {
 export const disconnectSocket = () => socket.disconnect();
 
 export const resetServer = () => {
-    store.dispatch(ChatActions.reset());
-    store.dispatch(DeckActions.setSelectedDeck(null));
     socket.emit('reset');
 };

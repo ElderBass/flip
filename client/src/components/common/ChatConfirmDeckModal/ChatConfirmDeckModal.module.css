@@ -1,4 +1,4 @@
-.chatConfirmDeckModal {
+.modal {
     width: 80%;
     display: grid;
     grid-template-columns: 1fr;
