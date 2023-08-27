@@ -85,10 +85,14 @@ const init = (server) => {
             ioServer.of(PATH).emit('returning_rooms', rooms);
         });
 
-        socket.on('study_deck', (room) => {
-            console.log('\n emitting socket event: study_deck', room, '\n');
-            const { id, activeDeck } = room;
-            ioServer.of(PATH).to(id).emit('studying_deck', activeDeck);
+        socket.on('study_deck', ({ roomId, studyDeck }) => {
+            console.log('\n emitting socket event: study_deck  [studyDeck:]', studyDeck, '\n');
+            ioServer.of(PATH).to(roomId).emit('studying_deck', studyDeck);
+        });
+
+        socket.on('end_study_deck', (roomId) => {
+            console.log('\n emitting socket event: end_study_deck  [roomId:]', roomId, '\n');
+            ioServer.of(PATH).to(roomId).emit('ending_study_deck');
         });
 
         socket.on('increment_study_deck', ({ roomId, deckIndex }) => {

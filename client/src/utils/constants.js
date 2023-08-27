@@ -52,3 +52,5 @@ export const ChatModalMap = {
     Study: ChatConfirmDeckModal,
     Reset: ResetChatModal,
 };
+
+export const incrementIndexDelayMillis = 250;

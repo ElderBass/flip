@@ -3,7 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 import store from '../store';
 import * as ChatActions from '../store/actions/chat';
 import * as DeckActions from '../store/actions/decks';
+import * as ChatStudyDeckActions from '../store/actions/chatStudyDeck';
 import { shuffleArray } from '../utils/helpers/shuffleArray';
+import { incrementIndexDelayMillis } from '../utils/constants';
 
 const PATH = '/socket/connect';
 let socket = null;
@@ -50,27 +52,25 @@ export const initSocket = () => {
 
         socket.on('studying_deck', (deck) => {
             const {
-                chat: { openRoom },
+                chatStudyDeck: { id = null },
             } = store.getState();
 
-            if (!openRoom.activeDeck) {
-                const updatedRoom = {
-                    ...openRoom,
-                    activeDeck: deck,
-                };
-                store.dispatch(ChatActions.setOpenRoom(updatedRoom));
+            if (!id) {
+                store.dispatch(ChatStudyDeckActions.setStudyDeck(deck));
             }
         });
 
+        socket.on('ending_study_deck', () => {
+            store.dispatch(ChatStudyDeckActions.setReachedEndOfDeck(true));
+        });
+
         socket.on('incrementing_study_deck', (deckIndex) => {
-            console.log('\n incrementing_study_deck SOCKET deck index =', deckIndex, '\n\n');
-            const {
-                chat: { openRoom },
-            } = store.getState();
-            console.log('\n openRoom - ', openRoom, '\n\n');
-            if (deckIndex !== openRoom.activeDeck.index) {
-                console.log('\n are we about to update study deck index ???? \n\n');
-                store.dispatch(ChatActions.setStudyDeckIndex(deckIndex));
+            const { chatStudyDeck } = store.getState();
+            if (deckIndex !== chatStudyDeck.index) {
+                store.dispatch(ChatStudyDeckActions.setFlipped(false));
+                setTimeout(() => {
+                    store.dispatch(ChatStudyDeckActions.setIndex(deckIndex));
+                }, incrementIndexDelayMillis);
             }
         });
 
@@ -156,25 +156,28 @@ export const leaveRoom = (room) => {
 
 export const studyDeck = () => {
     const {
-        decks: { selectedDeck },
         chat: { openRoom },
+        decks: { selectedDeck },
     } = store.getState();
 
     store.dispatch(DeckActions.setSelectedDeck(null));
 
-    // SOME FUCKING HOW this is causing a state invariant error
     const shuffledCards = shuffleArray(selectedDeck.cards);
 
-    const updatedRoom = {
-        ...openRoom,
-        activeDeck: {
-            ...selectedDeck,
-            cards: shuffledCards,
-        },
+    const studyDeck = {
+        ...selectedDeck,
+        flipped: false,
+        index: 0,
+        reachedEndOfDeck: false,
+        cards: shuffledCards,
     };
-    store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     store.dispatch(ChatActions.setModal(null));
-    socket.emit('study_deck', updatedRoom);
+    store.dispatch(ChatStudyDeckActions.setStudyDeck(studyDeck));
+    socket.emit('study_deck', { roomId: openRoom.id, studyDeck });
+};
+
+export const endStudyDeck = (roomId) => {
+    socket.emit('end_study_deck', roomId);
 };
 
 export const incrementStudyDeck = (roomId, index) => {
@@ -189,5 +192,6 @@ export const reconnect = async (roomId) => {
 export const disconnectSocket = () => socket.disconnect();
 
 export const resetServer = () => {
+    store.dispatch(ChatStudyDeckActions.reset());
     socket.emit('reset');
 };

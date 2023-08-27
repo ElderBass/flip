@@ -1,57 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import store from '../../../store';
 import ReactCardFlip from 'react-card-flip';
-import { SIDES } from '../../../utils/constants';
-import * as ChatActions from '../../../store/actions/chat';
+import { incrementIndexDelayMillis, SIDES } from '../../../utils/constants';
+import * as ChatStudyDeckActions from '../../../store/actions/chatStudyDeck';
 import StudyCardSide from '../StudyCardSide';
 import StudyDeckHeader from '../StudyDeckHeader/StudyDeckHeader';
 import styles from './ChatRoomStudyDeck.module.css';
-import { incrementStudyDeck } from '../../../api/socket';
+import { endStudyDeck, incrementStudyDeck } from '../../../api/socket';
 
-const ChatRoomStudyDeck = ({ deck = null, userIsHost }) => {
+const ChatRoomStudyDeck = ({ userIsHost }) => {
     const {
-        chat: { openRoom },
+        chat: {
+            openRoom: { id: roomId },
+        },
+        chatStudyDeck,
     } = store.getState();
 
-    const { activeDeck: { index = 0 } = {}, id: roomId } = openRoom;
+    const { cards, deckName, index, flipped, reachedEndOfDeck } = chatStudyDeck;
 
     const cardSideDurationMillis = 5000;
 
-    const [endOfDeck, setEndOfDeck] = useState(false);
-    const [flipped, setFlipped] = useState(false);
     const [showNextButton, setShowNextButton] = useState(false);
 
     useEffect(() => {
-        console.log('\n\n running chat room study deck useEffect \n\n');
         setTimeout(() => {
-            setFlipped(true);
+            store.dispatch(ChatStudyDeckActions.setFlipped(true));
             setShowNextButton(true);
         }, cardSideDurationMillis);
     }, [index]);
 
-    if (!deck || !deck.cards) return null;
-
-    const { cards, deckName } = deck;
+    if (!chatStudyDeck._id) return null;
 
     const onNextClick = () => {
         const nextIndex = index + 1;
-        console.log('\n setting flipped to FALSE \n\n');
-        setFlipped(false);
         setShowNextButton(false);
+        store.dispatch(ChatStudyDeckActions.setFlipped(false));
         setTimeout(() => {
             if (nextIndex === cards.length) {
-                setEndOfDeck(true);
+                store.dispatch(ChatStudyDeckActions.setReachedEndOfDeck(true));
+                endStudyDeck(roomId);
             } else {
-                store.dispatch(ChatActions.setStudyDeckIndex(nextIndex));
+                store.dispatch(ChatStudyDeckActions.setIndex(nextIndex));
                 incrementStudyDeck(roomId, nextIndex);
             }
-        }, 200);
+        }, incrementIndexDelayMillis);
     };
 
     return (
         <div className={styles.chatRoomStudyDeck}>
             <StudyDeckHeader deckName={deckName} />
-            {!endOfDeck ? (
+            {!reachedEndOfDeck ? (
                 <div className={styles.gameWrapper}>
                     <ReactCardFlip isFlipped={flipped}>
                         <StudyCardSide

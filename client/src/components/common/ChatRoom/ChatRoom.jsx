@@ -8,17 +8,18 @@ import styles from './ChatRoom.module.css';
 const ChatRoom = ({ room }) => {
     const {
         user: { email },
+        chatStudyDeck,
     } = store.getState();
 
     const [showStudyRoom, setShowStudyRoom] = useState(false);
 
     useEffect(() => {
-        if (room.activeDeck) {
+        if (chatStudyDeck._id) {
             setShowStudyRoom(true);
         } else {
             setShowStudyRoom(false);
         }
-    }, [room]);
+    }, [chatStudyDeck]);
 
     const onSelectDeck = (deck) => {
         store.dispatch(ChatActions.setModal({ type: 'Study', deck }));
@@ -29,7 +30,7 @@ const ChatRoom = ({ room }) => {
     return (
         <div className={styles.chatRoom}>
             {showStudyRoom ? (
-                <ChatRoomStudyDeck deck={room.activeDeck} userIsHost={userIsHost} />
+                <ChatRoomStudyDeck userIsHost={userIsHost} />
             ) : (
                 <ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
             )}

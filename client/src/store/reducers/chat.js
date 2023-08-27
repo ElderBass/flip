@@ -32,15 +32,6 @@ const chat = (state = INITIAL_STATE, { type, payload }) => {
             return { ...state, messages: [...state.messages, payload] };
         case ChatActions.SET_MODAL:
             return { ...state, actionModal: payload };
-        case ChatActions.SET_STUDY_DECK_INDEX:
-            const updatedRoom = {
-                ...state.openRoom,
-                activeDeck: {
-                    ...state.openRoom.activeDeck,
-                    index: payload
-                }
-            }
-            return { ...state, openRoom: updatedRoom };
         case ChatActions.RESET:
             return INITIAL_STATE;
         default:
