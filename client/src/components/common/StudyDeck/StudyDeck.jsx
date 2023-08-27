@@ -7,6 +7,7 @@ import AddedCards from '../AddedCards';
 import EndOfDeck from '../EndOfDeck';
 import StudyCardSide from '../StudyCardSide';
 import styles from './StudyDeck.module.css';
+import StudyDeckHeader from '../StudyDeckHeader/StudyDeckHeader';
 
 const StudyDeck = () => {
     const history = useHistory();
@@ -55,15 +56,7 @@ const StudyDeck = () => {
     return (
         <div className={styles.studyDeckContent}>
             <div className={styles.studyDeckContainer}>
-                <div className={styles.studyDeckHeader}>
-                    <div className={styles.spacer} />
-                    <h3>
-                        Studying{' '}
-                        <span className={styles.deckName}>
-                            <i>{deckName}</i>
-                        </span>
-                    </h3>
-                </div>
+                <StudyDeckHeader deckName={deckName} />
                 {endOfDeck ? (
                     <EndOfDeck
                         onStudyAgain={onStudyAgain}

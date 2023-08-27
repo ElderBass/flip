@@ -1,5 +1,7 @@
+import ChatConfirmDeckModal from '../components/common/ChatConfirmDeckModal';
 import ChatJoinLeaveModal from '../components/common/ChatJoinLeaveModal';
 import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
+import ResetChatModal from '../components/common/ResetChatModal';
 
 export const ERROR_MESSAGE = {
     LOGIN: {
@@ -43,8 +45,20 @@ export const PAGES = {
     STUDY: '/study',
 };
 
-export const ChatModalMap = {
-    Create: CreateRoomForm,
-    Join: ChatJoinLeaveModal,
-    Leave: ChatJoinLeaveModal,
+export const MODALS = {
+    CREATE: 'Create',
+    JOIN: 'Join',
+    LEAVE: 'Leave',
+    STUDY: 'Study',
+    RESET: 'Reset'
 };
+
+export const ChatModalMap = {
+    [MODALS.CREATE]: CreateRoomForm,
+    [MODALS.JOIN]: ChatJoinLeaveModal,
+    [MODALS.LEAVE]: ChatJoinLeaveModal,
+    [MODALS.STUDY]: ChatConfirmDeckModal,
+    [MODALS.RESET]: ResetChatModal,
+};
+
+export const incrementIndexDelayMillis = 250;

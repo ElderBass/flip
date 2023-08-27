@@ -5,14 +5,19 @@ import store from '../../../../store';
 import { setSelectedDeck } from '../../../../store/actions/decks';
 import CarouselItem from '../CarouselItem';
 
-const Deck = ({ item, itemId, classes }) => {
+const Deck = ({ item, itemId, classes, onClick = null }) => {
     const { deckName } = item;
     const history = useHistory();
 
-    const onClick = async () => {
+    const clickHandler = async () => {
         try {
             const response = await getOneDeck(itemId);
-            store.dispatch(setSelectedDeck(response.data.deck));
+            const deck = response.data.deck;
+            store.dispatch(setSelectedDeck(deck));
+            if (onClick) {
+                onClick(deck);
+                return;
+            }
             history.push('/deck');
         } catch (e) {
             console.log('\n error in getting single deck to set as selected deck: ', '\n\n');
@@ -20,7 +25,7 @@ const Deck = ({ item, itemId, classes }) => {
     };
 
     return (
-        <CarouselItem onClick={onClick} label={deckName} classes={classes} />
+        <CarouselItem onClick={clickHandler} label={deckName} classes={classes} />
     );
 };
 

@@ -36,7 +36,11 @@ const Chat = () => {
             <div className={styles.chatPageContent}>
                 <div className={styles.chat}>
                     {actionModal && actionModal.type ? (
-                        <ModalComponent type={actionModal.type} room={actionModal.room} />
+                        <ModalComponent
+                            type={actionModal.type}
+                            room={actionModal.room}
+                            deck={actionModal.deck}
+                        />
                     ) : (
                         <ChatRoomContainer rooms={rooms} openRoom={openRoom} email={email} />
                     )}

@@ -16,19 +16,6 @@
     gap: 20px;
 }
 
-.studyDeckHeader {
-    width: 60%;
-    text-align: center;
-}
-
-.studyDeckHeader > h3 {
-    font-size: 30px;
-}
-
-.deckName {
-    color: var(--card-pink);
-}
-
 .cancelStudyBtn {
     flex: 1 0 33%;
     color: var(--card-purple);

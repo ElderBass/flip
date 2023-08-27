@@ -1,11 +1,13 @@
 import React from 'react';
 import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
-import { resetServer } from '../../../api/socket';
+import { MODALS } from '../../../utils/constants';
 import styles from './ChatRoomActionButton.module.css';
 
 const ChatRoomActionButton = ({ type, room }) => {
-    const onActionClick = (type) => store.dispatch(ChatActions.setModal({ type, room }));
+    const onActionClick = (type) => {
+        store.dispatch(ChatActions.setModal({ type, room }));
+    };
 
     const Reset = () => {
         return (
@@ -14,7 +16,7 @@ const ChatRoomActionButton = ({ type, room }) => {
                     <button
                         type="button"
                         className={`${styles.btn} ${styles.reset}`}
-                        onClick={resetServer}
+                        onClick={() => onActionClick(MODALS.RESET)}
                     >
                         Reset
                     </button>
@@ -22,7 +24,7 @@ const ChatRoomActionButton = ({ type, room }) => {
                 <button
                     type="button"
                     className={`${styles.btn} ${styles.reset}`}
-                    onClick={() => onActionClick('Leave')}
+                    onClick={() => onActionClick(MODALS.LEAVE)}
                 >
                     Leave Room
                 </button>
@@ -34,7 +36,7 @@ const ChatRoomActionButton = ({ type, room }) => {
         <button
             type="button"
             className={`${styles.btn} ${styles.create}`}
-            onClick={() => onActionClick('Create')}
+            onClick={() => onActionClick(MODALS.CREATE)}
         >
             Create Chat Room
         </button>

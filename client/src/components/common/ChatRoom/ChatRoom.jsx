@@ -1,32 +1,41 @@
-import React from 'react';
-import UserResult from '../UserResult';
-import userResultStyles from '../UserResult/ChatResult.module.css';
+import React, { useEffect, useState } from 'react';
+import store from '../../../store';
+import * as ChatActions from '../../../store/actions/chat';
+import { MODALS } from '../../../utils/constants';
+import ChatRoomSelectDeck from '../ChatRoomSelectDeck';
+import ChatRoomStudyDeck from '../ChatRoomStudyDeck';
 import styles from './ChatRoom.module.css';
 
 const ChatRoom = ({ room }) => {
-    const { name, members = [] } = room;
+    const {
+        user: { email },
+        chatStudyDeck, 
+        chat: { openRoom: { id } }
+    } = store.getState();
 
-    const onDeckClick = () => {};
+    const [showStudyRoom, setShowStudyRoom] = useState(false);
+
+    useEffect(() => {
+        if (chatStudyDeck._id) {
+            setShowStudyRoom(true);
+        } else {
+            setShowStudyRoom(false);
+        }
+    }, [chatStudyDeck]);
+
+    const onSelectDeck = (deck) => {
+        store.dispatch(ChatActions.setModal({ type: MODALS.STUDY, deck }));
+    };
+
+    const userIsHost = room && room.host && email === room.host.email;
 
     return (
         <div className={styles.chatRoom}>
-            <div className={styles.header}>
-                Now Viewing Room: <span className={styles.roomName}>{name}</span>
-            </div>
-            <div className={styles.heading}>
-                <p style={{ margin: '8px' }}>Choose a Deck to Study</p>
-            </div>
-            <div className={styles.users}>
-                {members.length > 0 &&
-                    members.map((member) => (
-                        <UserResult
-                            key={member._id}
-                            user={member}
-                            onDeckClick={onDeckClick}
-                            styles={userResultStyles}
-                        />
-                    ))}
-            </div>
+            {showStudyRoom ? (
+                <ChatRoomStudyDeck deck={chatStudyDeck} roomId={id} userIsHost={userIsHost} />
+            ) : (
+                <ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
+            )}
         </div>
     );
 };

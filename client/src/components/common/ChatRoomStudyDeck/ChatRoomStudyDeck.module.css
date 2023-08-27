@@ -1,0 +1,31 @@
+.chatRoomStudyDeck {
+    flex: 1 0 70%;
+    max-height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nextBtn {
+    outline: none;
+    border: none;
+    background-color: var(--card-purple);
+    font-size: 24px;
+    padding: 16px;
+    color: white;
+    margin: 16px;
+    border-radius: 8px;
+    font-family: var(--text-font);
+}
+
+.nextBtn:hover {
+    cursor: pointer;
+    background-color: var(--card-green);
+}

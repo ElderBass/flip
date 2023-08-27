@@ -1,7 +1,14 @@
-.chatRoom {
-    width: 100%;
+.chatRoomSelectDeck {
+    min-height: 500px;
+    width: 80%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    font-family: var(--text-font);
+    margin: 16px;
+    background-color: var(--action-blue);
+    box-shadow: 2px 2px 4px var(--pencil-gray);
 }
 
 .header {
@@ -24,6 +31,10 @@
     padding: 16px 0;
     font-size: 24px;
     color: var(--background-yellow);
+}
+
+.headingText {
+    margin: 8px;
 }
 
 .roomDeets {
@@ -49,4 +60,13 @@
     display: flex;
     justify-content: center;
     gap: 8px;
+}
+
+.waitingMessage {
+    color: var(--dark-gray);
+    font-size: 24px;
+}
+
+.waitingText {
+    margin: 8px !important;
 }
