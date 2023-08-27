@@ -52,10 +52,10 @@ export const initSocket = () => {
 
         socket.on('studying_deck', (deck) => {
             const {
-                chatStudyDeck: { id = null },
+                chatStudyDeck: { _id = null },
             } = store.getState();
 
-            if (!id) {
+            if (!_id) {
                 store.dispatch(ChatStudyDeckActions.setStudyDeck(deck));
             }
         });
@@ -192,6 +192,5 @@ export const reconnect = async (roomId) => {
 export const disconnectSocket = () => socket.disconnect();
 
 export const resetServer = () => {
-    store.dispatch(ChatStudyDeckActions.reset());
     socket.emit('reset');
 };

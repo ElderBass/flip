@@ -2,6 +2,7 @@ import React from 'react';
 import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
 import { hasJoinedRoom } from '../../../utils/chatRoomUtils';
+import { MODALS } from '../../../utils/constants';
 import { trimEmail } from '../../../utils/helpers/emailHelpers';
 import styles from './RoomListItem.module.css';
 
@@ -11,7 +12,7 @@ const RoomListItem = ({ room, email }) => {
     const { members, name, host } = room;
 
     const onClick = () => {
-        store.dispatch(ChatActions.setModal({ type: 'Join', room }));
+        store.dispatch(ChatActions.setModal({ type: MODALS.JOIN, room }));
     };
 
     const nameText = `Room: ${name}`;

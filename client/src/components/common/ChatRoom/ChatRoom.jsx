@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
+import { MODALS } from '../../../utils/constants';
 import ChatRoomSelectDeck from '../ChatRoomSelectDeck';
 import ChatRoomStudyDeck from '../ChatRoomStudyDeck';
 import styles from './ChatRoom.module.css';
@@ -8,7 +9,8 @@ import styles from './ChatRoom.module.css';
 const ChatRoom = ({ room }) => {
     const {
         user: { email },
-        chatStudyDeck,
+        chatStudyDeck, 
+        chat: { openRoom: { id } }
     } = store.getState();
 
     const [showStudyRoom, setShowStudyRoom] = useState(false);
@@ -22,7 +24,7 @@ const ChatRoom = ({ room }) => {
     }, [chatStudyDeck]);
 
     const onSelectDeck = (deck) => {
-        store.dispatch(ChatActions.setModal({ type: 'Study', deck }));
+        store.dispatch(ChatActions.setModal({ type: MODALS.STUDY, deck }));
     };
 
     const userIsHost = room && room.host && email === room.host.email;
@@ -30,7 +32,7 @@ const ChatRoom = ({ room }) => {
     return (
         <div className={styles.chatRoom}>
             {showStudyRoom ? (
-                <ChatRoomStudyDeck userIsHost={userIsHost} />
+                <ChatRoomStudyDeck deck={chatStudyDeck} roomId={id} userIsHost={userIsHost} />
             ) : (
                 <ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
             )}

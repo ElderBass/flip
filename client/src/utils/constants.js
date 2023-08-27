@@ -45,12 +45,20 @@ export const PAGES = {
     STUDY: '/study',
 };
 
+export const MODALS = {
+    CREATE: 'Create',
+    JOIN: 'Join',
+    LEAVE: 'Leave',
+    STUDY: 'Study',
+    RESET: 'Reset'
+};
+
 export const ChatModalMap = {
-    Create: CreateRoomForm,
-    Join: ChatJoinLeaveModal,
-    Leave: ChatJoinLeaveModal,
-    Study: ChatConfirmDeckModal,
-    Reset: ResetChatModal,
+    [MODALS.CREATE]: CreateRoomForm,
+    [MODALS.JOIN]: ChatJoinLeaveModal,
+    [MODALS.LEAVE]: ChatJoinLeaveModal,
+    [MODALS.STUDY]: ChatConfirmDeckModal,
+    [MODALS.RESET]: ResetChatModal,
 };
 
 export const incrementIndexDelayMillis = 250;

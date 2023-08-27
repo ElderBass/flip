@@ -8,15 +8,8 @@ import StudyDeckHeader from '../StudyDeckHeader/StudyDeckHeader';
 import styles from './ChatRoomStudyDeck.module.css';
 import { endStudyDeck, incrementStudyDeck } from '../../../api/socket';
 
-const ChatRoomStudyDeck = ({ userIsHost }) => {
-    const {
-        chat: {
-            openRoom: { id: roomId },
-        },
-        chatStudyDeck,
-    } = store.getState();
-
-    const { cards, deckName, index, flipped, reachedEndOfDeck } = chatStudyDeck;
+const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
+    const { cards, deckName, index, flipped, reachedEndOfDeck, _id: deckId } = deck;
 
     const cardSideDurationMillis = 5000;
 
@@ -29,7 +22,7 @@ const ChatRoomStudyDeck = ({ userIsHost }) => {
         }, cardSideDurationMillis);
     }, [index]);
 
-    if (!chatStudyDeck._id) return null;
+    if (!deckId) return null;
 
     const onNextClick = () => {
         const nextIndex = index + 1;

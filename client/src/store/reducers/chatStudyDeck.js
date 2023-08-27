@@ -1,4 +1,5 @@
 import * as ChatStudyDeckActions from '../actions/chatStudyDeck';
+import * as ChatActions from '../actions/chat';
 
 const INITIAL_STATE = {
     _id: '',
@@ -19,7 +20,7 @@ const chatStudyDeck = (state = INITIAL_STATE, { type, payload }) => {
             return { ...state, index: payload };
         case ChatStudyDeckActions.SET_REACHED_END_OF_DECK:
             return { ...state, reachedEndOfDeck: payload };
-        case ChatStudyDeckActions.RESET:
+        case ChatActions.RESET:
             return INITIAL_STATE;
         default:
             return state;

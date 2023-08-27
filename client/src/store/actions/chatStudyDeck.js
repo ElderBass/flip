@@ -22,11 +22,6 @@ const setReachedEndOfDeck = (reachedEnd) => ({
     payload: reachedEnd,
 });
 
-const RESET = 'RESET';
-const reset = () => ({
-    type: RESET,
-});
-
 export {
     SET_STUDY_DECK,
     setStudyDeck,
@@ -36,6 +31,4 @@ export {
     setIndex,
     SET_REACHED_END_OF_DECK,
     setReachedEndOfDeck,
-    RESET,
-    reset,
 };

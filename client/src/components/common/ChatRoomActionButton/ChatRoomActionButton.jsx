@@ -1,11 +1,11 @@
 import React from 'react';
 import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
+import { MODALS } from '../../../utils/constants';
 import styles from './ChatRoomActionButton.module.css';
 
 const ChatRoomActionButton = ({ type, room }) => {
     const onActionClick = (type) => {
-        console.log('\n ARE WE FUCKING DOING THIS \n\n');
         store.dispatch(ChatActions.setModal({ type, room }));
     };
 
@@ -16,7 +16,7 @@ const ChatRoomActionButton = ({ type, room }) => {
                     <button
                         type="button"
                         className={`${styles.btn} ${styles.reset}`}
-                        onClick={() => onActionClick('Reset')}
+                        onClick={() => onActionClick(MODALS.RESET)}
                     >
                         Reset
                     </button>
@@ -24,7 +24,7 @@ const ChatRoomActionButton = ({ type, room }) => {
                 <button
                     type="button"
                     className={`${styles.btn} ${styles.reset}`}
-                    onClick={() => onActionClick('Leave')}
+                    onClick={() => onActionClick(MODALS.LEAVE)}
                 >
                     Leave Room
                 </button>
@@ -36,7 +36,7 @@ const ChatRoomActionButton = ({ type, room }) => {
         <button
             type="button"
             className={`${styles.btn} ${styles.create}`}
-            onClick={() => onActionClick('Create')}
+            onClick={() => onActionClick(MODALS.CREATE)}
         >
             Create Chat Room
         </button>
