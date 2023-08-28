@@ -7,6 +7,7 @@ import StudyCardSide from '../StudyCardSide';
 import StudyDeckHeader from '../StudyDeckHeader/StudyDeckHeader';
 import styles from './ChatRoomStudyDeck.module.css';
 import { endStudyDeck, incrementStudyDeck } from '../../../api/socket';
+import ChatEndStudyNotice from '../ChatNotice';
 
 const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
     const { cards, deckName, index, flipped, reachedEndOfDeck, _id: deckId } = deck;
@@ -41,7 +42,7 @@ const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
 
     return (
         <div className={styles.chatRoomStudyDeck}>
-            <StudyDeckHeader deckName={deckName} />
+            <StudyDeckHeader endOfDeck={reachedEndOfDeck} deckName={deckName} />
             {!reachedEndOfDeck ? (
                 <div className={styles.gameWrapper}>
                     <ReactCardFlip isFlipped={flipped}>
@@ -63,7 +64,7 @@ const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
                     )}
                 </div>
             ) : (
-                <div>This is the end homie</div>
+                <ChatEndStudyNotice userIsHost={userIsHost} />
             )}
         </div>
     );

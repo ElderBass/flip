@@ -52,10 +52,10 @@ export const initSocket = () => {
 
         socket.on('studying_deck', (deck) => {
             const {
-                chatStudyDeck: { _id = null },
+                chatStudyDeck: { _id = null, reachedEndOfDeck },
             } = store.getState();
 
-            if (!_id) {
+            if (!_id || reachedEndOfDeck) {
                 store.dispatch(ChatStudyDeckActions.setStudyDeck(deck));
             }
         });
@@ -152,6 +152,17 @@ export const leaveRoom = (room) => {
     const updatedRoom = { ...room, members: newMembers };
     store.dispatch(ChatActions.updateRoom(updatedRoom));
     socket.emit('leave_room', { roomId: id, email });
+};
+
+export const destroyRoom = () => {
+    const {
+        chat: {
+            openRoom: { id: roomId },
+        },
+    } = store.getState();
+
+    store.dispatch(ChatActions.reset());
+    socket.emit('destroy_room', roomId);
 };
 
 export const studyDeck = () => {

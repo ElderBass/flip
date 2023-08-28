@@ -21,6 +21,7 @@ const chatStudyDeck = (state = INITIAL_STATE, { type, payload }) => {
         case ChatStudyDeckActions.SET_REACHED_END_OF_DECK:
             return { ...state, reachedEndOfDeck: payload };
         case ChatActions.RESET:
+        case ChatStudyDeckActions.RESET:
             return INITIAL_STATE;
         default:
             return state;

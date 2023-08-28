@@ -12,6 +12,10 @@
     margin: 0;
 }
 
+.roomNameSpan {
+    color: var(--create-card-green);
+}
+
 .chatRoomName {
     font-size: 20px;
     margin: 12px 0 8px 0;

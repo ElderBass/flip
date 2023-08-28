@@ -1,5 +1,5 @@
 import ChatConfirmDeckModal from '../components/common/ChatConfirmDeckModal';
-import ChatJoinLeaveModal from '../components/common/ChatJoinLeaveModal';
+import ChatRoomActionModal from '../components/common/ChatRoomActionModal';
 import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
 import ResetChatModal from '../components/common/ResetChatModal';
 
@@ -50,13 +50,15 @@ export const MODALS = {
     JOIN: 'Join',
     LEAVE: 'Leave',
     STUDY: 'Study',
-    RESET: 'Reset'
+    RESET: 'Reset',
+    END_ROOM: 'End'
 };
 
 export const ChatModalMap = {
     [MODALS.CREATE]: CreateRoomForm,
-    [MODALS.JOIN]: ChatJoinLeaveModal,
-    [MODALS.LEAVE]: ChatJoinLeaveModal,
+    [MODALS.JOIN]: ChatRoomActionModal,
+    [MODALS.LEAVE]: ChatRoomActionModal,
+    [MODALS.END_ROOM]: ChatRoomActionModal,
     [MODALS.STUDY]: ChatConfirmDeckModal,
     [MODALS.RESET]: ResetChatModal,
 };

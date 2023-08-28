@@ -46,7 +46,7 @@ const setModal = (payload) => ({
     payload,
 });
 
-const RESET = 'RESET';
+const RESET = 'RESET_CHAT';
 const reset = () => ({
     type: RESET,
 });
