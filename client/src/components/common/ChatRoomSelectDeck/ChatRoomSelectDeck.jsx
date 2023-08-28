@@ -25,9 +25,9 @@ const ChatRoomSelectDeck = ({ room, onSelectDeck }) => {
             {userIsHost ? (
                 <div className={styles.users}>
                     {members.length > 0 &&
-                        members.map((member) => (
+                        members.map((member, i) => (
                             <UserResult
-                                key={member._id}
+                                key={i}
                                 user={member}
                                 onDeckClick={onSelectDeck}
                                 styles={userResultStyles}

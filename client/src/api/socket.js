@@ -52,10 +52,10 @@ export const initSocket = () => {
 
         socket.on('studying_deck', (deck) => {
             const {
-                chatStudyDeck: { _id = null },
+                chatStudyDeck: { _id = null, reachedEndOfDeck },
             } = store.getState();
 
-            if (!_id) {
+            if (!_id || reachedEndOfDeck) {
                 store.dispatch(ChatStudyDeckActions.setStudyDeck(deck));
             }
         });
@@ -154,6 +154,17 @@ export const leaveRoom = (room) => {
     socket.emit('leave_room', { roomId: id, email });
 };
 
+export const destroyRoom = () => {
+    const {
+        chat: {
+            openRoom: { id: roomId },
+        },
+    } = store.getState();
+
+    store.dispatch(ChatActions.reset());
+    socket.emit('destroy_room', roomId);
+};
+
 export const studyDeck = () => {
     const {
         chat: { openRoom },
@@ -173,6 +184,7 @@ export const studyDeck = () => {
     };
     store.dispatch(ChatActions.setModal(null));
     store.dispatch(ChatStudyDeckActions.setStudyDeck(studyDeck));
+    console.log('\n emitting study_deck = ', studyDeck, '\n\n');
     socket.emit('study_deck', { roomId: openRoom.id, studyDeck });
 };
 

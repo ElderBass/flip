@@ -1,10 +1,10 @@
 import React from 'react';
 import store from '../../../store';
 import * as ChatActions from '../../../store/actions/chat';
-import { joinRoom, leaveRoom } from '../../../api/socket';
-import styles from './ChatJoinLeaveModal.module.css';
+import { destroyRoom, joinRoom, leaveRoom } from '../../../api/socket';
+import styles from './ChatRoomActionModal.module.css';
 
-const ChatJoinLeaveModal = ({ room, type }) => {
+const ChatRoomActionModal = ({ room, type }) => {
     const textMap = {
         Leave: {
             main: 'Had enough chatter?',
@@ -14,11 +14,16 @@ const ChatJoinLeaveModal = ({ room, type }) => {
             main: 'Feeling social?',
             sub: 'Join up to flip some cards while chatting with friends',
         },
+        End: {
+            main: 'Need a break?',
+            sub: 'This cannot be undone, but you can create another room any time'
+        }
     };
 
     const onConfirmClickMap = {
         Leave: leaveRoom,
         Join: joinRoom,
+        End: destroyRoom
     };
 
     const onConfirm = () => onConfirmClickMap[type](room);
@@ -46,4 +51,4 @@ const ChatJoinLeaveModal = ({ room, type }) => {
     );
 };
 
-export default ChatJoinLeaveModal;
+export default ChatRoomActionModal;
