@@ -184,7 +184,6 @@ export const studyDeck = () => {
     };
     store.dispatch(ChatActions.setModal(null));
     store.dispatch(ChatStudyDeckActions.setStudyDeck(studyDeck));
-    console.log('\n emitting study_deck = ', studyDeck, '\n\n');
     socket.emit('study_deck', { roomId: openRoom.id, studyDeck });
 };
 
