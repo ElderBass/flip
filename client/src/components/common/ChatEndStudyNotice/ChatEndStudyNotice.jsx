@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatEndStudyActions from '../ChatEndStudyActions/ChatEndStudyActions';
+import ChatEndStudyActions from '../ChatEndStudyActions';
 import styles from './ChatEndStudyNotice.module.css';
 
 const ChatEndStudyNotice = ({ userIsHost }) => {

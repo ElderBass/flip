@@ -1,10 +1,3 @@
-import ChatConfirmDeckModal from '../components/common/ChatConfirmDeckModal';
-import ChatNewHostModal from '../components/common/ChatNewHostModal';
-import ChatRoomActionModal from '../components/common/ChatRoomActionModal';
-import ChatRoomEndedModal from '../components/common/ChatRoomEndedModal';
-import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
-import ResetChatModal from '../components/common/ResetChatModal';
-
 export const ERROR_MESSAGE = {
     LOGIN: {
         404: "Huh, couldn't find any user with that email",
@@ -56,17 +49,6 @@ export const MODALS = {
     END_ROOM: 'End',
     ROOM_ENDED: 'RoomEnded',
     NEW_HOST: 'NewHost'
-};
-
-export const ChatModalMap = {
-    [MODALS.CREATE]: CreateRoomForm,
-    [MODALS.JOIN]: ChatRoomActionModal,
-    [MODALS.LEAVE]: ChatRoomActionModal,
-    [MODALS.END_ROOM]: ChatRoomActionModal,
-    [MODALS.STUDY]: ChatConfirmDeckModal,
-    [MODALS.RESET]: ResetChatModal,
-    [MODALS.ROOM_ENDED]: ChatRoomEndedModal,
-    [MODALS.NEW_HOST]: ChatNewHostModal
 };
 
 export const incrementIndexDelayMillis = 250;

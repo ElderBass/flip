@@ -12,7 +12,7 @@ const RoomListItem = ({ room, email }) => {
     const { members, name, host } = room;
 
     const onClick = () => {
-        store.dispatch(ChatActions.setModal({ type: MODALS.JOIN, room }));
+        store.dispatch(ChatActions.setModal({ type: MODALS.JOIN, item: room }));
     };
 
     const nameText = `Room: ${name}`;

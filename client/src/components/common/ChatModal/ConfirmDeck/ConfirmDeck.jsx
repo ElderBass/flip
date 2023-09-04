@@ -1,11 +1,11 @@
 import React from 'react';
-import { studyDeck } from '../../../api/socket';
-import store from '../../../store';
-import * as ChatActions from '../../../store/actions/chat';
-import * as DeckActions from '../../../store/actions/decks';
-import styles from './ChatConfirmDeckModal.module.css';
+import { studyDeck } from '../../../../api/socket';
+import store from '../../../../store';
+import * as ChatActions from '../../../../store/actions/chat';
+import * as DeckActions from '../../../../store/actions/decks';
+import styles from './ConfirmDeck.module.css';
 
-const ChatConfirmDeckModal = ({ deck }) => {
+const ConfirmDeck = ({ item: deck }) => {
     const onCancelClick = () => {
         store.dispatch(ChatActions.setModal(null));
         store.dispatch(DeckActions.setSelectedDeck(null));
@@ -32,4 +32,4 @@ const ChatConfirmDeckModal = ({ deck }) => {
     );
 };
 
-export default ChatConfirmDeckModal;
+export default ConfirmDeck;

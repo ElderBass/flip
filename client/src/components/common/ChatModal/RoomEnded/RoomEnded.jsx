@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import store from '../../../store';
-import * as ChatActions from '../../../store/actions/chat';
-import styles from './ChatRoomEndedModal.module.css';
+import store from '../../../../store';
+import * as ChatActions from '../../../../store/actions/chat';
+import styles from './RoomEnded.module.css';
 
-const ChatRoomEndedModal = ({ room }) => {
+const RoomEnded = ({ item: room }) => {
     const history = useHistory();
 
     const onHomeClick = () => {
@@ -41,4 +41,4 @@ const ChatRoomEndedModal = ({ room }) => {
     );
 };
 
-export default ChatRoomEndedModal;
+export default RoomEnded;

@@ -6,7 +6,7 @@ import styles from './ChatRoomActionButton.module.css';
 
 const ChatRoomActionButton = ({ type, room }) => {
     const onActionClick = (type) => {
-        store.dispatch(ChatActions.setModal({ type, room }));
+        store.dispatch(ChatActions.setModal({ type, item: room }));
     };
 
     const Reset = () => {

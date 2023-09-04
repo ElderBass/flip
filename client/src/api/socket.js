@@ -40,7 +40,7 @@ export const initSocket = () => {
             if (hasJoinedRoom(targetRoom, email)) {
                 if (destroyedRoom && destroyedRoom.host.email !== email) {
                     store.dispatch(
-                        ChatActions.setModal({ type: MODALS.ROOM_ENDED, room: destroyedRoom })
+                        ChatActions.setModal({ type: MODALS.ROOM_ENDED, item: destroyedRoom })
                     );
                 } else if (!destroyedRoom) {
                     store.dispatch(ChatActions.setOpenRoom(targetRoom));
@@ -59,7 +59,7 @@ export const initSocket = () => {
             if (hasJoinedRoom(updatedRoom, email)) {
                 if (hasNewHost) {
                     store.dispatch(
-                        ChatActions.setModal({ type: MODALS.NEW_HOST, room: updatedRoom })
+                        ChatActions.setModal({ type: MODALS.NEW_HOST, item: updatedRoom })
                     );
                     return;
                 }
