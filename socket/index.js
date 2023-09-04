@@ -28,7 +28,7 @@ const init = (server) => {
     ioServer = new Server(server, options);
 
     ioServer.of(PATH).on('connection', (socket) => {
-        ioServer.of(PATH).emit('returning_rooms', rooms);
+        ioServer.of(PATH).emit('returning_rooms', { rooms, roomId: null });
 
         socket.on('send_message', (msg) => {
             console.log('\n emitting socket event send_message: ', msg, '\n');
@@ -41,13 +41,14 @@ const init = (server) => {
             rooms.push(room);
             console.log('\n current rooms: ', rooms, '\n');
             socket.join(id);
-            ioServer.of(PATH).emit('returning_rooms', rooms);
+            ioServer.of(PATH).emit('returning_rooms', { rooms, roomId: id });
         });
 
         socket.on('destroy_room', (roomId) => {
             console.log('\n destroying room: ', roomId, '\n');
+            const oldRoom = rooms.filter((room) => room.id === roomId)[0];
             rooms = rooms.filter((room) => room.id !== roomId);
-            ioServer.of(PATH).emit('returning_rooms', rooms);
+            ioServer.of(PATH).to(roomId).emit('after_destroy_room', { rooms, oldRoom, roomId });
         });
 
         socket.on('leave_room', ({ roomId, email }) => {
@@ -65,24 +66,28 @@ const init = (server) => {
                 return room;
             });
             socket.leave(roomId);
-            ioServer.of(PATH).emit('returning_rooms', rooms);
+            ioServer.of(PATH).emit('returning_rooms', { rooms, roomId });
         });
 
         socket.on('join_room', ({ roomId, user }) => {
             console.log('\n emitting socket event: join_room', roomId, '\n');
             console.log('\n current rooms: ', rooms, '\n');
             const targetRoom = rooms.filter((room) => room.id === roomId)[0];
-            const { members } = targetRoom;
-            const updatedMembers = [...members, user];
-            targetRoom.members = updatedMembers;
-            rooms = rooms.map((room) => {
-                if (room.id === roomId) {
-                    return targetRoom;
-                }
-                return room;
-            });
-            socket.join(roomId);
-            ioServer.of(PATH).emit('returning_rooms', rooms);
+
+            if (targetRoom) {
+                const { members } = targetRoom;
+                const updatedMembers = [...members, user];
+                targetRoom.members = updatedMembers;
+                rooms = rooms.map((room) => {
+                    if (room.id === roomId) {
+                        return targetRoom;
+                    }
+                    return room;
+                });
+                socket.join(roomId);
+            }
+
+            ioServer.of(PATH).emit('returning_rooms', { rooms, roomId });
         });
 
         socket.on('study_deck', ({ roomId, studyDeck }) => {
