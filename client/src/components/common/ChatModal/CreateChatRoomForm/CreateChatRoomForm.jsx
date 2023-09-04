@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { createRoom } from '../../../api/socket';
-import store from '../../../store';
-import * as ChatActions from '../../../store/actions/chat';
-import styles from './CreateRoomForm.module.css';
+import { createRoom } from '../../../../api/socket';
+import store from '../../../../store';
+import * as ChatActions from '../../../../store/actions/chat';
+import styles from './CreateChatRoomForm.module.css';
 
-const CreateRoomForm = () => {
+const CreateChatRoomForm = () => {
     const [name, setName] = useState('');
 
     const onChange = (e) => setName(e.target.value);
@@ -47,4 +47,4 @@ const CreateRoomForm = () => {
     );
 };
 
-export default CreateRoomForm;
+export default CreateChatRoomForm;

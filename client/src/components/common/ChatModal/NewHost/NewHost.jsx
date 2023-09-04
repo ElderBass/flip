@@ -1,11 +1,11 @@
 import React from 'react';
-import store from '../../../store';
-import * as ChatActions from '../../../store/actions/chat';
-import * as ChatStudyDeckActions from '../../../store/actions/chatStudyDeck';
-import { trimEmail } from '../../../utils/helpers/emailHelpers';
-import styles from './ChatNewHostModal.module.css';
+import store from '../../../../store';
+import * as ChatActions from '../../../../store/actions/chat';
+import * as ChatStudyDeckActions from '../../../../store/actions/chatStudyDeck';
+import { trimEmail } from '../../../../utils/helpers/emailHelpers';
+import styles from './NewHost.module.css';
 
-const ChatNewHostModal = ({ room }) => {
+const NewHost = ({ item: room }) => {
     const {
         host: { email: hostEmail },
     } = room;
@@ -46,4 +46,4 @@ const ChatNewHostModal = ({ room }) => {
     );
 };
 
-export default ChatNewHostModal;
+export default NewHost;

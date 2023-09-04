@@ -1,10 +1,10 @@
 import React from 'react';
-import store from '../../../store';
-import { resetServer } from '../../../api/socket';
-import * as ChatActions from '../../../store/actions/chat';
-import styles from '../ChatConfirmDeckModal/ChatConfirmDeckModal.module.css';
+import store from '../../../../store';
+import { resetServer } from '../../../../api/socket';
+import * as ChatActions from '../../../../store/actions/chat';
+import styles from '../ConfirmDeck/ConfirmDeck.module.css';
 
-const ResetChatModal = () => {
+const ResetChat = () => {
     const onCancelClick = () => {
         store.dispatch(ChatActions.setModal(null));
     };
@@ -27,4 +27,4 @@ const ResetChatModal = () => {
     );
 };
 
-export default ResetChatModal;
+export default ResetChat;

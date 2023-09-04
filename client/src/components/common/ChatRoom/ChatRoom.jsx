@@ -24,7 +24,7 @@ const ChatRoom = ({ room }) => {
     }, [chatStudyDeck]);
 
     const onSelectDeck = (deck) => {
-        store.dispatch(ChatActions.setModal({ type: MODALS.STUDY, deck }));
+        store.dispatch(ChatActions.setModal({ type: MODALS.STUDY, item: deck }));
     };
 
     const userIsHost = room && room.host && email === room.host.email;

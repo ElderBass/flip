@@ -1,10 +1,10 @@
 import React from 'react';
-import store from '../../../store';
-import * as ChatActions from '../../../store/actions/chat';
-import { destroyRoom, joinRoom, leaveRoom } from '../../../api/socket';
-import styles from './ChatRoomActionModal.module.css';
+import store from '../../../../store';
+import * as ChatActions from '../../../../store/actions/chat';
+import { destroyRoom, joinRoom, leaveRoom } from '../../../../api/socket';
+import styles from './RoomAction.module.css';
 
-const ChatRoomActionModal = ({ room, type }) => {
+const RoomAction = ({ item: room, type }) => {
     const textMap = {
         Leave: {
             main: 'Had enough chatter?',
@@ -51,4 +51,4 @@ const ChatRoomActionModal = ({ room, type }) => {
     );
 };
 
-export default ChatRoomActionModal;
+export default RoomAction;
