@@ -1,3 +1,17 @@
+.roomListContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-family: var(--logo-font);
+}
+
+.flipWithFriends {
+    font-size: 60px;
+    color: var(--card-pink);
+    margin: 12px;
+}
+
 .roomListContainer {
     min-height: 300px;
     width: 80%;

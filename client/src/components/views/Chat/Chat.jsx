@@ -45,7 +45,6 @@ const Chat = () => {
                         <ChatRoomContainer rooms={rooms} openRoom={openRoom} email={email} />
                     )}
                 </div>
-
                 <ChatContainer messages={messages} room={openRoom} email={email} />
             </div>
         </div>

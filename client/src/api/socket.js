@@ -33,16 +33,38 @@ export const initSocket = () => {
                 user: { email },
             } = store.getState();
 
-            const targetRoom = destroyedRoom ? destroyedRoom : rooms.filter((room) => room.id === roomId)[0];
+            const targetRoom = destroyedRoom
+                ? destroyedRoom
+                : rooms.filter((room) => room.id === roomId)[0];
 
             if (hasJoinedRoom(targetRoom, email)) {
                 if (destroyedRoom && destroyedRoom.host.email !== email) {
-                    store.dispatch(ChatActions.setModal({ type: MODALS.ROOM_ENDED, room: destroyedRoom }));
+                    store.dispatch(
+                        ChatActions.setModal({ type: MODALS.ROOM_ENDED, room: destroyedRoom })
+                    );
                 } else if (!destroyedRoom) {
                     store.dispatch(ChatActions.setOpenRoom(targetRoom));
                 }
             }
             store.dispatch(ChatActions.setRooms(rooms));
+        });
+
+        socket.on('updated_room', ({ updatedRoom, rooms, hasNewHost = false }) => {
+            const {
+                user: { email },
+            } = store.getState();
+
+            store.dispatch(ChatActions.setRooms(rooms));
+
+            if (hasJoinedRoom(updatedRoom, email)) {
+                if (hasNewHost) {
+                    store.dispatch(
+                        ChatActions.setModal({ type: MODALS.NEW_HOST, room: updatedRoom })
+                    );
+                    return;
+                }
+                store.dispatch(ChatActions.setOpenRoom(updatedRoom));
+            }
         });
 
         socket.on('receive_message', (message) => {
@@ -129,26 +151,43 @@ export const joinRoom = (room) => {
     };
     store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     store.dispatch(ChatActions.setModal(null));
-    socket.emit('join_room', { roomId: room.id, user: newMember });
+    socket.emit('update_room', { updatedRoom, updateType: 'join' });
 };
 
-// TODO: Refactor to choose a new host when the host leaves
 export const leaveRoom = (room) => {
-    const { id, members } = room;
+    const { id, members, host } = room;
     store.dispatch(ChatActions.endChat());
     const {
         user: { email },
+        chat: { rooms },
     } = store.getState();
 
-    const newMembers = members.filter((user) => user.email !== email);
+    const updatedMembers = members.filter((member) => member.email !== email);
 
-    if (!newMembers.length) {
+    if (!updatedMembers.length) {
         socket.emit('destroy_room', id);
         return;
     }
-    const updatedRoom = { ...room, members: newMembers };
-    store.dispatch(ChatActions.updateRoom(updatedRoom));
-    socket.emit('leave_room', { roomId: id, email });
+
+    const updatedRoom = { ...room, members: updatedMembers };
+
+    let hasNewHost = false;
+
+    if (email === host.email) {
+        const updatedHostIndex = Math.floor(Math.random() * updatedMembers.length);
+        updatedRoom.host = updatedRoom.members[updatedHostIndex];
+        hasNewHost = true;
+    }
+
+    const updatedRooms = rooms.map((room) => {
+        if (room.id === id) {
+            return updatedRoom;
+        }
+        return room;
+    });
+
+    store.dispatch(ChatActions.setRooms(updatedRooms));
+    socket.emit('update_room', { updatedRoom, hasNewHost, updateType: 'leave' });
 };
 
 export const destroyRoom = () => {

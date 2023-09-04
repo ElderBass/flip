@@ -1,4 +1,5 @@
 import ChatConfirmDeckModal from '../components/common/ChatConfirmDeckModal';
+import ChatNewHostModal from '../components/common/ChatNewHostModal';
 import ChatRoomActionModal from '../components/common/ChatRoomActionModal';
 import ChatRoomEndedModal from '../components/common/ChatRoomEndedModal';
 import CreateRoomForm from '../components/common/CreateRoomForm/CreateRoomForm';
@@ -53,7 +54,8 @@ export const MODALS = {
     STUDY: 'Study',
     RESET: 'Reset',
     END_ROOM: 'End',
-    ROOM_ENDED: 'RoomEnded'
+    ROOM_ENDED: 'RoomEnded',
+    NEW_HOST: 'NewHost'
 };
 
 export const ChatModalMap = {
@@ -63,7 +65,8 @@ export const ChatModalMap = {
     [MODALS.END_ROOM]: ChatRoomActionModal,
     [MODALS.STUDY]: ChatConfirmDeckModal,
     [MODALS.RESET]: ResetChatModal,
-    [MODALS.ROOM_ENDED]: ChatRoomEndedModal
+    [MODALS.ROOM_ENDED]: ChatRoomEndedModal,
+    [MODALS.NEW_HOST]: ChatNewHostModal
 };
 
 export const incrementIndexDelayMillis = 250;

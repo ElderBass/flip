@@ -18,6 +18,7 @@ const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
 
     useEffect(() => {
         setTimeout(() => {
+            console.log('\n when are we doing this? \n\n');
             store.dispatch(ChatStudyDeckActions.setFlipped(true));
             setShowNextButton(true);
         }, cardSideDurationMillis);

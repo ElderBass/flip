@@ -1,4 +1,5 @@
 const { Server } = require('socket.io');
+const { updateRoomsList } = require('./utils');
 
 const PATH = '/socket/connect';
 let ioServer = null;
@@ -48,62 +49,66 @@ const init = (server) => {
             console.log('\n destroying room: ', roomId, '\n');
             const destroyedRoom = rooms.filter((room) => room.id === roomId)[0];
             rooms = rooms.filter((room) => room.id !== roomId);
-            ioServer.of(PATH).to(roomId).emit('returning_rooms', { rooms, destroyedRoom, roomId });
+            ioServer
+                .of(PATH)
+                .to(roomId)
+                .emit('returning_rooms', { rooms, destroyedRoom, roomId });
         });
 
-        socket.on('leave_room', ({ roomId, email }) => {
-            console.log('\n emitting socket event: leave_room', roomId, '\n');
-            const targetRoom = rooms.filter((room) => room.id === roomId)[0];
-            const { members } = targetRoom;
-            const updatedMembers = members.filter(
-                (member) => member.email !== email
+        socket.on('update_room', ({ updatedRoom, hasNewHost, updateType }) => {
+            console.log(
+                '\n emitting socket event: update_room - [updateType:]',
+                updateType,
+                '\n'
             );
-            targetRoom.members = updatedMembers;
-            rooms = rooms.map((room) => {
-                if (room.id === roomId) {
-                    return targetRoom;
-                }
-                return room;
-            });
-            socket.leave(roomId);
-            ioServer.of(PATH).emit('returning_rooms', { rooms, roomId });
-        });
+            console.log('\n updatedRoom = ', updatedRoom, '\n\n');
 
-        socket.on('join_room', ({ roomId, user }) => {
-            console.log('\n emitting socket event: join_room', roomId, '\n');
-            console.log('\n current rooms: ', rooms, '\n');
-            const targetRoom = rooms.filter((room) => room.id === roomId)[0];
+            const { id: roomId } = updatedRoom;
 
-            if (targetRoom) {
-                const { members } = targetRoom;
-                const updatedMembers = [...members, user];
-                targetRoom.members = updatedMembers;
-                rooms = rooms.map((room) => {
-                    if (room.id === roomId) {
-                        return targetRoom;
-                    }
-                    return room;
-                });
+            if (updateType === 'leave') {
+                socket.leave(roomId);
+            } else {
                 socket.join(roomId);
             }
 
-            ioServer.of(PATH).emit('returning_rooms', { rooms, roomId });
+            rooms = updateRoomsList(rooms, updatedRoom);
+            console.log('\n current rooms: ', rooms, '\n');
+
+            ioServer
+                .of(PATH)
+                .to(roomId)
+                .emit('updated_room', { updatedRoom, rooms, hasNewHost });
         });
 
         socket.on('study_deck', ({ roomId, studyDeck }) => {
-            console.log('\n emitting socket event: study_deck  [studyDeck:]', studyDeck, '\n');
+            console.log(
+                '\n emitting socket event: study_deck  [studyDeck:]',
+                studyDeck,
+                '\n'
+            );
             ioServer.of(PATH).to(roomId).emit('studying_deck', studyDeck);
         });
 
         socket.on('end_study_deck', (roomId) => {
-            console.log('\n emitting socket event: end_study_deck  [roomId:]', roomId, '\n');
+            console.log(
+                '\n emitting socket event: end_study_deck  [roomId:]',
+                roomId,
+                '\n'
+            );
             ioServer.of(PATH).to(roomId).emit('ending_study_deck');
         });
 
         socket.on('increment_study_deck', ({ roomId, deckIndex }) => {
-            console.log('\n emitting socket event: increment_study_deck ([roomId]:', roomId, ' )\n');
-            ioServer.of(PATH).to(roomId).emit('incrementing_study_deck', deckIndex);
-        })
+            console.log(
+                '\n emitting socket event: increment_study_deck ([roomId]:',
+                roomId,
+                ' )\n'
+            );
+            ioServer
+                .of(PATH)
+                .to(roomId)
+                .emit('incrementing_study_deck', deckIndex);
+        });
 
         socket.on('reconnect', (roomId) => {
             console.log('\n emitting socket event: reconnect', roomId, '\n');
