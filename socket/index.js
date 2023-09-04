@@ -46,9 +46,9 @@ const init = (server) => {
 
         socket.on('destroy_room', (roomId) => {
             console.log('\n destroying room: ', roomId, '\n');
-            const oldRoom = rooms.filter((room) => room.id === roomId)[0];
+            const destroyedRoom = rooms.filter((room) => room.id === roomId)[0];
             rooms = rooms.filter((room) => room.id !== roomId);
-            ioServer.of(PATH).to(roomId).emit('after_destroy_room', { rooms, oldRoom, roomId });
+            ioServer.of(PATH).to(roomId).emit('returning_rooms', { rooms, destroyedRoom, roomId });
         });
 
         socket.on('leave_room', ({ roomId, email }) => {

@@ -28,30 +28,19 @@ export const initSocket = () => {
 
         socket.once('connect', resolve);
 
-        socket.on('returning_rooms', ({ rooms, roomId }) => {
-            console.log('\n running returning rooms = ', rooms, '\n\n');
+        socket.on('returning_rooms', ({ rooms, roomId, destroyedRoom = null }) => {
             const {
                 user: { email },
             } = store.getState();
 
-            const targetRoom = rooms.filter((room) => room.id === roomId)[0];
+            const targetRoom = destroyedRoom ? destroyedRoom : rooms.filter((room) => room.id === roomId)[0];
 
-            if (
-                targetRoom &&
-                hasJoinedRoom(targetRoom, email)
-            ) {
-                store.dispatch(ChatActions.setOpenRoom(targetRoom));
-            }
-            store.dispatch(ChatActions.setRooms(rooms));
-        });
-
-        socket.on('after_destroy_room', ({ rooms, oldRoom }) => {
-            const {
-                user: { email },
-            } = store.getState();
-
-            if (oldRoom.host.email !== email && hasJoinedRoom(oldRoom, email)) {
-                store.dispatch(ChatActions.setModal({ type: MODALS.ROOM_ENDED, room: oldRoom }));
+            if (hasJoinedRoom(targetRoom, email)) {
+                if (destroyedRoom && destroyedRoom.host.email !== email) {
+                    store.dispatch(ChatActions.setModal({ type: MODALS.ROOM_ENDED, room: destroyedRoom }));
+                } else if (!destroyedRoom) {
+                    store.dispatch(ChatActions.setOpenRoom(targetRoom));
+                }
             }
             store.dispatch(ChatActions.setRooms(rooms));
         });
