@@ -5,7 +5,8 @@ import * as ChatActions from '../store/actions/chat';
 import * as DeckActions from '../store/actions/decks';
 import * as ChatStudyDeckActions from '../store/actions/chatStudyDeck';
 import { shuffleArray } from '../utils/helpers/shuffleArray';
-import { incrementIndexDelayMillis } from '../utils/constants';
+import { hasJoinedRoom } from '../utils/chatRoomUtils';
+import { incrementIndexDelayMillis, MODALS } from '../utils/constants';
 
 const PATH = '/socket/connect';
 let socket = null;
@@ -27,22 +28,20 @@ export const initSocket = () => {
 
         socket.once('connect', resolve);
 
-        socket.on('returning_rooms', (rooms) => {
+        socket.on('returning_rooms', ({ rooms, roomId, destroyedRoom = null }) => {
             const {
                 user: { email },
             } = store.getState();
-            if (rooms.length === 0) {
-                store.dispatch(ChatActions.setOpenRoom({}));
-            }
 
-            rooms.forEach((room) => {
-                if (
-                    room.members &&
-                    room.members.filter((member) => member.email === email).length > 0
-                ) {
-                    store.dispatch(ChatActions.setOpenRoom(room));
+            const targetRoom = destroyedRoom ? destroyedRoom : rooms.filter((room) => room.id === roomId)[0];
+
+            if (hasJoinedRoom(targetRoom, email)) {
+                if (destroyedRoom && destroyedRoom.host.email !== email) {
+                    store.dispatch(ChatActions.setModal({ type: MODALS.ROOM_ENDED, room: destroyedRoom }));
+                } else if (!destroyedRoom) {
+                    store.dispatch(ChatActions.setOpenRoom(targetRoom));
                 }
-            });
+            }
             store.dispatch(ChatActions.setRooms(rooms));
         });
 
@@ -136,9 +135,7 @@ export const joinRoom = (room) => {
 // TODO: Refactor to choose a new host when the host leaves
 export const leaveRoom = (room) => {
     const { id, members } = room;
-    store.dispatch(ChatActions.setOpenRoom({}));
-    store.dispatch(ChatActions.setMessages([]));
-    store.dispatch(ChatActions.setModal(null));
+    store.dispatch(ChatActions.endChat());
     const {
         user: { email },
     } = store.getState();
@@ -161,7 +158,7 @@ export const destroyRoom = () => {
         },
     } = store.getState();
 
-    store.dispatch(ChatActions.reset());
+    store.dispatch(ChatActions.endChat());
     socket.emit('destroy_room', roomId);
 };
 

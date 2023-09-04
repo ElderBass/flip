@@ -7,7 +7,7 @@ import StudyCardSide from '../StudyCardSide';
 import StudyDeckHeader from '../StudyDeckHeader/StudyDeckHeader';
 import styles from './ChatRoomStudyDeck.module.css';
 import { endStudyDeck, incrementStudyDeck } from '../../../api/socket';
-import ChatEndStudyNotice from '../ChatNotice';
+import ChatEndStudyNotice from '../ChatEndStudyNotice';
 
 const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
     const { cards, deckName, index, flipped, reachedEndOfDeck, _id: deckId } = deck;

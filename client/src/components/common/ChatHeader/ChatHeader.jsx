@@ -6,11 +6,11 @@ const ChatHeader = ({ roomName = '' }) => {
         return (
             <p className={styles.chatRoomName}>
                 {roomName ? (
-                    <p>
+                    <>
                         In Room <span className={styles.roomNameSpan}>{roomName}</span>
-                    </p>
+                    </>
                 ) : (
-                    <p>Create or Join a Room to Chat</p>
+                    <>Create or Join a Room to Chat</>
                 )}
             </p>
         );
