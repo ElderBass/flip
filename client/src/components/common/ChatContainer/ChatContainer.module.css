@@ -7,7 +7,7 @@
     align-items: center;
     border-left: solid 2px var(--card-pink);
     position: relative;
-  }
+}
 
 .conversation {
     list-style-type: none;
@@ -46,56 +46,56 @@
 }
 
 .messageForm {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .actions {
-  position: relative;
-  border: solid 2px var(--card-pink);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  margin: 12px 8px;
+    position: relative;
+    border: solid 2px var(--card-pink);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin: 12px 8px;
 }
 
 .messageInput {
-  width: 100%;
-  background-color: var(--background-yellow);
-  border: none;
-  height: 52px;
-  color: var(--pencil-gray);
-  font-family: var(--text-font);
-  font-size: 20px;
-  padding-left: 4px;
+    width: 100%;
+    background-color: var(--background-yellow);
+    border: none;
+    height: 52px;
+    color: var(--pencil-gray);
+    font-family: var(--text-font);
+    font-size: 20px;
+    padding-left: 4px;
 }
 
 .messageInput::placeholder {
-  font-size: 20px;
-  opacity: .6;
+    font-size: 20px;
+    opacity: 0.6;
 }
 
 .messageInput:disabled {
-  opacity: .5;
+    opacity: 0.5;
 }
 
 .sendMsgBtn {
-  max-width: 42px;
-  position: absolute;
-  right: 8px;
-  background-color: var(--background-yellow);
-  outline: none;
-  border: none;
-  transform: rotate(10deg);
-  color: var(--card-pink);
+    max-width: 42px;
+    position: absolute;
+    right: 8px;
+    background-color: var(--background-yellow);
+    outline: none;
+    border: none;
+    transform: rotate(10deg);
+    color: var(--card-pink);
 }
 
 .sendMsgBtn:hover {
-  cursor: pointer;
-  color: var(--card-pink);
+    cursor: pointer;
+    color: var(--card-pink);
 }
 
 .sendMsgBtn:disabled {
-  opacity: .5;
+    opacity: 0.5;
 }

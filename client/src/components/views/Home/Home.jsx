@@ -20,7 +20,7 @@ const Home = () => {
         const getUserData = async () => {
             try {
                 if (following.length) {
-                    getFollowedUsers(following).then((users) => setFollowedUsers(users))
+                    getFollowedUsers(following).then((users) => setFollowedUsers(users));
                 }
                 const deckResponse = await getAllUserDecks(_id);
                 setUserDecks(deckResponse.data.decks);

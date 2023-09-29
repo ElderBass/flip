@@ -24,7 +24,7 @@
     border: none;
     background: var(--background-yellow);
     font-family: var(--text-font);
-    opacity: .7;
+    opacity: 0.7;
 }
 
 .cancelStudyBtn:hover {

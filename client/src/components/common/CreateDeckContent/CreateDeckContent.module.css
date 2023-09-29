@@ -48,14 +48,14 @@
     cursor: default;
     font-size: 70px;
     color: var(--pencil-gray);
-    opacity: .5;
+    opacity: 0.5;
 }
 
 .addCardBtn:disabled:hover {
     cursor: default;
     font-size: 70px;
     color: var(--pencil-gray);
-    opacity: .5;
+    opacity: 0.5;
     font-weight: 500;
 }
 
@@ -103,13 +103,13 @@
 .finishBtn:disabled {
     cursor: default;
     color: var(--pencil-gray);
-    opacity: .5;
+    opacity: 0.5;
     font-size: 60px;
 }
 
 .finishBtn:disabled:hover {
     color: var(--pencil-gray);
-    opacity: .5;
+    opacity: 0.5;
     font-size: 60px;
     font-weight: 400;
 }

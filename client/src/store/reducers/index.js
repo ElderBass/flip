@@ -13,4 +13,4 @@ const appReducer = combineReducers({
 
 export default function rootReducer(state, action) {
     return appReducer(state, action);
-};
+}

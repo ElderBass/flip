@@ -29,7 +29,7 @@ const CardSide = ({ value, onChange, onFlip, side, onSubmit }) => {
                 onSubmit(e);
             }
         }
-    }
+    };
 
     return (
         <div className={styles.cardSide}>

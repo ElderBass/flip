@@ -14,7 +14,7 @@
     align-items: center;
     padding: 20px 0;
     background: var(--create-card-green);
-    box-shadow: 3px 3px 6px  var(--dark-gray);
+    box-shadow: 3px 3px 6px var(--dark-gray);
 }
 
 .label {
@@ -38,10 +38,10 @@
 .input {
     width: 80%;
     border: solid 1px var(--card-pink);
-    background-color: rgb(92, 98, 116, .2);
+    background-color: rgb(92, 98, 116, 0.2);
     font-family: var(--text-font);
     border-radius: 5px;
-    color: var(--pencil-gray)
+    color: var(--pencil-gray);
 }
 
 .frontInput {

@@ -6,11 +6,7 @@ import CarouselItem from '../CarouselItem';
 const Following = ({ item, classes }) => {
     return (
         <Link className="link" to={`/user/${item._id}`}>
-            <CarouselItem
-                onClick={() => {}}
-                label={trimEmail(item.email)}
-                classes={classes}
-            />
+            <CarouselItem onClick={() => {}} label={trimEmail(item.email)} classes={classes} />
         </Link>
     );
 };

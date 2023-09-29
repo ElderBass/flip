@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SIDES } from '../../../utils/constants';
 import CardSide from './CardSide';
 import styles from './CreateCardForm.module.css';
-import AbortActionConfirmationModal from "../AbortActionConfirmationModal";
+import AbortActionConfirmationModal from '../AbortActionConfirmationModal';
 
 const cardStyles = {
     display: 'flex',
@@ -21,7 +21,8 @@ const backStyles = {
 };
 
 const CreateCardForm = (props) => {
-    const { error, submitCard, currentCard, editCard, deleteCard, cancelDeleteCard, isEdit } = props;
+    const { error, submitCard, currentCard, editCard, deleteCard, cancelDeleteCard, isEdit } =
+        props;
     const [front, setFront] = useState(currentCard.front || '');
     const [back, setBack] = useState(currentCard.back || '');
     const [flipped, setFlipped] = useState(false);

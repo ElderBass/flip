@@ -17,7 +17,7 @@ const NewHost = ({ item: room }) => {
     const userIsHost = hostEmail === userEmail;
 
     const hostName = userIsHost ? 'You' : trimEmail(hostEmail);
-    const verb = userIsHost ? 'are' : 'is'
+    const verb = userIsHost ? 'are' : 'is';
 
     const onOkayClick = () => {
         store.dispatch(ChatActions.setOpenRoom(room));
@@ -35,10 +35,7 @@ const NewHost = ({ item: room }) => {
                 </p>
             </div>
             <div className={styles.actions}>
-                <button
-                    className={`${styles.btn} ${styles.backToChatBtn}`}
-                    onClick={onOkayClick}
-                >
+                <button className={`${styles.btn} ${styles.backToChatBtn}`} onClick={onOkayClick}>
                     Okay
                 </button>
             </div>

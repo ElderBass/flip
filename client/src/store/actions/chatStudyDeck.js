@@ -24,7 +24,7 @@ const setReachedEndOfDeck = (reachedEnd) => ({
 
 const RESET = 'RESET_CHAT_STUDY_DECK';
 const reset = () => ({
-    type: RESET
+    type: RESET,
 });
 
 export {
@@ -37,5 +37,5 @@ export {
     SET_REACHED_END_OF_DECK,
     setReachedEndOfDeck,
     RESET,
-    reset
+    reset,
 };

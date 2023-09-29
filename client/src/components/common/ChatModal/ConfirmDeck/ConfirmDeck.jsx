@@ -16,7 +16,8 @@ const ConfirmDeck = ({ item: deck }) => {
             <div className={styles.header}>Start Flippin'</div>
             <div className={styles.heading}>
                 <p className={styles.mainText}>
-                    Confirm <span className={styles.deckName}>{deck.deckName}</span> is the deck you want
+                    Confirm <span className={styles.deckName}>{deck.deckName}</span> is the deck you
+                    want
                 </p>
                 <p className={styles.subText}>See how you stack up with your friends</p>
             </div>

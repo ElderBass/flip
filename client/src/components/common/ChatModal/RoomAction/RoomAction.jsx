@@ -16,14 +16,14 @@ const RoomAction = ({ item: room, type }) => {
         },
         End: {
             main: 'Need a break?',
-            sub: 'This cannot be undone, but you can create another room any time'
-        }
+            sub: 'This cannot be undone, but you can create another room any time',
+        },
     };
 
     const onConfirmClickMap = {
         Leave: leaveRoom,
         Join: joinRoom,
-        End: destroyRoom
+        End: destroyRoom,
     };
 
     const onConfirm = () => onConfirmClickMap[type](room);

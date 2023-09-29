@@ -1,4 +1,4 @@
-import zenaDecks from "./zenaDecks";
+import zenaDecks from './zenaDecks';
 
 const Zena = {
     email: 'zenababy@gmail.com',
@@ -9,7 +9,7 @@ const Zena = {
     favorites: [zenaDecks[0]],
     following: [],
     followers: [],
-    isLoggedIn: true
+    isLoggedIn: true,
 };
 
 export default Zena;

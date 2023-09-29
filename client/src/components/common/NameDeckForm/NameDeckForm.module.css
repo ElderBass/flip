@@ -23,7 +23,7 @@
     justify-content: space-between;
     align-items: center;
     background: var(--card-blue);
-    box-shadow: 3px 3px 6px var(--dark-gray); 
+    box-shadow: 3px 3px 6px var(--dark-gray);
 }
 
 .label {
@@ -51,7 +51,7 @@
 .input {
     width: 80%;
     border: solid 2px var(--background-yellow);
-    background-color: rgb(86, 236, 141, .3);
+    background-color: rgb(86, 236, 141, 0.3);
     font-family: var(--text-font);
     border-radius: 5px;
     height: 60px;

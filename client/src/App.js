@@ -19,10 +19,12 @@ function App() {
     const ComponentMap = {
         Home,
         Landing,
-        FourOhFourPage
+        FourOhFourPage,
     };
 
-    const { user: { isLoggedIn } } = store.getState();
+    const {
+        user: { isLoggedIn },
+    } = store.getState();
 
     const [CatchAllPage, setCatchAllPage] = useState(null);
 

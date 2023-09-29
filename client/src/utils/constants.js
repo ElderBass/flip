@@ -48,7 +48,7 @@ export const MODALS = {
     RESET: 'Reset',
     END_ROOM: 'End',
     ROOM_ENDED: 'RoomEnded',
-    NEW_HOST: 'NewHost'
+    NEW_HOST: 'NewHost',
 };
 
 export const incrementIndexDelayMillis = 250;
