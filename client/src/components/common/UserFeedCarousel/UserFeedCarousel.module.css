@@ -17,7 +17,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
-    overflow: hidden;    
+    overflow: hidden;
     padding: 20px 0;
 }
 
@@ -49,7 +49,6 @@
     cursor: pointer;
     box-shadow: 2px 2px 4px var(--card-pink);
     color: var(--pencil-gray);
-
 }
 
 .noContent {

@@ -1,48 +1,48 @@
 @import url('../../../index.css');
 
 .actions {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 20;
-  align-items: center;
-  text-align: center;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 20;
+    align-items: center;
+    text-align: center;
+    width: 100%;
 }
 
 .logoutHeader {
-  width: 100%;
-  padding-bottom: 10px;
-  text-align: center;
-  font-size: 50px;
-  font-weight: 400;
-  color: var(--pencil-gray);
-  font-family: var(--text-font);
-  border-bottom: solid 2px var(--card-pink);
+    width: 100%;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 400;
+    color: var(--pencil-gray);
+    font-family: var(--text-font);
+    border-bottom: solid 2px var(--card-pink);
 }
 
 .logoutButton {
-  text-align: center;
-  color: var(--background-yellow);
-  font-family: var(--logo-font);
-  font-size: 80px;
-  font-weight: 500;
-  margin: 30px 0;
+    text-align: center;
+    color: var(--background-yellow);
+    font-family: var(--logo-font);
+    font-size: 80px;
+    font-weight: 500;
+    margin: 30px 0;
 }
 
 .logoutButton:hover {
-  cursor: pointer;
-  color: var(--card-green);
+    cursor: pointer;
+    color: var(--card-green);
 }
 
 .cancelButton {
-  margin: 30px 0;
-  color: var(--pencil-gray);
-  border: none;
-  font-size: 30px;
+    margin: 30px 0;
+    color: var(--pencil-gray);
+    border: none;
+    font-size: 30px;
 }
 
 .cancelButton:hover {
-  cursor: pointer;
-  color: var(--dark-gray);
+    cursor: pointer;
+    color: var(--dark-gray);
 }

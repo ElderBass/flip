@@ -43,7 +43,11 @@ const NameDeckForm = ({ deckName, setDeckName, submitName }) => {
                     <button className={styles.submitBtn} type="submit">
                         Confirm Name
                     </button>
-                    <button className={styles.cancelBtn} type="button" onClick={() => history.goBack()}>
+                    <button
+                        className={styles.cancelBtn}
+                        type="button"
+                        onClick={() => history.goBack()}
+                    >
                         Cancel
                     </button>
                 </div>

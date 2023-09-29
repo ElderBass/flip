@@ -16,7 +16,7 @@ const SignupForm = ({ setError }) => {
 
     const history = useHistory();
 
-    useEffect(() =>  {
+    useEffect(() => {
         emailRef.current.focus();
     }, []);
 
@@ -26,7 +26,7 @@ const SignupForm = ({ setError }) => {
         }
     }, [email, password, confirmPassword]);
 
-    const onSubmit = async e => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         if (!isValidEmail(email)) {
             setError(ERROR_MESSAGE.SIGNUP.INVALID_EMAIL);
@@ -55,42 +55,50 @@ const SignupForm = ({ setError }) => {
         <form onSubmit={onSubmit} className={styles.signupForm}>
             <h1 className={styles.header}>Sign Up</h1>
             <div className={styles.inputField}>
-                <label className={styles.label} htmlFor='email'>Email:</label>
+                <label className={styles.label} htmlFor="email">
+                    Email:
+                </label>
                 <input
                     className={styles.input}
                     ref={emailRef}
-                    id='email'
+                    id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
             <div className={styles.inputField}>
-                <label className={styles.label} htmlFor='password'>Password:</label>
+                <label className={styles.label} htmlFor="password">
+                    Password:
+                </label>
                 <input
                     className={styles.input}
-                    type='password'
-                    id='password'
+                    type="password"
+                    id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
             <div className={styles.inputField}>
-                <label className={styles.label} htmlFor='confirmPassword'>Confirm:</label>
+                <label className={styles.label} htmlFor="confirmPassword">
+                    Confirm:
+                </label>
                 <input
                     className={styles.input}
-                    type='password'
-                    id='confirmPassword'
+                    type="password"
+                    id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
             </div>
             <div className={styles.actions}>
                 {formFilledOut && (
-                    <button className={styles.submitBtn} type='submit'>Continue</button>
+                    <button className={styles.submitBtn} type="submit">
+                        Continue
+                    </button>
                 )}
             </div>
         </form>
-    )
+    );
 };
 
 export default SignupForm;

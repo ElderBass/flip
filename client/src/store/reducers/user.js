@@ -35,10 +35,13 @@ function user(state = INITIAL_STATE, { type, payload }) {
         case UserActions.SET_FAVORITES:
             return { ...state, favorites: payload };
         case UserActions.ADD_FAVORITE:
-            const alreadyFavorited = state.favorites.filter(fav => fav._id === payload._id).length > 0;
-            return alreadyFavorited ? state : { ...state, favorites: [...state.favorites, payload] };
+            const alreadyFavorited =
+                state.favorites.filter((fav) => fav._id === payload._id).length > 0;
+            return alreadyFavorited
+                ? state
+                : { ...state, favorites: [...state.favorites, payload] };
         case UserActions.REMOVE_FAVORITE:
-            const updatedFavs = state.favorites.filter(fav => fav._id === payload._id);
+            const updatedFavs = state.favorites.filter((fav) => fav._id === payload._id);
             return { ...state, favorites: updatedFavs };
         default:
             return state;

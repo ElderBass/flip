@@ -11,16 +11,16 @@
     border: none;
     outline: none;
     border-bottom: solid 2px var(--pencil-gray);
-    padding: 16px 12px;;
+    padding: 16px 12px;
 }
 
 .roomListItem:hover {
     cursor: pointer;
-   background-color: var(--create-card-green);
+    background-color: var(--create-card-green);
 }
 
 .roomListItem:disabled {
     cursor: default;
     color: var(--background-yellow);
-    background-color: rgba(92, 98, 116, .4);
+    background-color: rgba(92, 98, 116, 0.4);
 }

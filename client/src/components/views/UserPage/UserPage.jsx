@@ -55,13 +55,12 @@ const UserPage = () => {
             let updatedFollowing;
             if (isFollowing) {
                 updatedFollowing = user.following.filter((id) => id !== userId);
-
             } else {
                 updatedFollowing = [...user.following, userId];
             }
             const newUser = {
                 ...user,
-                following: updatedFollowing
+                following: updatedFollowing,
             };
 
             await updateUser(newUser);

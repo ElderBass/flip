@@ -4,9 +4,9 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 2fr;
     grid-template-areas:
-    "header"
-    "input"
-    "actions";
+        'header'
+        'input'
+        'actions';
     background-color: var(--create-card-green);
     box-shadow: 3px 3px 6px var(--dark-gray);
 }
@@ -40,7 +40,7 @@
 .input {
     width: 90%;
     border: solid 1px var(--card-pink);
-    background-color: rgb(92, 98, 116, .2);
+    background-color: rgb(92, 98, 116, 0.2);
     font-family: var(--text-font);
     font-size: 24px;
     border-radius: 5px;
@@ -49,8 +49,8 @@
 }
 
 .input::placeholder {
-    opacity: .6;
-  }
+    opacity: 0.6;
+}
 
 .actions {
     grid-area: actions;
@@ -58,7 +58,7 @@
     justify-self: center;
     display: flex;
     justify-content: space-evenly;
-    width: 80%;    
+    width: 80%;
 }
 
 .cancel {
@@ -68,7 +68,7 @@
     border: none;
     outline: none;
     background-color: var(--create-card-green);
-    opacity: .8;
+    opacity: 0.8;
 }
 
 .cancel:hover {
@@ -95,5 +95,5 @@
 .confirm:disabled {
     cursor: default;
     background-color: var(--pencil-gray);
-    opacity: .5;
+    opacity: 0.5;
 }

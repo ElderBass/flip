@@ -5,12 +5,12 @@ import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducers';
 
 const logger = createLogger({
-  level: {
-    prevState: false,
-    action: 'log',
-    nextState: 'log',
-    error: 'error'
-  }
+    level: {
+        prevState: false,
+        action: 'log',
+        nextState: 'log',
+        error: 'error',
+    },
 });
 
 const persistConfig = { key: 'flip', storage };
@@ -18,8 +18,8 @@ const persistConfig = { key: 'flip', storage };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 const persistor = persistStore(store);

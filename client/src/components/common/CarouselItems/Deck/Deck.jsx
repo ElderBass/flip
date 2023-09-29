@@ -24,9 +24,7 @@ const Deck = ({ item, itemId, classes, onClick = null }) => {
         }
     };
 
-    return (
-        <CarouselItem onClick={clickHandler} label={deckName} classes={classes} />
-    );
+    return <CarouselItem onClick={clickHandler} label={deckName} classes={classes} />;
 };
 
 export default Deck;

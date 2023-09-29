@@ -3,7 +3,7 @@ export const mapStudyCards = (cards) => {
         const mappedCard = {
             index: i,
             front: card.front,
-            back: card.back
+            back: card.back,
         };
         return mappedCard;
     });

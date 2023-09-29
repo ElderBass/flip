@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npm run test",
     "seed": "node data/seed.js",
+    "format:client": "prettier --write ./client/src",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node index.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
@@ -25,7 +26,8 @@
   "devDependencies": {
     "bson": "5.2.0",
     "concurrently": "7.5.0",
-    "nodemon": "2.0.20"
+    "nodemon": "2.0.20",
+    "prettier": "3.0.3"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

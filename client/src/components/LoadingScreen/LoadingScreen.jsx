@@ -6,11 +6,11 @@ const LoadingScreen = () => {
     return (
         <div className={styles.loadingScreen}>
             <ThreeCircles
-              height="300"
-              width="300"
-              color="rgb(103, 145, 253)"
-              visible={true}
-              ariaLabel="three-circles-rotating"
+                height="300"
+                width="300"
+                color="rgb(103, 145, 253)"
+                visible={true}
+                ariaLabel="three-circles-rotating"
             />
         </div>
     );

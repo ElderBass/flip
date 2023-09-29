@@ -16,7 +16,7 @@ const ChatModal = ({ type, item }) => {
         [MODALS.STUDY]: ConfirmDeck,
         [MODALS.RESET]: ResetChat,
         [MODALS.ROOM_ENDED]: RoomEnded,
-        [MODALS.NEW_HOST]: NewHost
+        [MODALS.NEW_HOST]: NewHost,
     };
 
     const ModalComponent = ChatModalMap[type];

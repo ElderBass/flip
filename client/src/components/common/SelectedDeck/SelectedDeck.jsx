@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import store from '../../../store';
 import * as UserActions from '../../../store/actions/user';
 import * as DeckActions from '../../../store/actions/decks';
-import {useEffect} from 'react';
-import {deleteDeck, editDeckFavorites, updateUser} from '../../../api';
-import {trimEmail} from '../../../utils/helpers/emailHelpers';
+import { useEffect } from 'react';
+import { deleteDeck, editDeckFavorites, updateUser } from '../../../api';
+import { trimEmail } from '../../../utils/helpers/emailHelpers';
 import styles from './SelectedDeck.module.css';
-import AbortActionConfirmationModal from "../AbortActionConfirmationModal";
+import AbortActionConfirmationModal from '../AbortActionConfirmationModal';
 
 const FAVORITE_CLASS = 'fas fa-heart fa-2x';
 const REGULAR_CLASS = 'far fa-heart fa-2x';
@@ -17,7 +17,7 @@ const SelectedDeck = () => {
     const history = useHistory();
 
     const {
-        decks: {selectedDeck},
+        decks: { selectedDeck },
         user,
     } = store.getState();
 
@@ -30,7 +30,7 @@ const SelectedDeck = () => {
         favorites: timesFavorited,
         author,
     } = selectedDeck;
-    const {favorites, email} = user;
+    const { favorites, email } = user;
 
     const [iconClass, setIconClass] = useState(REGULAR_CLASS);
     const [deckFavorites, setDeckFavorites] = useState(timesFavorited);
@@ -90,11 +90,11 @@ const SelectedDeck = () => {
         };
 
         await updateUser(newUser);
-        await editDeckFavorites({favorites: timesFavorited + 1, deckId});
+        await editDeckFavorites({ favorites: timesFavorited + 1, deckId });
 
         store.dispatch(UserActions.updateUser(newUser));
         store.dispatch(
-            DeckActions.setSelectedDeck({...selectedDeck, favorites: timesFavorited + 1})
+            DeckActions.setSelectedDeck({ ...selectedDeck, favorites: timesFavorited + 1 })
         );
     };
 
@@ -139,11 +139,11 @@ const SelectedDeck = () => {
                 <>
                     <div title={deckName} className={styles.selectedDeck}>
                         <div className={styles.greyLines}>
-                            <hr className={styles.greyLine}/>
-                            <hr className={styles.greyLine}/>
-                            <hr className={styles.greyLine}/>
-                            <hr className={styles.greyLine}/>
-                            <hr className={styles.greyLine}/>
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
+                            <hr className={styles.greyLine} />
                         </div>
                         <div className={styles.selectedDeckHeader}>
                             {showDeleteIcon ? (
@@ -152,7 +152,7 @@ const SelectedDeck = () => {
                                     className={`${DELETE_CLASS} ${styles.icon}`}
                                 />
                             ) : (
-                                <div className={styles.spacer}/>
+                                <div className={styles.spacer} />
                             )}
                             <p className={styles.header}>{deckName}</p>
                             <i
@@ -177,17 +177,17 @@ const SelectedDeck = () => {
                         <div className={styles.actions}>
                             {user._id === userId && (
                                 <Link
-                                    to={{pathname: '/edit-deck', state: {isEdit: true}}}
+                                    to={{ pathname: '/edit-deck', state: { isEdit: true } }}
                                     className={`${styles.button} ${styles.editBtn}`}
                                 >
                                     Edit
                                 </Link>
                             )}
-                            {cards.length > 0 &&
+                            {cards.length > 0 && (
                                 <Link to="/study" className={`${styles.button} ${styles.studyBtn}`}>
                                     Study
                                 </Link>
-                            }
+                            )}
                         </div>
                     </div>
                     <div className={`${styles.returnHome} ${styles.button}`}>

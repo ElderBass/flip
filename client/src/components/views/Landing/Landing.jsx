@@ -37,7 +37,6 @@ const Landing = () => {
                     <SignupLoginToggle text={toggleText} onClick={onToggleClick} />
                 </div>
             </div>
-
         </div>
     );
 };

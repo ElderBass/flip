@@ -9,8 +9,10 @@ import styles from './ChatRoom.module.css';
 const ChatRoom = ({ room }) => {
     const {
         user: { email },
-        chatStudyDeck, 
-        chat: { openRoom: { id } }
+        chatStudyDeck,
+        chat: {
+            openRoom: { id },
+        },
     } = store.getState();
 
     const [showStudyRoom, setShowStudyRoom] = useState(false);
