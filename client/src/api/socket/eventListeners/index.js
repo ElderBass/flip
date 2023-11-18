@@ -5,11 +5,13 @@ import { reset_complete } from "./reset_complete";
 import { returning_rooms } from "./returning_rooms";
 import { studying_deck } from "./studying_deck";
 import { updated_room } from "./updated_room";
+import { user_typing } from "./user_typing";
 
 const socketEventListeners = {
     returning_rooms,
     updated_room,
     studying_deck,
+    user_typing,
     receive_message,
     ending_study_deck,
     incrementing_study_deck,

@@ -34,11 +34,33 @@ export const initSocket = () => {
     });
 };
 
+export const sendTyping = (isTyping) => {
+    const {
+        user: { username },
+        chat: { openRoom },
+    } = store.getState();
+
+    const eventData = {
+        roomId: openRoom.id,
+        sender: username,
+        isTyping,
+    };
+    socket.emit('send_typing', eventData);
+};
+
 export const sendMessage = (message) => {
     const {
         user: { username },
         chat: { openRoom },
     } = store.getState();
+
+    const typingData = {
+        roomId: openRoom.id,
+        sender: username,
+        isTyping: false,
+    };
+
+    socket.emit('send_typing', typingData);
 
     const messageObject = {
         text: message,

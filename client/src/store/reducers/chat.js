@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     openRoom: {},
     messages: [],
     actionModal: null,
+    userTyping: null,
 };
 
 const chat = (state = INITIAL_STATE, { type, payload }) => {
@@ -32,6 +33,8 @@ const chat = (state = INITIAL_STATE, { type, payload }) => {
             return { ...state, messages: [...state.messages, payload] };
         case ChatActions.SET_MODAL:
             return { ...state, actionModal: payload };
+        case ChatActions.SET_USER_TYPING:
+            return { ...state, userTyping: payload };
         case ChatActions.RESET:
             return INITIAL_STATE;
         default:
