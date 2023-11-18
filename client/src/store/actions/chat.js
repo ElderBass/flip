@@ -46,11 +46,6 @@ const setModal = (payload) => ({
     payload,
 });
 
-const END_CHAT = 'END_CHAT';
-const endChat = () => ({
-    type: END_CHAT,
-});
-
 const RESET = 'RESET_CHAT';
 const reset = () => ({
     type: RESET,
@@ -73,8 +68,6 @@ export {
     addMessage,
     SET_MODAL,
     setModal,
-    END_CHAT,
-    endChat,
     RESET,
     reset,
 };

@@ -11,7 +11,7 @@ const ChatRoomActionButton = ({ type, room }) => {
 
     const Reset = () => {
         return (
-            <>
+            <div className={styles.resetBtnContainer}>
                 {process.env.NODE_ENV === 'development' && (
                     <button
                         type="button"
@@ -28,7 +28,7 @@ const ChatRoomActionButton = ({ type, room }) => {
                 >
                     Leave Room
                 </button>
-            </>
+            </div>
         );
     };
 

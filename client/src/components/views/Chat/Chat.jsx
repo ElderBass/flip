@@ -6,6 +6,7 @@ import ChatContainer from '../../common/ChatContainer';
 import ChatRoomContainer from '../../common/ChatRoomContainer';
 import ChatModal from '../../common/ChatModal';
 import styles from './Chat.module.css';
+import { unloadChat } from '../../../utils/unloadChat';
 
 const Chat = () => {
     const { email, rooms, messages, openRoom, actionModal } = useSelector(({ user, chat }) => ({
@@ -25,6 +26,8 @@ const Chat = () => {
             }
         };
         connectToSocket();
+
+        return () => unloadChat(openRoom);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -32,13 +35,11 @@ const Chat = () => {
         <div className={styles.chatPage}>
             <Header />
             <div className={styles.chatPageContent}>
-                <div className={styles.chat}>
-                    {actionModal && actionModal.type ? (
-                        <ChatModal type={actionModal.type} item={actionModal.item || null} />
-                    ) : (
-                        <ChatRoomContainer rooms={rooms} openRoom={openRoom} email={email} />
-                    )}
-                </div>
+                {actionModal && actionModal.type ? (
+                    <ChatModal type={actionModal.type} item={actionModal.item || null} />
+                ) : (
+                    <ChatRoomContainer rooms={rooms} openRoom={openRoom} email={email} />
+                )}
                 <ChatContainer messages={messages} room={openRoom} email={email} />
             </div>
         </div>

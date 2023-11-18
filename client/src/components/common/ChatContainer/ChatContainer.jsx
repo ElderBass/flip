@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './ChatContainer.module.css';
@@ -7,8 +8,9 @@ import ChatHeader from '../ChatHeader';
 import ChatMessage from '../ChatMessage';
 import { trimEmail } from '../../../utils/helpers/emailHelpers';
 
-const ChatContainer = ({ messages, room, email }) => {
-    const { id, name } = room;
+const ChatContainer = ({ messages, email }) => {
+    const { openRoom } = useSelector((state) => state.chat);
+    const { id, name } = openRoom;
 
     const [conversation, setConversation] = useState([]);
     const [message, setMessage] = useState('');
@@ -43,6 +45,7 @@ const ChatContainer = ({ messages, room, email }) => {
                 {conversation.length > 0 &&
                     conversation.map((msg) => (
                         <ChatMessage
+                            key={msg.id}
                             isUserMessage={msg.sender === trimEmail(email)}
                             message={msg}
                         />
@@ -56,10 +59,10 @@ const ChatContainer = ({ messages, room, email }) => {
                         id="message"
                         value={message}
                         placeholder="Type message here"
-                        disabled={!room.id}
+                        disabled={!openRoom.id}
                         onKeyDown={onKeyDown}
                     />
-                    <button disabled={!room.id} className={styles.sendMsgBtn} type="submit">
+                    <button disabled={!openRoom.id} className={styles.sendMsgBtn} type="submit">
                         <FontAwesomeIcon icon={faPaperPlane} size="2x" />
                     </button>
                 </div>

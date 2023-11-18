@@ -56,6 +56,7 @@ function App() {
                     <AuthRoute exact path="/browse" component={Browse} />
                     <AuthRoute exact path="/chat" component={Chat} />
                     <AuthRoute exact path="/logout" component={Logout} />
+                    <Route exact path="/landing" component={Landing} />
                     <Route component={ComponentMap[CatchAllPage]} />
                 </Switch>
             </div>

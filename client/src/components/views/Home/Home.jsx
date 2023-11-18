@@ -7,14 +7,24 @@ import UserFeedCarousel from '../../common/UserFeedCarousel';
 import { getAllUserDecks } from '../../../api';
 import { getFollowedUsers } from '../../../utils/helpers/getFollowedUsers';
 import LoadingScreen from '../../LoadingScreen';
+import { useHistory } from 'react-router-dom';
+import { PAGES } from '../../../utils/constants';
 
 const Home = () => {
-    const { user } = store.getState();
+    const { user, chat } = store.getState();
+    const history = useHistory();
     const { favorites, following, _id } = user;
 
     const [loading, setLoading] = useState(true);
     const [userDecks, setUserDecks] = useState([]);
     const [followedUsers, setFollowedUsers] = useState([]);
+
+    // TODO: Hacky fix for not navigating to Home page if chat is still active
+    useEffect(() => {
+        if (chat.openRoom && chat.openRoom.id) {
+            history.push(PAGES.CHAT);
+        }
+    }, [chat, history]);
 
     useEffect(() => {
         const getUserData = async () => {
