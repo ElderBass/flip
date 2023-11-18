@@ -53,7 +53,7 @@ export const initSocket = () => {
                     }
                 }
             } else {
-                // Just in case somehow you openRoom isn't reset when rooms are
+                // Just in case somehow openRoom isn't reset when rooms are
                 store.dispatch(ChatActions.setOpenRoom({}));
             }
         });
@@ -189,14 +189,6 @@ export const leaveRoom = (room) => {
     store.dispatch(ChatActions.reset());
     socket.emit('update_room', { updatedRoom, hasNewHost, updateType: 'leave' });
 };
-
-// TODO: Decide if we need this at all
-// export const leaveChat = (room, cb) => {
-// Leave Room
-// End Chat/Reset Redux state
-// Disconnect from socket
-// Call callback to navigate or whatever?
-// };
 
 export const destroyRoom = (roomId) => {
     const {
