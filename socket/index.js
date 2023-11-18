@@ -49,7 +49,7 @@ const init = (server) => {
             console.log('\n destroying room: ', roomId, '\n');
             const destroyedRoom = rooms.filter((room) => room.id === roomId)[0];
             rooms = rooms.filter((room) => room.id !== roomId);
-            ioServer.of(PATH).to(roomId).emit('returning_rooms', { rooms, destroyedRoom, roomId });
+            ioServer.of(PATH).emit('returning_rooms', { rooms, destroyedRoom, roomId });
         });
 
         socket.on('update_room', ({ updatedRoom, hasNewHost, updateType }) => {

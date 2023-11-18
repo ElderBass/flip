@@ -12,7 +12,10 @@ const PATH = '/socket/connect';
 let socket = null;
 
 export const initSocket = () => {
-    if (socket) return;
+    if (socket) {
+        socket.emit('reconnect');
+        return;
+    }
 
     const options = {
         autoConnect: false,
@@ -29,24 +32,30 @@ export const initSocket = () => {
         socket.once('connect', resolve);
 
         socket.on('returning_rooms', ({ rooms, roomId, destroyedRoom = null }) => {
-            const {
-                user: { email },
-            } = store.getState();
-
-            const targetRoom = destroyedRoom
-                ? destroyedRoom
-                : rooms.filter((room) => room.id === roomId)[0];
-
-            if (hasJoinedRoom(targetRoom, email)) {
-                if (destroyedRoom && destroyedRoom.host.email !== email) {
-                    store.dispatch(
-                        ChatActions.setModal({ type: MODALS.ROOM_ENDED, item: destroyedRoom })
-                    );
-                } else if (!destroyedRoom) {
-                    store.dispatch(ChatActions.setOpenRoom(targetRoom));
-                }
-            }
             store.dispatch(ChatActions.setRooms(rooms));
+
+            if (rooms.length > 0) {
+                const {
+                    user: { email },
+                } = store.getState();
+
+                const targetRoom = destroyedRoom
+                    ? destroyedRoom
+                    : rooms.filter((room) => room.id === roomId)[0];
+
+                if (hasJoinedRoom(targetRoom, email)) {
+                    if (destroyedRoom && destroyedRoom.host.email !== email) {
+                        store.dispatch(
+                            ChatActions.setModal({ type: MODALS.ROOM_ENDED, item: destroyedRoom })
+                        );
+                    } else if (!destroyedRoom) {
+                        store.dispatch(ChatActions.setOpenRoom(targetRoom));
+                    }
+                }
+            } else {
+                // Just in case somehow you openRoom isn't reset when rooms are
+                store.dispatch(ChatActions.setOpenRoom({}));
+            }
         });
 
         socket.on('updated_room', ({ updatedRoom, rooms, hasNewHost = false }) => {
@@ -156,16 +165,14 @@ export const joinRoom = (room) => {
 
 export const leaveRoom = (room) => {
     const { id, members, host } = room;
-    store.dispatch(ChatActions.endChat());
     const {
         user: { email },
-        chat: { rooms },
     } = store.getState();
 
     const updatedMembers = members.filter((member) => member.email !== email);
 
     if (!updatedMembers.length) {
-        socket.emit('destroy_room', id);
+        destroyRoom(id);
         return;
     }
 
@@ -179,26 +186,29 @@ export const leaveRoom = (room) => {
         hasNewHost = true;
     }
 
-    const updatedRooms = rooms.map((room) => {
-        if (room.id === id) {
-            return updatedRoom;
-        }
-        return room;
-    });
-
-    store.dispatch(ChatActions.setRooms(updatedRooms));
+    store.dispatch(ChatActions.reset());
     socket.emit('update_room', { updatedRoom, hasNewHost, updateType: 'leave' });
 };
 
-export const destroyRoom = () => {
+// TODO: Decide if we need this at all
+// export const leaveChat = (room, cb) => {
+// Leave Room
+// End Chat/Reset Redux state
+// Disconnect from socket
+// Call callback to navigate or whatever?
+// };
+
+export const destroyRoom = (roomId) => {
     const {
         chat: {
-            openRoom: { id: roomId },
+            openRoom: { id },
         },
     } = store.getState();
 
-    store.dispatch(ChatActions.endChat());
-    socket.emit('destroy_room', roomId);
+    const actualId = roomId || id;
+
+    store.dispatch(ChatActions.reset());
+    socket.emit('destroy_room', actualId);
 };
 
 export const studyDeck = () => {

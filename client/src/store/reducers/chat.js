@@ -32,8 +32,6 @@ const chat = (state = INITIAL_STATE, { type, payload }) => {
             return { ...state, messages: [...state.messages, payload] };
         case ChatActions.SET_MODAL:
             return { ...state, actionModal: payload };
-        case ChatActions.END_CHAT:
-            return { ...state, openRoom: {}, messages: [], actionModal: null };
         case ChatActions.RESET:
             return INITIAL_STATE;
         default:

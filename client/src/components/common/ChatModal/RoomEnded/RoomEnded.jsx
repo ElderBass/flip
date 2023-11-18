@@ -13,7 +13,7 @@ const RoomEnded = ({ item: room }) => {
     };
 
     const onBackToChatClick = () => {
-        store.dispatch(ChatActions.endChat());
+        store.dispatch(ChatActions.reset());
     };
 
     return (

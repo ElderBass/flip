@@ -1,3 +1,10 @@
+.resetBtnContainer {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    width: 100%;
+}
+
 .btn {
     outline: none;
     border: var(--card-pink);

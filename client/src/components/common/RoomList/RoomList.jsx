@@ -1,4 +1,5 @@
 import React from 'react';
+import ChatRoomActionButton from '../ChatRoomActionButton';
 import RoomListItem from '../RoomListItem';
 import styles from './RoomList.module.css';
 
@@ -18,6 +19,7 @@ const RoomList = ({ rooms, email }) => {
                     )}
                 </div>
             </div>
+            <ChatRoomActionButton type="create" />
         </div>
     );
 };

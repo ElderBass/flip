@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import styles from './Logout.module.css';
 import LogoutForm from './LogoutForm';
 import { logout } from '../../../utils/logout';
+import { PAGES } from '../../../utils/constants';
+import styles from './Logout.module.css';
 
 const Logout = () => {
     const history = useHistory();
@@ -10,7 +11,7 @@ const Logout = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         await logout();
-        history.push('/');
+        history.push(PAGES.LANDING);
     };
 
     return (
