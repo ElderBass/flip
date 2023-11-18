@@ -31,6 +31,12 @@ const init = (server) => {
     ioServer.of(PATH).on('connection', (socket) => {
         ioServer.of(PATH).emit('returning_rooms', { rooms, roomId: null });
 
+        socket.on('send_typing', (data) => {
+            const { roomId } = data;
+            console.log('\n emitting socket event send_typing: ', roomId, '\n');
+            ioServer.of(PATH).to(roomId).emit('user_typing', data);
+        });
+
         socket.on('send_message', (msg) => {
             console.log('\n emitting socket event send_message: ', msg, '\n');
             ioServer.of(PATH).to(msg.roomId).emit('receive_message', msg);
