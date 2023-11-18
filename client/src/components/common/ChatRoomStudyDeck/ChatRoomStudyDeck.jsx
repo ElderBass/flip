@@ -57,11 +57,13 @@ const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
                             flipWithFriends={true}
                         />
                     </ReactCardFlip>
-                    {showNextButton && userIsHost && (
-                        <button className={styles.nextBtn} onClick={onNextClick}>
-                            Next
-                        </button>
-                    )}
+                    <div style={{ height: '100px' }}>
+                        {showNextButton && userIsHost && (
+                            <button className={styles.nextBtn} onClick={onNextClick}>
+                                Next
+                            </button>
+                        )}
+                    </div>
                 </div>
             ) : (
                 <ChatEndStudyNotice userIsHost={userIsHost} />

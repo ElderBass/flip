@@ -1,12 +1,11 @@
 import { io } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
-import store from '../store';
-import * as ChatActions from '../store/actions/chat';
-import * as DeckActions from '../store/actions/decks';
-import * as ChatStudyDeckActions from '../store/actions/chatStudyDeck';
-import { shuffleArray } from '../utils/helpers/shuffleArray';
-import { hasJoinedRoom } from '../utils/chatRoomUtils';
-import { incrementIndexDelayMillis, MODALS } from '../utils/constants';
+import store from '../../store';
+import * as ChatActions from '../../store/actions/chat';
+import * as DeckActions from '../../store/actions/decks';
+import * as ChatStudyDeckActions from '../../store/actions/chatStudyDeck';
+import { shuffleArray } from '../../utils/helpers/shuffleArray';
+import { registerSocketListeners } from './eventListeners';
 
 const PATH = '/socket/connect';
 let socket = null;
@@ -30,84 +29,7 @@ export const initSocket = () => {
         socket = io(`http://localhost:8000${PATH}`, options);
 
         socket.once('connect', resolve);
-
-        socket.on('returning_rooms', ({ rooms, roomId, destroyedRoom = null }) => {
-            store.dispatch(ChatActions.setRooms(rooms));
-
-            if (rooms.length > 0) {
-                const {
-                    user: { email },
-                } = store.getState();
-
-                const targetRoom = destroyedRoom
-                    ? destroyedRoom
-                    : rooms.filter((room) => room.id === roomId)[0];
-
-                if (hasJoinedRoom(targetRoom, email)) {
-                    if (destroyedRoom && destroyedRoom.host.email !== email) {
-                        store.dispatch(
-                            ChatActions.setModal({ type: MODALS.ROOM_ENDED, item: destroyedRoom })
-                        );
-                    } else if (!destroyedRoom) {
-                        store.dispatch(ChatActions.setOpenRoom(targetRoom));
-                    }
-                }
-            } else {
-                // Just in case somehow openRoom isn't reset when rooms are
-                store.dispatch(ChatActions.setOpenRoom({}));
-            }
-        });
-
-        socket.on('updated_room', ({ updatedRoom, rooms, hasNewHost = false }) => {
-            const {
-                user: { email },
-            } = store.getState();
-
-            store.dispatch(ChatActions.setRooms(rooms));
-
-            if (hasJoinedRoom(updatedRoom, email)) {
-                if (hasNewHost) {
-                    store.dispatch(
-                        ChatActions.setModal({ type: MODALS.NEW_HOST, item: updatedRoom })
-                    );
-                    return;
-                }
-                store.dispatch(ChatActions.setOpenRoom(updatedRoom));
-            }
-        });
-
-        socket.on('receive_message', (message) => {
-            store.dispatch(ChatActions.addMessage(message));
-        });
-
-        socket.on('studying_deck', (deck) => {
-            const {
-                chatStudyDeck: { _id = null, reachedEndOfDeck },
-            } = store.getState();
-
-            if (!_id || reachedEndOfDeck) {
-                store.dispatch(ChatStudyDeckActions.setStudyDeck(deck));
-            }
-        });
-
-        socket.on('ending_study_deck', () => {
-            store.dispatch(ChatStudyDeckActions.setReachedEndOfDeck(true));
-        });
-
-        socket.on('incrementing_study_deck', (deckIndex) => {
-            const { chatStudyDeck } = store.getState();
-            if (deckIndex !== chatStudyDeck.index) {
-                store.dispatch(ChatStudyDeckActions.setFlipped(false));
-                setTimeout(() => {
-                    store.dispatch(ChatStudyDeckActions.setIndex(deckIndex));
-                }, incrementIndexDelayMillis);
-            }
-        });
-
-        socket.on('reset_complete', () => {
-            store.dispatch(ChatActions.reset());
-        });
-
+        registerSocketListeners(socket);
         socket.open();
     });
 };

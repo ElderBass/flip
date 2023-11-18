@@ -24,7 +24,7 @@ const ChatRoomActionButton = ({ type, room }) => {
                 <button
                     type="button"
                     className={`${styles.btn} ${styles.reset}`}
-                    onClick={() => onActionClick(MODALS.LEAVE)}
+                    onClick={() => onActionClick(MODALS.LEAVE_ROOM)}
                 >
                     Leave Room
                 </button>
