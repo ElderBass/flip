@@ -82,3 +82,9 @@ export const chatActionModalTextMap = {
 };
 
 export const incrementIndexDelayMillis = 250;
+
+export const SENDER_TYPE = {
+    THIS_USER: 'thisUser',
+    OTHER_USER: 'otherUser',
+    SYSTEM: 'system'
+};

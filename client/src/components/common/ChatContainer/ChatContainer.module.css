@@ -1,27 +1,32 @@
 .chatContainer {
     flex: 1 0 25%;
-    height: 100%;
+    width: 100%;
     background: var(--background-yellow);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border-left: solid 2px var(--card-pink);
-    position: relative;
+    border-right: solid 2px var(--card-pink);
 }
 
 .conversation {
+    height: 100%;
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding: 10px;
+    gap: 4px;
+    overflow: auto;
+    padding: 0 10px 8px 10px;
 }
 
 .typingIndicator {
-    height: 30px;
-    padding: 6px;
+    height: 32px;
+    padding: 4px;
     color: var(--dark-gray);
-    font-size: 18px;
+    font-size: 16px;
+    align-self: center;
+}
+
+.typingIndicatorMsg {
+    margin: 0;
 }
 
 .typer {
@@ -40,6 +45,7 @@
 .sender {
     margin: 0 !important;
     font-size: 18px !important;
+    text-align: left;
 }
 
 .msgText {
@@ -57,9 +63,12 @@
 }
 
 .messageForm {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
+    padding-top: 12px;
+    background-color: var(--card-pink);
+    height: 92px;
 }
 
 .actions {
@@ -75,6 +84,7 @@
     width: 100%;
     background-color: var(--background-yellow);
     border: none;
+    border-radius: 4px;
     height: 52px;
     color: var(--pencil-gray);
     font-family: var(--text-font);
@@ -85,10 +95,6 @@
 .messageInput::placeholder {
     font-size: 20px;
     opacity: 0.6;
-}
-
-.messageInput:disabled {
-    opacity: 0.5;
 }
 
 .sendMsgBtn {

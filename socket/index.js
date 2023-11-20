@@ -58,13 +58,13 @@ const init = (server) => {
             ioServer.of(PATH).emit('returning_rooms', { rooms, destroyedRoom, roomId });
         });
 
-        socket.on('update_room', ({ updatedRoom, hasNewHost, updateType }) => {
+        socket.on('update_room', ({ updatedRoom, username, hasNewHost, updateType }) => {
             console.log('\n emitting socket event: update_room - [updateType:]', updateType, '\n');
             console.log('\n updatedRoom = ', updatedRoom, '\n\n');
 
             const { id: roomId } = updatedRoom;
 
-            if (updateType === 'leave') {
+            if (updateType === 'left') {
                 socket.leave(roomId);
             } else {
                 socket.join(roomId);
@@ -73,7 +73,7 @@ const init = (server) => {
             rooms = updateRoomsList(rooms, updatedRoom);
             console.log('\n current rooms: ', rooms, '\n');
 
-            ioServer.of(PATH).to(roomId).emit('updated_room', { updatedRoom, rooms, hasNewHost });
+            ioServer.of(PATH).to(roomId).emit('updated_room', { updatedRoom, rooms, username, hasNewHost, updateType });
         });
 
         socket.on('study_deck', ({ roomId, studyDeck }) => {

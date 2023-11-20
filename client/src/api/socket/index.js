@@ -1,11 +1,14 @@
 import { io } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
 import store from '../../store';
 import * as ChatActions from '../../store/actions/chat';
 import * as DeckActions from '../../store/actions/decks';
 import * as ChatStudyDeckActions from '../../store/actions/chatStudyDeck';
 import { shuffleArray } from '../../utils/helpers/shuffleArray';
 import { registerSocketListeners } from './eventListeners';
+import { trimEmail } from '../../utils/helpers/emailHelpers';
+import { SENDER_TYPE } from '../../utils/constants';
 
 const PATH = '/socket/connect';
 let socket = null;
@@ -66,7 +69,9 @@ export const sendMessage = (message) => {
         text: message,
         id: `message-${uuidv4()}`,
         roomId: openRoom.id,
+        timestamp: dayjs(Date.now()),
         sender: username,
+        senderType: SENDER_TYPE.THIS_USER,
     };
     socket.emit('send_message', messageObject);
 };
@@ -97,6 +102,7 @@ export const joinRoom = (room) => {
     } = store.getState();
 
     const newMember = { email, _id };
+    const username = trimEmail(email);
 
     const updatedRoom = {
         ...room,
@@ -104,7 +110,7 @@ export const joinRoom = (room) => {
     };
     store.dispatch(ChatActions.setOpenRoom(updatedRoom));
     store.dispatch(ChatActions.setModal(null));
-    socket.emit('update_room', { updatedRoom, updateType: 'join' });
+    socket.emit('update_room', { updatedRoom, username, updateType: 'joined' });
 };
 
 export const leaveRoom = (room) => {
@@ -131,7 +137,12 @@ export const leaveRoom = (room) => {
     }
 
     store.dispatch(ChatActions.reset());
-    socket.emit('update_room', { updatedRoom, hasNewHost, updateType: 'leave' });
+    socket.emit('update_room', {
+        updatedRoom,
+        username: trimEmail(email),
+        hasNewHost,
+        updateType: 'left',
+    });
 };
 
 export const destroyRoom = (roomId) => {

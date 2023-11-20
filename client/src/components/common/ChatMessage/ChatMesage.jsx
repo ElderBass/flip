@@ -1,17 +1,37 @@
+import dayjs from 'dayjs';
 import React from 'react';
+import { SENDER_TYPE } from '../../../utils/constants';
 import styles from './ChatMessage.module.css';
 
-const ChatMessage = ({ isUserMessage, message }) => {
-    const bubbleClass = isUserMessage ? styles.userBubble : '';
-    const headerClass = isUserMessage ? styles.alignRight : '';
+const ChatMessage = ({ message }) => {
+    const { senderType, sender, text, timestamp } = message;
+    const classNameMap = {
+        thisUser: {
+            bubble: styles.userBubble,
+            header: '',
+        },
+        otherUser: {
+            bubble: '',
+            header: '',
+        },
+        system: {
+            bubble: styles.systemBubble,
+            header: styles.systemHeader,
+        },
+    };
+    const { bubble, header } = classNameMap[senderType];
+
+    const messageClasss = senderType === SENDER_TYPE.THIS_USER ? `${styles.chatMessage} ${styles.alignRight}` : styles.chatMessage;
+    const isSystemMsg = senderType === SENDER_TYPE.SYSTEM;
 
     return (
-        <li className={styles.chatMessage}>
-            {!isUserMessage && (
-                <p className={`${styles.sender} ${headerClass}`}>{message.sender}</p>
-            )}
-            <div className={`${styles.messageBubble} ${bubbleClass}`}>
-                <p className={styles.messageText}>{message.text}</p>
+        <li className={styles.chatMessageListItem}>
+            <div className={messageClasss}>
+                {!isSystemMsg && <p className={`${styles.sender} ${header}`}>{sender || senderType}</p>}
+                <div className={`${styles.messageBubble} ${bubble}`}>
+                    <p className={styles.messageText}>{text}</p>
+                </div>
+                <p className={styles.timestamp}>{dayjs(timestamp).format('h:mm a')}</p>
             </div>
         </li>
     );

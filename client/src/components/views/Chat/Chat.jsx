@@ -35,12 +35,12 @@ const Chat = () => {
         <div className={styles.chatPage}>
             <Header />
             <div className={styles.chatPageContent}>
+            <ChatContainer messages={messages} room={openRoom} email={email} />
                 {actionModal && actionModal.type ? (
                     <ChatModal type={actionModal.type} item={actionModal.item || null} />
                 ) : (
                     <ChatRoomContainer rooms={rooms} openRoom={openRoom} email={email} />
                 )}
-                <ChatContainer messages={messages} room={openRoom} email={email} />
             </div>
         </div>
     );
