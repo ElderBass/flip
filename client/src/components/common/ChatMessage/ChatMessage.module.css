@@ -35,10 +35,33 @@
     margin: 4px;
 }
 
+.systemBubble {
+    background-color: var(--card-pink);
+    color: white;
+    border-radius: 4px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border: solid 2px var(--card-pink);
+    padding: 16px;
+    max-width: 100%;
+    width: 100%;
+}
+
+.systemHeader {
+    color: var(--pencil-gray);
+    text-align: left;
+}
+
 .alignRight {
     align-self: flex-end;
 }
 
 .messageText {
     margin: 0;
+}
+
+.timestamp {
+    margin: 0;
+    font-size: 12px;
+    color: var(--pencil-gray);
 }
