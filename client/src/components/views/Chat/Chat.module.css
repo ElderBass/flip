@@ -1,8 +1,8 @@
 @import url('../../../index.css');
 
 .chatPage {
-    height: 100vh;
     display: grid;
+    height: 100vh;
     color: var(--card-blue);
     background: var(--background-yellow);
     grid-template-columns: 1fr;
@@ -15,5 +15,5 @@
 .chatPageContent {
     grid-area: content;
     display: flex;
-    height: 100%;
+    height: 90%;
 }

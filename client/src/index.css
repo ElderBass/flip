@@ -25,6 +25,7 @@ body {
     box-sizing: border-box;
     background: var(--background-yellow);
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 a {

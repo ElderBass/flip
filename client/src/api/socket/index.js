@@ -69,7 +69,7 @@ export const sendMessage = (message) => {
         text: message,
         id: `message-${uuidv4()}`,
         roomId: openRoom.id,
-        timestamp: dayjs(Date.now),
+        timestamp: dayjs(Date.now()),
         sender: username,
         senderType: SENDER_TYPE.THIS_USER,
     };

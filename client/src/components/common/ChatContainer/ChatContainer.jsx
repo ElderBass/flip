@@ -30,10 +30,10 @@ const ChatContainer = ({ messages, email }) => {
         const isEnterKey = e.code === 'Enter' || e.keyCode === 13;
         if (isEnterKey && e.shiftKey === false) {
             onSubmit(e);
+        } else {
+            sendTyping(true);
+            setTimeout(() => sendTyping(false), 1500);
         }
-        sendTyping(true);
-
-        setTimeout(() => sendTyping(false), 1500);
     };
 
     // TODO: When I move rooms to the DB, will make messages as part of room
@@ -46,11 +46,6 @@ const ChatContainer = ({ messages, email }) => {
     return (
         <div className={styles.chatContainer}>
             <ChatHeader roomName={name} />
-            {userTyping && (
-                <p className={styles.typingIndicator}>
-                    <span className={styles.typer}>{userTyping.sender}</span> is typing...
-                </p>
-            )}
             <ul className={styles.conversation}>
                 {conversation.length > 0 &&
                     conversation.map((msg) => (
@@ -61,6 +56,13 @@ const ChatContainer = ({ messages, email }) => {
                         />
                     ))}
             </ul>
+            <div className={styles.typingIndicator}>
+                {userTyping && (
+                    <p className={styles.typingIndicatorMsg}>
+                        <span className={styles.typer}>{userTyping.sender}</span> is typing...
+                    </p>
+                )}
+            </div>
             <form className={styles.messageForm} onSubmit={onSubmit}>
                 <div className={styles.actions}>
                     <input

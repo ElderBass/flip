@@ -1,13 +1,18 @@
+.chatMessageListItem {
+    display: flex;
+}
+
 .chatMessage {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
 }
 
 .sender {
     font-size: 12px;
     color: var(--pencil-gray);
-    margin: 4px;
+    margin: 4px 0;
 }
 
 .messageBubble {
@@ -32,28 +37,29 @@
     border-bottom-left-radius: 8px;
     background-color: var(--card-blue);
     align-self: flex-end;
-    margin: 4px;
 }
 
 .systemBubble {
-    background-color: var(--card-pink);
-    color: white;
+    background-color: var(--background-yello);
+    color: var(--card-purple);
     border-radius: 4px;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
-    border: solid 2px var(--card-pink);
-    padding: 16px;
+    padding: 8px;
+    padding-bottom: 2px;
     max-width: 100%;
     width: 100%;
+    font-family: var(--logo-font);
+    font-size: 30px;
+    text-align: center;
 }
 
 .systemHeader {
     color: var(--pencil-gray);
-    text-align: left;
 }
 
 .alignRight {
-    align-self: flex-end;
+    align-items: flex-end;
 }
 
 .messageText {
@@ -62,6 +68,7 @@
 
 .timestamp {
     margin: 0;
-    font-size: 12px;
+    padding: 0 2px;
+    font-size: 10px;
     color: var(--pencil-gray);
 }
