@@ -80,7 +80,8 @@ const ChatContainer = ({ messages, email }) => {
             <TypingIndicator />
             <form className={styles.messageForm} onSubmit={onSubmit}>
                 <div className={styles.actions}>
-                    <input
+                    <textarea
+                        rows={1}
                         className={styles.messageInput}
                         onChange={onChange}
                         id="message"
@@ -89,7 +90,7 @@ const ChatContainer = ({ messages, email }) => {
                         disabled={!openRoom.id}
                         onKeyDown={onKeyDown}
                     />
-                    <button disabled={!openRoom.id} className={styles.sendMsgBtn} type="submit">
+                    <button disabled={!openRoom.id || !message.length} className={styles.sendMsgBtn} type="submit">
                         <FontAwesomeIcon icon={faPaperPlane} size="2x" />
                     </button>
                 </div>
