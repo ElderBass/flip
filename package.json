@@ -25,6 +25,7 @@
   "homepage": "https://github.com/ElderBass/flip#readme",
   "devDependencies": {
     "bson": "5.2.0",
+    "classnames": "2.3.2",
     "concurrently": "7.5.0",
     "dayjs": "1.11.10",
     "nodemon": "2.0.20",

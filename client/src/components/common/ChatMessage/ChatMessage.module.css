@@ -68,3 +68,7 @@
     font-size: 10px;
     color: var(--pencil-gray);
 }
+
+.centeredStamp {
+    align-self: center;
+}

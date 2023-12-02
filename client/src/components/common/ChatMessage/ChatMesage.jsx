@@ -1,5 +1,6 @@
-import dayjs from 'dayjs';
 import React from 'react';
+import classNames from 'classnames';
+import dayjs from 'dayjs';
 import { SENDER_TYPE } from '../../../utils/constants';
 import styles from './ChatMessage.module.css';
 
@@ -29,11 +30,19 @@ const ChatMessage = ({ message }) => {
 
     return (
         <div className={messageClasss}>
-            {!isSystemMsg && <p className={`${styles.sender} ${header}`}>{sender || senderType}</p>}
-            <div className={`${styles.messageBubble} ${bubble}`}>
+            {!isSystemMsg && (
+                <p className={classNames(styles.sender, header)}>{sender || senderType}</p>
+            )}
+            <div className={classNames(styles.messageBubble, bubble)}>
                 <p className={styles.messageText}>{text}</p>
             </div>
-            <p className={styles.timestamp}>{dayjs(timestamp).format('h:mm a')}</p>
+            <p
+                className={classNames(styles.timestamp, {
+                    [styles.centeredStamp]: isSystemMsg,
+                })}
+            >
+                {dayjs(timestamp).format('h:mm a')}
+            </p>
         </div>
     );
 };
