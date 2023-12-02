@@ -6,6 +6,9 @@
     display: flex;
     flex-direction: column;
     border-right: solid 2px var(--card-pink);
+    box-shadow: 3px 3px 6px var(--pencil-gray);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .conversation {
@@ -52,11 +55,9 @@
 }
 
 .messageForm {
-    position: relative;
-    bottom: 0;
     width: 100%;
     background-color: var(--card-pink);
-    height: 92px;
+    border-bottom-right-radius: 6px;
 }
 
 .actions {
@@ -64,7 +65,7 @@
     align-items: center;
     background-color: var(--card-pink);
     border-radius: 8px;
-    margin: 12px 8px;
+    padding: 12px;
 }
 
 .messageInput {

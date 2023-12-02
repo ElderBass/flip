@@ -5,6 +5,7 @@
     width: 100%;
     color: white;
     height: 106px;
+    border-top-right-radius: 6px;
 }
 
 .chatRoomHeader {
