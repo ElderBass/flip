@@ -1,7 +1,3 @@
-.chatMessageListItem {
-    display: flex;
-}
-
 .chatMessage {
     display: flex;
     flex-direction: column;

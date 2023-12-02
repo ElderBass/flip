@@ -21,19 +21,20 @@ const ChatMessage = ({ message }) => {
     };
     const { bubble, header } = classNameMap[senderType];
 
-    const messageClasss = senderType === SENDER_TYPE.THIS_USER ? `${styles.chatMessage} ${styles.alignRight}` : styles.chatMessage;
+    const messageClasss =
+        senderType === SENDER_TYPE.THIS_USER
+            ? `${styles.chatMessage} ${styles.alignRight}`
+            : styles.chatMessage;
     const isSystemMsg = senderType === SENDER_TYPE.SYSTEM;
 
     return (
-        <li className={styles.chatMessageListItem}>
-            <div className={messageClasss}>
-                {!isSystemMsg && <p className={`${styles.sender} ${header}`}>{sender || senderType}</p>}
-                <div className={`${styles.messageBubble} ${bubble}`}>
-                    <p className={styles.messageText}>{text}</p>
-                </div>
-                <p className={styles.timestamp}>{dayjs(timestamp).format('h:mm a')}</p>
+        <div className={messageClasss}>
+            {!isSystemMsg && <p className={`${styles.sender} ${header}`}>{sender || senderType}</p>}
+            <div className={`${styles.messageBubble} ${bubble}`}>
+                <p className={styles.messageText}>{text}</p>
             </div>
-        </li>
+            <p className={styles.timestamp}>{dayjs(timestamp).format('h:mm a')}</p>
+        </div>
     );
 };
 
