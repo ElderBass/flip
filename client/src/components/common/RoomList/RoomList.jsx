@@ -1,14 +1,28 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import ChatRoomActionButton from '../ChatRoomActionButton';
 import RoomListItem from '../RoomListItem';
 import styles from './RoomList.module.css';
 
 const RoomList = ({ rooms, email }) => {
+    const history = useHistory();
+
+    const onBackClick = () => history.goBack();
+
     return (
         <div className={styles.roomListContent}>
-            <h2 className={styles.flipWithFriends}>Flip with Friends</h2>
+            <div className={styles.pageHeader}>
+                <div className={styles.backButton} onClick={onBackClick}>
+                    <FontAwesomeIcon icon={faArrowLeft} size="2x" style={{ color: 'inherit' }} />
+                    <p className={styles.backButtonLabel}>Back</p>
+                </div>
+                <h2 className={styles.pageHeaderText}>Flip with Friends</h2>
+                <div />
+            </div>
             <div className={styles.roomListContainer}>
-                <div className={styles.header}>Join a Room</div>
+                <div className={styles.roomListHeader}>Join a Room</div>
                 <div className={styles.roomList}>
                     {rooms.length ? (
                         rooms.map((room) => (

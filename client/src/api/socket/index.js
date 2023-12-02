@@ -43,12 +43,13 @@ export const sendTyping = (isTyping) => {
         chat: { openRoom },
     } = store.getState();
 
-    const eventData = {
+    const typingData = {
         roomId: openRoom.id,
         sender: username,
         isTyping,
     };
-    socket.emit('send_typing', eventData);
+
+    socket.emit('send_typing', typingData);
 };
 
 export const sendMessage = (message) => {

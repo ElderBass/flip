@@ -46,9 +46,15 @@ const setModal = (payload) => ({
     payload,
 });
 
-const SET_USER_TYPING = 'SET_USER_TYPING';
-const setUserTyping = (typingData) => ({
-    type: SET_USER_TYPING,
+const ADD_USER_TYPING = 'ADD_USER_TYPING';
+const addUserTyping = (typingData) => ({
+    type: ADD_USER_TYPING,
+    payload: typingData,
+});
+
+const REMOVE_USER_TYPING = 'REMOVE_USER_TYPING';
+const removeUserTyping = (typingData) => ({
+    type: REMOVE_USER_TYPING,
     payload: typingData,
 });
 
@@ -74,8 +80,10 @@ export {
     addMessage,
     SET_MODAL,
     setModal,
-    SET_USER_TYPING,
-    setUserTyping,
+    ADD_USER_TYPING,
+    addUserTyping,
+    REMOVE_USER_TYPING,
+    removeUserTyping,
     RESET,
     reset,
 };
