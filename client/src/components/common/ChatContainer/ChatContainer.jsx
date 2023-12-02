@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,8 +9,15 @@ import ChatMessage from '../ChatMessage';
 import { trimEmail } from '../../../utils/helpers/emailHelpers';
 import TypingIndicator from '../TypingIndicator/TypingIndicator';
 
+const defaultScrollingOptions = {
+    behavior: 'smooth',
+    block: 'end',
+    inline: 'center',
+};
+
 const ChatContainer = ({ messages, email }) => {
     const { openRoom } = useSelector((state) => state.chat);
+    const newMessageRef = useRef(null);
 
     const { id, name } = openRoom;
 
@@ -38,11 +45,22 @@ const ChatContainer = ({ messages, email }) => {
         setTimeout(() => sendTyping(false), 2000);
     };
 
+    const scrollToMessage = (options) => {
+        if (newMessageRef && newMessageRef.current) {
+            setTimeout(() => {
+                if (newMessageRef && newMessageRef.current) {
+                    newMessageRef.current.scrollIntoView(options);
+                }
+            }, 1);
+        }
+    };
+
     // TODO: When I move rooms to the DB, will make messages as part of room
     // thus won't need this hack to filter out room-specific messages
     useEffect(() => {
         const roomMessages = messages.filter((msg) => msg.roomId === id);
         setConversation(roomMessages);
+        scrollToMessage(defaultScrollingOptions);
     }, [messages, id]);
 
     return (
@@ -51,11 +69,12 @@ const ChatContainer = ({ messages, email }) => {
             <ul className={styles.conversation}>
                 {conversation.length > 0 &&
                     conversation.map((msg) => (
-                        <ChatMessage
-                            key={msg.id}
-                            isUserMessage={msg.sender === trimEmail(email)}
-                            message={msg}
-                        />
+                        <li key={msg.id} className={styles.chatMessageListItem} ref={newMessageRef}>
+                            <ChatMessage
+                                isUserMessage={msg.sender === trimEmail(email)}
+                                message={msg}
+                            />
+                        </li>
                     ))}
             </ul>
             <TypingIndicator />
