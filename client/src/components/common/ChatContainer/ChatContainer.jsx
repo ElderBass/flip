@@ -7,10 +7,10 @@ import { sendMessage, sendTyping } from '../../../api/socket';
 import ChatHeader from '../ChatHeader';
 import ChatMessage from '../ChatMessage';
 import { trimEmail } from '../../../utils/helpers/emailHelpers';
+import TypingIndicator from '../TypingIndicator/TypingIndicator';
 
 const ChatContainer = ({ messages, email }) => {
-    const openRoom = useSelector((state) => state.chat.openRoom);
-    const userTyping = useSelector((state) => state.chat.userTyping);
+    const { openRoom } = useSelector((state) => state.chat);
 
     const { id, name } = openRoom;
 
@@ -30,10 +30,12 @@ const ChatContainer = ({ messages, email }) => {
         const isEnterKey = e.code === 'Enter' || e.keyCode === 13;
         if (isEnterKey && e.shiftKey === false) {
             onSubmit(e);
-        } else {
-            sendTyping(true);
-            setTimeout(() => sendTyping(false), 1500);
+            sendTyping(false);
+            return;
         }
+
+        sendTyping(true);
+        setTimeout(() => sendTyping(false), 2000);
     };
 
     // TODO: When I move rooms to the DB, will make messages as part of room
@@ -56,13 +58,7 @@ const ChatContainer = ({ messages, email }) => {
                         />
                     ))}
             </ul>
-            <div className={styles.typingIndicator}>
-                {userTyping && (
-                    <p className={styles.typingIndicatorMsg}>
-                        <span className={styles.typer}>{userTyping.sender}</span> is typing...
-                    </p>
-                )}
-            </div>
+            <TypingIndicator />
             <form className={styles.messageForm} onSubmit={onSubmit}>
                 <div className={styles.actions}>
                     <input

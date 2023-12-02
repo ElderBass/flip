@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     openRoom: {},
     messages: [],
     actionModal: null,
-    userTyping: null,
+    usersTyping: [],
 };
 
 const chat = (state = INITIAL_STATE, { type, payload }) => {
@@ -33,8 +33,17 @@ const chat = (state = INITIAL_STATE, { type, payload }) => {
             return { ...state, messages: [...state.messages, payload] };
         case ChatActions.SET_MODAL:
             return { ...state, actionModal: payload };
-        case ChatActions.SET_USER_TYPING:
-            return { ...state, userTyping: payload };
+        case ChatActions.ADD_USER_TYPING:
+            const isAlreadyTyping =
+                state.usersTyping.filter((user) => user === payload).length === 1;
+            if (isAlreadyTyping) return state;
+
+            return { ...state, usersTyping: [...state.usersTyping, payload] };
+        case ChatActions.REMOVE_USER_TYPING:
+            const updatedUsers = state.usersTyping.filter(
+                (user) => user !== payload
+            );
+            return { ...state, usersTyping: updatedUsers };
         case ChatActions.RESET:
             return INITIAL_STATE;
         default:

@@ -17,22 +17,6 @@
     padding: 0 10px 8px 10px;
 }
 
-.typingIndicator {
-    height: 32px;
-    padding: 4px;
-    color: var(--dark-gray);
-    font-size: 16px;
-    align-self: center;
-}
-
-.typingIndicatorMsg {
-    margin: 0;
-}
-
-.typer {
-    color: var(--card-purple);
-}
-
 .msg {
     padding: 8px;
     width: 98%;

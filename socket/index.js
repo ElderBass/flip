@@ -33,7 +33,7 @@ const init = (server) => {
 
         socket.on('send_typing', (data) => {
             const { roomId } = data;
-            console.log('\n emitting socket event send_typing: ', roomId, '\n');
+            console.log('\n emitting socket event send_typing: ', data, '\n');
             ioServer.of(PATH).to(roomId).emit('user_typing', data);
         });
 
