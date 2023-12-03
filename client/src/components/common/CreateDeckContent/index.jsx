@@ -1,3 +1,3 @@
-import CreateDeckContent from './CreateDeckContent';
+import CreateDeckContent from "./CreateDeckContent";
 
 export default CreateDeckContent;

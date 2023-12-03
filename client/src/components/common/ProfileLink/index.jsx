@@ -1,3 +1,3 @@
-import ProfileLink from './ProfileLink';
+import ProfileLink from "./ProfileLink";
 
 export default ProfileLink;

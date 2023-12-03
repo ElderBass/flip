@@ -1,3 +1,3 @@
-import ScrollCaret from './ScrollCaret';
+import ScrollCaret from "./ScrollCaret";
 
 export default ScrollCaret;

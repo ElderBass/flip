@@ -1,3 +1,3 @@
-import RoomEnded from './RoomEnded';
+import RoomEnded from "./RoomEnded";
 
 export default RoomEnded;

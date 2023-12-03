@@ -1,3 +1,3 @@
-import ChatMessage from './ChatMesage';
+import ChatMessage from "./ChatMesage";
 
 export default ChatMessage;

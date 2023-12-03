@@ -1,55 +1,55 @@
-@import url('../../../index.css');
+@import url("../../../index.css");
 
 .fourOhFourPage {
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    color: var(--card-blue);
-    background: var(--background-yellow);
-    grid-template-columns: 1fr;
-    grid-template-rows: 100px auto;
-    grid-template-areas:
-        'header'
-        'content';
+	height: 100vh;
+	width: 100vw;
+	display: grid;
+	color: var(--card-blue);
+	background: var(--background-yellow);
+	grid-template-columns: 1fr;
+	grid-template-rows: 100px auto;
+	grid-template-areas:
+		"header"
+		"content";
 }
 
 .fourOhFourContent {
-    grid-area: content;
-    display: flex;
-    padding-bottom: 30px;
-    height: 100%;
-    color: var(--card-blue);
-    font-family: var(--text-font);
+	grid-area: content;
+	display: flex;
+	padding-bottom: 30px;
+	height: 100%;
+	color: var(--card-blue);
+	font-family: var(--text-font);
 }
 
 .actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 50%;
 }
 
 .button {
-    border: none;
-    outline: none;
-    background-color: var(--background-yellow);
+	border: none;
+	outline: none;
+	background-color: var(--background-yellow);
 }
 
 .goBack {
-    color: var(--pencil-gray);
-    opacity: 0.7;
+	color: var(--pencil-gray);
+	opacity: 0.7;
 }
 
 .goBack:hover {
-    cursor: pointer;
-    opacity: 1;
+	cursor: pointer;
+	opacity: 1;
 }
 
 .home {
-    color: var(--card-pink);
+	color: var(--card-pink);
 }
 
 .home {
-    cursor: pointer;
-    color: var(--card-blue);
+	cursor: pointer;
+	color: var(--card-blue);
 }

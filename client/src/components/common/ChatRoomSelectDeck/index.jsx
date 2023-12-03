@@ -1,3 +1,3 @@
-import ChatRoomSelectDeck from './ChatRoomSelectDeck';
+import ChatRoomSelectDeck from "./ChatRoomSelectDeck";
 
 export default ChatRoomSelectDeck;

@@ -1,3 +1,3 @@
-import AddedCards from './AddedCards';
+import AddedCards from "./AddedCards";
 
 export default AddedCards;

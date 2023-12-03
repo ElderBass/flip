@@ -1,3 +1,3 @@
-import StudyDeckHeader from './StudyDeckHeader';
+import StudyDeckHeader from "./StudyDeckHeader";
 
 export default StudyDeckHeader;

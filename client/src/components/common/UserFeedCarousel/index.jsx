@@ -1,3 +1,3 @@
-import UserFeedCarousel from './UserFeedCarousel';
+import UserFeedCarousel from "./UserFeedCarousel";
 
 export default UserFeedCarousel;

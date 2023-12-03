@@ -1,73 +1,73 @@
 .roomListContent {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    font-family: var(--logo-font);
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	font-family: var(--logo-font);
 }
 
 .pageHeader {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    width: 80%;
-    padding: 24px;
-    padding-bottom: 0;
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	width: 80%;
+	padding: 24px;
+	padding-bottom: 0;
 }
 
 .backButton {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    padding: 12px;
-    border-radius: 4px;
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	padding: 12px;
+	border-radius: 4px;
 }
 
 .backButton:hover {
-    cursor: pointer;
-    color: var(--card-purple);
+	cursor: pointer;
+	color: var(--card-purple);
 }
 
 .backButtonLabel {
-    font-family: var(--text-font);
-    font-size: 24px;
-    margin: 0;
+	font-family: var(--text-font);
+	font-size: 24px;
+	margin: 0;
 }
 
 .pageHeaderText {
-    font-size: 60px;
-    color: var(--card-pink);
-    margin: 0px;
-    text-align: center;
+	font-size: 60px;
+	color: var(--card-pink);
+	margin: 0px;
+	text-align: center;
 }
 
 .roomListContainer {
-    min-height: 300px;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-family: var(--text-font);
-    background-color: var(--background-yellow);
-    box-shadow: 2px 2px 4px var(--pencil-gray);
+	min-height: 300px;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	font-family: var(--text-font);
+	background-color: var(--background-yellow);
+	box-shadow: 2px 2px 4px var(--pencil-gray);
 }
 
 .roomListHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    height: 64px;
-    width: 100%;
-    color: var(--card-blue);
-    border-bottom: solid 2px var(--card-pink);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 28px;
+	height: 64px;
+	width: 100%;
+	color: var(--card-blue);
+	border-bottom: solid 2px var(--card-pink);
 }
 
 .roomList {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 16px;
 }

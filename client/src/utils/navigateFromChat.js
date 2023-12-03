@@ -1,7 +1,7 @@
-import { disconnectSocket, leaveRoom } from '../api/socket';
+import { disconnectSocket, leaveRoom } from "../api/socket";
 
 export const navigateFromChat = (navigate, room) => {
-    leaveRoom(room);
-    disconnectSocket();
-    navigate();
+	leaveRoom(room);
+	disconnectSocket();
+	navigate();
 };

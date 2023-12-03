@@ -1,3 +1,3 @@
-import SelectedDeck from './SelectedDeck';
+import SelectedDeck from "./SelectedDeck";
 
 export default SelectedDeck;

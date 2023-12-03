@@ -1,3 +1,3 @@
-import Following from './Following';
+import Following from "./Following";
 
 export default Following;

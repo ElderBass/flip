@@ -1,3 +1,3 @@
-import ChatRoomStudyDeck from './ChatRoomStudyDeck';
+import ChatRoomStudyDeck from "./ChatRoomStudyDeck";
 
 export default ChatRoomStudyDeck;

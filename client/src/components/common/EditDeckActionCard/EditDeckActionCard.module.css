@@ -1,55 +1,55 @@
-@import url('../../../index.css');
+@import url("../../../index.css");
 
 .container {
-    flex: 1 0 80%;
-    display: flex;
-    margin: auto;
-    flex-direction: column;
-    align-items: center;
-    color: var(--background-yellow);
-    background: var(--background-yellow);
+	flex: 1 0 80%;
+	display: flex;
+	margin: auto;
+	flex-direction: column;
+	align-items: center;
+	color: var(--background-yellow);
+	background: var(--background-yellow);
 }
 
 .editDeckActionCard {
-    height: 400px;
-    width: 90%;
-    max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--card-purple);
-    box-shadow: 3px 3px 6px var(--dark-gray);
-    padding-bottom: 20px;
+	height: 400px;
+	width: 90%;
+	max-width: 700px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--card-purple);
+	box-shadow: 3px 3px 6px var(--dark-gray);
+	padding-bottom: 20px;
 }
 
 .label {
-    width: 100%;
-    padding: 10px;
-    font-size: 26px;
-    margin-bottom: 10px;
-    text-align: center;
-    color: var(--background-yellow);
-    border-bottom: solid 1.5px var(--card-pink);
+	width: 100%;
+	padding: 10px;
+	font-size: 26px;
+	margin-bottom: 10px;
+	text-align: center;
+	color: var(--background-yellow);
+	border-bottom: solid 1.5px var(--card-pink);
 }
 
 .instructions {
-    font-size: 34px;
-    color: var(--background-yellow);
+	font-size: 34px;
+	color: var(--background-yellow);
 }
 
 .addCardBtn {
-    border-radius: 8px;
-    color: white;
-    background-color: var(--dark-green);
-    font-size: 30px;
-    padding: 10px 20px;
-    outline: none;
-    border: none;
-    font-family: var(--text-font);
+	border-radius: 8px;
+	color: white;
+	background-color: var(--dark-green);
+	font-size: 30px;
+	padding: 10px 20px;
+	outline: none;
+	border: none;
+	font-family: var(--text-font);
 }
 
 .addCardBtn:hover {
-    background-color: var(--card-blue);
-    cursor: pointer;
+	background-color: var(--card-blue);
+	cursor: pointer;
 }

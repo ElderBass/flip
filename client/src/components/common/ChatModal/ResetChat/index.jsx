@@ -1,3 +1,3 @@
-import ResetChat from './ResetChat';
+import ResetChat from "./ResetChat";
 
 export default ResetChat;

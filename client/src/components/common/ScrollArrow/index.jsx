@@ -1,3 +1,3 @@
-import ScrollArrow from './ScrollArrow';
+import ScrollArrow from "./ScrollArrow";
 
 export default ScrollArrow;

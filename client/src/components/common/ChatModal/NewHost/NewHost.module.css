@@ -1,67 +1,67 @@
 .chatNewHostModal {
-    min-height: 400px;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    font-family: var(--text-font);
-    margin: 16px;
-    background-color: var(--action-blue);
-    box-shadow: 2px 2px 4px var(--pencil-gray);
+	min-height: 400px;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	text-align: center;
+	font-family: var(--text-font);
+	margin: 16px;
+	background-color: var(--action-blue);
+	box-shadow: 2px 2px 4px var(--pencil-gray);
 }
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    height: 30%;
-    width: 100%;
-    color: var(--background-yellow);
-    border-bottom: solid 2px var(--card-pink);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 28px;
+	height: 30%;
+	width: 100%;
+	color: var(--background-yellow);
+	border-bottom: solid 2px var(--card-pink);
 }
 
 .hostName {
-    color: var(--background-yellow);
+	color: var(--background-yellow);
 }
 
 .heading {
-    padding: 16px 0;
-    color: var(--dark-gray);
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+	padding: 16px 0;
+	color: var(--dark-gray);
+	height: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .headingText {
-    font-size: 24px;
-    margin: 8px;
+	font-size: 24px;
+	margin: 8px;
 }
 
 .secondaryText {
-    font-size: 20px;
-    margin: 8px !important;
+	font-size: 20px;
+	margin: 8px !important;
 }
 
 .actions {
-    height: 30%;
-    padding-bottom: 24px;
+	height: 30%;
+	padding-bottom: 24px;
 }
 
 .btn {
-    border: none;
-    outline: none;
-    padding: 16px;
-    color: white;
-    font-size: 24px;
-    border-radius: 4px;
-    font-family: var(--text-font);
-    background-color: var(--card-green);
+	border: none;
+	outline: none;
+	padding: 16px;
+	color: white;
+	font-size: 24px;
+	border-radius: 4px;
+	font-family: var(--text-font);
+	background-color: var(--card-green);
 }
 
 .btn:hover {
-    cursor: pointer;
-    background-color: var(--card-pink);
+	cursor: pointer;
+	background-color: var(--card-pink);
 }
