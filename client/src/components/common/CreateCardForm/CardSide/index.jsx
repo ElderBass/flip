@@ -1,3 +1,3 @@
-import CardSide from './CardSide';
+import CardSide from "./CardSide";
 
 export default CardSide;

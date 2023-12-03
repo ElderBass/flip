@@ -1,3 +1,3 @@
-import ChatRoomActionButton from './ChatRoomActionButton';
+import ChatRoomActionButton from "./ChatRoomActionButton";
 
 export default ChatRoomActionButton;

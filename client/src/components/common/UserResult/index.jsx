@@ -1,3 +1,3 @@
-import UserResult from './UserResult';
+import UserResult from "./UserResult";
 
 export default UserResult;

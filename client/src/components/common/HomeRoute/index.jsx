@@ -1,3 +1,3 @@
-import HomeRoute from './HomeRoute';
+import HomeRoute from "./HomeRoute";
 
 export default HomeRoute;

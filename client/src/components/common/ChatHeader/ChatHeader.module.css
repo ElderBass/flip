@@ -1,24 +1,24 @@
 .header {
-    background-color: var(--card-pink);
-    padding: 16px;
-    text-align: center;
-    width: 100%;
-    color: white;
-    height: 106px;
-    border-top-right-radius: 6px;
+	background-color: var(--card-pink);
+	padding: 16px;
+	text-align: center;
+	width: 100%;
+	color: white;
+	height: 106px;
+	border-top-right-radius: 6px;
 }
 
 .chatRoomHeader {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0;
+	font-size: 24px;
+	font-weight: 600;
+	margin: 0;
 }
 
 .roomNameSpan {
-    color: var(--create-card-green);
+	color: var(--create-card-green);
 }
 
 .chatRoomName {
-    font-size: 20px;
-    margin: 12px 0 8px 0;
+	font-size: 20px;
+	margin: 12px 0 8px 0;
 }

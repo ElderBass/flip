@@ -1,3 +1,3 @@
-import NewHost from './NewHost';
+import NewHost from "./NewHost";
 
 export default NewHost;

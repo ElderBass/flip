@@ -1,3 +1,3 @@
-import FourOhFour from './FourOhFour';
+import FourOhFour from "./FourOhFour";
 
 export default FourOhFour;

@@ -1,16 +1,16 @@
 .studyDeckHeader {
-    width: 60%;
-    text-align: center;
+	width: 60%;
+	text-align: center;
 }
 
 .studyDeckHeader > h3 {
-    font-size: 30px;
+	font-size: 30px;
 }
 
 .deckName {
-    color: var(--card-pink);
+	color: var(--card-pink);
 }
 
 .spacer {
-    height: 5%;
+	height: 5%;
 }

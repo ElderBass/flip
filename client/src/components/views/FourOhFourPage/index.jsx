@@ -1,3 +1,3 @@
-import FourOhFourPage from './FourOhFourPage';
+import FourOhFourPage from "./FourOhFourPage";
 
 export default FourOhFourPage;

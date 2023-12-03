@@ -1,3 +1,3 @@
-import EndOfDeck from './EndOfDeck';
+import EndOfDeck from "./EndOfDeck";
 
 export default EndOfDeck;

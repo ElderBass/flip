@@ -1,65 +1,65 @@
-@import url('../../../index.css');
+@import url("../../../index.css");
 
 .endOfDeck {
-    width: 90%;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 40px;
-    color: var(--card-blue);
+	width: 90%;
+	min-height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	padding: 40px;
+	color: var(--card-blue);
 }
 
 .finished {
-    font-size: 50px;
+	font-size: 50px;
 }
 
 .withUnknownButton {
-    justify-content: space-between;
+	justify-content: space-between;
 }
 
 .withoutUnknownButton {
-    justify-content: center;
+	justify-content: center;
 }
 
 .studyActions {
-    width: 70%;
-    display: flex;
-    align-items: center;
+	width: 70%;
+	display: flex;
+	align-items: center;
 }
 
 .actionButton {
-    font-family: var(--text-font);
-    padding: 10px 15px;
-    font-size: 25px;
-    border: none;
-    outline: none;
-    border-radius: 8px;
-    color: white;
+	font-family: var(--text-font);
+	padding: 10px 15px;
+	font-size: 25px;
+	border: none;
+	outline: none;
+	border-radius: 8px;
+	color: white;
 }
 
 .studyEntire {
-    background: var(--card-purple);
+	background: var(--card-purple);
 }
 
 .studyUnknown {
-    background-color: var(--card-blue);
+	background-color: var(--card-blue);
 }
 
 .actionButton:hover {
-    cursor: pointer;
-    background-color: var(--card-pink);
+	cursor: pointer;
+	background-color: var(--card-pink);
 }
 
 .returnHome {
-    font-size: 24px;
-    opacity: 0.7;
-    color: var(--pencil-gray);
+	font-size: 24px;
+	opacity: 0.7;
+	color: var(--pencil-gray);
 }
 
 .returnHome:hover {
-    cursor: pointer;
-    opacity: 1;
-    font-weight: 600;
+	cursor: pointer;
+	opacity: 1;
+	font-weight: 600;
 }

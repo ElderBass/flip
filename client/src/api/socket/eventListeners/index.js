@@ -8,18 +8,18 @@ import { updated_room } from "./updated_room";
 import { user_typing } from "./user_typing";
 
 const socketEventListeners = {
-    returning_rooms,
-    updated_room,
-    studying_deck,
-    user_typing,
-    receive_message,
-    ending_study_deck,
-    incrementing_study_deck,
-    reset_complete,
+	returning_rooms,
+	updated_room,
+	studying_deck,
+	user_typing,
+	receive_message,
+	ending_study_deck,
+	incrementing_study_deck,
+	reset_complete,
 };
 
 export const registerSocketListeners = (socket) => {
-    for (const [event, handler] of Object.entries(socketEventListeners)) {
-        socket.on(event, handler);
-    }
+	for (const [event, handler] of Object.entries(socketEventListeners)) {
+		socket.on(event, handler);
+	}
 };

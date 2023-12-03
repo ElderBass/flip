@@ -1,115 +1,115 @@
-@import url('../../../index.css');
+@import url("../../../index.css");
 
 .createDeckContent {
-    grid-area: content;
-    display: flex;
-    padding-bottom: 30px;
-    height: 100%;
+	grid-area: content;
+	display: flex;
+	padding-bottom: 30px;
+	height: 100%;
 }
 
 .cancelEditDeck {
-    width: 80%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    z-index: 0;
-    align-items: center;
+	width: 80%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	z-index: 0;
+	align-items: center;
 }
 
 .createDeckForm {
-    flex: 1 0 70%;
-    max-height: 70%;
-    color: var(--card-blue);
-    background: var(--background-yellow);
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+	flex: 1 0 70%;
+	max-height: 70%;
+	color: var(--card-blue);
+	background: var(--background-yellow);
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 }
 
 .addCardBtn {
-    height: 90px;
-    font-size: 80px;
-    font-weight: 500;
-    font-family: var(--logo-font);
-    color: var(--dark-green);
-    outline: none;
-    border: none;
-    padding: 0 20px;
-    background: none;
+	height: 90px;
+	font-size: 80px;
+	font-weight: 500;
+	font-family: var(--logo-font);
+	color: var(--dark-green);
+	outline: none;
+	border: none;
+	padding: 0 20px;
+	background: none;
 }
 
 .addCardBtn:hover {
-    cursor: pointer;
-    font-size: 86px;
-    font-weight: 700;
+	cursor: pointer;
+	font-size: 86px;
+	font-weight: 700;
 }
 
 .addCardBtn:disabled {
-    cursor: default;
-    font-size: 70px;
-    color: var(--pencil-gray);
-    opacity: 0.5;
+	cursor: default;
+	font-size: 70px;
+	color: var(--pencil-gray);
+	opacity: 0.5;
 }
 
 .addCardBtn:disabled:hover {
-    cursor: default;
-    font-size: 70px;
-    color: var(--pencil-gray);
-    opacity: 0.5;
-    font-weight: 500;
+	cursor: default;
+	font-size: 70px;
+	color: var(--pencil-gray);
+	opacity: 0.5;
+	font-weight: 500;
 }
 
 .actions {
-    flex: 1 0 20%;
-    margin-top: -20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	flex: 1 0 20%;
+	margin-top: -20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .cancelBtn {
-    padding: 20px;
-    color: var(--card-purple);
-    font-size: 32px;
-    font-family: var(--text-font);
-    background: var(--background-yellow);
-    border: none;
+	padding: 20px;
+	color: var(--card-purple);
+	font-size: 32px;
+	font-family: var(--text-font);
+	background: var(--background-yellow);
+	border: none;
 }
 
 .cancelBtn:hover {
-    cursor: pointer;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--card-blue);
+	cursor: pointer;
+	font-size: 36px;
+	font-weight: 700;
+	color: var(--card-blue);
 }
 
 .finishBtn {
-    padding: 20px;
-    color: var(--dark-green);
-    font-size: 70px;
-    font-family: var(--logo-font);
-    outline: none;
-    border: none;
-    background: var(--background-yellow);
-    font-weight: 400;
+	padding: 20px;
+	color: var(--dark-green);
+	font-size: 70px;
+	font-family: var(--logo-font);
+	outline: none;
+	border: none;
+	background: var(--background-yellow);
+	font-weight: 400;
 }
 
 .finishBtn:hover {
-    cursor: pointer;
-    font-size: 74px;
-    font-weight: 700;
+	cursor: pointer;
+	font-size: 74px;
+	font-weight: 700;
 }
 
 .finishBtn:disabled {
-    cursor: default;
-    color: var(--pencil-gray);
-    opacity: 0.5;
-    font-size: 60px;
+	cursor: default;
+	color: var(--pencil-gray);
+	opacity: 0.5;
+	font-size: 60px;
 }
 
 .finishBtn:disabled:hover {
-    color: var(--pencil-gray);
-    opacity: 0.5;
-    font-size: 60px;
-    font-weight: 400;
+	color: var(--pencil-gray);
+	opacity: 0.5;
+	font-size: 60px;
+	font-weight: 400;
 }

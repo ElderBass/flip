@@ -1,3 +1,3 @@
-import UsersSearchBar from './UsersSearchBar';
+import UsersSearchBar from "./UsersSearchBar";
 
 export default UsersSearchBar;

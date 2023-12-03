@@ -1,11 +1,11 @@
-@import url('../../../index.css');
+@import url("../../../index.css");
 
 .logout {
-    font-size: 20px;
-    color: var(--pencil-gray);
+	font-size: 20px;
+	color: var(--pencil-gray);
 }
 
 .logout:hover {
-    cursor: pointer;
-    color: var(--card-pink);
+	cursor: pointer;
+	color: var(--card-pink);
 }

@@ -1,3 +1,3 @@
-import Study from './Study';
+import Study from "./Study";
 
 export default Study;

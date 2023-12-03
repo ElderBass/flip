@@ -1,3 +1,3 @@
-import RoomListItem from './RoomListItem';
+import RoomListItem from "./RoomListItem";
 
 export default RoomListItem;

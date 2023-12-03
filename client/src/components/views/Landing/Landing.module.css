@@ -1,66 +1,66 @@
-@import url('../../../index.css');
+@import url("../../../index.css");
 
 .landingPage {
-    height: 100vh;
-    width: 100%;
-    display: flex;
+	height: 100vh;
+	width: 100%;
+	display: flex;
 }
 
 .splash {
-    flex: 1 0 35%;
-    background-color: var(--background-yellow);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	flex: 1 0 35%;
+	background-color: var(--background-yellow);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .logo {
-    flex: 1 0 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 200px;
-    font-family: var(--logo-font);
+	flex: 1 0 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 200px;
+	font-family: var(--logo-font);
 }
 
 .blurb {
-    flex: 1 0 50%;
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	flex: 1 0 50%;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .error {
-    height: 50px;
-    text-align: center;
-    margin-bottom: 30px;
-    background: var(--card-blue);
+	height: 50px;
+	text-align: center;
+	margin-bottom: 30px;
+	background: var(--card-blue);
 }
 
 .errorMsg {
-    color: var(--background-yellow);
-    font-size: 22px;
-    text-align: center;
+	color: var(--background-yellow);
+	font-size: 22px;
+	text-align: center;
 }
 
 .wrapper {
-    flex: 1 0 65%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--card-blue);
+	flex: 1 0 65%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--card-blue);
 }
 
 .loginSignup {
-    width: 80%;
-    height: 70%;
-    background-color: var(--card-blue);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	width: 80%;
+	height: 70%;
+	background-color: var(--card-blue);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }

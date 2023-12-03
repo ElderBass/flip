@@ -1,3 +1,3 @@
-import CreateChatRoomForm from './CreateChatRoomForm';
+import CreateChatRoomForm from "./CreateChatRoomForm";
 
 export default CreateChatRoomForm;

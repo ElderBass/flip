@@ -1,3 +1,3 @@
-import ChatEndStudyActions from './ChatEndStudyActions';
+import ChatEndStudyActions from "./ChatEndStudyActions";
 
 export default ChatEndStudyActions;

@@ -1,3 +1,3 @@
-import ChatEndStudyNotice from './ChatEndStudyNotice';
+import ChatEndStudyNotice from "./ChatEndStudyNotice";
 
 export default ChatEndStudyNotice;

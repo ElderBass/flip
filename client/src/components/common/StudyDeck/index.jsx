@@ -1,3 +1,3 @@
-import StudyDeck from './StudyDeck';
+import StudyDeck from "./StudyDeck";
 
 export default StudyDeck;

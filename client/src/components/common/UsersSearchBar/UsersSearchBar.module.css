@@ -1,28 +1,28 @@
-@import url('../../../index.css');
+@import url("../../../index.css");
 
 .usersSearchBar {
-    padding: 2rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+	padding: 2rem;
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 .userSearchForm {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 .userSearchInput {
-    min-width: 50%;
-    max-width: 80%;
-    background-color: var(--background-yellow);
-    color: var(--pencil-gray);
-    border: none;
-    border-bottom: solid 1.5px var(--card-pink);
-    font-family: var(--logo-font);
-    font-size: 2rem;
-    outline: none;
-    padding: 10px;
-    height: 50px;
+	min-width: 50%;
+	max-width: 80%;
+	background-color: var(--background-yellow);
+	color: var(--pencil-gray);
+	border: none;
+	border-bottom: solid 1.5px var(--card-pink);
+	font-family: var(--logo-font);
+	font-size: 2rem;
+	outline: none;
+	padding: 10px;
+	height: 50px;
 }

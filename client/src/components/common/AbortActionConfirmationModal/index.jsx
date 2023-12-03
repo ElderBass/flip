@@ -1,3 +1,3 @@
-import AbortActionConfirmationModal from './AbortActionConfirmationModal';
+import AbortActionConfirmationModal from "./AbortActionConfirmationModal";
 
 export default AbortActionConfirmationModal;

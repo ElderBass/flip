@@ -1,15 +1,15 @@
 .typingIndicator {
-    height: 32px;
-    padding: 4px;
-    color: var(--dark-gray);
-    font-size: 16px;
-    align-self: center;
+	height: 32px;
+	padding: 4px;
+	color: var(--dark-gray);
+	font-size: 16px;
+	align-self: center;
 }
 
 .typingIndicatorMsg {
-    margin: 0;
+	margin: 0;
 }
 
 .typer {
-    color: var(--card-purple);
+	color: var(--card-purple);
 }
