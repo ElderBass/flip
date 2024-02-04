@@ -4,7 +4,7 @@ import store from "../../../store";
 import * as ChatActions from "../../../store/actions/chat";
 import { hasJoinedRoom } from "../../../utils/chatRoomUtils";
 import ChatRoom from "../ChatRoom";
-import RoomList from "../RoomList";
+import ChatRoomList from "../ChatRoomList";
 import styles from "./ChatRoomContainer.module.css";
 
 const ChatRoomContainer = () => {
@@ -35,7 +35,7 @@ const ChatRoomContainer = () => {
 			{userInRoom ? (
 				<ChatRoom room={openRoom} userInRoom={userInRoom} />
 			) : (
-				<RoomList rooms={rooms} email={email} />
+				<ChatRoomList rooms={rooms} email={email} />
 			)}
 		</div>
 	);
