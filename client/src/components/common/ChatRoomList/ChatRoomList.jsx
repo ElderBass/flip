@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import ChatRoomActionButton from "../ChatRoomActionButton";
 import RoomListItem from "../RoomListItem";
-import styles from "./RoomList.module.css";
+import styles from "./ChatRoomList.module.css";
 
-const RoomList = ({ rooms, email }) => {
+const ChatRoomList = ({ rooms, email }) => {
 	const history = useHistory();
 
 	const onBackClick = () => history.goBack();
@@ -46,4 +46,4 @@ const RoomList = ({ rooms, email }) => {
 	);
 };
 
-export default RoomList;
+export default ChatRoomList;

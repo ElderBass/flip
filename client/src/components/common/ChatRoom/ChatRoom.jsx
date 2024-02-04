@@ -48,7 +48,7 @@ const ChatRoom = ({ room }) => {
 					userIsHost={userIsHost}
 				/>
 			)}
-			{showSelectDeck && (
+			{showSelectDeck && !showStudyRoom && (
 				<ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
 			)}
 			{(showStudyRoom || showSelectDeck) && (

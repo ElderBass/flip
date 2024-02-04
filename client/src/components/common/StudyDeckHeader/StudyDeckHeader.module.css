@@ -3,14 +3,12 @@
 	text-align: center;
 }
 
-.studyDeckHeader > h3 {
-	font-size: 30px;
+.studyDeckHeader > h2 {
+	font-family: var(--logo-font);
+	font-size: 50px;
+	margin: 24px;
 }
 
 .deckName {
 	color: var(--card-pink);
-}
-
-.spacer {
-	height: 5%;
 }
