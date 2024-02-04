@@ -1,7 +1,3 @@
-.chatRoomContainer {
-	display: flex;
-}
-
 .chatRoom {
 	flex: 1 0 auto;
 	width: 100%;
