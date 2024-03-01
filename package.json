@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run test",
     "seed": "node data/seed.js",
-    "format:client": "prettier --write ./client/src",
+    "format:client": "prettier --write ./client/src && git add .",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node index.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",

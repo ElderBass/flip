@@ -6,12 +6,16 @@
 	width: 620px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	align-items: center;
 	padding: 20px 0;
 	background: var(--card-blue);
 	color: var(--background-yellow);
 	box-shadow: 3px 3px 6px var(--dark-gray);
+}
+
+.flipWithFriendsCard {
+	height: 400px;
+	width: 800px;
 }
 
 .headerSpace {
@@ -23,6 +27,13 @@
 	text-align: center;
 	color: var(--pencil-gray);
 	border-bottom: solid 1.5px var(--card-pink);
+}
+
+.sideValue {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 }
 
 .frontValue {

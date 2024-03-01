@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import store from "../../../store";
 import * as ChatActions from "../../../store/actions/chat";
@@ -39,18 +39,27 @@ const ChatRoom = ({ room }) => {
 
 	const userIsHost = room && room.host && email === room.host.email;
 
-	return (
-		<div className={styles.chatRoom}>
-			{showStudyRoom && (
+	const ChildComponent = useMemo(() => {
+		if (chatStudyDeck._id) {
+			return (
 				<ChatRoomStudyDeck
 					deck={chatStudyDeck}
 					roomId={openRoom.id}
 					userIsHost={userIsHost}
 				/>
-			)}
-			{showSelectDeck && !showStudyRoom && (
+			);
+		} else if (openRoom && openRoom.id) {
+			return (
 				<ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
-			)}
+			);
+		} else {
+			return null;
+		}
+	}, [chatStudyDeck, openRoom, room, userIsHost]);
+
+	return (
+		<div className={styles.chatRoom}>
+			{ChildComponent}
 			{(showStudyRoom || showSelectDeck) && (
 				<ChatRoomActionButton type="reset" room={openRoom} />
 			)}
