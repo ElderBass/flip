@@ -8,7 +8,10 @@ import styles from "./CreateChatRoomForm.module.css";
 const CreateChatRoomForm = () => {
 	const [name, setName] = useState("");
 
-	const onChange = (e) => setName(e.target.value);
+	const onChange = (e) => {
+		if (e.target.value.length === 24) return;
+		setName(e.target.value);
+	};
 
 	const resetModal = () => {
 		setName("");

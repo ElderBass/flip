@@ -4,10 +4,10 @@ import ReactCardFlip from "react-card-flip";
 import { incrementIndexDelayMillis, SIDES } from "../../../utils/constants";
 import * as ChatStudyDeckActions from "../../../store/actions/chatStudyDeck";
 import StudyCardSide from "../StudyCardSide";
-import StudyDeckHeader from "../StudyDeckHeader/StudyDeckHeader";
 import styles from "./ChatRoomStudyDeck.module.css";
 import { endStudyDeck, incrementStudyDeck } from "../../../api/socket";
 import ChatEndStudyNotice from "../ChatEndStudyNotice";
+import ChatRoomHeader from "../ChatRoomHeader";
 
 const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
 	const {
@@ -49,7 +49,10 @@ const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
 
 	return (
 		<div className={styles.chatRoomStudyDeck}>
-			<StudyDeckHeader endOfDeck={reachedEndOfDeck} deckName={deckName} />
+			<ChatRoomHeader
+				headerText={reachedEndOfDeck ? "Finished Studying" : "Studying"}
+				spanText={deckName}
+			/>
 			{!reachedEndOfDeck ? (
 				<div className={styles.gameWrapper}>
 					<ReactCardFlip isFlipped={flipped}>

@@ -3,6 +3,7 @@ import store from "../../../store";
 import UserResult from "../UserResult";
 import userResultStyles from "../UserResult/ChatResult.module.css";
 import styles from "./ChatRoomSelectDeck.module.css";
+import ChatRoomHeader from "../ChatRoomHeader";
 
 const ChatRoomSelectDeck = ({ room, onSelectDeck }) => {
 	const { name, members, host = "" } = room;
@@ -18,12 +19,7 @@ const ChatRoomSelectDeck = ({ room, onSelectDeck }) => {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.pageHeader}>
-				<h2 className={styles.pageHeaderText}>
-					Now Viewing Room:{" "}
-					<span className={styles.roomName}>{name}</span>
-				</h2>
-			</div>
+			<ChatRoomHeader headerText="Now Viewing Room:" spanText={name} />
 			<div className={styles.chatRoomSelectDeck}>
 				<div className={styles.header}>
 					<p className={styles.headingText}>{headingText}</p>

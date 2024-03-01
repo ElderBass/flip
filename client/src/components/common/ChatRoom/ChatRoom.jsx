@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import store from "../../../store";
 import * as ChatActions from "../../../store/actions/chat";
@@ -19,18 +19,6 @@ const ChatRoom = ({ room }) => {
 		chat,
 	}));
 
-	const [showStudyRoom, setShowStudyRoom] = useState(false);
-	const [showSelectDeck, setShowSelectDeck] = useState(false);
-
-	// TODO: Super hacky way to have loading screen show when navigating away from chat.
-	useEffect(() => {
-		if (chatStudyDeck._id) {
-			setShowStudyRoom(true);
-		} else if (openRoom && openRoom.id) {
-			setShowSelectDeck(true);
-		}
-	}, [chatStudyDeck, openRoom]);
-
 	const onSelectDeck = (deck) => {
 		store.dispatch(
 			ChatActions.setModal({ type: MODALS.STUDY, item: deck })
@@ -39,21 +27,28 @@ const ChatRoom = ({ room }) => {
 
 	const userIsHost = room && room.host && email === room.host.email;
 
-	return (
-		<div className={styles.chatRoom}>
-			{showStudyRoom && (
+	const ChildComponent = useMemo(() => {
+		if (chatStudyDeck._id) {
+			return (
 				<ChatRoomStudyDeck
 					deck={chatStudyDeck}
 					roomId={openRoom.id}
 					userIsHost={userIsHost}
 				/>
-			)}
-			{showSelectDeck && !showStudyRoom && (
+			);
+		} else if (openRoom && openRoom.id) {
+			return (
 				<ChatRoomSelectDeck room={room} onSelectDeck={onSelectDeck} />
-			)}
-			{(showStudyRoom || showSelectDeck) && (
-				<ChatRoomActionButton type="reset" room={openRoom} />
-			)}
+			);
+		} else {
+			return null;
+		}
+	}, [chatStudyDeck, openRoom, room, userIsHost]);
+
+	return (
+		<div className={styles.chatRoom}>
+			{ChildComponent}
+			<ChatRoomActionButton type="reset" room={openRoom} />
 		</div>
 	);
 };
