@@ -7,8 +7,9 @@ import { setModal } from "../../../store/actions/chat";
 import { MODALS } from "../../../utils/constants";
 
 const ChatRoomHeader = ({ headerText, spanText }) => {
+	const { openRoom } = store.getState().chat;
 	const onLeaveClick = () =>
-		store.dispatch(setModal({ type: MODALS.LEAVE_ROOM }));
+		store.dispatch(setModal({ type: MODALS.LEAVE_ROOM, item: openRoom }));
 
 	return (
 		<div className={styles.chatRoomHeader}>

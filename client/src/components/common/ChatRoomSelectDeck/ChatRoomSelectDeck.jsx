@@ -3,7 +3,7 @@ import store from "../../../store";
 import UserResult from "../UserResult";
 import userResultStyles from "../UserResult/ChatResult.module.css";
 import styles from "./ChatRoomSelectDeck.module.css";
-import ChatRoomHeader from "../ChatRoomHeader/ChatRoomHeader";
+import ChatRoomHeader from "../ChatRoomHeader";
 
 const ChatRoomSelectDeck = ({ room, onSelectDeck }) => {
 	const { name, members, host = "" } = room;

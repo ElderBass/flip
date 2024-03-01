@@ -7,7 +7,7 @@ import StudyCardSide from "../StudyCardSide";
 import styles from "./ChatRoomStudyDeck.module.css";
 import { endStudyDeck, incrementStudyDeck } from "../../../api/socket";
 import ChatEndStudyNotice from "../ChatEndStudyNotice";
-import ChatRoomHeader from "../ChatRoomHeader/ChatRoomHeader";
+import ChatRoomHeader from "../ChatRoomHeader";
 
 const ChatRoomStudyDeck = ({ deck, roomId, userIsHost }) => {
 	const {
