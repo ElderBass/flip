@@ -20,7 +20,6 @@ const ChatRoomList = ({ rooms, email }) => {
 						size="2x"
 						style={{ color: "inherit" }}
 					/>
-					<p className={styles.backButtonLabel}>Back</p>
 				</div>
 				<h2 className={styles.pageHeaderText}>Flip with Friends</h2>
 				<div />

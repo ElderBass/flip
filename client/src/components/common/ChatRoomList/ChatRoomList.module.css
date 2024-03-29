@@ -29,12 +29,6 @@
 	color: var(--card-purple);
 }
 
-.backButtonLabel {
-	font-family: var(--text-font);
-	font-size: 24px;
-	margin: 0;
-}
-
 .pageHeaderText {
 	font-size: 60px;
 	color: var(--card-pink);
