@@ -1,0 +1,106 @@
+.chatContainer {
+	flex: 1 0 25%;
+	width: 100%;
+	max-height: 900px;
+	background: var(--background-yellow);
+	display: flex;
+	flex-direction: column;
+	border-right: solid 2px var(--card-pink);
+	box-shadow: 3px 3px 6px var(--pencil-gray);
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+.conversation {
+	height: 100%;
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	overflow: auto;
+	padding: 0 10px 8px 10px;
+}
+
+.chatMessageListItem {
+	display: flex;
+}
+
+.msg {
+	padding: 8px;
+	width: 98%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 18px !important;
+}
+
+.sender {
+	margin: 0 !important;
+	font-size: 18px !important;
+	text-align: left;
+}
+
+.msgText {
+	font-size: 18px !important;
+	margin: 0 !important;
+	color: var(--dark-gray);
+}
+
+.hostMsg {
+	border: solid 1px var(--card-blue);
+}
+
+.userMsg {
+	border: solid 1px var(--card-purple);
+}
+
+.messageForm {
+	width: 100%;
+	background-color: var(--card-pink);
+	border-bottom-right-radius: 6px;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	background-color: var(--card-pink);
+	border-radius: 8px;
+	padding: 12px;
+}
+
+.messageInput {
+	flex: 1;
+	border: solid 2px var(--card-pink);
+	background-color: var(--background-yellow);
+	border-radius: 8px;
+	height: 52px;
+	color: var(--pencil-gray);
+	font-family: var(--text-font);
+	font-size: 20px;
+	padding: 12px;
+	resize: none;
+}
+
+.messageInput::placeholder {
+	font-size: 20px;
+	opacity: 0.6;
+}
+
+.sendMsgBtn {
+	flex: 0 0 42px;
+	background: transparent;
+	outline: none;
+	border: none;
+	transform: rotate(10deg);
+	color: var(--background-yellow);
+}
+
+.sendMsgBtn:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.sendMsgBtn:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}

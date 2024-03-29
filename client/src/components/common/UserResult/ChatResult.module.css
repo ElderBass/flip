@@ -1,0 +1,67 @@
+@import url("../../../index.css");
+
+.userResultContainer {
+	display: flex;
+	flex-direction: column;
+	height: 150px;
+	width: 33%;
+	background-color: var(--background-yellow);
+	box-shadow: 2px 2px 4px var(--dark-gray);
+}
+
+.username {
+	border-bottom: solid 2px var(--card-pink);
+	color: var(--card-blue);
+	width: 100%;
+	padding-bottom: 10px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.contentContainer {
+	width: 90%;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	overflow: hidden;
+	padding: 4px 0;
+}
+
+.deckCarouselItem {
+	height: 64px;
+	width: 84px;
+	display: block;
+	font-size: 16px;
+	background-color: var(--action-blue);
+	color: var(--background-yellow);
+	box-shadow: 2px 2px 4px var(--dark-gray);
+}
+
+.line {
+	width: 100%;
+	height: 8px;
+	background-color: var(--action-blue);
+	border-bottom: solid 1px var(--card-pink);
+}
+
+.label {
+	font-size: 16px;
+	text-align: center;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.deckCarouselItem:hover {
+	cursor: pointer;
+	box-shadow: 2px 2px 4px var(--card-pink);
+	color: var(--pencil-gray);
+}
+
+.noDecks {
+	color: var(--card-pink);
+	font-size: 20px;
+	text-align: center;
+	align-self: center;
+}

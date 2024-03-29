@@ -1,11 +1,12 @@
 {
   "name": "flip-server",
-  "version": "1.2.2",
+  "version": "1.4.0",
   "description": "Node server for the flashcard app Flip",
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
     "seed": "node data/seed.js",
+    "format:client": "prettier --write ./client/src && git add .",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node index.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
@@ -24,8 +25,11 @@
   "homepage": "https://github.com/ElderBass/flip#readme",
   "devDependencies": {
     "bson": "5.2.0",
+    "classnames": "2.3.2",
     "concurrently": "7.5.0",
-    "nodemon": "2.0.20"
+    "dayjs": "1.11.10",
+    "nodemon": "2.0.20",
+    "prettier": "3.0.3"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -37,6 +41,7 @@
     "jsonwebtoken": "8.5.1",
     "mongoose": "6.7.0",
     "morgan": "1.10.0",
+    "socket.io": "4.6.1",
     "uuid": "9.0.0"
   },
   "engines": {

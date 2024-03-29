@@ -1,0 +1,129 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 80%;
+}
+
+.pageHeader {
+	text-align: center;
+	width: 80%;
+	padding: 24px;
+}
+
+.pageHeaderText {
+	font-size: 60px;
+	color: var(--card-pink);
+	margin: 0px;
+	text-align: center;
+	font-family: var(--logo-font);
+}
+
+.createRoomForm {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 2fr 2fr;
+	grid-template-areas:
+		"header"
+		"input"
+		"actions";
+	background-color: var(--create-card-green);
+	box-shadow: 3px 3px 6px var(--dark-gray);
+}
+
+.formHeader {
+	grid-area: header;
+	width: 100%;
+	padding: 16px;
+	font-size: 30px;
+	border-bottom: solid 2px var(--card-pink);
+	color: var(--pencil-gray);
+	text-align: center;
+}
+
+.inputField {
+	grid-area: input;
+	width: 80%;
+	align-self: center;
+	justify-self: center;
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	padding-bottom: 2px;
+	border-bottom: solid 1px var(--card-pink);
+}
+
+.label {
+	font-family: var(--logo-font);
+	font-size: 44px;
+	margin: 0 16px;
+	color: var(--card-pink);
+}
+
+.gray {
+	color: var(--pencil-gray);
+	opacity: 0.8;
+}
+
+.input {
+	width: 90%;
+	background: transparent;
+	border: none;
+	font-family: var(--text-font);
+	padding-left: 8px;
+	font-size: 24px;
+	border-radius: 6px;
+	color: var(--pencil-gray);
+	height: 60px;
+}
+
+.input::placeholder {
+	opacity: 0.6;
+}
+
+.actions {
+	grid-area: actions;
+	align-self: center;
+	justify-self: center;
+	display: flex;
+	justify-content: space-evenly;
+	width: 80%;
+}
+
+.cancel {
+	font-family: var(--logo-font);
+	color: var(--pencil-gray);
+	font-size: 42px;
+	border: none;
+	outline: none;
+	background-color: var(--create-card-green);
+	opacity: 0.8;
+}
+
+.cancel:hover {
+	cursor: pointer;
+	font-weight: 600;
+	opacity: 1;
+}
+
+.confirm {
+	font-family: var(--text-font);
+	border: none;
+	background-color: var(--card-pink);
+	color: white;
+	padding: 12px;
+	font-size: 30px;
+	border-radius: 8px;
+}
+
+.confirm:hover {
+	cursor: pointer;
+	background-color: var(--card-purple);
+}
+
+.confirm:disabled {
+	cursor: default;
+	background-color: var(--pencil-gray);
+	opacity: 0.5;
+}

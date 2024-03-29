@@ -1,0 +1,28 @@
+.resetBtnContainer {
+	display: flex;
+	gap: 24px;
+	justify-content: center;
+	width: 100%;
+}
+
+.btn {
+	outline: none;
+	border: var(--card-pink);
+	border-radius: 5px;
+	padding: 20px;
+	font-size: 24px;
+	color: white;
+	font-family: var(--text-font);
+}
+.btn:hover {
+	cursor: pointer;
+	background-color: var(--card-purple);
+}
+
+.create {
+	background-color: var(--card-green);
+}
+
+.reset {
+	background-color: var(--card-pink);
+}

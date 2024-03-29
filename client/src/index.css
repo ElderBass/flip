@@ -1,40 +1,42 @@
 :root {
-  --background-yellow: rgb(246, 238, 146);
-  --lighter-blue: rgb(139, 144, 218);
-  --card-blue: rgb(81, 128, 248);
-  --action-blue: rgb(103, 145, 253);
-  --card-pink: #f8519f;
-  --alt-pink: #FF00E5;
-  --card-purple: rgb(199, 107, 252);
-  --card-green: rgb(29, 228, 102);
-  --create-card-green: rgb(86, 236, 141);
-  --dark-green: rgb(10, 130, 72);
-  --pencil-gray: #5c6274;
-  --logo-font: 'Reenie Beanie', cursive;
-  --text-font: 'Vidaloka', serif;
+	--background-yellow: rgb(246, 238, 146);
+	--lighter-blue: rgb(139, 144, 218);
+	--card-blue: rgb(81, 128, 248);
+	--action-blue: rgb(103, 145, 253);
+	--card-pink: #f8519f;
+	--alt-pink: #ff00e5;
+	--card-purple: rgb(199, 107, 252);
+	--card-green: rgb(8, 192, 76);
+	--create-card-green: rgb(86, 236, 141);
+	--dark-green: rgb(10, 130, 72);
+	--pencil-gray: #5c6274;
+	--dark-gray: #212124;
+	--logo-font: "Reenie Beanie", cursive;
+	--text-font: "Vidaloka", serif;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
-  box-sizing: border-box;
-  background: var(--background-yellow);
-  scroll-behavior: smooth;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100vw;
-  margin-right: -5px;
+	box-sizing: border-box;
+	background: var(--background-yellow);
+	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
 
 a {
-  color: inherit;
-  text-decoration: none !important;
+	color: inherit;
+	text-decoration: none !important;
+}
+
+h4 {
+	margin: 8px 0;
 }
 
 .link {
-  text-decoration: none !important;
+	text-decoration: none !important;
 }

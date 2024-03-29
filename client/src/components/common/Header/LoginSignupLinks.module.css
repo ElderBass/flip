@@ -1,0 +1,13 @@
+.login:hover {
+	cursor: pointer;
+	color: var(--card-pink);
+}
+
+.signup {
+	color: var(--card-green);
+}
+
+.signup:hover {
+	cursor: pointer;
+	color: var(--card-pink);
+}
