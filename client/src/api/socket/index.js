@@ -29,7 +29,8 @@ export const initSocket = () => {
 		transports: ["polling"],
 	};
 	return new Promise((resolve) => {
-		socket = io(`http://localhost:8000${PATH}`, options);
+		const socketUrl = process.env.PORT || "http://localhost:8000";
+		socket = io(`${socketUrl}${PATH}`, options);
 
 		socket.once("connect", resolve);
 		registerSocketListeners(socket);
@@ -79,7 +80,11 @@ export const sendMessage = (message) => {
 
 export const createRoom = async (roomName) => {
 	if (!socket) {
-		await initSocket();
+		try {
+			await initSocket();
+		} catch (err) {
+			console.error("Error initializing socket: ", err);
+		}
 	}
 	const {
 		user: { email, _id },
