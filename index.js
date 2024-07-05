@@ -38,4 +38,4 @@ mongoose
     .catch((err) => console.log('\n error connecting to MongoDB = ', err, '\n'));
 
 const server = http.createServer(app).listen(PORT);
-init(server);
+init(server, process.env.PORT);

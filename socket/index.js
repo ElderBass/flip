@@ -6,7 +6,7 @@ let ioServer = null;
 
 let rooms = [];
 
-const init = (server) => {
+const init = (server, port) => {
     const options = {
         path: PATH,
         pingTimeout: 20000,
@@ -14,7 +14,7 @@ const init = (server) => {
         upgradeTimeout: 20000,
         transports: ['polling'],
         cors: {
-            origin: 'http://localhost:3000',
+            origin: port || 'http://localhost:3000',
         },
         handlePreflightRequest(req, res) {
             res.writeHead(200, {
