@@ -40,6 +40,7 @@ mongoose
 const server = http.createServer(app).listen(PORT);
 
 try {
+    console.log("\n ARE WE INITIALIZING THE SOCKET SERVER? \n");
     init(server, process.env.PORT);
 } catch (err) {
     console.log('\n error initializing socket server: ', err, '\n');
