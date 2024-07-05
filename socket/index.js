@@ -1,4 +1,4 @@
-const { Server } = require('socket.io');
+const io = require('socket.io');
 const { updateRoomsList } = require('./utils');
 
 const PATH = '/socket/connect';
@@ -25,8 +25,8 @@ const init = (server, port) => {
             res.end();
         },
     };
-
-    ioServer = new Server(server, options);
+    console.log("\n ABOUT TO INIT SERVER \n")
+    ioServer = io(server, options);
 
     console.log("\n DID WE CONNECT TO THE SERVER?", ioServer, "\n\n");
 
