@@ -29,9 +29,13 @@ export const initSocket = () => {
 		transports: ["polling"],
 	};
 	return new Promise((resolve) => {
-		const socketUrl = process.env.PORT || "http://localhost:8000";
+		let socketUrl;
+		if (window.location.hostname === "localhost") {
+			socketUrl = "http://localhost:8000";
+		} else {
+			socketUrl = "https://flip-by-zyg.herokuapp.com/";
+		}
 		console.log("\n SOCKET URL: ", socketUrl, "\n");
-		console.log("\n process.env.PORT: ", process.env.PORT, "\n");
 		socket = io(`${socketUrl}${PATH}`, options);
 
 		socket.once("connect", resolve);
