@@ -28,6 +28,8 @@ const init = (server, port) => {
 
     ioServer = new Server(server, options);
 
+    console.log("\n DID WE CONNECT TO THE SERVER?", ioServer, "\n\n");
+
     ioServer.of(PATH).on('connection', (socket) => {
         ioServer.of(PATH).emit('returning_rooms', { rooms, roomId: null });
 

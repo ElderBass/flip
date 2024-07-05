@@ -30,6 +30,8 @@ export const initSocket = () => {
 	};
 	return new Promise((resolve) => {
 		const socketUrl = process.env.PORT || "http://localhost:8000";
+		console.log("\n SOCKET URL: ", socketUrl, "\n");
+		console.log("\n process.env.PORT: ", process.env.PORT, "\n");
 		socket = io(`${socketUrl}${PATH}`, options);
 
 		socket.once("connect", resolve);
